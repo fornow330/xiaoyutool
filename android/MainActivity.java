@@ -34,6 +34,14 @@ public class MainActivity extends Activity {
     private PermissionRequest pendingPerm;
     private Runnable afterPerm;
 
+    // 在线版通道：按顺序尝试，全部不通时使用内置页面
+    private static final String[] ONLINE_URLS = {
+            "https://fornow330.github.io/xiaoyutool/",
+            "https://fastly.jsdelivr.net/gh/fornow330/xiaoyutool@main/index.html",
+            "https://cdn.jsdelivr.net/gh/fornow330/xiaoyutool@main/index.html",
+            "https://ghproxy.net/https://raw.githubusercontent.com/fornow330/xiaoyutool/main/index.html"
+    };
+
     private static final int PICK_CODE = 1001;
     private static final int REQ_CAM = 3001;
     private static final int REQ_CHOOSER = 3002;
@@ -84,6 +92,16 @@ public class MainActivity extends Activity {
                         && "appassets.androidplatform.net".equals(u.getHost())) {
                     String path = u.getPath();
                     if (path == null || "/".equals(path)) path = "/index.html";
+                    if ("/index.html".equals(path)) {
+                        java.io.File cf = usableCache();
+                        if (cf != null) {
+                            try {
+                                return new android.webkit.WebResourceResponse("text/html", "UTF-8",
+                                        new java.io.FileInputStream(cf));
+                            } catch (Exception ignored) {
+                            }
+                        }
+                    }
                     try {
                         java.io.InputStream in = getAssets().open(path.substring(1));
                         String mime = guessMime(path);
@@ -131,6 +149,86 @@ public class MainActivity extends Activity {
         root.addView(web, new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         setContentView(root);
+        refreshOnline();
+    }
+
+    private java.io.File cacheFile() {
+        return new java.io.File(getFilesDir(), "xiaoyutool-online.html");
+    }
+
+    private long assetSize(String name) {
+        try {
+            return getAssets().openFd(name).getLength();
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    /** 只有在线缓存的体积不小于内置页面时才用它（内置版本更新更大说明内置更新） */
+    private java.io.File usableCache() {
+        java.io.File f = cacheFile();
+        if (!f.exists() || f.length() < 100000) return null;
+        if (f.length() < assetSize("index.html")) return null;
+        return f;
+    }
+
+    /** 后台按通道顺序拉取最新页面，成功后写入缓存，下次启动生效 */
+    private void refreshOnline() {
+        new Thread(new Runnable() {
+            @Override public void run() {
+                for (String url : ONLINE_URLS) {
+                    String body = fetch(url);
+                    if (body == null) continue;
+                    try {
+                        java.io.File tmp = new java.io.File(getFilesDir(), "xiaoyutool-online.tmp");
+                        java.io.FileOutputStream fo = new java.io.FileOutputStream(tmp);
+                        fo.write(body.getBytes("UTF-8"));
+                        fo.close();
+                        java.io.File f = cacheFile();
+                        if (f.exists() && f.length() == tmp.length()) {
+                            tmp.delete();
+                            return;
+                        }
+                        if (f.exists()) f.delete();
+                        tmp.renameTo(f);
+                        return;
+                    } catch (Exception e) {
+                        return;
+                    }
+                }
+            }
+        }).start();
+    }
+
+    private String fetch(String url) {
+        java.net.HttpURLConnection c = null;
+        try {
+            java.net.URL u = new java.net.URL(url);
+            c = (java.net.HttpURLConnection) u.openConnection();
+            c.setConnectTimeout(6000);
+            c.setReadTimeout(8000);
+            c.setInstanceFollowRedirects(true);
+            c.setRequestProperty("User-Agent", "xiaoyutool-app");
+            if (c.getResponseCode() != 200) return null;
+            java.io.InputStream in = c.getInputStream();
+            java.io.ByteArrayOutputStream bo = new java.io.ByteArrayOutputStream();
+            byte[] buf = new byte[8192];
+            int n;
+            long total = 0;
+            while ((n = in.read(buf)) > 0) {
+                total += n;
+                if (total > 3 * 1024 * 1024) break;
+                bo.write(buf, 0, n);
+            }
+            in.close();
+            String s = bo.toString("UTF-8");
+            if (!s.contains("小羽工具箱") || !s.contains("function t_")) return null;
+            return s;
+        } catch (Exception e) {
+            return null;
+        } finally {
+            if (c != null) c.disconnect();
+        }
     }
 
     private String guessMime(String path) {
