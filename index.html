@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>小羽工具箱 · 255 个小工具</title>
+<title>小羽工具箱 · 本地工具集合</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%232C63F0'/%3E%3Cpath d='M7 8h10M7 12h10M7 16h6' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
 /* ===== tokens ===== */
@@ -191,7 +191,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
 <header class="topbar">
   <div class="brand">
     <h1>小羽工具箱</h1>
-    <span>255 个工具</span>
+    <span id="toolCount">0 个工具</span>
   </div>
   <div class="search">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
@@ -565,8 +565,218 @@ const TOOLS = [
   {id:'asciitable', n:'ASCII表', c:'kit', col:'#8A94A6', ic:'text'},
   {id:'sqlfmt', n:'SQL美化', c:'kit', col:'#2C63F0', ic:'code'},
   {id:'uuidbatch', n:'批量UUID', c:'kit', col:'#17A673', ic:'hash'},
-  {id:'tsbatch', n:'时间戳批量', c:'kit', col:'#D9822B', ic:'clock'}
+  {id:'tsbatch', n:'时间戳批量', c:'kit', col:'#D9822B', ic:'clock'},
+  {id:'gyro', n:'陀螺仪', c:'dev', col:'#2C63F0', ic:'compass'},
+  {id:'proximity', n:'距离传感器', c:'dev', col:'#17A673', ic:'distance'},
+  {id:'spectrum', n:'音频频谱', c:'dev', col:'#F0A22B', ic:'wave'},
+  {id:'camres', n:'摄像头分辨率', c:'dev', col:'#E2543B', ic:'scan'},
+  {id:'micplay', n:'录音回放', c:'dev', col:'#7A5AF8', ic:'wave'},
+  {id:'colorbars', n:'彩条测试', c:'dev', col:'#0E9AA7', ic:'palette'},
+  {id:'clipwrite', n:'剪贴板写入', c:'dev', col:'#5B7CFA', ic:'code'},
+  {id:'fileinfo', n:'文件信息', c:'dev', col:'#D9822B', ic:'text'},
+  {id:'perms', n:'权限状态', c:'dev', col:'#3B8A67', ic:'shield'},
+  {id:'orient', n:'方向仪表', c:'dev', col:'#8A6D3B', ic:'compass'},
+  {id:'swipe', n:'滑动方向', c:'dev', col:'#2C63F0', ic:'arrows'},
+  {id:'tapspeed', n:'连点测试', c:'dev', col:'#17A673', ic:'pulse'},
+  {id:'pointerpressure', n:'触控压力', c:'dev', col:'#F0A22B', ic:'pulse'},
+  {id:'storage', n:'存储估算', c:'dev', col:'#E2543B', ic:'cloud'},
+  {id:'netlatency', n:'网络延迟', c:'dev', col:'#7A5AF8', ic:'wave'},
+  {id:'savefile', n:'另存文件', c:'dev', col:'#0E9AA7', ic:'text'},
+  {id:'longpress', n:'长按测试', c:'dev', col:'#5B7CFA', ic:'timer'},
+  {id:'pointertrack', n:'指针轨迹', c:'dev', col:'#D9822B', ic:'link'},
+  {id:'zoomtest', n:'缩放检测', c:'dev', col:'#3B8A67', ic:'magnify'},
+  {id:'sensors', n:'传感器支持', c:'dev', col:'#8A6D3B', ic:'grid'},
+  {id:'orientlock', n:'屏幕方向锁', c:'dev', col:'#2C63F0', ic:'frame'},
+  {id:'vignette', n:'暗角', c:'img', col:'#17A673', ic:'image'},
+  {id:'grain', n:'噪点', c:'img', col:'#F0A22B', ic:'dots'},
+  {id:'warmth', n:'冷暖色调', c:'img', col:'#E2543B', ic:'sun'},
+  {id:'oil', n:'油画', c:'img', col:'#7A5AF8', ic:'palette'},
+  {id:'cartoon', n:'卡通化', c:'img', col:'#0E9AA7', ic:'image'},
+  {id:'film', n:'胶片', c:'img', col:'#5B7CFA', ic:'frame'},
+  {id:'double', n:'双重曝光', c:'img', col:'#D9822B', ic:'image'},
+  {id:'mirror', n:'镜像拼图', c:'img', col:'#3B8A67', ic:'image'},
+  {id:'bgblur', n:'背景虚化', c:'img', col:'#8A6D3B', ic:'image'},
+  {id:'label', n:'文字标签', c:'img', col:'#2C63F0', ic:'text'},
+  {id:'gridlines', n:'构图线', c:'img', col:'#17A673', ic:'grid'},
+  {id:'compare', n:'前后对比', c:'img', col:'#F0A22B', ic:'image'},
+  {id:'dot', n:'点阵化', c:'img', col:'#E2543B', ic:'dots'},
+  {id:'channel', n:'单通道', c:'img', col:'#7A5AF8', ic:'palette'},
+  {id:'motion', n:'动感模糊', c:'img', col:'#0E9AA7', ic:'wave'},
+  {id:'levels', n:'色阶', c:'img', col:'#5B7CFA', ic:'palette'},
+  {id:'lomo', n:'LOMO', c:'img', col:'#D9822B', ic:'sun'},
+  {id:'tilt', n:'移轴', c:'img', col:'#3B8A67', ic:'image'},
+  {id:'sat', n:'饱和度', c:'img', col:'#8A6D3B', ic:'drop'},
+  {id:'hue', n:'色相', c:'img', col:'#2C63F0', ic:'palette'},
+  {id:'denoise', n:'降噪', c:'img', col:'#17A673', ic:'image'},
+  {id:'pencil', n:'彩铅', c:'img', col:'#F0A22B', ic:'image'},
+  {id:'poster', n:'海报色', c:'img', col:'#E2543B', ic:'palette'},
+  {id:'threshold', n:'黑白阈值', c:'img', col:'#7A5AF8', ic:'image'},
+  {id:'glow', n:'柔光', c:'img', col:'#0E9AA7', ic:'sun'},
+  {id:'diag', n:'水印', c:'img', col:'#5B7CFA', ic:'frame'},
+  {id:'tiling', n:'平铺贴图', c:'img', col:'#D9822B', ic:'grid'},
+  {id:'infocard', n:'信息卡片', c:'img', col:'#3B8A67', ic:'text'},
+  {id:'widecrop', n:'宽幅裁剪', c:'img', col:'#8A6D3B', ic:'frame'},
+  {id:'gallery', n:'拼接长图', c:'img', col:'#2C63F0', ic:'stitch'},
+  {id:'txtnum', n:'提取数字', c:'txt', col:'#F0A22B', ic:'ascii'},
+  {id:'txten', n:'提取英文', c:'txt', col:'#E2543B', ic:'ascii'},
+  {id:'txtzh', n:'提取中文', c:'txt', col:'#7A5AF8', ic:'text'},
+  {id:'txttrim', n:'清理空格', c:'txt', col:'#0E9AA7', ic:'text'},
+  {id:'txtcomma', n:'行尾加符号', c:'txt', col:'#5B7CFA', ic:'text'},
+  {id:'txtquote', n:'批量加引号', c:'txt', col:'#D9822B', ic:'text'},
+  {id:'txtjsonarr', n:'清单转 JSON', c:'txt', col:'#3B8A67', ic:'code'},
+  {id:'txtsqlin', n:'清单转 SQL', c:'txt', col:'#8A6D3B', ic:'code'},
+  {id:'txtcenter', n:'文本对齐', c:'txt', col:'#2C63F0', ic:'text'},
+  {id:'txtv', n:'竖排文字', c:'txt', col:'#17A673', ic:'text'},
+  {id:'txttian', n:'田字格', c:'txt', col:'#F0A22B', ic:'grid'},
+  {id:'txtbox', n:'文字加框', c:'txt', col:'#E2543B', ic:'frame'},
+  {id:'txtgroup', n:'分组拆分', c:'txt', col:'#7A5AF8', ic:'batch'},
+  {id:'txtrevlines', n:'行倒序', c:'txt', col:'#0E9AA7', ic:'arrows'},
+  {id:'txtshuffle', n:'随机行序', c:'txt', col:'#5B7CFA', ic:'dice'},
+  {id:'txtnumlines', n:'批量编号', c:'txt', col:'#D9822B', ic:'tally'},
+  {id:'txtcsvcol', n:'转 CSV 列', c:'txt', col:'#3B8A67', ic:'text'},
+  {id:'txtmd', n:'转 Markdown', c:'txt', col:'#8A6D3B', ic:'code'},
+  {id:'txtcodeblock', n:'转代码块', c:'txt', col:'#2C63F0', ic:'code'},
+  {id:'txtfullhalf', n:'全角半角', c:'txt', col:'#17A673', ic:'fullhalf'},
+  {id:'txtmask', n:'信息打码', c:'txt', col:'#F0A22B', ic:'shield'},
+  {id:'txtwidth', n:'字符宽度', c:'txt', col:'#E2543B', ic:'ruler'},
+  {id:'txtwords', n:'字数统计', c:'txt', col:'#7A5AF8', ic:'tally'},
+  {id:'txtrepeat', n:'重复文本', c:'txt', col:'#0E9AA7', ic:'batch'},
+  {id:'txtbetween', n:'区间提取', c:'txt', col:'#5B7CFA', ic:'magnify'},
+  {id:'txtsplit', n:'分句切分', c:'txt', col:'#D9822B', ic:'text'},
+  {id:'txtjoin', n:'合并段落', c:'txt', col:'#3B8A67', ic:'text'},
+  {id:'txtrename', n:'批量改名', c:'txt', col:'#8A6D3B', ic:'batch'},
+  {id:'txttable', n:'文本转表格', c:'txt', col:'#2C63F0', ic:'grid'},
+  {id:'txtfreq', n:'词频统计', c:'txt', col:'#17A673', ic:'tally'},
+  {id:'creditinstallment', n:'分期还款', c:'num', col:'#E2543B', ic:'percent'},
+  {id:'vat', n:'增值税', c:'num', col:'#7A5AF8', ic:'percent'},
+  {id:'overtime', n:'加班费', c:'num', col:'#0E9AA7', ic:'clock'},
+  {id:'areaconv', n:'面积换算', c:'num', col:'#5B7CFA', ic:'grid'},
+  {id:'wallpaper', n:'墙纸用量', c:'num', col:'#D9822B', ic:'grid'},
+  {id:'curtain', n:'窗帘用料', c:'num', col:'#3B8A67', ic:'ruler'},
+  {id:'aircondition', n:'空调匹数', c:'num', col:'#8A6D3B', ic:'sun'},
+  {id:'wiregauge', n:'电线线径', c:'num', col:'#2C63F0', ic:'pulse'},
+  {id:'waterbill', n:'水费', c:'num', col:'#17A673', ic:'drop'},
+  {id:'gasbill', n:'燃气费', c:'num', col:'#F0A22B', ic:'calc'},
+  {id:'tiresize', n:'轮胎尺寸', c:'num', col:'#E2543B', ic:'rod'},
+  {id:'brakepath', n:'刹车距离', c:'num', col:'#7A5AF8', ic:'truck'},
+  {id:'childheight', n:'儿童身高', c:'num', col:'#0E9AA7', ic:'person'},
+  {id:'bsa', n:'体表面积', c:'num', col:'#5B7CFA', ic:'person'},
+  {id:'heartrate', n:'心率区间', c:'num', col:'#D9822B', ic:'pulse'},
+  {id:'fishtank', n:'鱼缸水量', c:'num', col:'#3B8A67', ic:'drop'},
+  {id:'mortar', n:'砂浆用量', c:'num', col:'#8A6D3B', ic:'calc'},
+  {id:'brickcount', n:'砌砖用量', c:'num', col:'#2C63F0', ic:'grid'},
+  {id:'cableamp', n:'电缆载流', c:'num', col:'#17A673', ic:'pulse'},
+  {id:'pipeflow', n:'管道流量', c:'num', col:'#F0A22B', ic:'drop'},
+  {id:'caffeine', n:'咖啡因代谢', c:'num', col:'#E2543B', ic:'clock'},
+  {id:'sipreturn', n:'定投收益', c:'num', col:'#7A5AF8', ic:'coin'},
+  {id:'minpayment', n:'最低还款', c:'num', col:'#0E9AA7', ic:'coin'},
+  {id:'breakeven', n:'盈亏平衡', c:'num', col:'#5B7CFA', ic:'percent'},
+  {id:'grossmargin', n:'毛利率', c:'num', col:'#D9822B', ic:'percent'},
+  {id:'inflation', n:'通胀换算', c:'num', col:'#3B8A67', ic:'calc'},
+  {id:'rentyield', n:'房租回报', c:'num', col:'#8A6D3B', ic:'house'},
+  {id:'rpm', n:'车速转速', c:'num', col:'#2C63F0', ic:'pulse'},
+  {id:'annualreturn', n:'年化收益', c:'num', col:'#17A673', ic:'coin'},
+  {id:'ceilingframe', n:'吊顶龙骨', c:'num', col:'#F0A22B', ic:'grid'},
+  {id:'countdown_to', n:'倒数日', c:'eff', col:'#7A5AF8', ic:'calendar'},
+  {id:'reminder_loop', n:'循环提醒', c:'eff', col:'#0E9AA7', ic:'clock'},
+  {id:'focus_timer', n:'专注计时', c:'eff', col:'#5B7CFA', ic:'timer'},
+  {id:'stand_reminder', n:'久坐提醒', c:'eff', col:'#D9822B', ic:'clock'},
+  {id:'eye_care', n:'护眼提醒', c:'eff', col:'#3B8A67', ic:'clock'},
+  {id:'stretch_timer', n:'拉伸计时', c:'eff', col:'#8A6D3B', ic:'timer'},
+  {id:'reading_log', n:'阅读记录', c:'eff', col:'#2C63F0', ic:'text'},
+  {id:'water_log', n:'喝水打卡', c:'eff', col:'#17A673', ic:'drop'},
+  {id:'scoreboard', n:'计分板', c:'eff', col:'#F0A22B', ic:'tally'},
+  {id:'vote_box', n:'投票器', c:'eff', col:'#E2543B', ic:'tally'},
+  {id:'flashcard', n:'单词卡', c:'eff', col:'#7A5AF8', ic:'text'},
+  {id:'mathquiz', n:'口算练习', c:'eff', col:'#0E9AA7', ic:'calc'},
+  {id:'random_order', n:'随机顺序', c:'eff', col:'#5B7CFA', ic:'dice'},
+  {id:'seatmap', n:'座位表', c:'eff', col:'#D9822B', ic:'grid'},
+  {id:'budget_list', n:'预算清单', c:'eff', col:'#3B8A67', ic:'coin'},
+  {id:'recipe_log', n:'菜谱记录', c:'eff', col:'#8A6D3B', ic:'text'},
+  {id:'workout_plan', n:'健身计划', c:'eff', col:'#2C63F0', ic:'pulse'},
+  {id:'travel_plan', n:'出行清单', c:'eff', col:'#17A673', ic:'truck'},
+  {id:'book_list', n:'读书清单', c:'eff', col:'#F0A22B', ic:'text'},
+  {id:'movie_list', n:'观影清单', c:'eff', col:'#E2543B', ic:'frame'},
+  {id:'wish_list', n:'心愿清单', c:'eff', col:'#7A5AF8', ic:'gift'},
+  {id:'daily_plan', n:'每日计划', c:'eff', col:'#0E9AA7', ic:'calendar'},
+  {id:'weekly_plan', n:'周计划', c:'eff', col:'#5B7CFA', ic:'calendar'},
+  {id:'month_review', n:'月度复盘', c:'eff', col:'#D9822B', ic:'calendar'},
+  {id:'year_goals', n:'年度目标', c:'eff', col:'#3B8A67', ic:'calendar'},
+  {id:'habit_grid', n:'习惯打卡', c:'eff', col:'#8A6D3B', ic:'grid'},
+  {id:'pomodoro_log', n:'番茄统计', c:'eff', col:'#2C63F0', ic:'timer'},
+  {id:'festival', n:'节日速查', c:'qry', col:'#0E9AA7', ic:'calendar'},
+  {id:'province', n:'省份简称', c:'qry', col:'#5B7CFA', ic:'grid'},
+  {id:'areacode', n:'长途区号', c:'qry', col:'#D9822B', ic:'link'},
+  {id:'traincode', n:'车次字母', c:'qry', col:'#3B8A67', ic:'truck'},
+  {id:'trafficsign', n:'交通标志', c:'qry', col:'#8A6D3B', ic:'shield'},
+  {id:'fireequip', n:'消防器材', c:'qry', col:'#2C63F0', ic:'shield'},
+  {id:'weathericon', n:'天气符号', c:'qry', col:'#17A673', ic:'sun'},
+  {id:'typhoon', n:'台风等级', c:'qry', col:'#F0A22B', ic:'wave'},
+  {id:'windscale', n:'风力等级', c:'qry', col:'#E2543B', ic:'wave'},
+  {id:'rainlevel', n:'降雨等级', c:'qry', col:'#7A5AF8', ic:'drop'},
+  {id:'uvindex', n:'紫外线指数', c:'qry', col:'#0E9AA7', ic:'sun'},
+  {id:'aqi', n:'空气质量指数', c:'qry', col:'#5B7CFA', ic:'cloud'},
+  {id:'noise', n:'噪音等级', c:'qry', col:'#D9822B', ic:'wave'},
+  {id:'currency', n:'货币符号', c:'qry', col:'#3B8A67', ic:'coin'},
+  {id:'intlcode', n:'国际区号', c:'qry', col:'#8A6D3B', ic:'link'},
+  {id:'langcode', n:'语言代码', c:'qry', col:'#2C63F0', ic:'text'},
+  {id:'airport', n:'机场三字码', c:'qry', col:'#17A673', ic:'truck'},
+  {id:'airline', n:'航司代码', c:'qry', col:'#F0A22B', ic:'truck'},
+  {id:'express', n:'快递公司', c:'qry', col:'#E2543B', ic:'truck'},
+  {id:'bloodtype', n:'血型遗传', c:'qry', col:'#7A5AF8', ic:'drop'},
+  {id:'ganzhi', n:'天干地支', c:'qry', col:'#0E9AA7', ic:'calendar'},
+  {id:'sanfu', n:'三伏数九', c:'qry', col:'#5B7CFA', ic:'sun'},
+  {id:'holiday', n:'法定假日', c:'qry', col:'#D9822B', ic:'calendar'},
+  {id:'screenres', n:'屏幕分辨率', c:'qry', col:'#3B8A67', ic:'grid'},
+  {id:'videores', n:'视频分辨率', c:'qry', col:'#8A6D3B', ic:'frame'},
+  {id:'audiofmt', n:'音频格式', c:'qry', col:'#2C63F0', ic:'wave'},
+  {id:'imgfmt', n:'图片格式', c:'qry', col:'#17A673', ic:'image'},
+  {id:'extname', n:'文件扩展名', c:'qry', col:'#F0A22B', ic:'text'},
+  {id:'chargeproto', n:'充电协议', c:'qry', col:'#E2543B', ic:'flash'},
+  {id:'usbtype', n:'USB 接口', c:'qry', col:'#7A5AF8', ic:'link'},
+  {id:'appliance', n:'家电功率', c:'qry', col:'#0E9AA7', ic:'flash'},
+  {id:'unitsym', n:'单位符号', c:'qry', col:'#5B7CFA', ic:'ruler'},
+  {id:'pipesize', n:'管径规格', c:'qry', col:'#D9822B', ic:'rod'},
+  {id:'json2yaml', n:'JSON 转 YAML', c:'kit', col:'#5B7CFA', ic:'code'},
+  {id:'yaml2json', n:'YAML 转 JSON', c:'kit', col:'#D9822B', ic:'code'},
+  {id:'xml2json', n:'XML 转 JSON', c:'kit', col:'#3B8A67', ic:'code'},
+  {id:'json2xml', n:'JSON 转 XML', c:'kit', col:'#8A6D3B', ic:'code'},
+  {id:'csv2sql', n:'CSV 转 SQL', c:'kit', col:'#2C63F0', ic:'code'},
+  {id:'jsonflat', n:'JSON 扁平化', c:'kit', col:'#17A673', ic:'code'},
+  {id:'jsondiff', n:'JSON 对比', c:'kit', col:'#F0A22B', ic:'code'},
+  {id:'jsonschema', n:'生成 Schema', c:'kit', col:'#E2543B', ic:'code'},
+  {id:'hex2text', n:'HEX 转文本', c:'kit', col:'#7A5AF8', ic:'ascii'},
+  {id:'text2hex', n:'文本转 HEX', c:'kit', col:'#0E9AA7', ic:'ascii'},
+  {id:'bin2text', n:'二进制转文本', c:'kit', col:'#5B7CFA', ic:'ascii'},
+  {id:'text2bin', n:'文本转二进制', c:'kit', col:'#D9822B', ic:'ascii'},
+  {id:'base32', n:'Base32', c:'kit', col:'#3B8A67', ic:'shield'},
+  {id:'base58', n:'Base58', c:'kit', col:'#8A6D3B', ic:'shield'},
+  {id:'urlmerge', n:'URL 参数整理', c:'kit', col:'#2C63F0', ic:'link'},
+  {id:'randstr', n:'随机字符串', c:'kit', col:'#17A673', ic:'dice'},
+  {id:'passphrase', n:'随机口令', c:'kit', col:'#F0A22B', ic:'shield'},
+  {id:'cronbuild', n:'Cron 生成', c:'kit', col:'#E2543B', ic:'clock'},
+  {id:'tsdiff', n:'时间戳差值', c:'kit', col:'#7A5AF8', ic:'clock'},
+  {id:'subnet', n:'子网计算', c:'kit', col:'#0E9AA7', ic:'grid'},
+  {id:'cidr', n:'CIDR 换算', c:'kit', col:'#5B7CFA', ic:'grid'},
+  {id:'macvendor', n:'MAC 解析', c:'kit', col:'#D9822B', ic:'link'},
+  {id:'uaparse', n:'UA 解析', c:'kit', col:'#3B8A67', ic:'person'},
+  {id:'httphdr', n:'请求头解析', c:'kit', col:'#8A6D3B', ic:'code'},
+  {id:'cookie', n:'Cookie 解析', c:'kit', col:'#2C63F0', ic:'shield'},
+  {id:'envparse', n:'.env 解析', c:'kit', col:'#17A673', ic:'code'},
+  {id:'cssvar', n:'CSS 变量提取', c:'kit', col:'#F0A22B', ic:'palette'},
+  {id:'mdtable', n:'Markdown 表格', c:'kit', col:'#E2543B', ic:'grid'},
+  {id:'json2env', n:'JSON 转 .env', c:'kit', col:'#7A5AF8', ic:'code'},
+  {id:'codecount', n:'代码行数', c:'kit', col:'#0E9AA7', ic:'tally'},
+  {id:'filesize', n:'文件大小换算', c:'kit', col:'#5B7CFA', ic:'calc'},
+  {id:'rgb2cmyk', n:'RGB 转 CMYK', c:'kit', col:'#D9822B', ic:'palette'},
+  {id:'strftime', n:'日期格式化', c:'kit', col:'#3B8A67', ic:'calendar'}
 ];
+document.addEventListener('DOMContentLoaded',()=>{
+  const el=document.getElementById('toolCount');
+  if(el) el.textContent=TOOLS.length+' 个工具';
+  document.title='小羽工具箱 · '+TOOLS.length+' 个小工具';
+});
+
 const CATS = [
   {k:'all', n:'全部'}, {k:'dev', n:'设备测量'}, {k:'img', n:'图片'},
   {k:'txt', n:'文字'}, {k:'num', n:'计算'}, {k:'eff', n:'效率'}, {k:'qry', n:'查询'}, {k:'kit', n:'开发者'}
@@ -9850,6 +10060,2416 @@ function t_sqlfmt(root){
     $('#sfOut',root).textContent=s;
   };
 }
+
+
+/* ===== 第五批新增工具 ===== */
+/* ================= 第五批：通用组件 ================= */
+
+/* 滤镜型图片工具 */
+function imgFilterTool(root, opt){
+  const ctl=opt.ctl?`<div class="lbl" style="display:flex;justify-content:space-between;margin-top:12px"><span>${opt.ctl.label}</span><b id="ifShow" style="color:var(--ink)">${opt.ctl.def}</b></div>
+    <input type="range" id="ifV" min="${opt.ctl.min}" max="${opt.ctl.max}" value="${opt.ctl.def}">`:'';
+  const api=imgTool(root, ctl+(opt.hint?`<p class="hint">${opt.hint}</p>`:''), opt.name||'图片');
+  function draw(){
+    const img=api.img; if(!img) return;
+    const s=Math.min(1, api.max/Math.max(img.naturalWidth,img.naturalHeight));
+    const w=Math.round(img.naturalWidth*s), h=Math.round(img.naturalHeight*s);
+    const cv=api.cv; cv.width=w; cv.height=h;
+    const ctx=cv.getContext('2d');
+    const el=$('#ifV',root);
+    const v=el?+el.value:0;
+    if(opt.ctl){ const sh=$('#ifShow',root); if(sh) sh.textContent=v; }
+    if(opt.draw) opt.draw(ctx,img,w,h,v);
+    else { ctx.filter=opt.filter(v); ctx.drawImage(img,0,0,w,h); ctx.filter='none'; }
+  }
+  if(opt.ctl) root.addEventListener('input',draw);
+  onPick(api,draw);
+}
+
+/* 计时器：倒计时/间隔提醒 */
+function timerTool(root, opt){
+  root.innerHTML=`
+    <div class="box" style="text-align:center">
+      <div id="tmBig" style="font-size:42px;font-weight:700;font-variant-numeric:tabular-nums">00:00</div>
+      <div id="tmSub" class="hint">${opt.sub||''}</div>
+      <div class="row" style="margin-top:14px;justify-content:center">
+        <button class="btn" id="tmStart">开始</button>
+        <button class="btn ghost" id="tmReset">重置</button>
+      </div>
+    </div>${opt.note?`<p class="hint">${opt.note}</p>`:''}`;
+  let left=opt.sec||300, timer=null;
+  function fmt(n){ const m=Math.floor(n/60), s=n%60; return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0'); }
+  function paint(){ $('#tmBig',root).textContent=fmt(left); }
+  function stop(){ clearInterval(timer); timer=null; $('#tmStart',root).textContent='开始'; }
+  $('#tmStart',root).onclick=()=>{
+    if(timer){ stop(); return; }
+    if(left<=0) left=opt.sec||300;
+    $('#tmStart',root).textContent='暂停';
+    timer=setInterval(()=>{
+      left--; paint();
+      if(left<=0){ stop(); toast(opt.doneMsg||'时间到');
+        try{ navigator.vibrate && navigator.vibrate([300,150,300]); }catch(e){} }
+    },1000);
+  };
+  $('#tmReset',root).onclick=()=>{ stop(); left=opt.sec||300; paint(); };
+  paint();
+  return stop;
+}
+
+/* 清单型工具：localStorage 持久化 */
+function checklistTool(root, opt){
+  root.innerHTML=`
+    <div class="box">
+      <div class="row"><input id="ckIn" placeholder="${opt.ph||'添加一项'}"><button class="btn" id="ckAdd" style="flex:0 0 72px">添加</button></div>
+      <div id="ckList" style="margin-top:12px"></div>
+      <div class="kv" style="margin-top:10px"><span>已完成</span><b id="ckCnt">0 / 0</b></div>
+      <button class="btn ghost block" id="ckClr" style="margin-top:10px">清除已完成</button>
+    </div>${opt.note?`<p class="hint">${opt.note}</p>`:''}`;
+  const key='xy_ck_'+opt.key;
+  let items=[];
+  try{ items=JSON.parse(localStorage.getItem(key)||'null') || (opt.items||[]).map(t=>({t,done:false})); }catch(e){ items=(opt.items||[]).map(t=>({t,done:false})); }
+  function save(){ try{ localStorage.setItem(key, JSON.stringify(items)); }catch(e){} }
+  function render(){
+    $('#ckList',root).innerHTML=items.length?items.map((it,i)=>`<div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #F1F3F7">
+      <input type="checkbox" data-ck="${i}" ${it.done?'checked':''} style="width:22px;height:22px">
+      <span style="flex:1;font-size:14px;${it.done?'color:var(--sub);text-decoration:line-through':''}">${it.t}</span>
+      <button class="btn ghost" data-ckdel="${i}" style="height:30px;padding:0 10px;font-size:12px">删</button></div>`).join('')
+      :'<p class="hint">还没有条目</p>';
+    $('#ckCnt',root).textContent=items.filter(i=>i.done).length+' / '+items.length;
+  }
+  $('#ckAdd',root).onclick=()=>{ const v=$('#ckIn',root).value.trim(); if(!v) return; items.push({t:v,done:false}); $('#ckIn',root).value=''; save(); render(); };
+  $('#ckIn',root).addEventListener('keydown',e=>{ if(e.key==='Enter') $('#ckAdd',root).click(); });
+  root.addEventListener('click',e=>{
+    const c=e.target.closest('[data-ck]');
+    if(c){ items[+c.dataset.ck].done=c.checked; save(); render(); return; }
+    const d=e.target.closest('[data-ckdel]');
+    if(d){ items.splice(+d.dataset.ckdel,1); save(); render(); }
+  });
+  $('#ckClr',root).onclick=()=>{ items=items.filter(i=>!i.done); save(); render(); };
+  render();
+}
+
+/* ================= 第五批：设备测试 ================= */
+
+function t_gyro(root){
+  root.innerHTML=`
+    <div class="box" style="text-align:center;padding:20px">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+        <div><div class="lbl">α 旋转</div><div id="gyA" style="font-size:20px;font-weight:700">0°</div></div>
+        <div><div class="lbl">β 前后</div><div id="gyB" style="font-size:20px;font-weight:700">0°</div></div>
+        <div><div class="lbl">γ 左右</div><div id="gyG" style="font-size:20px;font-weight:700">0°</div></div>
+      </div>
+      <button class="btn block" id="gyGo" style="margin-top:16px">开始读取</button>
+    </div>
+    <p class="hint">转动手机看角度变化，用来检查陀螺仪/方向传感器。</p>`;
+  let stop=null;
+  $('#gyGo',root).onclick=()=>{
+    if(stop){ stop(); stop=null; return; }
+    const handler=e=>{
+      const a=$('#gyA',root), b=$('#gyB',root), g=$('#gyG',root);
+      if(!a) return;
+      a.textContent=Math.round(e.alpha||0)+'°';
+      b.textContent=Math.round(e.beta||0)+'°';
+      g.textContent=Math.round(e.gamma||0)+'°';
+    };
+    stop=readOrientation(handler,()=>toast('当前环境没有方向传感器'));
+    toast('读取中');
+  };
+  return ()=>{ if(stop) stop(); };
+}
+
+function t_proximity(root){
+  root.innerHTML=`
+    <div class="box" style="text-align:center;padding:24px">
+      <div style="width:120px;height:120px;border-radius:50%;background:#EEF3FF;margin:0 auto;display:grid;place-items:center">
+        <svg viewBox="0 0 24 24" width="46" height="46" fill="none" stroke="#2C63F0" stroke-width="1.7">${ICONS.distance}</svg>
+      </div>
+      <div id="prV" style="font-size:20px;font-weight:700;margin-top:14px">--</div>
+      <div id="prH" class="hint">把手掌靠近手机顶部</div>
+    </div>
+    <p class="hint">只有部分安卓机开放距离传感器，不支持时会一直显示 --。</p>`;
+  if(!('ProximitySensor' in window)){
+    $('#prH',root).textContent='当前环境不支持距离传感器';
+    return;
+  }
+  try{
+    const s=new ProximitySensor();
+    s.addEventListener('reading',()=>{
+      const v=$('#prV',root); if(!v) return;
+      v.textContent=s.near?'靠近':'远离';
+      $('#prH',root).textContent=s.max?('量程 0 – '+s.max):'';
+    });
+    s.addEventListener('error',()=>{ $('#prH',root).textContent='传感器读取失败'; });
+    s.start();
+    return ()=>{ try{s.stop();}catch(e){} };
+  }catch(e){ $('#prH',root).textContent='传感器启动失败'; }
+}
+
+function t_spectrum(root){
+  root.innerHTML=`
+    <div class="box">
+      <canvas id="spCv" style="width:100%;height:140px;border-radius:10px;background:#0E1116"></canvas>
+      <div class="row" style="margin-top:10px">
+        <button class="btn" id="spGo">开始</button><button class="btn ghost" id="spStop">停止</button>
+      </div>
+    </div>
+    <p class="hint">对着手机说话或放音乐，看频谱跳动，用来判断麦克风是否正常。</p>`;
+  let stream=null, ac=null, raf=null;
+  function stop(){
+    cancelAnimationFrame(raf); raf=null;
+    if(stream){ stream.getTracks().forEach(t=>t.stop()); stream=null; }
+    if(ac){ try{ac.close();}catch(e){} ac=null; }
+  }
+  $('#spGo',root).onclick=async ()=>{
+    stop();
+    try{
+      stream=await navigator.mediaDevices.getUserMedia({audio:true});
+      ac=new (window.AudioContext||window.webkitAudioContext)();
+      const an=ac.createAnalyser(); an.fftSize=256;
+      ac.createMediaStreamSource(stream).connect(an);
+      const buf=new Uint8Array(an.frequencyBinCount);
+      const cv=$('#spCv',root), ctx=cv.getContext('2d');
+      const loop=()=>{
+        if(!cv.isConnected){ stop(); return; }
+        an.getByteFrequencyData(buf);
+        const w=cv.clientWidth, h=cv.clientHeight;
+        if(cv.width!==w*2){ cv.width=w*2; cv.height=h*2; }
+        ctx.setTransform(2,0,0,2,0,0);
+        ctx.fillStyle='#0E1116'; ctx.fillRect(0,0,w,h);
+        const bars=48, bw=w/bars;
+        for(let i=0;i<bars;i++){
+          const v=buf[Math.floor(i/bars*buf.length)]/255;
+          const bh=v*h*0.9;
+          ctx.fillStyle='hsl('+(190-v*120)+',80%,55%)';
+          ctx.fillRect(i*bw+1, h-bh, bw-2, bh);
+        }
+        raf=requestAnimationFrame(loop);
+      };
+      loop();
+    }catch(e){ toast('无法访问麦克风'); }
+  };
+  $('#spStop',root).onclick=stop;
+  return stop;
+}
+
+function t_camres(root){
+  root.innerHTML=`
+    <div class="box">
+      <video id="crV" autoplay playsinline muted style="width:100%;border-radius:10px;background:#000;aspect-ratio:4/3"></video>
+      <div class="kv" style="margin-top:10px"><span>实际分辨率</span><b id="crRes">—</b></div>
+      <button class="btn block" id="crGo" style="margin-top:12px">开启并读取</button>
+    </div>
+    <p class="hint">看视频流真实分辨率，判断摄像头是否正常、是否被降级。</p>`;
+  let stream=null;
+  $('#crGo',root).onclick=async ()=>{
+    if(stream){ stream.getTracks().forEach(t=>t.stop()); stream=null; return; }
+    try{
+      stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});
+      $('#crV',root).srcObject=stream;
+      const t=stream.getVideoTracks()[0];
+      const st=t.getSettings?t.getSettings():{};
+      $('#crRes',root).textContent=(st.width||'?')+' × '+(st.height||'?')+' @ '+(st.frameRate?Math.round(st.frameRate):'?')+'fps';
+    }catch(e){ toast('无法打开摄像头'); }
+  };
+  return ()=>{ if(stream) stream.getTracks().forEach(t=>t.stop()); };
+}
+
+function t_micplay(root){
+  root.innerHTML=`
+    <div class="box" style="text-align:center">
+      <div id="mpSt" class="hint">点录音，说一句话，再回放</div>
+      <div class="row" style="margin-top:14px;justify-content:center">
+        <button class="btn" id="mpRec">录音</button>
+        <button class="btn ghost" id="mpStop">停止</button>
+        <button class="btn ghost" id="mpPlay">回放</button>
+      </div>
+      <div class="kv" style="margin-top:12px"><span>录音时长</span><b id="mpLen">—</b></div>
+    </div>`;
+  let stream=null, rec=null, chunks=[], url=null, t0=0;
+  $('#mpRec',root).onclick=async ()=>{
+    try{
+      stream=await navigator.mediaDevices.getUserMedia({audio:true});
+      chunks=[];
+      rec=new MediaRecorder(stream);
+      rec.ondataavailable=e=>{ if(e.data.size) chunks.push(e.data); };
+      rec.onstop=()=>{
+        const blob=new Blob(chunks,{type:'audio/webm'});
+        if(url) URL.revokeObjectURL(url);
+        url=URL.createObjectURL(blob);
+        $('#mpSt',root).textContent='已录好，点回放试听';
+        $('#mpLen',root).textContent=((Date.now()-t0)/1000).toFixed(1)+' 秒';
+      };
+      t0=Date.now();
+      rec.start();
+      $('#mpSt',root).textContent='录音中…';
+    }catch(e){ toast('无法访问麦克风'); }
+  };
+  $('#mpStop',root).onclick=()=>{ if(rec&&rec.state!=='inactive') rec.stop(); if(stream){stream.getTracks().forEach(t=>t.stop()); stream=null;} };
+  $('#mpPlay',root).onclick=()=>{ if(!url) return toast('先录一段'); new Audio(url).play().catch(()=>toast('播放失败')); };
+  return ()=>{ if(stream) stream.getTracks().forEach(t=>t.stop()); if(url) URL.revokeObjectURL(url); };
+}
+
+function t_colorbars(root){
+  const bars=['#FFFFFF','#FFFF00','#00FFFF','#00FF00','#FF00FF','#FF0000','#0000FF','#000000'];
+  root.innerHTML=`
+    <div class="box" style="padding:0;overflow:hidden;border-radius:10px">
+      <div id="cbBars" style="display:flex;height:180px">${bars.map(c=>`<div style="flex:1;background:${c}"></div>`).join('')}</div>
+    </div>
+    <div class="box">
+      <div class="seg" id="cbMode"><button class="on" data-v="solid">纯色全屏</button><button data-v="bars">彩条</button></div>
+      <div id="cbColors" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px">
+        ${bars.map(c=>`<button data-c="${c}" style="height:44px;border-radius:8px;border:1px solid var(--line);background:${c}"></button>`).join('')}
+      </div>
+    </div>
+    <p class="hint">贴屏幕看亮点、暗点、漏光；纯色画面全屏后更容易发现坏点。</p>`;
+  root.addEventListener('click',e=>{
+    const b=e.target.closest('[data-c]'); if(!b) return;
+    const wrap=$('#cbBars',root);
+    wrap.innerHTML=`<div style="flex:1;background:${b.dataset.c}"></div>`;
+    if(document.fullscreenEnabled && !document.fullscreenElement){
+      document.documentElement.requestFullscreen().catch(()=>{});
+    }
+  });
+}
+
+function t_clipwrite(root){
+  root.innerHTML=`
+    <div class="box">
+      <textarea id="cwIn" style="min-height:110px">复制到剪贴板的内容</textarea>
+      <button class="btn block" id="cwGo" style="margin-top:10px">写入剪贴板</button>
+    </div>
+    <p class="hint">生成链接、口令后一键复制，省得长按选择。</p>`;
+  $('#cwGo',root).onclick=()=>copyText($('#cwIn',root).value);
+}
+
+function t_fileinfo(root){
+  root.innerHTML=`
+    <div class="box">
+      <button class="btn block" id="fiPick">选择文件</button>
+      <div id="fiOut" style="margin-top:12px"></div>
+    </div>
+    <p class="hint">选文件只看本地信息，不会上传。</p>`;
+  $('#fiPick',root).onclick=async ()=>{
+    const f=await pickFile('*');
+    if(!f) return;
+    const d=new Date(f.lastModified);
+    $('#fiOut',root).innerHTML=`
+      <div class="kv"><span>文件名</span><b style="font-weight:500;word-break:break-all">${f.name}</b></div>
+      <div class="kv"><span>大小</span><b>${bytes(f.size)}</b></div>
+      <div class="kv"><span>类型</span><b style="font-weight:500">${f.type||'未知'}</b></div>
+      <div class="kv"><span>修改时间</span><b style="font-weight:500">${d.toLocaleString('zh-CN')}</b></div>`;
+  };
+}
+
+function t_perms(root){
+  const list=[['camera','摄像头'],['microphone','麦克风'],['geolocation','定位'],['notifications','通知'],['clipboard-read','剪贴板读取'],['persistent-storage','存储持久化']];
+  root.innerHTML=`<div class="box"><p class="lbl" style="margin:0">权限状态</p><div id="pmOut" style="margin-top:10px">读取中…</div>
+    <button class="btn block" id="pmGo" style="margin-top:12px">重新查询</button></div>
+    <p class="hint">只查询浏览器记录的授权状态，不会重新弹窗授权（除非你发起点按钮操作）。</p>`;
+  async function run(){
+    if(!navigator.permissions){ $('#pmOut',root).textContent='当前环境不支持权限查询'; return; }
+    const rows=[];
+    for(const [name,label] of list){
+      try{
+        const st=await navigator.permissions.query({name});
+        rows.push([label, st.state]);
+      }catch(e){ rows.push([label,'不支持查询']); }
+    }
+    $('#pmOut',root).innerHTML=rows.map(([k,v])=>{
+      const color=v==='granted'?'#17A673':v==='denied'?'#E2543B':'#D9822B';
+      return `<div class="kv"><span>${k}</span><b style="color:${color};font-weight:600">${v}</b></div>`;
+    }).join('');
+  }
+  $('#pmGo',root).onclick=run;
+  run();
+}
+
+function t_orient(root){
+  root.innerHTML=`
+    <div class="box" style="text-align:center;padding:18px">
+      <canvas id="orCv" style="width:100%;height:220px;border-radius:10px;background:#FAFBFD;border:1px solid var(--line)"></canvas>
+      <button class="btn block" id="orGo" style="margin-top:12px">开始</button>
+    </div>
+    <p class="hint">移动手机，看指示点随之移动，用来验证方向传感器是否正常。</p>`;
+  let stop=null, raf=null;
+  const cv=$('#orCv',root), ctx=cv.getContext('2d');
+  let beta=0, gamma=0;
+  function draw(){
+    const w=cv.clientWidth, h=cv.clientHeight;
+    if(cv.width!==w*2 || cv.height!==h*2){ cv.width=w*2; cv.height=h*2; }
+    ctx.setTransform(2,0,0,2,0,0);
+    ctx.clearRect(0,0,w,h);
+    ctx.strokeStyle='#E5E8EC';
+    ctx.beginPath(); ctx.arc(w/2,h/2,Math.min(w,h)/2-10,0,Math.PI*2); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(w/2,10); ctx.lineTo(w/2,h-10); ctx.moveTo(10,h/2); ctx.lineTo(w-10,h/2); ctx.stroke();
+    const r=Math.min(w,h)/2-10;
+    const x=w/2+Math.max(-1,Math.min(1,gamma/90))*r;
+    const y=h/2+Math.max(-1,Math.min(1,beta/90))*r;
+    ctx.fillStyle='#2C63F0'; ctx.beginPath(); ctx.arc(x,y,12,0,Math.PI*2); ctx.fill();
+    raf=requestAnimationFrame(draw);
+  }
+  $('#orGo',root).onclick=()=>{
+    if(stop){ stop(); stop=null; cancelAnimationFrame(raf); return; }
+    stop=readOrientation(e=>{ beta=e.beta||0; gamma=e.gamma||0; },()=>toast('当前环境没有方向传感器'));
+    draw();
+  };
+  return ()=>{ if(stop) stop(); cancelAnimationFrame(raf); };
+}
+
+function t_swipe(root){
+  root.innerHTML=`
+    <div class="box">
+      <div id="swBox" style="height:260px;border-radius:10px;background:#FAFBFD;border:1px solid var(--line);display:grid;place-items:center;touch-action:none">
+        <div style="text-align:center"><div id="swDir" style="font-size:26px;font-weight:700">滑动试试</div><div class="hint" id="swDetail">在方块内滑动手指</div></div>
+      </div>
+    </div>
+    <p class="hint">测试屏幕滑动灵敏度与方向识别，也便于排查触摸断触。</p>`;
+  const box=$('#swBox',root);
+  let x0=0, y0=0, t0=0;
+  const fmt=()=>$('#swDir',root);
+  box.addEventListener('touchstart',e=>{ const t=e.touches[0]; x0=t.clientX; y0=t.clientY; t0=Date.now(); },{passive:true});
+  box.addEventListener('touchend',e=>{
+    const t=e.changedTouches[0];
+    const dx=t.clientX-x0, dy=t.clientY-y0, dt=Date.now()-t0;
+    const dir=Math.abs(dx)>Math.abs(dy)?(dx>0?'向右':'向左'):(dy>0?'向下':'向上');
+    const el=fmt(); if(!el) return;
+    el.textContent=dir;
+    $('#swDetail',root).textContent=`距离 ${Math.round(Math.hypot(dx,dy))} px · 用时 ${dt} ms · 速度 ${dt?Math.round(Math.hypot(dx,dy)/dt*1000):0} px/s`;
+  },{passive:true});
+}
+
+function t_tapspeed(root){
+  root.innerHTML=`
+    <div class="box" style="text-align:center">
+      <div id="tpArea" style="height:200px;border-radius:10px;background:#EEF3FF;display:grid;place-items:center;user-select:none">
+        <div><div style="font-size:34px;font-weight:700" id="tpCnt">0</div><div class="hint">点这里，越快越多</div></div>
+      </div>
+      <div class="kv" style="margin-top:12px"><span>最长点击间隔</span><b id="tpGap">—</b></div>
+      <div class="kv"><span>最高点击速度</span><b id="tpCps">—</b></div>
+    </div>
+    <p class="hint">测试屏幕触控响应与连点速度，适合检查断触。</p>`;
+  let last=0, count=0, maxGap=0, best=0;
+  const area=$('#tpArea',root);
+  function tap(e){
+    e.preventDefault();
+    const now=performance.now();
+    if(last && now-last<600){ count++; maxGap=Math.max(maxGap, now-last); }
+    else count=0;
+    last=now;
+    const cps=count>0?1000/((now-last)||1):0;
+    const cnt=$('#tpCnt',root); if(!cnt) return;
+    cnt.textContent=count;
+    $('#tpGap',root).textContent=maxGap?Math.round(maxGap)+' ms':'—';
+    $('#tpCps',root).textContent=maxGap?Math.round(1000/maxGap)+' 次/秒':'—';
+  }
+  area.addEventListener('touchstart',tap,{passive:false});
+  area.addEventListener('mousedown',tap);
+}
+
+function t_pointerpressure(root){
+  root.innerHTML=`
+    <div class="box">
+      <div id="ppBox" style="height:220px;border-radius:10px;background:#FAFBFD;border:1px solid var(--line);display:grid;place-items:center;touch-action:none">
+        <div style="text-align:center"><div id="ppV" style="font-size:24px;font-weight:700">--</div><div class="hint">用触控笔或手指按住</div></div>
+      </div>
+    </div>
+    <p class="hint">支持压感的手机/手写笔才会返回 0–1 的力度值，普通手指一般固定。</p>`;
+  const box=$('#ppBox',root);
+  box.addEventListener('pointermove',e=>{
+    const el=$('#ppV',root); if(!el) return;
+    el.textContent=(e.pressure*100).toFixed(0)+' %';
+    if(e.pointerType) $('#ppBox',root).dataset.pt=e.pointerType;
+  });
+}
+
+function t_storage(root){
+  root.innerHTML=`
+    <div class="box">
+      <div class="kv"><span>可用配额</span><b id="sgQuota">—</b></div>
+      <div class="kv"><span>已使用</span><b id="sgUse">—</b></div>
+      <div class="kv"><span>使用占比</span><b id="sgPct">—</b></div>
+      <div style="height:14px;border-radius:7px;background:#F1F3F7;margin-top:12px;overflow:hidden">
+        <div id="sgBar" style="height:100%;width:0;background:#2C63F0"></div>
+      </div>
+      <button class="btn block" id="sgGo" style="margin-top:12px">刷新</button>
+    </div>
+    <p class="hint">浏览器分配给本站的存储额度，不代表手机剩余空间。</p>`;
+  async function run(){
+    if(!navigator.storage||!navigator.storage.estimate){ $('#sgQuota',root).textContent='不支持'; return; }
+    const est=await navigator.storage.estimate();
+    const q=est.quota||0, u=est.usage||0;
+    $('#sgQuota',root).textContent=bytes(q);
+    $('#sgUse',root).textContent=bytes(u);
+    const pct=q?u/q*100:0;
+    $('#sgPct',root).textContent=pct.toFixed(3)+' %';
+    $('#sgBar',root).style.width=Math.min(100,pct)+'%';
+  }
+  $('#sgGo',root).onclick=run; run();
+}
+
+function t_netlatency(root){
+  root.innerHTML=`
+    <div class="box" style="text-align:center">
+      <div id="nlV" style="font-size:36px;font-weight:700">-- ms</div>
+      <div class="hint" id="nlH">点开始测 5 次</div>
+      <button class="btn block" id="nlGo" style="margin-top:14px">开始测速</button>
+    </div>
+    <div class="box"><div id="nlList" style="font-size:13px;line-height:1.9;color:var(--sub)">—</div></div>
+    <p class="hint">用请求本页面图片的方式测往返延迟，受缓存影响会有偏差。</p>`;
+  $('#nlGo',root).onclick=async ()=>{
+    const list=[];
+    for(let i=0;i<5;i++){
+      const t=performance.now();
+      try{
+        await fetch(location.href,{cache:'no-store'});
+        list.push(Math.round(performance.now()-t));
+      }catch(e){ list.push(-1); }
+      $('#nlList',root).textContent=list.map((v,i)=>'第 '+(i+1)+' 次：'+(v<0?'失败':v+' ms')).join('\n');
+    }
+    const ok=list.filter(v=>v>=0);
+    if(ok.length){
+      const avg=Math.round(ok.reduce((a,b)=>a+b,0)/ok.length);
+      $('#nlV',root).textContent=avg+' ms';
+      $('#nlH',root).textContent='最小 '+Math.min(...ok)+' ms · 最大 '+Math.max(...ok)+' ms';
+    }
+  };
+}
+
+function t_savefile(root){
+  root.innerHTML=`
+    <div class="box">
+      <textarea id="svIn" style="min-height:100px">另存为文件的内容</textarea>
+      <div class="lbl" style="margin-top:10px">文件名</div><input id="svName" value="note.txt">
+      <button class="btn block" id="svGo" style="margin-top:10px">另存为</button>
+    </div>
+    <p class="hint">桌面浏览器会弹出保存位置；手机多数直接下载到下载目录。</p>`;
+  $('#svGo',root).onclick=async ()=>{
+    const blob=new Blob([$('#svIn',root).value],{type:'text/plain'});
+    const name=$('#svName',root).value||'note.txt';
+    if(window.showSaveFilePicker){
+      try{
+        const h=await window.showSaveFilePicker({suggestedName:name});
+        const w=await h.createWritable(); await w.write(blob); await w.close();
+        toast('已保存'); return;
+      }catch(e){}
+    }
+    download(blob,name);
+  };
+}
+
+function t_longpress(root){
+  root.innerHTML=`
+    <div class="box" style="text-align:center">
+      <div id="lpArea" style="height:190px;border-radius:10px;background:#FAFBFD;border:1px solid var(--line);display:grid;place-items:center;user-select:none;touch-action:none">
+        <div><div id="lpV" style="font-size:26px;font-weight:700">按住这里</div><div class="hint" id="lpS">持续 1 秒算长按</div></div>
+      </div>
+      <div class="kv" style="margin-top:10px"><span>本次时长</span><b id="lpT">—</b></div>
+    </div>
+    <p class="hint">用于检查长按识别是否正常，也能测量屏幕触控保持能力。</p>`;
+  let t0=0, timer=null;
+  const area=$('#lpArea',root);
+  function start(e){
+    t0=Date.now();
+    const v=$('#lpV',root); if(v){ v.textContent='按住中…'; v.style.color='#2C63F0'; }
+    clearInterval(timer);
+    timer=setInterval(()=>{ const s=(Date.now()-t0)/1000; const el=$('#lpS',root); if(el) el.textContent=s.toFixed(1)+' 秒'; },100);
+  }
+  function end(){
+    if(!t0) return;
+    const ms=Date.now()-t0; t0=0; clearInterval(timer);
+    const v=$('#lpV',root); if(v){ v.textContent=ms>=1000?'长按成功':'短按'; v.style.color=ms>=1000?'#17A673':'#D9822B'; }
+    const el=$('#lpT',root); if(el) el.textContent=ms+' ms';
+  }
+  area.addEventListener('touchstart',start,{passive:true});
+  area.addEventListener('touchend',end,{passive:true});
+  area.addEventListener('mousedown',start);
+  area.addEventListener('mouseup',end);
+  area.addEventListener('mouseleave',end);
+  return ()=>clearInterval(timer);
+}
+
+function t_pointertrack(root){
+  root.innerHTML=`
+    <div class="box">
+      <div id="ptBox" style="position:relative;height:240px;border-radius:10px;background:#FAFBFD;border:1px solid var(--line);overflow:hidden;touch-action:none">
+        <div id="ptDot" style="position:absolute;width:14px;height:14px;border-radius:50%;background:#2C63F0;opacity:.7;transform:translate(-50%,-50%);left:0;top:0"></div>
+        <div id="ptTrail" style="position:absolute;inset:0"></div>
+      </div>
+      <div class="kv" style="margin-top:10px"><span>当前坐标</span><b id="ptXY">—</b></div>
+    </div>
+    <p class="hint">移动手指或鼠标，观察轨迹是否连续，判断触摸屏是否断触。</p>`;
+  const box=$('#ptBox',root), dot=$('#ptDot',root), trail=$('#ptTrail',root);
+  function move(e){
+    const r=box.getBoundingClientRect();
+    const x=e.clientX-r.left, y=e.clientY-r.top;
+    dot.style.left=x+'px'; dot.style.top=y+'px';
+    const el=$('#ptXY',root); if(el) el.textContent=Math.round(x)+' , '+Math.round(y);
+    if(trail.childElementCount>80) trail.innerHTML='';
+    const d=document.createElement('div');
+    d.style.cssText=`position:absolute;left:${x}px;top:${y}px;width:4px;height:4px;border-radius:50%;background:#2C63F0;opacity:.25;transform:translate(-50%,-50%)`;
+    trail.appendChild(d);
+  }
+  box.addEventListener('pointermove',move);
+  return ()=>{};
+}
+
+function t_zoomtest(root){
+  root.innerHTML=`
+    <div class="box">
+      <div class="kv"><span>页面缩放比</span><b id="zmS">—</b></div>
+      <div class="kv"><span>CSS 视口</span><b id="zmV">—</b></div>
+      <div class="kv"><span>设备像素比</span><b id="zmD">—</b></div>
+      <div style="height:110px;margin-top:12px;border-radius:10px;border:1px dashed #C9D0DA;display:grid;place-items:center">
+        <div style="width:60px;height:60px;border-radius:50%;background:#EEF3FF;border:1px solid #C9D6F5"></div>
+      </div>
+    </div>
+    <p class="hint">双指缩放页面，观察圆是否变形，用于检查缩放与布局是否正常。</p>`;
+  function run(){
+    const s=window.outerWidth?Math.round(window.outerWidth/innerWidth*100):100;
+    $('#zmS',root).textContent=s+' %';
+    $('#zmV',root).textContent=innerWidth+' × '+innerHeight;
+    $('#zmD',root).textContent=(devicePixelRatio||1);
+  }
+  run(); window.addEventListener('resize',run);
+  return ()=>window.removeEventListener('resize',run);
+}
+
+function t_sensors(root){
+  const list=['Accelerometer','Gyroscope','Magnetometer','AmbientLightSensor','ProximitySensor','GravitySensor','LinearAccelerationSensor'];
+  root.innerHTML=`
+    <div class="box"><p class="lbl" style="margin:0">传感器支持情况</p><div style="margin-top:10px">
+      ${list.map(n=>`<div class="kv"><span>${n}</span><b style="color:${n in window?'#17A673':'#9AA1AB'};font-weight:600">${n in window?'支持':'不支持'}</b></div>`).join('')}
+    </div></div>
+    <p class="hint">只在安卓 Chrome 系浏览器开放，iOS 多数不提供。</p>`;
+}
+
+function t_orientlock(root){
+  root.innerHTML=`
+    <div class="box">
+      <div class="kv"><span>当前方向</span><b id="olNow">—</b></div>
+      <div class="kv"><span>锁定接口</span><b>${screen.orientation&&screen.orientation.lock?'支持':'不支持'}</b></div>
+      <div class="row" style="margin-top:12px">
+        <button class="btn" id="olP">锁定竖屏</button>
+        <button class="btn ghost" id="olL">锁定横屏</button>
+        <button class="btn ghost" id="olU">解除锁定</button>
+      </div>
+    </div>
+    <p class="hint">只在全屏页面生效，普通网页多数浏览器会拒绝。</p>`;
+  const upd=()=>{ const el=$('#olNow',root); if(el) el.textContent=screen.orientation?screen.orientation.type:'未知'; };
+  $('#olP',root).onclick=async ()=>{ try{ await screen.orientation.lock('portrait'); toast('已锁定竖屏'); }catch(e){ toast('锁定失败，可能需全屏'); } };
+  $('#olL',root).onclick=async ()=>{ try{ await screen.orientation.lock('landscape'); toast('已锁定横屏'); }catch(e){ toast('锁定失败，可能需全屏'); } };
+  $('#olU',root).onclick=()=>{ try{ screen.orientation.unlock(); toast('已解除'); }catch(e){} };
+  if(screen.orientation) screen.orientation.addEventListener('change',upd);
+  upd();
+  return ()=>{ if(screen.orientation) screen.orientation.removeEventListener('change',upd); };
+}
+
+/* ================= 第五批：图片工具 ================= */
+
+function t_vignette(root){
+  imgFilterTool(root,{name:'暗角',ctl:{label:'强度',min:10,max:90,def:45},draw:(ctx,img,w,h,v)=>{
+    ctx.drawImage(img,0,0,w,h);
+    const g=ctx.createRadialGradient(w/2,h/2,Math.min(w,h)*0.35,w/2,h/2,Math.max(w,h)*0.72);
+    g.addColorStop(0,'rgba(0,0,0,0)'); g.addColorStop(1,'rgba(0,0,0,'+(v/100)+')');
+    ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
+  },hint:'压暗四角，突出主体，人像和静物常用。'});
+}
+
+function t_grain(root){
+  imgFilterTool(root,{name:'噪点',ctl:{label:'颗粒',min:5,max:80,def:30},draw:(ctx,img,w,h,v)=>{
+    ctx.drawImage(img,0,0,w,h);
+    const d=ctx.getImageData(0,0,w,h), p=d.data, amt=v*0.6;
+    for(let i=0;i<p.length;i+=4){
+      const n=(Math.random()-0.5)*amt;
+      p[i]+=n; p[i+1]+=n; p[i+2]+=n;
+    }
+    ctx.putImageData(d,0,0);
+  },hint:'增加胶片颗粒感，做复古封面常用。'});
+}
+
+function t_warmth(root){
+  imgFilterTool(root,{name:'冷暖',ctl:{label:'色温',min:-60,max:60,def:20},draw:(ctx,img,w,h,v)=>{
+    ctx.drawImage(img,0,0,w,h);
+    ctx.fillStyle=v>=0?`rgba(255,150,60,${Math.abs(v)/260})`:`rgba(60,150,255,${Math.abs(v)/260})`;
+    ctx.fillRect(0,0,w,h);
+  },hint:'正值偏暖、负值偏冷，调整照片氛围。'});
+}
+
+function t_oil(root){
+  imgFilterTool(root,{name:'油画',hint:'模拟油画质感，细节多的照片效果更明显。',draw:(ctx,img,w,h)=>{
+    ctx.filter='saturate(1.45) contrast(1.15)';
+    ctx.drawImage(img,0,0,w,h);
+    ctx.filter='none';
+    const d=ctx.getImageData(0,0,w,h).data;
+    const out=ctx.getImageData(0,0,w,h);
+    const step=3;
+    for(let y=0;y<h;y+=1){
+      for(let x=0;x<w;x+=1){
+        const i=(y*w+x)*4;
+        for(let c=0;c<3;c++) out.data[i+c]=Math.round(d[i+c]/step)*step;
+      }
+    }
+    ctx.putImageData(out,0,0);
+  }});
+}
+
+function t_cartoon(root){
+  imgFilterTool(root,{name:'卡通',ctl:{label:'色阶',min:2,max:8,def:4},draw:(ctx,img,w,h,v)=>{
+    ctx.drawImage(img,0,0,w,h);
+    const imgd=ctx.getImageData(0,0,w,h), p=imgd.data, lv=v;
+    const q=256/lv;
+    for(let i=0;i<p.length;i+=4){
+      p[i]=Math.round(p[i]/q)*q; p[i+1]=Math.round(p[i+1]/q)*q; p[i+2]=Math.round(p[i+2]/q)*q;
+    }
+    ctx.putImageData(imgd,0,0);
+  },hint:'减少色阶做出卡通平涂感，配合锐化更接近插画。'});
+}
+
+function t_film(root){
+  imgFilterTool(root,{name:'胶片',ctl:{label:'强度',min:10,max:80,def:40},draw:(ctx,img,w,h,v)=>{
+    ctx.drawImage(img,0,0,w,h);
+    ctx.fillStyle=`rgba(250,232,200,${v/400})`; ctx.fillRect(0,0,w,h);
+    const imgd=ctx.getImageData(0,0,w,h), p=imgd.data;
+    for(let i=0;i<p.length;i+=4){
+      const n=(Math.random()-0.5)*(v*0.5);
+      p[i]+=n; p[i+1]+=n; p[i+2]+=n;
+    }
+    ctx.putImageData(imgd,0,0);
+  },hint:'暖色调 + 颗粒，模拟胶片质感。'});
+}
+
+function t_double(root){
+  root.innerHTML=`
+    <div class="box">
+      <div class="row"><button class="btn" id="dbA">选择底图</button><button class="btn ghost" id="dbB">选择叠图</button></div>
+      <div class="lbl" style="margin-top:12px">不透明度</div><input type="range" id="dbOp" min="10" max="100" value="55">
+      <div class="seg" id="dbBlend" style="margin-top:10px"><button class="on" data-v="screen">滤色</button><button data-v="multiply">正片叠底</button><button data-v="overlay">叠加</button></div>
+    </div>
+    <div class="box" style="display:none" id="dbWrap"><canvas id="dbCv" style="width:100%;border-radius:10px"></canvas>
+      <button class="btn block" id="dbSave" style="margin-top:12px">保存</button></div>
+    <p class="hint">两张照片叠在一起做出双重曝光效果。</p>`;
+  let a=null, b2=null, mode='screen';
+  $('#dbA',root).onclick=async()=>{ const f=await pickFile('image/*'); if(f){ a=await loadImg(f); draw(); } };
+  $('#dbB',root).onclick=async()=>{ const f=await pickFile('image/*'); if(f){ b2=await loadImg(f); draw(); } };
+  segBind(root,'#dbBlend',v=>{ mode=v; draw(); });
+  $('#dbOp',root).oninput=draw;
+  function draw(){
+    if(!a) return;
+    const cv=$('#dbCv',root);
+    cv.width=a.naturalWidth; cv.height=a.naturalHeight;
+    const ctx=cv.getContext('2d');
+    ctx.drawImage(a,0,0);
+    if(b2){
+      ctx.globalCompositeOperation=mode;
+      ctx.globalAlpha=(+$('#dbOp',root).value||55)/100;
+      ctx.drawImage(b2,0,0,cv.width,cv.height);
+      ctx.globalAlpha=1; ctx.globalCompositeOperation='source-over';
+    }
+    $('#dbWrap',root).style.display='';
+  }
+  $('#dbSave',root).onclick=()=>{ if(!a) return toast('先选底图'); $('#dbCv',root).toBlob(x=>{download(x,'双重曝光_'+Date.now()+'.jpg'); toast('已保存');},'image/jpeg',0.92); };
+}
+
+function t_mirror(root){
+  imgFilterTool(root,{name:'镜像拼图',hint:'左半边原图，右半边镜像，适合做对称封面。',draw:(ctx,img,w,h)=>{
+    const half=Math.floor(w/2);
+    ctx.drawImage(img,0,0,img.naturalWidth/2,img.naturalHeight,0,0,Math.ceil(w/2),h*1);
+    ctx.save();
+    ctx.translate(w,0); ctx.scale(-1,1);
+    ctx.drawImage(img,0,0,img.naturalWidth/2,img.naturalHeight,0,0,Math.ceil(w/2),h);
+    ctx.restore();
+  }});
+}
+
+function t_bgblur(root){
+  imgFilterTool(root,{name:'背景虚化',ctl:{label:'虚化范围',min:10,max:70,def:35},draw:(ctx,img,w,h,v)=>{
+    ctx.filter='blur('+Math.round(w*v/100)+'px)';
+    ctx.drawImage(img,0,0,w,h);
+    ctx.filter='none';
+    const rx=w*0.32, ry=h*0.45;
+    ctx.save();
+    ctx.beginPath(); ctx.ellipse(w/2,h*0.55,rx,ry,0,0,Math.PI*2); ctx.clip();
+    ctx.drawImage(img,0,0,w,h);
+    ctx.restore();
+  },hint:'周围虚化、中间清晰的简易人像效果。'});
+}
+
+function t_label(root){
+  root.innerHTML=`
+    <div class="box"><div class="lbl">标签文字</div><input id="lbTxt" value="标签文字">
+      <div class="lbl" style="margin-top:10px">字号</div><input type="range" id="lbSize" min="12" max="72" value="28"></div>
+    <div class="box" style="display:none" id="lbWrap"><canvas id="lbCv" style="width:100%;border-radius:10px"></canvas>
+      <button class="btn block" id="lbSave" style="margin-top:12px">保存</button></div>
+    <p class="hint">在图片底部压一条说明文字，适合做带说明的截图。</p>`;
+  let img=null;
+  async function pick(){ const f=await pickFile('image/*'); if(f){ img=await loadImg(f); $('#lbWrap',root).style.display=''; draw(); } }
+  $('#lbTxt',root).oninput=draw; $('#lbSize',root).oninput=draw;
+  function draw(){
+    if(!img) return;
+    const cv=$('#lbCv',root);
+    const s=Math.min(1,1200/Math.max(img.naturalWidth,img.naturalHeight));
+    const w=Math.round(img.naturalWidth*s), h=Math.round(img.naturalHeight*s);
+    const size=+$('#lbSize',root).value||28;
+    const barH=Math.max(size*2.4,44);
+    cv.width=w; cv.height=h;
+    const ctx=cv.getContext('2d');
+    ctx.drawImage(img,0,0,w,h);
+    ctx.fillStyle='rgba(0,0,0,0.62)'; ctx.fillRect(0,h-barH,w,barH);
+    ctx.fillStyle='#fff'; ctx.textBaseline='middle';
+    ctx.font='600 '+size+'px system-ui,-apple-system,sans-serif';
+    ctx.fillText($('#lbTxt',root).value||'', w*0.05, h-barH/2, w*0.9);
+  }
+  $('#lbWrap',root).addEventListener('click',e=>{ if(e.target.id==='lbSave'){ $('#lbCv',root).toBlob(b=>{download(b,'标签图_'+Date.now()+'.jpg'); toast('已保存');},'image/jpeg',0.92); } });
+  $('#lbWrap',root).prepend(Object.assign(document.createElement('button'),{className:'btn block',textContent:'重新选择图片',onclick:pick,style:'margin-bottom:10px'}));
+  pick.__fn=true;
+  const b=$('#lbWrap',root).firstElementChild; b.onclick=pick;
+  return ()=>{};
+}
+
+function t_gridlines(root){
+  imgFilterTool(root,{name:'构图线',ctl:{label:'线条粗细',min:1,max:8,def:2},draw:(ctx,img,w,h,v)=>{
+    ctx.drawImage(img,0,0,w,h);
+    ctx.strokeStyle='rgba(255,255,255,0.85)'; ctx.lineWidth=v;
+    for(let i=1;i<3;i++){
+      ctx.beginPath(); ctx.moveTo(w*i/3,0); ctx.lineTo(w*i/3,h); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0,h*i/3); ctx.lineTo(w,h*i/3); ctx.stroke();
+    }
+  },hint:'三分法辅助线，方便练习构图。'});
+}
+
+function t_compare(root){
+  root.innerHTML=`
+    <div class="box">
+      <button class="btn block" id="cpPick">选择图片</button>
+      <div class="lbl" style="margin-top:12px">对比位置</div><input type="range" id="cpV" min="0" max="100" value="50">
+    </div>
+    <div class="box" style="display:none" id="cpWrap"><canvas id="cpCv" style="width:100%;border-radius:10px"></canvas>
+      <p class="hint">左：原图　右：黑白处理</p></div>
+    <p class="hint">左右拖动看前后差异，做修图对比图。</p>`;
+  let img=null;
+  $('#cpPick',root).onclick=async()=>{ const f=await pickFile('image/*'); if(f){ img=await loadImg(f); $('#cpWrap',root).style.display=''; draw(); } };
+  $('#cpV',root).oninput=draw;
+  function draw(){
+    if(!img) return;
+    const cv=$('#cpCv',root);
+    const s=Math.min(1,1200/Math.max(img.naturalWidth,img.naturalHeight));
+    cv.width=Math.round(img.naturalWidth*s); cv.height=Math.round(img.naturalHeight*s);
+    const ctx=cv.getContext('2d');
+    ctx.drawImage(img,0,0,cv.width,cv.height);
+    const cut=cv.width*((+$('#cpV',root).value||50)/100);
+    ctx.save();
+    ctx.beginPath(); ctx.rect(cut,0,cv.width-cut,cv.height); ctx.clip();
+    ctx.filter='grayscale(1) contrast(1.05)';
+    ctx.drawImage(img,0,0,cv.width,cv.height);
+    ctx.filter='none';
+    ctx.restore();
+    ctx.fillStyle='#fff'; ctx.fillRect(cut-1,0,2,cv.height);
+  }
+}
+
+function t_dot(root){
+  imgFilterTool(root,{name:'点阵化',ctl:{label:'点大小',min:2,max:16,def:6},draw:(ctx,img,w,h,v)=>{
+    const tmp=document.createElement('canvas'); tmp.width=w; tmp.height=h;
+    tmp.getContext('2d').drawImage(img,0,0,w,h);
+    const d=tmp.getContext('2d').getImageData(0,0,w,h).data;
+    ctx.fillStyle='#fff'; ctx.fillRect(0,0,w,h);
+    const step=v*2;
+    for(let y=0;y<h;y+=step){
+      for(let x=0;x<w;x+=step){
+        const i=(y*w+x)*4;
+        ctx.fillStyle='rgb('+d[i]+','+d[i+1]+','+d[i+2]+')';
+        ctx.fillRect(x,y,step/2,step/2);
+      }
+    }
+  }});
+}
+
+function t_channel(root){
+  imgFilterTool(root,{name:'单通道',ctl:{label:'通道 (0红 1绿 2蓝)',min:0,max:2,def:0},draw:(ctx,img,w,h,v)=>{
+    ctx.drawImage(img,0,0,w,h);
+    const d=ctx.getImageData(0,0,w,h), p=d.data;
+    for(let i=0;i<p.length;i+=4){
+      if(v!==0) p[i]=0;
+      if(v!==1) p[i+1]=0;
+      if(v!==2) p[i+2]=0;
+    }
+    ctx.putImageData(d,0,0);
+  },hint:'单独查看红/绿/蓝通道，排查偏色。'});
+}
+
+function t_motion(root){
+  imgFilterTool(root,{name:'动感模糊',ctl:{label:'强度',min:2,max:30,def:10},draw:(ctx,img,w,h,v)=>{
+    ctx.fillStyle='#fff'; ctx.fillRect(0,0,w,h);
+    ctx.globalAlpha=1/v;
+    for(let i=0;i<v;i++){
+      ctx.drawImage(img, i*1.2, 0, w, h);
+    }
+    ctx.globalAlpha=1;
+  },hint:'水平拖影，做速度感效果。'});
+}
+
+function t_levels(root){
+  imgFilterTool(root,{name:'色阶',ctl:{label:'伽马 (10-30)',min:10,max:30,def:18},draw:(ctx,img,w,h,v)=>{
+    ctx.drawImage(img,0,0,w,h);
+    const d=ctx.getImageData(0,0,w,h), p=d.data;
+    const lut=new Uint8ClampedArray(256);
+    for(let i=0;i<256;i++) lut[i]=Math.min(255,Math.round(255*Math.pow(i/255, v/10)));
+    for(let i=0;i<p.length;i+=4){ p[i]=lut[p[i]]; p[i+1]=lut[p[i+1]]; p[i+2]=lut[p[i+2]]; }
+    ctx.putImageData(d,0,0);
+  }});
+}
+
+function t_lomo(root){
+  imgFilterTool(root,{name:'LOMO',draw:(ctx,img,w,h)=>{
+    ctx.filter='saturate(1.5) contrast(1.25)';
+    ctx.drawImage(img,0,0,w,h);
+    ctx.filter='none';
+    const g=ctx.createRadialGradient(w/2,h/2,Math.min(w,h)*0.3,w/2,h/2,Math.max(w,h)*0.7);
+    g.addColorStop(0,'rgba(0,0,0,0)'); g.addColorStop(1,'rgba(0,0,0,0.55)');
+    ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
+  },hint:'高饱和 + 暗角，偏复古的风格。'});
+}
+
+function t_tilt(root){
+  imgFilterTool(root,{name:'移轴',ctl:{label:'清晰带宽度',min:20,max:80,def:45},draw:(ctx,img,w,h,v)=>{
+    ctx.filter='blur('+Math.round(w*0.02)+'px)';
+    ctx.drawImage(img,0,0,w,h);
+    ctx.filter='none';
+    const band=h*v/100;
+    ctx.save();
+    ctx.beginPath(); ctx.rect(0, (h-band)/2, w, band); ctx.clip();
+    ctx.drawImage(img,0,0,w,h);
+    ctx.restore();
+  },hint:'中间清晰、上下模糊，模拟移轴微缩景观。'});
+}
+
+function t_sat(root){
+  imgFilterTool(root,{name:'饱和度',ctl:{label:'饱和度 (%)',min:0,max:200,def:120},filter:v=>`saturate(${v}%)`});
+}
+
+function t_hue(root){
+  imgFilterTool(root,{name:'色相',ctl:{label:'偏转 (°)',min:-180,max:180,def:30},filter:v=>`hue-rotate(${v}deg)`});
+}
+
+function t_denoise(root){
+  imgFilterTool(root,{name:'降噪',ctl:{label:'强度',min:1,max:8,def:3},filter:v=>`blur(${v}px)`,hint:'轻微模糊可掩盖噪点，注意别把细节糊掉。'});
+}
+
+function t_pencil(root){
+  imgFilterTool(root,{name:'彩铅',draw:(ctx,img,w,h)=>{
+    ctx.filter='saturate(1.6) contrast(1.1)';
+    ctx.drawImage(img,0,0,w,h);
+    ctx.filter='none';
+    const d=ctx.getImageData(0,0,w,h), p=d.data;
+    for(let i=0;i<p.length;i+=4){
+      const lum=(p[i]+p[i+1]+p[i+2])/3;
+      const boost=255-lum;
+      p[i]=Math.min(255,p[i]+boost*0.15);
+      p[i+1]=Math.min(255,p[i+1]+boost*0.15);
+      p[i+2]=Math.min(255,p[i+2]+boost*0.15);
+    }
+    ctx.putImageData(d,0,0);
+  }});
+}
+
+function t_poster(root){
+  imgFilterTool(root,{name:'海报色',ctl:{label:'色阶数',min:3,max:12,def:5},draw:(ctx,img,w,h,v)=>{
+    ctx.drawImage(img,0,0,w,h);
+    const d=ctx.getImageData(0,0,w,h), p=d.data, q=256/v;
+    for(let i=0;i<p.length;i+=4){
+      p[i]=Math.min(255,Math.round(p[i]/q)*q);
+      p[i+1]=Math.min(255,Math.round(p[i+1]/q)*q);
+      p[i+2]=Math.min(255,Math.round(p[i+2]/q)*q);
+    }
+    ctx.putImageData(d,0,0);
+  }});
+}
+
+function t_threshold(root){
+  imgFilterTool(root,{name:'黑白阈值',ctl:{label:'阈值',min:30,max:220,def:128},draw:(ctx,img,w,h,v)=>{
+    ctx.drawImage(img,0,0,w,h);
+    const d=ctx.getImageData(0,0,w,h), p=d.data;
+    for(let i=0;i<p.length;i+=4){
+      const lum=p[i]*0.3+p[i+1]*0.59+p[i+2]*0.11;
+      const c=lum>v?255:0;
+      p[i]=p[i+1]=p[i+2]=c;
+    }
+    ctx.putImageData(d,0,0);
+  }});
+}
+
+function t_glow(root){
+  imgFilterTool(root,{name:'柔光',ctl:{label:'柔度',min:4,max:30,def:12},draw:(ctx,img,w,h,v)=>{
+    ctx.drawImage(img,0,0,w,h);
+    ctx.globalCompositeOperation='screen';
+    ctx.globalAlpha=0.5;
+    ctx.filter=`blur(${v}px)`;
+    ctx.drawImage(img,0,0,w,h);
+    ctx.filter='none'; ctx.globalAlpha=1; ctx.globalCompositeOperation='source-over';
+  },hint:'叠加模糊层，做出柔光人像效果。'});
+}
+
+function t_diag(root){
+  imgFilterTool(root,{name:'水印',ctl:{label:'字号',min:12,max:60,def:26},draw:(ctx,img,w,h,v)=>{
+    ctx.drawImage(img,0,0,w,h);
+    ctx.save();
+    ctx.globalAlpha=0.6; ctx.fillStyle='#fff';
+    ctx.font='600 '+v+'px system-ui,-apple-system,sans-serif';
+    ctx.textAlign='center';
+    ctx.translate(w/2,h/2); ctx.rotate(-30*Math.PI/180);
+    ctx.fillText('仅供查阅', 0, 0);
+    ctx.restore();
+  },hint:'居中斜向水印，适合发图前加标注。'});
+}
+
+function t_tiling(root){
+  imgFilterTool(root,{name:'平铺贴图',ctl:{label:'重复次数',min:2,max:4,def:2},draw:(ctx,img,w,h,v)=>{
+    const cw=w/v, ch=h/v;
+    for(let y=0;y<v;y++) for(let x=0;x<v;x++) ctx.drawImage(img, x*cw, y*ch, cw, ch);
+  },hint:'把图片当成花纹平铺，做聊天背景或壁纸底图。'});
+}
+
+function t_infocard(root){
+  imgFilterTool(root,{name:'信息卡片',draw:(ctx,img,w,h)=>{
+    const bar=Math.max(60, Math.round(h*0.1));
+    ctx.fillStyle='#fff'; ctx.fillRect(0,0,w,h+bar);
+    ctx.drawImage(img,0,0,w,h);
+    ctx.fillStyle='#15181D';
+    ctx.font='600 '+Math.round(bar*0.32)+'px system-ui,-apple-system,sans-serif';
+    ctx.fillText('照片信息', w*0.04, h+bar*0.42);
+    ctx.fillStyle='#6E7580';
+    ctx.font=Math.round(bar*0.24)+'px system-ui,-apple-system,sans-serif';
+    const d=new Date();
+    ctx.fillText(img.naturalWidth+' × '+img.naturalHeight+' px · '+d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'), w*0.04, h+bar*0.76);
+  },hint:'图片下方加一条尺寸与日期说明，方便归档。'});
+}
+
+function t_widecrop(root){
+  root.innerHTML=`
+    <div class="box">
+      <button class="btn block" id="wcPick">选择图片</button>
+      <div class="seg" id="wcR" style="margin-top:12px"><button class="on" data-v="2.35">2.35:1</button><button data-v="1.85">1.85:1</button><button data-v="2">2:1</button></div>
+    </div>
+    <div class="box" style="display:none" id="wcWrap"><canvas id="wcCv" style="width:100%;border-radius:10px"></canvas>
+      <button class="btn block" id="wcSave" style="margin-top:12px">保存</button></div>
+    <p class="hint">裁成宽幅比例，适合做网页横幅和公众号头图。</p>`;
+  let img=null, ratio=2.35;
+  segBind(root,'#wcR',v=>{ ratio=+v; draw(); });
+  $('#wcPick',root).onclick=async()=>{ const f=await pickFile('image/*'); if(f){ img=await loadImg(f); $('#wcWrap',root).style.display=''; draw(); } };
+  function draw(){
+    if(!img) return;
+    const cv=$('#wcCv',root);
+    let cw=img.naturalWidth, ch=Math.round(cw/ratio);
+    if(ch>img.naturalHeight){ ch=img.naturalHeight; cw=Math.round(ch*ratio); }
+    cv.width=cw; cv.height=ch;
+    cv.getContext('2d').drawImage(img,(img.naturalWidth-cw)/2,(img.naturalHeight-ch)/2,cw,ch,0,0,cw,ch);
+  }
+  $('#wcSave',root).onclick=()=>{ if(!img) return toast('先选图片'); $('#wcCv',root).toBlob(b=>{download(b,'宽幅_'+Date.now()+'.jpg'); toast('已保存');},'image/jpeg',0.92); };
+}
+
+function t_gallery(root){
+  root.innerHTML=`
+    <div class="box">
+      <button class="btn block" id="glPick">选择多张图片（按顺序拼接）</button>
+      <div class="lbl" style="margin-top:12px">图片间距</div><input type="number" id="glGap" value="10" min="0" max="60">
+      <div class="lbl">背景</div><input type="color" id="glBg" value="#FFFFFF">
+    </div>
+    <div class="box" style="display:none" id="glWrap"><canvas id="glCv" style="width:100%;border-radius:10px"></canvas>
+      <button class="btn block" id="glSave" style="margin-top:12px">保存长图</button></div>
+    <p class="hint">把几张图纵向拼成一张长图，做商品详情或聊天截图合集。</p>`;
+  let imgs=[];
+  $('#glPick',root).onclick=async()=>{
+    const fs=await pickFile('image/*', true);
+    if(!fs) return;
+    imgs=await Promise.all((Array.isArray(fs)?fs:[fs]).slice(0,12).map(loadImg));
+    $('#glWrap',root).style.display=''; draw();
+  };
+  root.addEventListener('input',draw);
+  function draw(){
+    if(!imgs.length) return;
+    const gap=Math.max(0,+$('#glGap',root).value||0);
+    const w=Math.min(1000, Math.max(...imgs.map(i=>i.naturalWidth)));
+    const scaled=imgs.map(i=>{ const s=w/i.naturalWidth; return {img:i, w, h:Math.round(i.naturalHeight*s)}; });
+    const totalH=scaled.reduce((a,b)=>a+b.h,0)+gap*(scaled.length+1);
+    const cv=$('#glCv',root); cv.width=w+gap*2; cv.height=totalH;
+    const ctx=cv.getContext('2d');
+    ctx.fillStyle=$('#glBg',root).value; ctx.fillRect(0,0,cv.width,cv.height);
+    let y=gap;
+    scaled.forEach(s=>{ ctx.drawImage(s.img, gap, y, s.w, s.h); y+=s.h+gap; });
+  }
+  $('#glSave',root).onclick=()=>{ if(!imgs.length) return toast('先选图片'); $('#glCv',root).toBlob(b=>{download(b,'拼接长图_'+Date.now()+'.jpg'); toast('已保存');},'image/jpeg',0.92); };
+}
+
+/* ================= 第五批：文字工具 ================= */
+
+function t_txtnum(root){
+  convTool(root,{def:'订单号 A1234 金额 88.5 元 2024-11-15',outLabel:'结果',modes:[
+    {label:'只留数字',fn:s=>s.match(/\d+(\.\d+)?/g)?.join(' ')||''},
+    {label:'数字求和',fn:s=>{const n=s.match(/\d+(\.\d+)?/g)||[];return n.length?String(n.reduce((a,b)=>a+(+b),0)):'0';}},
+    {label:'数字个数',fn:s=>String((s.match(/\d+/g)||[]).length)}
+  ],note:'提取文本里的数字，便于从聊天记录里抓金额、单号。'});
+}
+
+function t_txten(root){
+  convTool(root,{def:'小羽工具箱 Toolbox 2024 ABC',outLabel:'结果',modes:[
+    {label:'只留英文',fn:s=>s.replace(/[^A-Za-z\s]/g,'').replace(/\s+/g,' ').trim()},
+    {label:'只留英文单词',fn:s=>(s.match(/[A-Za-z]+/g)||[]).join(',')},
+    {label:'首字母大写',fn:s=>s.replace(/\b\w/g,c=>c.toUpperCase())}
+  ]});
+}
+
+function t_txtzh(root){
+  convTool(root,{def:'小羽工具箱 Toolbox 中文提取 2024',outLabel:'结果',modes:[
+    {label:'只留中文',fn:s=>s.replace(/[^\u4e00-\u9fa5]/g,'')},
+    {label:'中文 + 标点',fn:s=>s.replace(/[^\u4e00-\u9fa5，。！？、；：""''（）《》]/g,'')},
+    {label:'中文字数',fn:s=>String((s.match(/[\u4e00-\u9fa5]/g)||[]).length)}
+  ]});
+}
+
+function t_txttrim(root){
+  convTool(root,{def:'  第一行有空格  \n\t第二行制表符\n   第三行',outLabel:'结果',modes:[
+    {label:'去首尾空格',fn:s=>s.split('\n').map(l=>l.trim()).join('\n')},
+    {label:'压缩空格',fn:s=>s.replace(/\s+/g,' ').trim()},
+    {label:'清空行',fn:s=>s.split('\n').filter(l=>l.trim()).join('\n')}
+  ],note:'整理从表格、PDF 复制过来的脏文本。'});
+}
+
+function t_txtcomma(root){
+  convTool(root,{def:'苹果\n香蕉\n橘子',outLabel:'结果',modes:[
+    {label:'行尾加逗号',fn:s=>s.split('\n').map(l=>l.trim()?l.trim()+',':'').join('\n')},
+    {label:'转一行逗号',fn:s=>s.split('\n').map(l=>l.trim()).filter(Boolean).join('，')},
+    {label:'行尾加分号',fn:s=>s.split('\n').map(l=>l.trim()?l.trim()+';':'').join('\n')}
+  ]});
+}
+
+function t_txtquote(root){
+  convTool(root,{def:'苹果\n香蕉\n橘子',outLabel:'结果',modes:[
+    {label:'每行加双引号',fn:s=>s.split('\n').map(l=>l.trim()?`"${l.trim()}"`:'').filter(Boolean).join(',\n')},
+    {label:'每行加单引号',fn:s=>s.split('\n').map(l=>l.trim()?`'${l.trim()}'`:'').filter(Boolean).join(',\n')},
+    {label:'加书名号',fn:s=>s.split('\n').map(l=>l.trim()?`《${l.trim()}》`:'').filter(Boolean).join('\n')}
+  ]});
+}
+
+function t_txtjsonarr(root){
+  convTool(root,{def:'苹果\n香蕉\n橘子',outLabel:'结果',modes:[
+    {label:'转为 JSON 数组',fn:s=>JSON.stringify(s.split('\n').map(l=>l.trim()).filter(Boolean),null,2)},
+    {label:'转为 JSON 对象',fn:s=>{const arr=s.split('\n').map(l=>l.trim()).filter(Boolean);return JSON.stringify(Object.fromEntries(arr.map((k,i)=>[k,i+1])),null,2);}},
+    {label:'转为换行数组',fn:s=>{const arr=s.split('\n').map(l=>l.trim()).filter(Boolean);return '[\n'+arr.map(a=>'  "'+a+'",').join('\n')+'\n]';}}
+  ],note:'把清单快速转成代码里的数组。'});
+}
+
+function t_txtsqlin(root){
+  convTool(root,{def:'苹果\n香蕉\n橘子',outLabel:'结果',modes:[
+    {label:'转 SQL IN',fn:s=>'IN ('+s.split('\n').map(l=>l.trim()).filter(Boolean).map(x=>`'${x}'`).join(', ')+')'},
+    {label:'转列值',fn:s=>s.split('\n').map(l=>l.trim()).filter(Boolean).map((x,i)=>`(${i+1}, '${x}')`).join(',\n')},
+    {label:'转 WHERE 条件',fn:s=>s.split('\n').map(l=>l.trim()).filter(Boolean).map(x=>`name = '${x}'`).join(' OR ')}
+  ]});
+}
+
+function t_txtcenter(root){
+  convTool(root,{def:'小羽工具箱\n作者 fornow\n交流群 728403008',outLabel:'结果',modes:[
+    {label:'居中排版（24 宽）',fn:s=>{const w=24;return s.split('\n').map(l=>{const n=[...l].length;const pad=Math.max(0,Math.floor((w-n)/2));return ' '.repeat(pad)+l;}).join('\n');}},
+    {label:'右侧对齐',fn:s=>{const arr=s.split('\n');const w=Math.max(...arr.map(l=>[...l].length));return arr.map(l=>' '.repeat(w-[...l].length)+l).join('\n');}},
+    {label:'两侧加框',fn:s=>{const arr=s.split('\n');return arr.map(l=>'| '+l+' |').join('\n');}}
+  ],note:'做纯文本排版、公告栏或代码注释。'});
+}
+
+function t_txtv(root){
+  convTool(root,{def:'小羽工具箱',outLabel:'竖排结果',modes:[
+    {label:'竖排（逐字换行）',fn:s=>[...s.replace(/\s/g,'')].join('\n')},
+    {label:'竖排带间隔',fn:s=>[...s.replace(/\s/g,'')].join('\n \n')},
+    {label:'竖排加竖线',fn:s=>[...s.replace(/\s/g,'')].join('\n｜')}
+  ],note:'生成竖排文字，适合发朋友圈或做书名排版。'});
+}
+
+function t_txttian(root){
+  convTool(root,{def:'小羽工具箱',outLabel:'田字格',modes:[
+    {label:'田字格（方框）',fn:s=>[...s.replace(/\s/g,'')].map(c=>'｜'+c+'｜').map(r=>'┌─┐\n'+r+'\n└─┘').join('\n')},
+    {label:'方框横排',fn:s=>'【'+[...s.replace(/\s/g,'')].join('】【')+'】'},
+    {label:'圆形装饰',fn:s=>[...s.replace(/\s/g,'')].map(c=>'◯'+c+'◯').join(' ')}
+  ]});
+}
+
+function t_txtbox(root){
+  convTool(root,{def:'小羽工具箱\n本地工具集合',outLabel:'结果',modes:[
+    {label:'星号框',fn:s=>{const arr=s.split('\n');const w=Math.max(...arr.map(l=>[...l].length))+2;const line='*'+'*'.repeat(w)+'*';return [line,...arr.map(l=>'* '+l+' '.repeat(w-[...l].length-1)+'*'),line].join('\n');}},
+    {label:'等号框',fn:s=>{const arr=s.split('\n');const w=Math.max(...arr.map(l=>[...l].length))+2;const line='+'+'-'.repeat(w)+'+';return [line,...arr.map(l=>'| '+l+' '.repeat(w-[...l].length-1)+'|'),line].join('\n');}},
+    {label:'井号标题框',fn:s=>{const arr=s.split('\n');const w=Math.max(...arr.map(l=>[...l].length))+4;return '#'.repeat(w)+'\n# '+arr.join('\n# ')+'\n'+'#'.repeat(w);}}
+  ]});
+}
+
+function t_txtgroup(root){
+  convTool(root,{def:'A1\nA2\nA3\nA4\nA5\nA6\nA7',outLabel:'结果',modes:[
+    {label:'每 3 条一组',fn:s=>{const a=s.split('\n').map(x=>x.trim()).filter(Boolean);const g=[];for(let i=0;i<a.length;i+=3)g.push(a.slice(i,i+3).join(' | '));return g.join('\n');}},
+    {label:'每 5 条一组',fn:s=>{const a=s.split('\n').map(x=>x.trim()).filter(Boolean);const g=[];for(let i=0;i<a.length;i+=5)g.push(a.slice(i,i+5).join(' / '));return g.join('\n');}},
+    {label:'两两配对',fn:s=>{const a=s.split('\n').map(x=>x.trim()).filter(Boolean);const g=[];for(let i=0;i+1<a.length;i+=2)g.push(a[i]+' – '+a[i+1]);return g.join('\n');}}
+  ],note:'把长清单拆成小组，方便排班、分发。'});
+}
+
+function t_txtrevlines(root){
+  convTool(root,{def:'第一行\n第二行\n第三行',outLabel:'结果',modes:[
+    {label:'行倒序',fn:s=>s.split('\n').reverse().join('\n')},
+    {label:'去空行后倒序',fn:s=>s.split('\n').filter(l=>l.trim()).reverse().join('\n')},
+    {label:'首尾互换',fn:s=>{const a=s.split('\n').filter(l=>l.trim());if(a.length<2)return a.join('');[a[0],a[a.length-1]]=[a[a.length-1],a[0]];return a.join('\n');}}
+  ]});
+}
+
+function t_txtshuffle(root){
+  convTool(root,{def:'张三\n李四\n王五\n赵六',outLabel:'结果',modes:[
+    {label:'随机打乱行序',fn:s=>{const a=s.split('\n').filter(l=>l.trim());for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a.join('\n');}},
+    {label:'随机取 1 条',fn:s=>{const a=s.split('\n').filter(l=>l.trim());return a[Math.floor(Math.random()*a.length)]||'';}},
+    {label:'随机选 3 条',fn:s=>{const a=s.split('\n').filter(l=>l.trim());const r=[];const c=[...a];while(r.length<Math.min(3,c.length)){r.push(c.splice(Math.floor(Math.random()*c.length),1)[0]);}return r.join('\n');}}
+  ],note:'抽人、抽奖、随机点名都靠它。'});
+}
+
+function t_txtnumlines(root){
+  convTool(root,{def:'苹果\n香蕉\n橘子',outLabel:'结果',modes:[
+    {label:'前缀 1. 2.',fn:s=>s.split('\n').filter(l=>l.trim()).map((l,i)=>(i+1)+'. '+l.trim()).join('\n')},
+    {label:'前缀 01 02',fn:s=>s.split('\n').filter(l=>l.trim()).map((l,i)=>String(i+1).padStart(2,'0')+'  '+l.trim()).join('\n')},
+    {label:'添加 Markdown 列表',fn:s=>s.split('\n').filter(l=>l.trim()).map(l=>'- '+l.trim()).join('\n')}
+  ]});
+}
+
+function t_txtcsvcol(root){
+  convTool(root,{def:'苹果\n香蕉\n橘子',outLabel:'CSV',modes:[
+    {label:'生成单列 CSV',fn:s=>'名称\n'+s.split('\n').filter(l=>l.trim()).map(l=>'"'+l.trim().replace(/"/g,'""')+'"').join('\n')},
+    {label:'两列（序号+名称）',fn:s=>'序号,名称\n'+s.split('\n').filter(l=>l.trim()).map((l,i)=>`${i+1},"${l.trim()}"`).join('\n')},
+    {label:'分号分隔',fn:s=>s.split('\n').filter(l=>l.trim()).join(';')}
+  ],note:'复制结果存成 .csv 就能用表格打开。'});
+}
+
+function t_txtmd(root){
+  convTool(root,{def:'第一句\n第二句\n第三句',outLabel:'Markdown',modes:[
+    {label:'转引用块',fn:s=>s.split('\n').filter(l=>l.trim()).map(l=>'> '+l.trim()).join('\n> \n')},
+    {label:'转代码块',fn:s=>'```\n'+s+'\n```'},
+    {label:'转标题 + 列表',fn:s=>'## 清单\n'+s.split('\n').filter(l=>l.trim()).map(l=>'- '+l.trim()).join('\n')}
+  ]});
+}
+
+function t_txtcodeblock(root){
+  convTool(root,{def:'console.log("hello")',outLabel:'结果',modes:[
+    {label:'JS 代码块',fn:s=>'```js\n'+s+'\n```'},
+    {label:'JSON 代码块',fn:s=>'```json\n'+s+'\n```'},
+    {label:'HTML 代码块',fn:s=>'```html\n'+s+'\n```'}
+  ]});
+}
+
+function t_txtfullhalf(root){
+  convTool(root,{def:'ＡＢＣ１２３ ｈｅｌｌｏ，你好！',outLabel:'结果',modes:[
+    {label:'全角转半角',fn:s=>s.replace(/[\uFF01-\uFF5E]/g,c=>String.fromCharCode(c.charCodeAt(0)-0xFEE0)).replace(/\u3000/g,' ')},
+    {label:'半角转全角',fn:s=>s.replace(/[!-~]/g,c=>String.fromCharCode(c.charCodeAt(0)+0xFEE0)).replace(/ /g,'\u3000')},
+    {label:'空格转全角',fn:s=>s.replace(/ /g,'\u3000')}
+  ],note:'处理从某些输入法或排版软件复制来的全角文本。'});
+}
+
+function t_txtmask(root){
+  convTool(root,{def:'手机号 13812345678，姓名 张三，账号 fornow330',outLabel:'打码结果',modes:[
+    {label:'手机号打码',fn:s=>s.replace(/1[3-9]\d{9}/g,m=>m.slice(0,3)+'****'+m.slice(7))},
+    {label:'保留首尾（通用）',fn:s=>s.replace(/\b(\w{2})\w+(\w{1})\b/g,'$1****$2')},
+    {label:'中间打码（标注用）',fn:s=>s.replace(/[\u4e00-\u9fa5]{2,}/g,m=>m[0]+'**'+(m.length>2?m[m.length-1]:''))}
+  ],note:'发截图或转述信息前先脱敏。'});
+}
+
+function t_txtwidth(root){
+  convTool(root,{def:'小羽工具箱 fornow 2024',outLabel:'统计',modes:[
+    {label:'统计宽度',fn:s=>{let w=0;for(const c of s){w+=/[\u4e00-\u9fa5\u3000-\u303F\uFF00-\uFFEF]/.test(c)?2:1;}return '可视宽度 '+w+' 字符位';}},
+    {label:'统计字符数',fn:s=>'总字符 '+[...s].length+' 个'},
+    {label:'分类统计',fn:s=>{const zh=(s.match(/[\u4e00-\u9fa5]/g)||[]).length;const en=(s.match(/[A-Za-z]/g)||[]).length;const num=(s.match(/\d/g)||[]).length;const sp=(s.match(/\s/g)||[]).length;return `中文 ${zh} · 英文 ${en} · 数字 ${num} · 空白 ${sp}`;}}
+  ]});
+}
+
+function t_txtwords(root){
+  convTool(root,{def:'小羽工具箱是一个纯本地的工具集合，支持 iOS 和 Android。',outLabel:'统计',modes:[
+    {label:'中文词数估算',fn:s=>{const zh=(s.match(/[\u4e00-\u9fa5]/g)||[]).length;return '约 '+zh+' 个汉字词（按每字一词粗算）';}},
+    {label:'英文单词数',fn:s=>String((s.match(/[A-Za-z][A-Za-z'-]*/g)||[]).length)+' 个英文单词'},
+    {label:'句子数',fn:s=>String((s.split(/[。！？.!?]+/).filter(x=>x.trim()).length))+' 句'}
+  ]});
+}
+
+function t_txtrepeat(root){
+  convTool(root,{def:'小羽',outLabel:'结果',modes:[
+    {label:'重复 3 次',fn:s=>Array(3).fill(s).join('')},
+    {label:'重复 10 次',fn:s=>Array(10).fill(s).join('')},
+    {label:'按行重复 3 次',fn:s=>s.split('\n').map(l=>Array(3).fill(l).join(' ')).join('\n')}
+  ],note:'生成占位文本、分隔线或测试数据。'});
+}
+
+function t_txtbetween(root){
+  convTool(root,{def:'【开始】要提取的内容在这里【结束】其他内容',outLabel:'结果',modes:[
+    {label:'提取【】之间',fn:s=>[...s.matchAll(/【([^】]+)】/g)].map(m=>m[1]).join('\n')||'没有匹配'},
+    {label:'提取<>之间',fn:s=>[...s.matchAll(/<([^>]+)>/g)].map(m=>m[1]).join('\n')||'没有匹配'},
+    {label:'提取所有引号内容',fn:s=>[...s.matchAll(/[""]([^""]+)[""]/g)].map(m=>m[1]).join('\n')||'没有匹配'}
+  ],note:'从长文本里挑出被标记包住的片段。'});
+}
+
+function t_txtsplit(root){
+  convTool(root,{def:'今天天气不错。我们去公园吧！你觉得呢？',outLabel:'结果',modes:[
+    {label:'按句切分（每行一句）',fn:s=>s.split(/(?<=[。！？!?])/).map(x=>x.trim()).filter(Boolean).join('\n')},
+    {label:'按逗号切分',fn:s=>s.split(/[，,、]/).map(x=>x.trim()).filter(Boolean).join('\n')},
+    {label:'按字数切分（每 10 字）',fn:s=>{const arr=[...s.replace(/\s/g,'')];const out=[];for(let i=0;i<arr.length;i+=10)out.push(arr.slice(i,i+10).join(''));return out.join('\n');}}
+  ]});
+}
+
+function t_txtjoin(root){
+  convTool(root,{def:'第一段\n第二段\n第三段',outLabel:'结果',modes:[
+    {label:'合并为一行',fn:s=>s.split('\n').map(x=>x.trim()).filter(Boolean).join(' ')},
+    {label:'合并成一段（不加空格）',fn:s=>s.split('\n').map(x=>x.trim()).filter(Boolean).join('')},
+    {label:'合并成句子（加句号）',fn:s=>{const a=s.split('\n').map(x=>x.trim()).filter(Boolean);return a.map(x=>/[。！？]$/.test(x)?x:x+'。').join('');}}
+  ],note:'把换行很多的文本重新拼成正常段落。'});
+}
+
+function t_txtrename(root){
+  convTool(root,{def:'IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg',outLabel:'新文件名',modes:[
+    {label:'统一加前缀',fn:s=>s.split('\n').filter(l=>l.trim()).map(l=>'小羽_'+l.trim()).join('\n')},
+    {label:'统一改扩展名 .png',fn:s=>s.split('\n').filter(l=>l.trim()).map(l=>l.replace(/\.\w+$/,'')+'.png').join('\n')},
+    {label:'批量编号 001 起',fn:s=>{const a=s.split('\n').filter(l=>l.trim());const ext=(a[0].match(/\.(\w+)$/)||[,'jpg'])[1];return a.map((l,i)=>'file_'+String(i+1).padStart(3,'0')+'.'+ext).join('\n');}}
+  ],note:'整理素材文件名，生成后手动改名即可。'});
+}
+
+/* ================= 第五批：计算工具 ================= */
+
+function t_creditinstallment(root){
+  calcTool(root,{fields:[['p','分期金额（元）',5000],['r','月利率（%）',0.6,0.1],['n','期数',12]],run:v=>{
+    const p=+v.p, r=v.r/100, n=Math.max(1,Math.round(v.n));
+    const m=r?p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1):p/n;
+    return [['每月还款',m.toFixed(2)+' 元'],['总还款',(m*n).toFixed(2)+' 元'],['总手续费/利息',(m*n-p).toFixed(2)+' 元']];
+  },note:'信用卡/花呗分期的等额本息估算。'});
+}
+
+function t_vat(root){
+  calcTool(root,{fields:[['a','含税金额（元）',1130],['r','税率（%）',13],['m','计算方向',['in','由含税算不含税','ex','由不含税算含税']]],run:v=>{
+    const a=+v.a, r=v.r/100;
+    if(v.m==='in'){ const net=a/(1+r), tax=a-net; return [['不含税金额',net.toFixed(2)+' 元'],['税额',tax.toFixed(2)+' 元'],['税率',(r*100).toFixed(1)+' %']]; }
+    const tax=a*r, total=a+tax; return [['税额',tax.toFixed(2)+' 元'],['含税金额',total.toFixed(2)+' 元'],['税率',(r*100).toFixed(1)+' %']];
+  },note:'增值税价税分离，常见税率 13%/9%/6%/3%。'});
+}
+
+function t_overtime(root){
+  calcTool(root,{fields:[['b','月基本工资（元）',8000],['h','本月加班小时',20],['k','加班类型',['w','工作日 1.5 倍','r','休息日 2 倍','f','节假日 3 倍']],['d','月计薪天数',21.75,0.25]],run:v=>{
+    const hourly=+v.b/(v.d*8);
+    const mult=v.k==='w'?1.5:v.k==='r'?2:3;
+    const pay=hourly*mult*(+v.h);
+    return [['小时工资',hourly.toFixed(2)+' 元/小时'],['加班倍数',mult+' 倍'],['加班费',pay.toFixed(2)+' 元'],['应发合计',(pay + +v.b).toFixed(2)+' 元']];
+  },note:'按劳动法常见倍数估算，实际以公司制度为准。'});
+}
+
+function t_areaconv(root){
+  calcTool(root,{fields:[['a','建筑面积（㎡）',100],['p','公摊率（%）',20,0.5]],run:v=>{
+    const a=+v.a, p=+v.p/100;
+    return [['套内面积',(a*(1-p)).toFixed(2)+' ㎡'],['公摊面积',(a*p).toFixed(2)+' ㎡'],['折合坪数',(a/3.3058).toFixed(2)+' 坪']];
+  },note:'买房看面积时快速换算套内与公摊。'});
+}
+
+function t_wallpaper(root){
+  calcTool(root,{fields:[['w','墙面宽（米）',4],['h','墙面高（米）',2.8],['r','每卷可贴宽度（米）',0.53,0.01],['l','每卷长度（米）',10,0.5]],run:v=>{
+    const w=+v.w,h=+v.h,r=+v.r,l=+v.l;
+    const strips=Math.ceil(w/r);
+    const perRoll=Math.floor(l/h);
+    const rolls=Math.ceil(strips/Math.max(1,perRoll));
+    return [['需要的墙纸条数',strips+' 条'],['每卷可出条数',perRoll+' 条'],['建议购买卷数',rolls+' 卷'],['损耗后建议',Math.ceil(rolls*1.1)+' 卷']];
+  },note:'买墙纸前先算卷数，避免多买或少买。'});
+}
+
+function t_curtain(root){
+  calcTool(root,{fields:[['w','窗宽（米）',2],['h','窗高（米）',2.4],['k','褶皱倍数',2,0.1],['p','每米价格（元）',80,5]],run:v=>{
+    const w=+v.w,h=+v.h,k=+v.k,p=+v.p;
+    const cloth=w*k;
+    return [['用料门幅',cloth.toFixed(2)+' 米'],['建议高度（含 20cm 加工）',(h+0.2).toFixed(2)+' 米'],['布料面积',(cloth*(h+0.2)).toFixed(2)+' ㎡'],['布料金额',(cloth*p).toFixed(2)+' 元']];
+  },note:'常见褶皱倍数 1.8–2.5，纱帘可小一点。'});
+}
+
+function t_aircondition(root){
+  calcTool(root,{fields:[['a','房间面积（㎡）',20],['h','层高（米）',2.8,0.1],['c','类型',['c','卧室/客厅','k','厨房西晒']]],run:v=>{
+    const a=+v.a,h=+v.h;
+    let need=a*(h/2.8)*(v.c==='k'?1.25:1);
+    const p=need/10;
+    return [['所需制冷量',Math.round(need*100)+' W'],['约合匹数',p.toFixed(1)+' 匹 (1匹≈2500W)'],['建议机型',p<=1.2?'1 匹':p<=1.6?'1.5 匹':p<=2.2?'2 匹':p<=3?'3 匹':'柜机 3 匹以上']];
+  },note:'按面积与层高粗算，顶层西晒再上浮一档。'});
+}
+
+function t_wiregauge(root){
+  calcTool(root,{fields:[['p','用电器功率（W）',2000],['v','电压（V）',220],['ph','相数',['1','单相','3','三相']]],run:v=>{
+    const p=+v.p,vv=+v.v;
+    const i=v.ph==='1'?p/vv:p/(vv*1.732*0.85);
+    const gauge=i<=10?'1.5 平方':i<=16?'2.5 平方':i<=25?'4 平方':i<=32?'6 平方':i<=45?'10 平方':'16 平方及以上';
+    return [['额定电流',i.toFixed(2)+' A'],['建议线径',gauge],['安全余量',(i*1.25).toFixed(2)+' A']];
+  },note:'铜芯线明敷估算，暗管穿线建议再放大一档。'});
+}
+
+function t_waterbill(root){
+  calcTool(root,{fields:[['u','用水量（吨）',15],['p','单价（元/吨）',3.2,0.1],['s','污水处理费（元/吨）',1.2,0.1]],run:v=>{
+    const u=+v.u,p=+v.p,s=+v.s;
+    return [['水费',(u*p).toFixed(2)+' 元'],['污水处理费',(u*s).toFixed(2)+' 元'],['合计',(u*(p+s)).toFixed(2)+' 元']];
+  },note:'各地单价差异大，按账单上的单价填。'});
+}
+
+function t_gasbill(root){
+  calcTool(root,{fields:[['u','用气量（立方）',20],['p','阶梯单价（元/立方）',2.8,0.1]],run:v=>{
+    const u=+v.u,p=+v.p;
+    return [['燃气费',(u*p).toFixed(2)+' 元'],['日均（按 30 天）',(u*p/30).toFixed(2)+' 元/天']];
+  }});
+}
+
+function t_tiresize(root){
+  calcTool(root,{fields:[['w','胎宽（mm）',225],['a','扁平比（%）',55],['d','轮毂直径（英寸）',17]],run:v=>{
+    const w=+v.w,a=+v.a/100,d=+v.d;
+    const side=w*a;
+    const diameter=d*25.4+side*2;
+    return [['胎侧高度',side.toFixed(1)+' mm'],['外径',diameter.toFixed(0)+' mm'],['周长',(Math.PI*diameter/1000).toFixed(2)+' 米'],['每公里转数',Math.round(1000/(Math.PI*diameter/1000))+' 转']];
+  },note:'换轮胎时确认外径变化是否在 3% 以内。'});
+}
+
+function t_brakepath(root){
+  calcTool(root,{fields:[['v','车速（km/h）',100],['r','反应时间（秒）',1,0.1],['k','路面',['d','干沥青 0.45','w','湿滑 0.3','s','冰雪 0.15']]],run:v=>{
+    const sp=+v.v/3.6, rt=+v.r, mu=v.k==='d'?0.45:v.k==='w'?0.3:0.15;
+    const react=sp*rt, brake=sp*sp/(2*9.8*mu);
+    return [['反应距离',react.toFixed(1)+' 米'],['制动距离',brake.toFixed(1)+' 米'],['总停车距离',(react+brake).toFixed(1)+' 米'],['备注','未考虑车况与载重']];
+  },note:'只是物理估算，实际请保持车距。'});
+}
+
+function t_childheight(root){
+  calcTool(root,{fields:[['f','父亲身高（cm）',175],['m','母亲身高（cm）',162],['g','孩子性别',['b','男孩','g','女孩']]],run:v=>{
+    const f=+v.f,m=+v.m;
+    const h=v.g==='b'?(f+m+13)/2:(f+m-13)/2;
+    return [['预测成年身高',h.toFixed(1)+' cm'],['浮动范围',(h-5).toFixed(1)+' – '+(h+5).toFixed(1)+' cm'],['说明','遗传公式，仅作参考']];
+  },note:'遗传靶身高公式，营养与运动也会影响。'});
+}
+
+function t_bsa(root){
+  calcTool(root,{fields:[['h','身高（cm）',170],['w','体重（kg）',65,0.5],['s','性别',['m','男','f','女']]],run:v=>{
+    const h=+v.h,w=+v.w;
+    const bsa=Math.sqrt(h*w/3600);
+    const bmi=w/Math.pow(h/100,2);
+    return [['体表面积',bsa.toFixed(3)+' ㎡'],['BMI',bmi.toFixed(1)],['基础代谢估算',Math.round(v.s==='m'?(10*w+6.25*h-5*30+5):(10*w+6.25*h-5*30-161))+' kcal/天']];
+  },note:'体表面积常用于用药剂量换算，实际遵医嘱。'});
+}
+
+function t_heartrate(root){
+  calcTool(root,{fields:[['a','年龄',30],['r','静息心率',65]],run:v=>{
+    const age=+v.a, rest=+v.r;
+    const max=220-age;
+    const zone=(lo,hi)=>Math.round(max*lo)+' – '+Math.round(max*hi)+' bpm';
+    return [['最大心率',max+' bpm'],['燃脂区间 (60-70%)',zone(0.6,0.7)],['有氧区间 (70-80%)',zone(0.7,0.8)],['无氧区间 (80-90%)',zone(0.8,0.9)],['储备心率法燃脂',Math.round(rest+(max-rest)*0.6)+' – '+Math.round(rest+(max-rest)*0.7)+' bpm']];
+  },note:'按年龄估算，服药或特殊体质请咨询医生。'});
+}
+
+function t_fishtank(root){
+  calcTool(root,{fields:[['l','缸长（cm）',60],['w','缸宽（cm）',30],['h','水深（cm）',40]],run:v=>{
+    const vol=(+v.l)*(+v.w)*(+v.h)/1000;
+    return [['水体容积',vol.toFixed(1)+' 升'],['约合重量',(vol*1).toFixed(1)+' kg'],['建议过滤流量',Math.round(vol*6)+' – '+Math.round(vol*10)+' L/h'],['换水 1/4',(vol/4).toFixed(1)+' 升']];
+  },note:'实际扣除底砂与造景后水体更少，养鱼按 8 折估。'});
+}
+
+function t_mortar(root){
+  calcTool(root,{fields:[['a','抹灰面积（㎡）',20],['t','厚度（cm）',2,0.1],['r','配比（水泥:砂）','1:3']].slice(0,3).concat([['m','每袋水泥 50kg 约 0.032m³',1]]),run:v=>{
+    const vol=(+v.a)*(+v.t/100);
+    const cement=vol*0.35, sand=vol*1.05;
+    return [['砂浆体积',vol.toFixed(3)+' m³'],['水泥用量',Math.round(cement/0.032*50)+' kg（约 '+Math.ceil(cement/0.032)+' 袋）'],['砂用量',(sand*1.4).toFixed(2)+' 吨'],['水约',(vol*0.18*1000).toFixed(0)+' L']];
+  },note:'1:3 抹灰砂浆粗估，实际按配合比单执行。'});
+}
+
+function t_brickcount(root){
+  calcTool(root,{fields:[['a','砌墙面积（㎡）',20],['t','墙厚（cm）',24,1],['k','砖规格',['std','标准砖 240×115×53','a','多孔砖 240×115×90','b','加气块 600×200×100']]],run:v=>{
+    const a=+v.a;
+    const perSq=v.k==='std'?(v.t<=12?64:v.t<=24?128:256):v.k==='a'?80:8;
+    const n=Math.ceil(a*perSq*1.05);
+    return [['每平方用砖',perSq+' 块'],['含 5% 损耗',n+' 块'],['砂浆约',(a*0.02*(v.t/12)).toFixed(2)+' m³']];
+  },note:'标准砖按 12/24/37 墙估算，异形墙另计。'});
+}
+
+function t_cableamp(root){
+  calcTool(root,{fields:[['s','铜线截面（mm²）',2.5,0.5],['m','敷设方式',['o','明敷','p','穿管','u','地下']]],run:v=>{
+    const s=+v.s;
+    const base={'1':14,'1.5':18,'2.5':25,'4':33,'6':43,'10':60,'16':80,'25':105}[String(s)]||6.5*s;
+    const f=v.m==='o'?1:v.m==='p'?0.85:0.9;
+    return [['参考载流量',Math.round(base*f)+' A'],['约可带功率（220V）',Math.round(base*f*220/1000)+' kW'],['建议断路器',Math.ceil(base*f/5)*5+' A']];
+  },note:'按常见铜芯线经验值，工程需查规范表。'});
+}
+
+function t_pipeflow(root){
+  calcTool(root,{fields:[['d','管内径（mm）',20],['v','流速（m/s）',1.5,0.1]],run:v=>{
+    const d=+v.d/1000, sp=+v.v;
+    const area=Math.PI*d*d/4;
+    return [['过流面积',(area*10000).toFixed(2)+' cm²'],['流量',(area*sp*1000).toFixed(2)+' L/s'],['每小时',(area*sp*3600).toFixed(1)+' m³/h']];
+  },note:'给水常用流速 1.0–2.0 m/s，过大易产生噪音。'});
+}
+
+function t_caffeine(root){
+  calcTool(root,{fields:[['c','摄入量（mg）',200],['t','经过时间（小时）',3,0.5]],run:v=>{
+    const left=(+v.c)*Math.pow(0.5,(+v.t)/5);
+    return [['当前体内残留',left.toFixed(1)+' mg'],['占初始',(left/(+v.c||1)*100).toFixed(1)+' %'],['完全代谢约需','≈'+((+v.c?5*Math.log2((+v.c)/20):5)).toFixed(1)+' 小时'],['提示',left>50?'可能影响入睡':'已较低']];
+  },note:'半衰期按 5 小时估算，个体差异明显。'});
+}
+
+function t_sipreturn(root){
+  calcTool(root,{fields:[['m','每月投入（元）',1000],['y','年化收益（%）',6,0.5],['n','投资年限',10],['k','初始本金（元）',0]],run:v=>{
+    const m=+v.m, r=(+v.y)/100/12, n=Math.round(+v.n*12), p=+v.k;
+    const fv=p*Math.pow(1+r,n)+m*((Math.pow(1+r,n)-1)/r||n);
+    return [['期末总额',fv.toFixed(0)+' 元'],['累计投入',(p+m*n).toFixed(0)+' 元'],['收益',(fv-p-m*n).toFixed(0)+' 元'],['收益率',((fv/(p+m*n||1)-1)*100).toFixed(1)+' %']];
+  },note:'按月定投、按月复利估算，不含税费。'});
+}
+
+function t_minpayment(root){
+  calcTool(root,{fields:[['b','账单金额（元）',5000],['r','最低比例（%）',10,1],['i','循环利息（%年）',18.25,0.5],['m','每月还款（元）',1000]],run:v=>{
+    const b=+v.b, r=+v.r/100, i=(+v.i)/100/12;
+    const min=b*r;
+    return [['本期最低还款',min.toFixed(2)+' 元'],['剩余本金',(b-min).toFixed(2)+' 元'],['按此每月还',(+v.m).toFixed(2)+' 元'],['预估利息（一年）',(b*i*12*0.6).toFixed(2)+' 元（粗估）']];
+  },note:'最低还款会拉长还款周期并产生利息，尽量一次还清。'});
+}
+
+function t_breakeven(root){
+  calcTool(root,{fields:[['p','单价（元）',30],['v','单位变动成本（元）',12],['f','月固定成本（元）',12000]],run:v=>{
+    const p=+v.p,vc=+v.v,f=+v.f;
+    const cm=p-vc;
+    const q=cm>0?f/cm:0;
+    return [['单位毛利',cm.toFixed(2)+' 元'],['毛利率',(cm/(p||1)*100).toFixed(1)+' %'],['保本销量',q?Math.ceil(q)+' 件/月':'亏损定价'],['保本销售额',q?(Math.ceil(q)*p).toFixed(0)+' 元':'—']];
+  },note:'开店、摆摊前先算保本点。'});
+}
+
+function t_grossmargin(root){
+  calcTool(root,{fields:[['s','售价（元）',100],['c','成本（元）',60]],run:v=>{
+    const s=+v.s,c=+v.c;
+    const g=s-c;
+    return [['毛利',g.toFixed(2)+' 元'],['毛利率',(g/(s||1)*100).toFixed(1)+' %'],['加价率',(g/(c||1)*100).toFixed(1)+' %'],['建议售价（毛利 40%）',(c/0.6).toFixed(2)+' 元']];
+  }});
+}
+
+function t_inflation(root){
+  calcTool(root,{fields:[['m','金额（元）',10000],['r','年均通胀（%）',3,0.1],['n','年数',10]],run:v=>{
+    const m=+v.m,r=+v.r/100,n=+v.n;
+    const future=m/Math.pow(1+r,n);
+    return [['未来购买力折现',future.toFixed(0)+' 元'],['相当于现在',(future/m*100).toFixed(1)+' %'],['货币贬值',((1-future/m)*100).toFixed(1)+' %']];
+  },note:'衡量存款被通胀侵蚀的程度。'});
+}
+
+function t_rentyield(root){
+  calcTool(root,{fields:[['p','总价（万元）',100],['r','月租金（元）',2500],['e','年支出（元）',3000]],run:v=>{
+    const p=+v.p*10000, r=+v.r, e=+v.e;
+    const net=r*12-e;
+    return [['年租金收入',(r*12).toFixed(0)+' 元'],['净租金',net.toFixed(0)+' 元'],['毛回报率',(r*12/p*100).toFixed(2)+' %'],['净回报率',(net/p*100).toFixed(2)+' %'],['回本年限',net?Math.round(p/net*10)/10+' 年':'—']];
+  },note:'不含空置期与贷款成本，粗略比较房源用。'});
+}
+
+function t_rpm(root){
+  calcTool(root,{fields:[['v','车速（km/h）',100],['g','挡位齿比',0.8,0.01],['f','主减速比',3.9,0.01],['t','轮胎直径（mm）',650,5]],run:v=>{
+    const sp=+v.v/3.6;
+    const wheelR=(+v.t)/2000;
+    const rpm=sp/(2*Math.PI*wheelR)*60*(+v.g)*(+v.f);
+    return [['车轮转速',(sp/(2*Math.PI*wheelR)*60).toFixed(0)+' rpm'],['发动机转速',Math.round(rpm)+' rpm'],['每小时里程',(+v.v)+' km']];
+  },note:'手动挡换挡时判断转速是否合理（粗算）。'});
+}
+
+function t_annualreturn(root){
+  calcTool(root,{fields:[['s','期初金额（元）',10000],['e','期末金额（元）',15000],['n','持有年数',3,0.1]],run:v=>{
+    const s=+v.s,e=+v.e,n=+v.n;
+    const total=(e/s-1)*100;
+    const cagr=(Math.pow(e/s,1/n)-1)*100;
+    return [['累计收益率',total.toFixed(2)+' %'],['年化收益率',cagr.toFixed(2)+' %'],['年化（简单）',(total/n).toFixed(2)+' %']];
+  },note:'年化收益率用几何平均，比简单平均更准确。'});
+}
+
+function t_txttable(root){
+  convTool(root,{def:'姓名,年龄,城市\n张三,28,宜昌\n李四,32,武汉',outLabel:'表格',modes:[
+    {label:'逗号列转 Markdown 表',fn:s=>{const a=s.split('\n').filter(l=>l.trim()).map(l=>l.split(/[,，\t]/).map(x=>x.trim()));if(!a.length)return '';const head=a[0];return '| '+head.join(' | ')+' |\n| '+head.map(()=>'---').join(' | ')+' |\n'+a.slice(1).map(r=>'| '+r.join(' | ')+' |').join('\n');}},
+    {label:'对齐显示',fn:s=>{const a=s.split('\n').filter(l=>l.trim()).map(l=>l.split(/[,，]/).map(x=>x.trim()));const w=[];a.forEach(r=>r.forEach((c,i)=>w[i]=Math.max(w[i]||0,[...c].length)));return a.map(r=>r.map((c,i)=>c+' '.repeat(w[i]-[...c].length)).join('  |  ')).join('\n');}},
+    {label:'转 HTML 表格',fn:s=>{const a=s.split('\n').filter(l=>l.trim()).map(l=>l.split(/[,，]/).map(x=>x.trim()));return '<table>\n'+a.map((r,i)=>'  <tr>'+r.map(c=>`<${i?'td':'th'}>${c}</${i?'td':'th'}>`).join('')+'</tr>').join('\n')+'\n</table>';}}
+  ],note:'把逗号分隔的文本快速排版成表。'});
+}
+
+function t_txtfreq(root){
+  convTool(root,{def:'工具箱 工具 本地 工具箱 离线 本地 工具',outLabel:'词频',modes:[
+    {label:'词频统计（按词）',fn:s=>{const m=s.match(/[\u4e00-\u9fa5]{2,}|[A-Za-z]{2,}/g)||[];const c={};m.forEach(w=>c[w]=(c[w]||0)+1);return Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,30).map(([w,n])=>w+'  '+n).join('\n')||'没有足够内容';}},
+    {label:'单字频率',fn:s=>{const m=[...s.replace(/\s/g,'')];const c={};m.forEach(w=>c[w]=(c[w]||0)+1);return Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,30).map(([w,n])=>w+'  '+n).join('\n');}},
+    {label:'出现最多的词',fn:s=>{const m=s.match(/[\u4e00-\u9fa5]{2,4}/g)||[];const c={};m.forEach(w=>c[w]=(c[w]||0)+1);const top=Object.entries(c).sort((a,b)=>b[1]-a[1])[0];return top?top[0]+'（'+top[1]+' 次）':'—';}}
+  ],note:'粗略词频，不依赖分词库，长文效果一般。'});
+}
+
+function t_ceilingframe(root){
+  calcTool(root,{fields:[['a','吊顶面积（㎡）',20],['s','龙骨间距（cm）',40,5],['k','每根长度（m）',3,0.1]],run:v=>{
+    const a=+v.a, sp=+v.s/100, len=+v.k;
+    const rows=Math.ceil(Math.sqrt(a)/sp)+1;
+    const mainLen=rows*Math.sqrt(a)/len;
+    return [['主龙骨约',Math.ceil(mainLen)+' 根'],['副龙骨约',Math.ceil(rows*2)+' 根'],['吊杆约',Math.ceil(a/(sp*sp*2))+' 根'],['每平方用量',(mainLen/a*len).toFixed(2)+' m']];
+  },note:'按方形空间与 40cm 间距粗估，异形空间加 10%。'});
+}
+
+/* ================= 第五批：效率工具 ================= */
+
+function t_countdown_to(root){
+  root.innerHTML=`
+    <div class="box">
+      <div class="lbl">目标日期时间</div><input type="datetime-local" id="ctIn">
+      <div class="lbl" style="margin-top:10px">事件名称</div><input id="ctName" value="目标日">
+    </div>
+    <div class="box" style="text-align:center">
+      <div id="ctBig" style="font-size:30px;font-weight:700;font-variant-numeric:tabular-nums">--</div>
+      <div class="hint" id="ctSub">设置后开始倒数</div>
+    </div>
+    <p class="hint">倒数到考试、纪念日、假期，刷新页面后重新设置即可。</p>`;
+  let timer=null;
+  function tick(){
+    const v=$('#ctIn',root).value;
+    if(!v){ $('#ctBig',root).textContent='--'; return; }
+    const d=new Date(v)-new Date();
+    if(d<=0){ $('#ctBig',root).textContent='已到时间'; $('#ctSub',root).textContent=$('#ctName',root).value; return; }
+    const day=Math.floor(d/86400000), hr=Math.floor(d%86400000/3600000), mi=Math.floor(d%3600000/60000), se=Math.floor(d%60000/1000);
+    $('#ctBig',root).textContent=`${day} 天 ${String(hr).padStart(2,'0')}:${String(mi).padStart(2,'0')}:${String(se).padStart(2,'0')}`;
+    $('#ctSub',root).textContent=$('#ctName',root).value;
+  }
+  $('#ctIn',root).onchange=()=>{ clearInterval(timer); timer=setInterval(tick,1000); tick(); };
+  tick();
+  return ()=>clearInterval(timer);
+}
+
+function t_reminder_loop(root){
+  root.innerHTML=`
+    <div class="box">
+      <div class="lbl">提醒内容</div><input id="rlTxt" value="起来喝点水">
+      <div class="lbl" style="margin-top:10px">间隔（分钟）</div><input type="number" id="rlMin" value="30" min="1" max="240">
+      <button class="btn block" id="rlGo" style="margin-top:12px">开始提醒</button>
+    </div>
+    <div class="box" style="text-align:center"><div id="rlNext" style="font-size:24px;font-weight:700">未开始</div>
+      <div class="hint" id="rlLog">—</div></div>
+    <p class="hint">页面开着时每到一个间隔弹出提示（浏览器通知需手动允许），也可用震动。</p>`;
+  let timer=null, left=0;
+  function step(){
+    left--;
+    if(left<=0){
+      const txt=$('#rlTxt',root).value||'提醒';
+      toast(txt); try{ navigator.vibrate && navigator.vibrate([300,120,300]); }catch(e){}
+      $('#rlLog',root).textContent=new Date().toLocaleTimeString('zh-CN')+' 已提醒';
+      left=Math.max(1,+$('#rlMin',root).value||30)*60;
+    }
+    $('#rlNext',root).textContent=Math.floor(left/60)+':'+String(left%60).padStart(2,'0');
+  }
+  $('#rlGo',root).onclick=()=>{
+    if(timer){ clearInterval(timer); timer=null; $('#rlGo',root).textContent='开始提醒'; $('#rlNext',root).textContent='已暂停'; return; }
+    left=Math.max(1,+$('#rlMin',root).value||30)*60;
+    timer=setInterval(step,1000); step();
+    $('#rlGo',root).textContent='暂停';
+  };
+  return ()=>clearInterval(timer);
+}
+
+function t_focus_timer(root){
+  timerTool(root,{sec:25*60,sub:'专注 25 分钟后休息 5 分钟',doneMsg:'本轮专注结束，休息一下',note:'想调时长可以自己改这里的时间，简单够用。'});
+}
+
+function t_stand_reminder(root){
+  timerTool(root,{sec:45*60,sub:'每 45 分钟提醒你站起来',doneMsg:'该站起来走两步了',note:'久坐伤腰，配合拉伸一起用。'});
+}
+
+function t_eye_care(root){
+  timerTool(root,{sec:20*60,sub:'每 20 分钟看远处 20 秒',doneMsg:'看向 6 米外，坚持 20 秒',note:'20-20-20 护眼法，屏幕党必备。'});
+}
+
+function t_stretch_timer(root){
+  timerTool(root,{sec:60,sub:'每个动作保持 30–60 秒',doneMsg:'换下一个动作',note:'颈肩、腰背各做一轮，别憋气。'});
+}
+
+function t_reading_log(root){
+  checklistTool(root,{key:'reading',ph:'书名 / 今天读的章节',note:'记录今天读了什么，勾掉即完成。',items:['读 10 页','记一条笔记','整理一句金句']});
+}
+
+function t_water_log(root){
+  checklistTool(root,{key:'water',ph:'加一杯（或写时间）',note:'一天 8 杯为目标，勾完就达标。',items:['第 1 杯','第 2 杯','第 3 杯','第 4 杯','第 5 杯','第 6 杯','第 7 杯','第 8 杯']});
+}
+
+function t_scoreboard(root){
+  root.innerHTML=`
+    <div class="box">
+      <div class="row"><input id="sbName" placeholder="选手名字"><button class="btn" id="sbAdd" style="flex:0 0 72px">加入</button></div>
+      <div id="sbList" style="margin-top:12px"></div>
+      <button class="btn ghost block" id="sbReset" style="margin-top:12px">清零</button>
+    </div>
+    <p class="hint">打牌、桌游、家庭比赛记分用，加减 1 分即可。</p>`;
+  let players=[{n:'甲',s:0},{n:'乙',s:0}];
+  function render(){
+    $('#sbList',root).innerHTML=players.map((p,i)=>`<div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #F1F3F7">
+      <span style="flex:1;font-size:14px">${p.n}</span>
+      <b style="font-size:20px;min-width:42px;text-align:right">${p.s}</b>
+      <button class="btn ghost" data-sbd="-1" data-i="${i}" style="width:40px;height:34px;padding:0">-</button>
+      <button class="btn" data-sbd="1" data-i="${i}" style="width:40px;height:34px;padding:0">+</button></div>`).join('');
+  }
+  root.addEventListener('click',e=>{
+    const b=e.target.closest('[data-sbd]'); if(!b) return;
+    players[+b.dataset.i].s+=+b.dataset.sbd; render();
+  });
+  $('#sbAdd',root).onclick=()=>{ const v=$('#sbName',root).value.trim(); if(!v) return; players.push({n:v,s:0}); $('#sbName',root).value=''; render(); };
+  $('#sbReset',root).onclick=()=>{ players.forEach(p=>p.s=0); render(); };
+  render();
+}
+
+function t_vote_box(root){
+  root.innerHTML=`
+    <div class="box">
+      <div class="row"><input id="vbName" placeholder="选项"><button class="btn" id="vbAdd" style="flex:0 0 72px">加选项</button></div>
+      <div id="vbList" style="margin-top:12px"></div>
+      <div class="kv"><span>总票数</span><b id="vbTotal">0</b></div>
+    </div>
+    <p class="hint">聚餐选餐厅、群里表决，点一下记一票。</p>`;
+  let opts=[{n:'火锅',v:0},{n:'烧烤',v:0},{n:'家常菜',v:0}];
+  function render(){
+    const total=opts.reduce((a,b)=>a+b.v,0);
+    const max=Math.max(1,...opts.map(o=>o.v));
+    $('#vbList',root).innerHTML=opts.map((o,i)=>`
+      <div style="padding:9px 0;border-bottom:1px solid #F1F3F7">
+        <div style="display:flex;justify-content:space-between;font-size:14px"><span>${o.n}</span><b>${o.v}</b></div>
+        <div style="height:6px;border-radius:3px;background:#F1F3F7;margin-top:6px"><div style="height:100%;border-radius:3px;background:#2C63F0;width:${o.v/max*100}%"></div></div>
+      </div>`).join('')||'<p class="hint">还没有选项</p>';
+    $('#vbTotal',root).textContent=total;
+  }
+  root.addEventListener('click',e=>{
+    const row=e.target.closest('[data-vi]');
+    if(row){ opts[+row.dataset.vi].v++; render(); }
+  });
+  $('#vbAdd',root).onclick=()=>{ const v=$('#vbName',root).value.trim(); if(!v) return; opts.push({n:v,v:0}); $('#vbName',root).value=''; render(); };
+  render();
+}
+
+function t_flashcard(root){
+  root.innerHTML=`
+    <div class="box" style="text-align:center">
+      <div id="fcCard" style="min-height:140px;border-radius:12px;background:#FAFBFD;border:1px solid var(--line);display:grid;place-items:center;padding:16px;font-size:19px;font-weight:600">点开始背单词</div>
+      <div class="hint" id="fcHint" style="margin-top:10px">—</div>
+      <div class="row" style="justify-content:center;margin-top:12px">
+        <button class="btn ghost" id="fcPrev">上一个</button>
+        <button class="btn" id="fcFlip">翻面</button>
+        <button class="btn ghost" id="fcNext">下一个</button>
+      </div>
+    </div>
+    <p class="hint">内置一组常用词，点「翻面」看释义，顺序背完一轮。</p>`;
+  const cards=[['abandon','放弃，抛弃'],['benefit','利益，好处'],['confirm','确认'],['deliver','投递，交付'],['efficient','高效的'],['feature','特征，功能'],['generate','生成'],['highlight','突出，亮点'],['improve','改进'],['journal','日志，期刊'],['knowledge','知识'],['layout','布局'],['modify','修改'],['negotiate','协商'],['optimize','优化'],['precise','精确的'],['quality','质量'],['reduce','减少'],['structure','结构'],['template','模板'],['update','更新'],['version','版本'],['wonder','想知道'],['yield','产出']];
+  let i=0, front=true;
+  function show(){
+    const c=cards[i];
+    $('#fcCard',root).textContent=front?c[0]:c[1];
+    $('#fcHint',root).textContent=`第 ${i+1} / ${cards.length} 张 · ${front?'正面':'背面'}`;
+  }
+  $('#fcFlip',root).onclick=()=>{ front=!front; show(); };
+  $('#fcNext',root).onclick=()=>{ i=(i+1)%cards.length; front=true; show(); };
+  $('#fcPrev',root).onclick=()=>{ i=(i-1+cards.length)%cards.length; front=true; show(); };
+  show();
+}
+
+function t_mathquiz(root){
+  root.innerHTML=`
+    <div class="box" style="text-align:center">
+      <div class="kv"><span>得分</span><b id="mqScore">0 / 0</b></div>
+      <div id="mqQ" style="font-size:32px;font-weight:700;margin:18px 0">准备开始</div>
+      <input id="mqA" inputmode="numeric" placeholder="答案" style="text-align:center;font-size:20px">
+      <button class="btn block" id="mqGo" style="margin-top:12px">开始 / 下一题</button>
+    </div>
+    <p class="hint">口算练习，适合给孩子或自己练手速。</p>`;
+  let a=0,b=0,op='+',ans=0,right=0,total=0,on=false;
+  function next(){
+    a=Math.floor(Math.random()*20)+1; b=Math.floor(Math.random()*20)+1;
+    const ops=['+','-','×']; op=ops[Math.floor(Math.random()*3)];
+    ans=op==='+'?a+b:op==='-'?Math.max(a,b)-Math.min(a,b):a*b;
+    if(op==='-'&&a<b){ [a,b]=[b,a]; ans=a-b; }
+    $('#mqQ',root).textContent=`${a} ${op} ${b} = ?`;
+    $('#mqA',root).value=''; $('#mqA',root).focus();
+  }
+  $('#mqGo',root).onclick=()=>{
+    if(!on){ on=true; next(); return; }
+    const v=+$('#mqA',root).value;
+    total++;
+    if(v===ans){ right++; toast('答对了'); } else { toast('答案是 '+ans); }
+    $('#mqScore',root).textContent=right+' / '+total;
+    next();
+  };
+}
+
+function t_random_order(root){
+  root.innerHTML=`
+    <div class="box">
+      <textarea id="roIn" style="min-height:110px">张三\n李四\n王五\n赵六\n钱七</textarea>
+      <button class="btn block" id="roGo" style="margin-top:10px">随机排序</button>
+    </div>
+    <div class="box"><div id="roOut" style="font-size:14px;line-height:2">—</div>
+      <button class="btn ghost block" id="roCopy" style="margin-top:10px">复制结果</button></div>
+    <p class="hint">抽奖顺序、发言顺序一键打乱。</p>`;
+  $('#roGo',root).onclick=()=>{
+    const a=$('#roIn',root).value.split('\n').map(x=>x.trim()).filter(Boolean);
+    for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+    $('#roOut',root).innerHTML=a.map((n,i)=>`<div><b style="color:#2C63F0">${i+1}.</b> ${n}</div>`).join('');
+  };
+  $('#roCopy',root).onclick=()=>copyText($('#roOut',root).textContent);
+}
+
+function t_seatmap(root){
+  root.innerHTML=`
+    <div class="box">
+      <div class="lbl">名单（每行一个）</div><textarea id="smIn" style="min-height:100px">张三\n李四\n王五\n赵六\n钱七\n孙八</textarea>
+      <div class="row" style="margin-top:10px"><div style="flex:1"><div class="lbl">列数</div><input type="number" id="smCol" value="4" min="2" max="8"></div>
+      <div style="flex:1"><div class="lbl">行数</div><input type="number" id="smRow" value="3" min="1" max="12"></div></div>
+      <button class="btn block" id="smGo" style="margin-top:10px">生成座位表</button>
+    </div>
+    <div class="box"><div id="smOut"></div></div>
+    <p class="hint">按顺序排座，超出座位的会空着。</p>`;
+  $('#smGo',root).onclick=()=>{
+    const names=$('#smIn',root).value.split('\n').map(x=>x.trim()).filter(Boolean);
+    const cols=Math.max(2,+$('#smCol',root).value||4), rows=Math.max(1,+$('#smRow',root).value||3);
+    let idx=0; const out=[];
+    for(let r=0;r<rows;r++){
+      const cells=[];
+      for(let c=0;c<cols;c++) cells.push(names[idx++]||'—');
+      out.push(cells);
+    }
+    $('#smOut',root).innerHTML=out.map(r=>`<div style="display:grid;grid-template-columns:repeat(${cols},1fr);gap:6px;margin-bottom:6px">
+      ${r.map(n=>`<div style="padding:10px 4px;text-align:center;border-radius:8px;background:#FAFBFD;border:1px solid var(--line);font-size:13px">${n}</div>`).join('')}</div>`).join('')
+      +`<p class="hint">共 ${names.length} 人 / ${rows*cols} 座</p>`;
+  };
+}
+
+function t_budget_list(root){
+  checklistTool(root,{key:'budget',ph:'支出项目 + 金额',items:['房租','水电燃气','吃饭','交通','日用','娱乐'],note:'月初列预算，花完勾一项，超支一眼看见。'});
+}
+
+function t_recipe_log(root){
+  checklistTool(root,{key:'recipe',ph:'菜名 / 所需食材',items:['番茄炒蛋：番茄、蛋','青椒肉丝：青椒、里脊','出锅前尝咸淡'],note:'常做的菜记下来，买菜前翻一眼。'});
+}
+
+function t_workout_plan(root){
+  checklistTool(root,{key:'workout',ph:'动作 + 组数',items:['深蹲 3×15','俯卧撑 3×12','平板支撑 3×40秒','开合跳 3×30秒'],note:'在家就能做的自重训练，量力而行。'});
+}
+
+function t_travel_plan(root){
+  checklistTool(root,{key:'travel',ph:'要带的东西 / 行程',items:['身份证','充电器','换洗衣物','提前订票','查天气'],note:'出门前逐项勾掉，少一件都麻烦。'});
+}
+
+function t_book_list(root){
+  checklistTool(root,{key:'book',ph:'书名',items:['《暗时间》','《人类简史》'],note:'想读的书先存着，读完勾掉并记一句感受。'});
+}
+
+function t_movie_list(root){
+  checklistTool(root,{key:'movie',ph:'片名',items:['《漫长的季节》','《三体》'],note:'片单越攒越长，勾掉的才是真看过。'});
+}
+
+function t_wish_list(root){
+  checklistTool(root,{key:'wish',ph:'想要的东西 / 想做的事',items:['换一把机械键盘','带家人出去旅行一次'],note:'先写下来，年底回看完成了几件。'});
+}
+
+function t_daily_plan(root){
+  checklistTool(root,{key:'daily',ph:'今天要做的事',items:['最重要的三件事','回复消息','运动 20 分钟','睡前复盘'],note:'每天定三件必做的事，别排满。'});
+}
+
+function t_weekly_plan(root){
+  checklistTool(root,{key:'weekly',ph:'本周目标',items:['周一周计划','周三检查进度','周末复盘'],note:'周计划只放三到五个目标，多了必然完不成。'});
+}
+
+function t_month_review(root){
+  checklistTool(root,{key:'month',ph:'本月回顾点',items:['完成的事','没做到的事','下月改进一条'],note:'月底花十分钟复盘，比记流水账有用。'});
+}
+
+function t_year_goals(root){
+  checklistTool(root,{key:'goal',ph:'年度目标',items:['存下一笔钱','读完 12 本书','把一件副业跑起来'],note:'目标要能被勾掉，模糊的愿望不算目标。'});
+}
+
+function t_habit_grid(root){
+  root.innerHTML=`
+    <div class="box">
+      <div class="row"><input id="hgName" placeholder="习惯名，如 早起"><button class="btn" id="hgAdd" style="flex:0 0 72px">添加</button></div>
+      <div id="hgList" style="margin-top:12px"></div>
+      <button class="btn ghost block" id="hgNew" style="margin-top:12px">新的一天（清空勾选）</button>
+    </div>
+    <p class="hint">连续打卡看格子右下角的天数，断一天就归零重来。</p>`;
+  let habits=[{n:'早起',d:0},{n:'运动',d:0}];
+  function render(){
+    $('#hgList',root).innerHTML=habits.map((h,i)=>`<div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #F1F3F7">
+      <span style="flex:1;font-size:14px">${h.n}</span>
+      <span style="font-size:12px;color:var(--sub)">连续 ${h.d} 天</span>
+      <button class="btn" data-hg="${i}" style="height:32px;padding:0 12px;font-size:12px">打卡</button></div>`).join('');
+  }
+  root.addEventListener('click',e=>{ const b=e.target.closest('[data-hg]'); if(!b) return; habits[+b.dataset.hg].d++; render(); });
+  $('#hgAdd',root).onclick=()=>{ const v=$('#hgName',root).value.trim(); if(!v) return; habits.push({n:v,d:0}); $('#hgName',root).value=''; render(); };
+  $('#hgNew',root).onclick=()=>{ habits.forEach(h=>h.d=0); render(); toast('新的一天，重新开始'); };
+  render();
+}
+
+function t_pomodoro_log(root){
+  root.innerHTML=`
+    <div class="box" style="text-align:center">
+      <div id="plV" style="font-size:30px;font-weight:700">0 个番茄</div>
+      <button class="btn block" id="plAdd" style="margin-top:12px">完成一个番茄（25 分钟）</button>
+      <div class="kv" style="margin-top:10px"><span>累计专注</span><b id="plMin">0 分钟</b></div>
+      <button class="btn ghost block" id="plClr" style="margin-top:10px">清零</button>
+    </div>
+    <p class="hint">只记录数量，配合番茄钟一起用；数据只存在本机。</p>`;
+  let n=0;
+  try{ n=+(localStorage.getItem('xy_pomo')||0); }catch(e){}
+  function render(){ $('#plV',root).textContent=n+' 个番茄'; $('#plMin',root).textContent=(n*25)+' 分钟'; }
+  $('#plAdd',root).onclick=()=>{ n++; try{localStorage.setItem('xy_pomo',n);}catch(e){} render(); toast('第 '+n+' 个'); };
+  $('#plClr',root).onclick=()=>{ n=0; try{localStorage.setItem('xy_pomo',0);}catch(e){} render(); };
+  render();
+}
+
+/* ================= 第五批：查询速查 ================= */
+
+function t_festival(root){
+  listTool(root,{ph:'节日 / 月份',note:'传统节日按农历，公历节日按日期；具体日期每年略有差异。',rows:[
+    ['春节','农历正月初一'],['元宵节','农历正月十五'],['龙抬头','农历二月初二'],['清明节','公历 4 月 4–6 日'],['端午节','农历五月初五'],['七夕','农历七月初七'],['中元节','农历七月十五'],['中秋节','农历八月十五'],['重阳节','农历九月初九'],['寒衣节','农历十月初一'],['下元节','农历十月十五'],['腊八节','农历十二月初八'],['小年','农历十二月廿三/廿四'],['除夕','农历十二月最后一天'],['元旦','1 月 1 日'],['妇女节','3 月 8 日'],['劳动节','5 月 1 日'],['儿童节','6 月 1 日'],['建党节','7 月 1 日'],['建军节','8 月 1 日'],['教师节','9 月 10 日'],['国庆节','10 月 1 日'],['记者节','11 月 8 日'],['国家公祭日','12 月 13 日']
+  ]});
+}
+
+function t_province(root){
+  listTool(root,{ph:'省份 / 省会 / 简称',note:'含 34 个省级行政区的简称与省会。',rows:[
+    ['北京市','京','北京'],['天津市','津','天津'],['河北省','冀','石家庄'],['山西省','晋','太原'],['内蒙古自治区','蒙','呼和浩特'],['辽宁省','辽','沈阳'],['吉林省','吉','长春'],['黑龙江省','黑','哈尔滨'],['上海市','沪','上海'],['江苏省','苏','南京'],['浙江省','浙','杭州'],['安徽省','皖','合肥'],['福建省','闽','福州'],['江西省','赣','南昌'],['山东省','鲁','济南'],['河南省','豫','郑州'],['湖北省','鄂','武汉'],['湖南省','湘','长沙'],['广东省','粤','广州'],['广西壮族自治区','桂','南宁'],['海南省','琼','海口'],['重庆市','渝','重庆'],['四川省','川/蜀','成都'],['贵州省','黔/贵','贵阳'],['云南省','滇/云','昆明'],['西藏自治区','藏','拉萨'],['陕西省','陕/秦','西安'],['甘肃省','甘/陇','兰州'],['青海省','青','西宁'],['宁夏回族自治区','宁','银川'],['新疆维吾尔自治区','新','乌鲁木齐'],['香港特别行政区','港','香港'],['澳门特别行政区','澳','澳门'],['台湾省','台','台北']
+  ]});
+}
+
+function t_areacode(root){
+  listTool(root,{ph:'城市 / 区号',note:'直辖市与主要城市长途区号。',rows:[
+    ['北京','010'],['上海','021'],['天津','022'],['重庆','023'],['沈阳','024'],['南京','025'],['武汉','027'],['成都','028'],['西安','029'],['广州','020'],['杭州','0571'],['宁波','0574'],['温州','0577'],['合肥','0551'],['福州','0591'],['厦门','0592'],['南昌','0791'],['长沙','0731'],['郑州','0371'],['济南','0531'],['青岛','0532'],['石家庄','0311'],['太原','0351'],['呼和浩特','0471'],['哈尔滨','0451'],['长春','0431'],['大连','0411'],['昆明','0871'],['贵阳','0851'],['南宁','0771'],['海口','0898'],['兰州','0931'],['银川','0951'],['西宁','0971'],['乌鲁木齐','0991'],['拉萨','0891']
+  ]});
+}
+
+function t_traincode(root){
+  listTool(root,{ph:'车次字母',note:'车次首字母代表列车等级，后面数字是具体车次。',rows:[
+    ['G','高铁，时速 300–350 km/h'],['D','动车，时速 200–250 km/h'],['C','城际动车'],['Z','直达特快'],['T','特快'],['K','快速'],['Y','旅游列车'],['L','临时旅客列车'],['X','行包专列'],['S','市域列车'],['无字母','普通旅客列车']
+  ]});
+}
+
+function t_trafficsign(root){
+  listTool(root,{ph:'标志类型 / 颜色',note:'按颜色与形状区分交通标志类别。',rows:[
+    ['红色圆圈','禁令标志，禁止某种行为'],['红色三角','警告标志，注意前方危险'],['蓝色圆形','指示标志，必须按规定行驶'],['蓝色方形','指路标志，方向与地点'],['黄色背景','施工或临时警告'],['绿色背景','高速公路指路'],['棕色背景','旅游区标志'],['白色虚线','同向车道分隔'],['白色实线','禁止跨越'],['黄色实线','对向分隔，禁止压线'],['双黄实线','严禁越线超车'],['导流线','禁止压线或停车']
+  ]});
+}
+
+function t_fireequip(root){
+  listTool(root,{ph:'器材 / 场景',note:'常见消防器材的适用场景，仅供了解。',rows:[
+    ['干粉灭火器','最常见，适用固体、液体、气体、电气火灾'],['二氧化碳灭火器','适用精密仪器、电气、图书档案'],['水基灭火器','适用固体与液体初起火灾，不可用于带电'],['泡沫灭火器','适用油类与固体，不可用于带电'],['灭火毯','厨房油锅起火、逃生披覆'],['消防栓','建筑内固定灭火设施，需配合水带'],['烟感报警器','探测烟雾，早发现早撤离'],['应急照明灯','断电时提供疏散照明'],['防烟面罩','过滤烟雾，短时逃生用'],['逃生绳','高层应急下降，需固定牢靠']
+  ]});
+}
+
+function t_weathericon(root){
+  listTool(root,{ph:'天气 / 符号',note:'手机天气里常见状态的含义。',rows:[
+    ['晴','太阳图标，全天少云'],['多云','云与太阳，云量 3–7 成'],['阴','整层云，几乎无阳光'],['小雨','雨滴 1 个，日雨量 <10mm'],['中雨','雨滴 2 个，10–24.9mm'],['大雨','雨滴 3 个，25–49.9mm'],['暴雨','雨滴多，≥50mm'],['雷阵雨','雷电 + 雨，短时强'],['小雪','雪花 1 个'],['中雪','雪花 2 个'],['大雪','雪花 3 个'],['雨夹雪','雨雪混合'],['雾','能见度 <1km'],['霾','空气中颗粒物多，能见度下降'],['大风','风力 ≥6 级'],['沙尘','能见度下降，注意防护']
+  ]});
+}
+
+function t_typhoon(root){
+  listTool(root,{ph:'等级 / 风速',note:'西北太平洋热带气旋分级。',rows:[
+    ['热带低压','10.8–17.1 m/s，6–7 级'],['热带风暴','17.2–24.4 m/s，8–9 级'],['强热带风暴','24.5–32.6 m/s，10–11 级'],['台风','32.7–41.4 m/s，12–13 级'],['强台风','41.5–50.9 m/s，14–15 级'],['超强台风','≥51.0 m/s，16 级以上']
+  ]});
+}
+
+function t_windscale(root){
+  listTool(root,{ph:'风力 / 现象',note:'蒲福风级，日常看预报用。',rows:[
+    ['0 级','无风，烟直上'],['1 级','软风，烟能表示方向'],['2 级','轻风，树叶微动'],['3 级','微风，树叶摇动'],['4 级','和风，纸片被吹起'],['5 级','清风，小树摇摆'],['6 级','强风，电线有声'],['7 级','疾风，步行困难'],['8 级','大风，树枝折断'],['9 级','烈风，屋顶受损'],['10 级','狂风，树木拔起'],['11 级','暴风，破坏严重'],['12 级','飓风，摧毁力极大']
+  ]});
+}
+
+function t_rainlevel(root){
+  listTool(root,{ph:'降雨 / 雨量',note:'24 小时降雨量分级。',rows:[
+    ['小雨','<10 mm'],['中雨','10–24.9 mm'],['大雨','25–49.9 mm'],['暴雨','50–99.9 mm'],['大暴雨','100–249.9 mm'],['特大暴雨','≥250 mm'],['短时强降水','1 小时 ≥20 mm']
+  ]});
+}
+
+function t_uvindex(root){
+  listTool(root,{ph:'UV 等级',note:'紫外线指数与防护建议。',rows:[
+    ['0–2 低','无需特别防护，可正常外出'],['3–5 中等','戴帽子、涂 SPF15 以上'],['6–7 高','避开正午，SPF30+'],['8–10 很高','尽量待在阴凉处，SPF30+ 每 2 小时补涂'],['11+ 极高','避免外出，长袖防晒衣 + 遮阳']
+  ]});
+}
+
+function t_aqi(root){
+  listTool(root,{ph:'AQI / 等级',note:'空气质量指数分级与建议。',rows:[
+    ['0–50 优','空气清新，适合户外'],['51–100 良','可正常活动'],['101–150 轻度污染','敏感人群减少户外'],['151–200 中度污染','减少户外运动，戴口罩'],['201–300 重度污染','尽量待在室内，关窗'],['300+ 严重污染','避免外出，使用净化器']
+  ]});
+}
+
+function t_noise(root){
+  listTool(root,{ph:'分贝 / 场景',note:'常见噪声参考值与影响。',rows:[
+    ['0–20 dB','安静房间，几乎无感'],['30 dB','耳语，图书馆'],['40 dB','冰箱运行声'],['50 dB','正常交谈'],['60 dB','空调或街道背景'],['70 dB','吸尘器，长期影响听力'],['80 dB','马路车流，需控制时长'],['90 dB','电锯，8 小时即伤听力'],['100 dB','地铁进站，立即不适'],['120 dB','飞机起飞，短时可致损伤']
+  ]});
+}
+
+function t_currency(root){
+  listTool(root,{ph:'货币 / 符号',note:'常见货币符号与代码，只做识别用。',rows:[
+    ['人民币','¥ / CNY'],['美元','$ / USD'],['欧元','€ / EUR'],['英镑','£ / GBP'],['日元','¥ / JPY'],['韩元','₩ / KRW'],['港币','HK$ / HKD'],['新台币','NT$ / TWD'],['澳元','A$ / AUD'],['加元','C$ / CAD'],['瑞士法郎','CHF'],['卢布','₽ / RUB'],['印度卢比','₹ / INR'],['泰铢','฿ / THB'],['新加坡元','S$ / SGD'],['越南盾','₫ / VND']
+  ]});
+}
+
+function t_intlcode(root){
+  listTool(root,{ph:'国家 / 区号',note:'国际电话区号，拨号前可核对。',rows:[
+    ['中国','+86'],['中国香港','+852'],['中国澳门','+853'],['中国台湾','+886'],['美国/加拿大','+1'],['英国','+44'],['法国','+33'],['德国','+49'],['俄罗斯','+7'],['日本','+81'],['韩国','+82'],['新加坡','+65'],['马来西亚','+60'],['泰国','+66'],['越南','+84'],['印度','+91'],['澳大利亚','+61'],['新西兰','+64'],['巴西','+55'],['意大利','+39'],['西班牙','+34'],['阿联酋','+971']
+  ]});
+}
+
+function t_langcode(root){
+  listTool(root,{ph:'语言 / 代码',note:'语言标记代码，写代码或配置时用。',rows:[
+    ['中文（简体）','zh-CN'],['中文（繁体）','zh-TW'],['英语','en'],['英语（美国）','en-US'],['英语（英国）','en-GB'],['日语','ja'],['韩语','ko'],['法语','fr'],['德语','de'],['西班牙语','es'],['俄语','ru'],['葡萄牙语','pt'],['意大利语','it'],['阿拉伯语','ar'],['泰语','th'],['越南语','vi'],['印地语','hi'],['土耳其语','tr']
+  ]});
+}
+
+function t_airport(root){
+  listTool(root,{ph:'机场 / 三字码',note:'常见机场 IATA 三字码。',rows:[
+    ['北京首都','PEK'],['北京大兴','PKX'],['上海虹桥','SHA'],['上海浦东','PVG'],['广州白云','CAN'],['深圳宝安','SZX'],['成都天府','TFU'],['重庆江北','CKG'],['杭州萧山','HGH'],['南京禄口','NKG'],['武汉天河','WUH'],['西安咸阳','XIY'],['昆明长水','KMG'],['厦门高崎','XMN'],['青岛胶东','TAO'],['香港国际','HKG'],['台北桃园','TPE'],['东京成田','NRT'],['东京羽田','HND'],['首尔仁川','ICN'],['新加坡樟宜','SIN'],['曼谷素万那普','BKK']
+  ]});
+}
+
+function t_airline(root){
+  listTool(root,{ph:'航司 / 代码',note:'两字代码常见于航班号前缀。',rows:[
+    ['中国国航','CA'],['东方航空','MU'],['南方航空','CZ'],['海南航空','HU'],['厦门航空','MF'],['深圳航空','ZH'],['四川航空','3U'],['山东航空','SC'],['吉祥航空','HO'],['春秋航空','9C'],['国泰航空','CX'],['香港航空','HX'],['澳门航空','NX'],['华信航空','AE'],['全日空','NH'],['日本航空','JL'],['大韩航空','KE'],['新加坡航空','SQ'],['泰国国际','TG'],['阿联酋航空','EK']
+  ]});
+}
+
+function t_express(root){
+  listTool(root,{ph:'快递公司',note:'常见快递公司与单号前缀特征。',rows:[
+    ['顺丰','SF 开头'],['京东物流','JD 开头'],['中通','750 / 778 开头'],['圆通','YT 开头'],['申通','773 / 668 开头'],['韵达','312 / 430 开头'],['极兔','JT 开头'],['邮政 EMS','EA / EB 开头'],['邮政包裹','KA / KB 开头'],['德邦','DP / DPK 开头'],['百世','B 开头'],['天天','TT 开头'],['丰网','SF 后缀'],['菜鸟驿站','面单 8 位取件码']
+  ]});
+}
+
+function t_bloodtype(root){
+  listTool(root,{ph:'父母血型',note:'ABO 血型遗传概率，仅供参考。',rows:[
+    ['O + O','子女全为 O 型'],['O + A','O 或 A，各约 50%'],['O + B','O 或 B，各约 50%'],['O + AB','A 或 B，各约 50%'],['A + A','A 或 O，A 约 75%'],['A + B','A、B、AB、O 均可能'],['A + AB','A、B、AB'],['B + B','B 或 O，B 约 75%'],['B + AB','A、B、AB'],['AB + AB','A、B、AB'],['A + O 且孩子 B','血量基因可能来自另一方，需核实']
+  ]});
+}
+
+function t_ganzhi(root){
+  listTool(root,{ph:'天干 / 地支',note:'十天干、十二地支与常见对应。',rows:[
+    ['甲','阳木，第 1 位'],['乙','阴木，第 2 位'],['丙','阳火，第 3 位'],['丁','阴火，第 4 位'],['戊','阳土，第 5 位'],['己','阴土，第 6 位'],['庚','阳金，第 7 位'],['辛','阴金，第 8 位'],['壬','阳水，第 9 位'],['癸','阴水，第 10 位'],['子','鼠，23–1 时'],['丑','牛，1–3 时'],['寅','虎，3–5 时'],['卯','兔，5–7 时'],['辰','龙，7–9 时'],['巳','蛇，9–11 时'],['午','马，11–13 时'],['未','羊，13–15 时'],['申','猴，15–17 时'],['酉','鸡，17–19 时'],['戌','狗，19–21 时'],['亥','猪，21–23 时']
+  ]});
+}
+
+function t_sanfu(root){
+  listTool(root,{ph:'三伏 / 数九',note:'节气时段说明，具体日期每年不同。',rows:[
+    ['初伏','夏至后第三个庚日起，10 天'],['中伏','夏至后第四个庚日起，10 或 20 天'],['末伏','立秋后第一个庚日起，10 天'],['冬九九','冬至起每 9 天一个「九」，共 81 天'],['一九','冬至后 1–9 天'],['二九','10–18 天'],['三九','19–27 天，最冷'],['四九','28–36 天'],['五九','37–45 天，开始回暖'],['六九','46–54 天'],['七九','55–63 天'],['八九','64–72 天'],['九九','73–81 天']
+  ]});
+}
+
+function t_holiday(root){
+  listTool(root,{ph:'法定假日',note:'全国性法定节假日与放假天数（以当年公告为准）。',rows:[
+    ['元旦','1 月 1 日，1 天'],['春节','农历除夕至初六，通常 7 天'],['清明节','4 月初，通常 3 天'],['劳动节','5 月 1 日，通常 5 天'],['端午节','农历五月初五，通常 3 天'],['中秋节','农历八月十五，通常 3 天'],['国庆节','10 月 1 日起，通常 7 天'],['周末','每周六日休息']
+  ]});
+}
+
+function t_screenres(root){
+  listTool(root,{ph:'分辨率',note:'常见屏幕分辨率与俗称。',rows:[
+    ['720×1280','HD，5 英寸左右老机型'],['1080×1920','FHD，最常见手机'],['1080×2340','FHD+，全面屏'],['1440×2560','2K，旗舰机'],['1170×2532','iPhone 12/13/14'],['1290×2796','iPhone 15 Pro Max'],['1366×768','老笔记本'],['1920×1080','1080p 显示器'],['2560×1440','2K 显示器'],['3840×2160','4K 显示器/电视'],['7680×4320','8K']
+  ]});
+}
+
+function t_videores(root){
+  listTool(root,{ph:'视频规格',note:'常见视频分辨率与码率参考。',rows:[
+    ['480p','854×480，约 1 Mbps'],['720p','1280×720，约 2.5 Mbps'],['1080p','1920×1080，约 5 Mbps'],['1440p','2560×1440，约 10 Mbps'],['4K','3840×2160，约 25 Mbps'],['竖屏 1080×1920','抖音/快手常用'],['竖屏 720×1280','省流模式'],['方形 1080×1080','朋友圈/Instagram']
+  ]});
+}
+
+function t_audiofmt(root){
+  listTool(root,{ph:'音频格式',note:'格式特点与常见用途。',rows:[
+    ['MP3','兼容性最好，有损'],['AAC','m4a 常用，效率高于 MP3'],['WAV','无损，体积大'],['FLAC','无损压缩，适合归档'],['APE','无损压缩，压缩率更高'],['OGG','开源有损格式'],['OPUS','低码率语音，微信语音常用'],['AMR','老式手机录音'],['MIDI','音符数据，不是音频'],['AIFF','苹果系无损']
+  ]});
+}
+
+function t_imgfmt(root){
+  listTool(root,{ph:'图片格式',note:'格式特性与使用建议。',rows:[
+    ['JPEG','有损，照片首选'],['PNG','无损带透明，图标与截图'],['WebP','体积小，现代浏览器'],['AVIF','压缩率更高，兼容性略差'],['GIF','动图，色彩受限'],['BMP','无压缩，体积大'],['SVG','矢量，可无损缩放'],['HEIC','苹果照片格式，省空间'],['TIFF','印刷与专业编辑'],['ICO','图标文件']
+  ]});
+}
+
+function t_extname(root){
+  listTool(root,{ph:'扩展名',note:'常见文件类型速查。',rows:[
+    ['.html/.htm','网页'],['.css','样式表'],['.js','脚本'],['.json','结构化数据'],['.md','Markdown 文档'],['.txt','纯文本'],['.csv','逗号分隔表格'],['.xlsx','Excel 表格'],['.docx','Word 文档'],['.pptx','PPT 演示'],['.pdf','便携文档'],['.zip/.rar/.7z','压缩包'],['.apk','安卓安装包'],['.mp4/.mov','视频'],['.mp3/.m4a','音频'],['.psd','Photoshop 源文件'],['.dwg','CAD 图纸'],['.sql','数据库脚本']
+  ]});
+}
+
+function t_chargeproto(root){
+  listTool(root,{ph:'充电协议',note:'常见快充协议与特点。',rows:[
+    ['PD','USB-IF 标准，最高 240W（PD 3.1）'],['QC','高通快充，QC4/5 兼容 PD'],['VOOC/SuperVOOC','OPPO 系，低压大电流'],['FCP/SCP','华为快充'],['PPS','PD 可编程电源，兼容性好'],['Mi Turbo Charge','小米私有快充'],['Pump Express','联发科协议'],['Qi','无线充电 5–15W'],['MagSafe','苹果磁吸无线'],['Qi2','新一代磁吸无线标准']
+  ]});
+}
+
+function t_usbtype(root){
+  listTool(root,{ph:'USB 接口',note:'接口外形与能力区别。',rows:[
+    ['USB-A','最常见方口，老设备'],['USB-B','打印机等设备端'],['Mini-USB','老相机、老硬盘'],['Micro-USB','老安卓手机，仅充电慢'],['USB-C','正反插，支持 PD 快充与视频'],['Lightning','苹果 2012–2023'],['Thunderbolt 3/4','USB-C 外形，高速 40Gbps'],['USB 2.0','480 Mbps'],['USB 3.2 Gen1','5 Gbps'],['USB 3.2 Gen2','10 Gbps'],['USB4','最高 40Gbps，兼容雷电']
+  ]});
+}
+
+function t_appliance(root){
+  listTool(root,{ph:'家电 / 功率',note:'常见家电功率参考，算电费时用。',rows:[
+    ['空调 1 匹','约 750–800 W'],['空调 1.5 匹','约 1100 W'],['电热水器','1500–3000 W'],['电磁炉','1800–2200 W'],['微波炉','800–1000 W'],['电饭煲','500–900 W'],['电水壶','1500–1800 W'],['冰箱','80–150 W（常开）'],['洗衣机','300–500 W'],['电视 55 寸','100–150 W'],['台式电脑','200–400 W'],['笔记本','45–90 W'],['电风扇','40–60 W'],['LED 灯','5–20 W'],['吹风机','1000–2000 W'],['电动车充电','200–400 W']
+  ]});
+}
+
+function t_unitsym(root){
+  listTool(root,{ph:'单位 / 符号',note:'常用单位符号与含义。',rows:[
+    ['m','米，长度'],['kg','千克，质量'],['s','秒，时间'],['A','安培，电流'],['K','开尔文，温度'],['mol','摩尔，物质的量'],['cd','坎德拉，光强'],['Pa','帕斯卡，压强'],['N','牛顿，力'],['J','焦耳，能量'],['W','瓦特，功率'],['Hz','赫兹，频率'],['V','伏特，电压'],['Ω','欧姆，电阻'],['℃','摄氏度'],['dB','分贝，声压级'],['lx','勒克斯，照度'],['Bq','贝可勒尔，放射性活度']
+  ]});
+}
+
+function t_pipesize(root){
+  listTool(root,{ph:'管径 / 俗称',note:'公称直径与俗称对照。',rows:[
+    ['DN15','4 分管，内径约 15mm'],['DN20','6 分管，约 20mm'],['DN25','1 寸管，约 25mm'],['DN32','1.2 寸，约 32mm'],['DN40','1.5 寸，约 40mm'],['DN50','2 寸，约 50mm'],['DN65','2.5 寸，约 65mm'],['DN80','3 寸，约 80mm'],['DN100','4 寸，约 100mm'],['DN125','5 寸，约 125mm'],['DN150','6 寸，约 150mm'],['DN200','8 寸，约 200mm']
+  ]});
+}
+
+/* ================= 第五批：开发者小工具 ================= */
+
+function t_json2yaml(root){
+  convTool(root,{def:'{"name":"小羽工具箱","version":"1.7","tags":["本地","离线"],"author":{"name":"fornow","group":728403008}}',outLabel:'YAML',modes:[{label:'JSON → YAML',
+    fn:s=>{const o=JSON.parse(s);
+      function emit(v,ind){
+        const pad='  '.repeat(ind);
+        if(Array.isArray(v)) return v.map(x=>typeof x==='object'&&x!==null?pad+'- '+emit(x,ind+1).trimStart():pad+'- '+fmt(x)).join('\n');
+        if(v&&typeof v==='object') return Object.entries(v).map(([k,x])=>typeof x==='object'&&x!==null?pad+k+':\n'+emit(x,ind+1):pad+k+': '+fmt(x)).join('\n');
+        return pad+fmt(v);
+      }
+      function fmt(v){ return typeof v==='string'?v:String(v); }
+      return emit(o,0);}}],note:'把接口返回的 JSON 转成配置文件写法。'});
+}
+
+function t_yaml2json(root){
+  convTool(root,{def:'name: 小羽工具箱\nversion: 1.7\ntags:\n  - 本地\n  - 离线',outLabel:'JSON',modes:[{label:'YAML → JSON',
+    fn:s=>{
+      const lines=s.split('\n').filter(l=>l.trim()&&!l.trim().startsWith('#'));
+      const root={}; const stack=[{obj:root,ind:-1}];
+      lines.forEach(raw=>{
+        const ind=raw.match(/^\s*/)[0].length;
+        const line=raw.trim();
+        while(stack.length>1 && ind<=stack[stack.length-1].ind) stack.pop();
+        const cur=stack[stack.length-1].obj;
+        if(line.startsWith('- ')){
+          const val=line.slice(2).trim();
+          if(Array.isArray(cur)) cur.push(val);
+          return;
+        }
+        const m=line.match(/^([^:]+):\s*(.*)$/); if(!m) return;
+        const k=m[1].trim(), v=m[2].trim();
+        if(!v){ const child={}; cur[k]=child; stack.push({obj:child,ind}); }
+        else cur[k]=v;
+      });
+      return JSON.stringify(root,null,2);}}],note:'支持简单的键值、缩进与列表，复杂 YAML 建议用专业工具。'});
+}
+
+function t_xml2json(root){
+  convTool(root,{def:'<user><name>fornow</name><group>728403008</group><tools>255</tools></user>',outLabel:'JSON',modes:[{label:'XML → JSON',
+    fn:s=>{
+      const doc=new DOMParser().parseFromString(s,'application/xml');
+      const err=doc.querySelector('parsererror'); if(err) throw new Error('XML 格式有误');
+      function walk(n){
+        const kids=[...n.children];
+        if(!kids.length) return n.textContent.trim();
+        const o={};
+        kids.forEach(c=>{ const k=c.tagName; if(o[k]){ if(!Array.isArray(o[k])) o[k]=[o[k]]; o[k].push(walk(c)); } else o[k]=walk(c); });
+        return o;
+      }
+      return JSON.stringify(walk(doc.documentElement),null,2);}}]});
+}
+
+function t_json2xml(root){
+  convTool(root,{def:'{"user":{"name":"fornow","group":728403008}}',outLabel:'XML',modes:[{label:'JSON → XML',
+    fn:s=>{
+      const o=JSON.parse(s);
+      function build(v,k,ind){
+        const pad='  '.repeat(ind);
+        if(Array.isArray(v)) return v.map(x=>build(x,k,ind)).join('\n');
+        if(v&&typeof v==='object') return pad+'<'+k+'>\n'+Object.entries(v).map(([kk,vv])=>build(vv,kk,ind+1)).join('\n')+'\n'+pad+'</'+k+'>';
+        return pad+'<'+k+'>'+String(v)+'</'+k+'>';
+      }
+      return Object.entries(o).map(([k,v])=>build(v,k,0)).join('\n');}}]});
+}
+
+function t_csv2sql(root){
+  convTool(root,{def:'id,name,age\n1,张三,28\n2,李四,32',outLabel:'SQL',modes:[{label:'CSV → INSERT',
+    fn:s=>{
+      const rows=s.trim().split('\n').map(l=>l.split(',').map(x=>x.trim()));
+      const head=rows[0];
+      return 'CREATE TABLE table_name (\n'+head.map(h=>'  '+h+' VARCHAR(255)').join(',\n')+'\n);\n\n'
+        +rows.slice(1).map(r=>`INSERT INTO table_name (${head.join(', ')}) VALUES (${r.map(v=>/\d/.test(v)?v:`'${v}'`).join(', ')});`).join('\n');
+    }}],note:'生成后可改表名与字段类型，注意转义。'});
+}
+
+function t_jsonflat(root){
+  convTool(root,{def:'{"a":{"b":1,"c":[1,2]},"d":true}',outLabel:'扁平结果',modes:[{label:'扁平化 key',
+    fn:s=>{
+      const o=JSON.parse(s); const out={};
+      (function walk(v,p){
+        if(Array.isArray(v)){ v.forEach((x,i)=>walk(x,p?p+'['+i+']':'['+i+']')); return; }
+        if(v&&typeof v==='object'){ Object.entries(v).forEach(([k,x])=>walk(x,p?p+'.'+k:k)); return; }
+        out[p]=v;
+      })(o,'');
+      return Object.entries(out).map(([k,v])=>k+' = '+v).join('\n');}}]});
+}
+
+function t_jsondiff(root){
+  convTool(root,{def:'{"a":1,"b":2,"c":3}\n----\n{"a":1,"b":9,"d":4}',outLabel:'差异',modes:[{label:'比较两段 JSON',
+    fn:s=>{
+      const [x,y]=s.split('----');
+      if(!y) throw new Error('用 ---- 分隔两段 JSON');
+      const A=JSON.parse(x), B=JSON.parse(y); const out=[];
+      const keys=new Set([...Object.keys(A),...Object.keys(B)]);
+      keys.forEach(k=>{
+        const av=JSON.stringify(A[k]), bv=JSON.stringify(B[k]);
+        if(!(k in A)) out.push('+ '+k+' = '+bv);
+        else if(!(k in B)) out.push('- '+k+' = '+av);
+        else if(av!==bv) out.push('~ '+k+' : '+av+' → '+bv);
+      });
+      return out.join('\n')||'没有差异';}}],note:'只比较顶层字段，适合核对接口返回。'});
+}
+
+function t_jsonschema(root){
+  convTool(root,{def:'{"name":"小羽","age":18,"tags":["a","b"],"ok":true}',outLabel:'Schema',modes:[{label:'生成简易 Schema',
+    fn:s=>{
+      const o=JSON.parse(s);
+      const typeOf=v=>Array.isArray(v)?'array':v===null?'null':typeof v==='object'?'object':typeof v==='number'?'number':typeof v==='boolean'?'boolean':'string';
+      const props={};
+      Object.entries(o).forEach(([k,v])=>{
+        const t=typeOf(v);
+        props[k]={type:t};
+        if(t==='array'&&v.length) props[k].items={type:typeOf(v[0])};
+      });
+      return JSON.stringify({type:'object',properties:props,required:Object.keys(o)},null,2);}}]});
+}
+
+function t_hex2text(root){
+  convTool(root,{def:'E5 B0 8F E7 BE BD E5 B7 A5 E5 85 B7 E7 AE B1',outLabel:'文本',modes:[{label:'HEX → 文本',
+    fn:s=>{const clean=s.replace(/[^0-9a-fA-F]/g,'');if(!clean.length)throw new Error('请输入十六进制内容');if(clean.length%2)throw new Error('长度必须是偶数');const bytes=new Uint8Array(clean.length/2);for(let i=0;i<clean.length;i+=2)bytes[i/2]=parseInt(clean.slice(i,i+2),16);return new TextDecoder('utf-8').decode(bytes);}}]});
+}
+
+function t_text2hex(root){
+  convTool(root,{def:'小羽工具箱',outLabel:'HEX',modes:[
+    {label:'文本 → HEX（空格）',fn:s=>[...s].map(c=>c.charCodeAt(0).toString(16).padStart(2,'0').toUpperCase()).join(' ')},
+    {label:'文本 → HEX（无分隔）',fn:s=>[...s].map(c=>c.charCodeAt(0).toString(16).padStart(2,'0')+'').join('')},
+    {label:'文本 → 0x 前缀',fn:s=>[...s].map(c=>'0x'+c.charCodeAt(0).toString(16).toUpperCase()).join(', ')}
+  ]});
+}
+
+function t_bin2text(root){
+  convTool(root,{def:'01110011 01101001 01101110 01100101',outLabel:'文本',modes:[{label:'二进制 → 文本',
+    fn:s=>{const bits=s.replace(/[^01]/g,'');if(bits.length%8)throw new Error('位数需为 8 的倍数');return bits.match(/.{8}/g).map(b=>String.fromCharCode(parseInt(b,2))).join('');}}]});
+}
+
+function t_text2bin(root){
+  convTool(root,{def:'sin',outLabel:'二进制',modes:[
+    {label:'文本 → 二进制',fn:s=>[...s].map(c=>c.charCodeAt(0).toString(2).padStart(8,'0')).join(' ')},
+    {label:'数字 → 二进制',fn:s=>s.split(/\s+/).filter(Boolean).map(n=>(+n).toString(2)).join(' ')}
+  ]});
+}
+
+function t_base32(root){
+  convTool(root,{def:'小羽工具箱',outLabel:'Base32',modes:[
+    {label:'编码',fn:s=>{const A='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';let bits='';[...s].forEach(c=>bits+=c.charCodeAt(0).toString(2).padStart(16,'0'));let out='';for(let i=0;i<bits.length;i+=5){const chunk=bits.slice(i,i+5).padEnd(5,'0');out+=A[parseInt(chunk,2)];}while(out.length%8)out+='=';return out;}},
+    {label:'解码',fn:s=>{const A='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';let bits='';for(const ch of s.replace(/=+/g,'').toUpperCase()){const i=A.indexOf(ch);if(i<0)continue;bits+=i.toString(2).padStart(5,'0');}const bytes=bits.match(/.{16}/g)||[];return bytes.map(b=>String.fromCharCode(parseInt(b,2))).join('');}}
+  ],note:'Base32 常用于验证码、密钥，注意不是 Base64。'});
+}
+
+function t_base58(root){
+  convTool(root,{def:'fornow330',outLabel:'Base58',modes:[{label:'编码',fn:s=>{
+    const A='123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+    let num=0n; for(const c of s) num=num*256n+BigInt(c.charCodeAt(0));
+    if(num===0n) return A[0];
+    let out=''; while(num>0n){ out=A[num%58n]+out; num=num/58n; }
+    return out;
+  }}],note:'比特币地址常用的编码方式，去掉了易混字符。'});
+}
+
+function t_urlmerge(root){
+  convTool(root,{def:'https://example.com/search?q=工具箱&page=1&sort=new',outLabel:'结果',modes:[
+    {label:'拆出参数表',fn:s=>{const u=new URL(s);return [...u.searchParams.entries()].map(([k,v])=>k+' = '+v).join('\n')||'没有参数';}},
+    {label:'去重排序参数',fn:s=>{const u=new URL(s);const arr=[...u.searchParams.entries()].sort((a,b)=>a[0].localeCompare(b[0]));u.search='';arr.forEach(([k,v])=>u.searchParams.append(k,v));return u.toString();}},
+    {label:'只保留域名',fn:s=>new URL(s).origin}
+  ]});
+}
+
+function t_randstr(root){
+  root.innerHTML=`
+    <div class="box">
+      <div class="row"><div style="flex:1"><div class="lbl">长度</div><input type="number" id="rsLen" value="16" min="4" max="128"></div>
+      <div style="flex:1"><div class="lbl">数量</div><input type="number" id="rsNum" value="5" min="1" max="50"></div></div>
+      <div class="lbl" style="margin-top:10px">字符集</div>
+      <select id="rsSet"><option value="all">字母+数字</option><option value="hex">十六进制</option><option value="num">纯数字</option><option value="sym">含符号</option></select>
+      <button class="btn block" id="rsGo" style="margin-top:12px">生成</button>
+    </div>
+    ${txtOut('结果','rsOut')}`;
+  const sets={all:'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789',hex:'0123456789abcdef',num:'0123456789',sym:'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*-_'};
+  $('#rsGo',root).onclick=()=>{
+    const len=Math.max(4,+$('#rsLen',root).value||16), n=Math.min(50,+$('#rsNum',root).value||5);
+    const cs=sets[$('#rsSet',root).value];
+    const out=[];
+    for(let k=0;k<n;k++){
+      const buf=crypto.getRandomValues(new Uint32Array(len));
+      out.push([...buf].map(x=>cs[x%cs.length]).join(''));
+    }
+    $('#rsOut',root).textContent=out.join('\n');
+  };
+}
+
+function t_passphrase(root){
+  root.innerHTML=`
+    <div class="box">
+      <div class="lbl">词组数量</div><input type="number" id="ppN" value="4" min="2" max="8">
+      <button class="btn block" id="ppGo" style="margin-top:12px">生成口令</button>
+    </div>
+    ${txtOut('结果','ppOut')}
+    <p class="hint">由常见词随机拼接，好记也更难猜；只在本机生成，不会上传。</p>`;
+  const words='山 河 云 树 石 光 风 雨 雪 火 木 水 星 月 日 海 岛 林 田 桥 门 窗 灯 书 笔 纸 茶 米 盐 铁 铜 银 金 沙 石 竹 草 花 果 叶 根 鸟 鱼 马 牛 羊 猫 犬 熊 鹿 鹰 风 雷 霜 雾 露 虹 潮 溪 泉 湖 江 川 崖 谷 洞 塔 城 乡 路 舟 车 轮 帆 网 线 针 布 衣 帽 鞋 篮 盒 罐 壶 勺 碗 盘 钟 铃 鼓 笛 琴 棋 画 印 章 图 卷 册 页 墨 砚 扇 伞 杖 梯 绳 锁 钥 钩 钉 锤 斧 锯 铲 耙 犁 磨 筛 秤 尺 规 剪 针';
+  $('#ppGo',root).onclick=()=>{
+    const n=Math.max(2,+$('#ppN',root).value||4);
+    const arr=words.split(' ');
+    const buf=crypto.getRandomValues(new Uint32Array(n));
+    $('#ppOut',root).textContent=[...buf].map(x=>arr[x%arr.length]).join('-');
+  };
+}
+
+function t_cronbuild(root){
+  root.innerHTML=`
+    <div class="box">
+      <div class="row"><div style="flex:1"><div class="lbl">分钟</div><input id="cbMi" value="0"></div>
+      <div style="flex:1"><div class="lbl">小时</div><input id="cbH" value="9"></div>
+      <div style="flex:1"><div class="lbl">日</div><input id="cbD" value="*"></div></div>
+      <div class="row" style="margin-top:10px"><div style="flex:1"><div class="lbl">月</div><input id="cbM" value="*"></div>
+      <div style="flex:1"><div class="lbl">周</div><input id="cbW" value="*"></div></div>
+      <button class="btn block" id="cbGo" style="margin-top:12px">生成表达式</button>
+    </div>
+    ${txtOut('Cron','cbOut')}
+    <p class="hint">* 表示每；支持 */5 这类步长写法，生成后自己核对含义。</p>`;
+  $('#cbGo',root).onclick=()=>{
+    const expr=[$('#cbMi',root).value,' $x','$x','$x','$x'].join('').replace(/\$x/g,'');
+    const p=['cbMi','cbH','cbD','cbM','cbW'].map(id=>($('#'+id,root).value||'*').trim());
+    $('#cbOut',root).textContent=p.join(' ');
+  };
+}
+
+function t_tsdiff(root){
+  convTool(root,{def:'1700000000\n1735689600',outLabel:'结果',modes:[{label:'时间戳差（秒）',
+    fn:s=>{const a=s.trim().split(/\s+/).map(Number);if(a.length<2)throw new Error('两行各一个时间戳');const d=Math.abs(a[0]-a[1]);return `${d} 秒 = ${(d/60).toFixed(1)} 分钟 = ${(d/3600).toFixed(2)} 小时 = ${(d/86400).toFixed(2)} 天`;}},
+    {label:'两个日期差',fn:s=>{const a=s.trim().split('\n');if(a.length<2)throw new Error('两行各一个日期');const d=Math.abs(new Date(a[0])-new Date(a[1]));return `${Math.round(d/86400000)} 天`;}},
+    {label:'时间戳转日期',fn:s=>s.trim().split(/\s+/).filter(Boolean).map(x=>new Date(+x*1000).toLocaleString('zh-CN')).join('\n')}
+  ]});
+}
+
+function t_subnet(root){
+  convTool(root,{def:'192.168.1.10/24',outLabel:'结果',modes:[{label:'计算网段',
+    fn:s=>{
+      const [ip,cidr]=s.trim().split('/'); const bits=+cidr;
+      if(!ip||isNaN(bits)) throw new Error('格式如 192.168.1.10/24');
+      const p=ip.split('.').map(Number); if(p.length!==4) throw new Error('IP 格式有误');
+      const mask=bits===0?0:(0xFFFFFFFF<<(32-bits))>>>0;
+      const ipInt=((p[0]<<24)>>>0)+(p[1]<<16)+(p[2]<<8)+p[3];
+      const net=(ipInt&mask)>>>0, bcast=(net|(~mask>>>0))>>>0;
+      const toIp=n=>[n>>>24,(n>>16)&255,(n>>8)&255,n&255].join('.');
+      const hosts=Math.max(0,Math.pow(2,32-bits)-2);
+      return `网段 ${toIp(net)}/${bits}\n掩码 ${toIp(mask)}\n可用范围 ${toIp(net+1)} – ${toIp(bcast-1)}\n广播 ${toIp(bcast)}\n主机数 ${hosts}`;
+    }}]});
+}
+
+function t_cidr(root){
+  convTool(root,{def:'192.168.0.0/16\n10.0.0.0/8',outLabel:'结果',modes:[{label:'CIDR 汇总',
+    fn:s=>s.split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{
+      const [ip,bits]=l.split('/');
+      const total=Math.pow(2,32-(+bits));
+      const kind=total>=16777216?'A 类级':total>=65536?'B 类级':total>=256?'C 类级':'小网段';
+      return `${l}  →  ${total} 个地址（${kind}）`;
+    }).join('\n')}]});
+}
+
+function t_macvendor(root){
+  convTool(root,{def:'00:1A:2B:3C:4D:5E',outLabel:'结果',modes:[
+    {label:'解析 OUI',fn:s=>{const hex=s.replace(/[^0-9a-fA-F]/g,'').toUpperCase();if(hex.length<6)throw new Error('MAC 至少 6 位');const oui=hex.slice(0,6);const bin=parseInt(oui.slice(0,2),16);return `OUI ${oui.slice(0,2)}-${oui.slice(2,4)}-${oui.slice(4,6)}\n本地管理位 ${(bin&2)?'是':'否'}\n组播位 ${(bin&1)?'是（组播）':'否（单播）'}\n前三字节常对应厂商（需查 IEEE 库）`;}},
+    {label:'格式化 MAC',fn:s=>{const hex=s.replace(/[^0-9a-fA-F]/g,'').toUpperCase().padEnd(12,'0').slice(0,12);return hex.match(/.{2}/g).join(':');}},
+    {label:'转小写短横线',fn:s=>s.replace(/[^0-9a-fA-F]/g,'').toLowerCase().match(/.{2}/g).join('-')}
+  ]});
+}
+
+function t_uaparse(root){
+  convTool(root,{def:'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148 Safari/604.1',outLabel:'结果',modes:[{label:'解析 UA',
+    fn:s=>{
+      const os=/iPhone|iPad/.test(s)?'iOS':/Android/.test(s)?'Android':/Windows NT/.test(s)?'Windows':/Mac OS X/.test(s)?'macOS':/Linux/.test(s)?'Linux':'未知';
+      const br=/Edg\//.test(s)?'Edge':/Chrome\//.test(s)?'Chrome':/Safari\//.test(s)?'Safari':/Firefox\//.test(s)?'Firefox':'未知';
+      const mobile=/Mobile|Android|iPhone/.test(s);
+      const v=(s.match(/(?:Version|Chrome|Firefox|Edg)\/([\d.]+)/)||[,'?'])[1];
+      return `系统 ${os}\n浏览器 ${br}（${v}）\n设备 ${mobile?'移动端':'桌面端'}`;
+    }}]});
+}
+
+function t_httphdr(root){
+  convTool(root,{def:'Content-Type: application/json\nCache-Control: no-cache\nSet-Cookie: uid=abc; Path=/\nAuthorization: Bearer xxx',outLabel:'解析',modes:[{label:'解析请求头',
+    fn:s=>s.split('\n').filter(l=>l.includes(':')).map(l=>{const i=l.indexOf(':');const k=l.slice(0,i).trim(),v=l.slice(i+1).trim();return `${k}\n  ${v}`;}).join('\n')},
+    {label:'生成对象',fn:s=>{const o={};s.split('\n').filter(l=>l.includes(':')).forEach(l=>{const i=l.indexOf(':');o[l.slice(0,i).trim()]=l.slice(i+1).trim();});return JSON.stringify(o,null,2);}},
+    {label:'转小写名',fn:s=>s.split('\n').filter(l=>l.includes(':')).map(l=>l.toLowerCase()).join('\n')}
+  ]});
+}
+
+function t_cookie(root){
+  convTool(root,{def:'uid=abc123; Path=/; Domain=.example.com; Max-Age=86400; HttpOnly; Secure',outLabel:'解析',modes:[{label:'拆分属性',
+    fn:s=>s.split(';').map(x=>x.trim()).filter(Boolean).map(x=>{const i=x.indexOf('=');return i<0?x+'（标记）':x.slice(0,i)+' = '+x.slice(i+1);}).join('\n')},
+    {label:'只看键值',fn:s=>s.split(';').filter(x=>x.includes('=')).map(x=>x.trim()).join('\n')},
+    {label:'检查安全项',fn:s=>{const low=s.toLowerCase();return ['Secure '+(low.includes('secure')?'已设置':'缺失'),'HttpOnly '+(low.includes('httponly')?'已设置':'缺失'),'SameSite '+(low.includes('samesite')?'已设置':'缺失')].join('\n');}}
+  ],note:'用于检查登录 Cookie 的安全属性，不涉及任何账号操作。'});
+}
+
+function t_envparse(root){
+  convTool(root,{def:'APP_NAME=小羽工具箱\nVERSION=1.7\nDEBUG=false\n# 注释行\nGREETING="hello world"',outLabel:'结果',modes:[
+    {label:'转 JSON',fn:s=>{const o={};s.split('\n').forEach(l=>{const t=l.trim();if(!t||t.startsWith('#'))return;const i=t.indexOf('=');if(i<0)return;o[t.slice(0,i).trim()]=t.slice(i+1).trim().replace(/^[""]|[""]$/g,'');});return JSON.stringify(o,null,2);}},
+    {label:'转 export 语句',fn:s=>s.split('\n').filter(l=>l.trim()&&!l.trim().startsWith('#')).map(l=>'export '+l.trim()).join('\n')},
+    {label:'提取变量名',fn:s=>s.split('\n').filter(l=>l.includes('=')&&!l.trim().startsWith('#')).map(l=>l.split('=')[0].trim()).join('\n')}
+  ]});
+}
+
+function t_cssvar(root){
+  convTool(root,{def:':root{--ink:#15181D;--sub:#6E7580;--line:#E5E8EC;--brand:#2C63F0}',outLabel:'变量',modes:[{label:'提取变量表',
+    fn:s=>[...s.matchAll(/--([\w-]+)\s*:\s*([^;]+);/g)].map(m=>m[1]+' = '+m[2].trim()).join('\n')||'没有找到变量'},
+    {label:'转 JS 对象',fn:s=>{const o={};[...s.matchAll(/--([\w-]+)\s*:\s*([^;]+);/g)].forEach(m=>o[m[1]]=m[2].trim());return JSON.stringify(o,null,2);}},
+    {label:'复制变量声明',fn:s=>[...s.matchAll(/--([\w-]+)\s*:\s*([^;]+);/g)].map(m=>`  --${m[1]}: ${m[2].trim()};`).join('\n')}
+  ]});
+}
+
+function t_mdtable(root){
+  convTool(root,{def:'| 名称 | 数量 |\n| --- | --- |\n| 工具 | 255 |\n| 分类 | 7 |',outLabel:'结果',modes:[
+    {label:'表格转文本',fn:s=>s.split('\n').filter(l=>l.includes('|')&&!/^\|[\s:|-]+\|$/.test(l.trim())).map(l=>l.split('|').slice(1,-1).map(x=>x.trim()).join('  |  ')).join('\n')},
+    {label:'表格转 CSV',fn:s=>s.split('\n').filter(l=>l.includes('|')&&!/^\|[\s:|-]+\|$/.test(l.trim())).map(l=>l.split('|').slice(1,-1).map(x=>x.trim()).join(',')).join('\n')},
+    {label:'压缩列宽',fn:s=>s.split('\n').filter(l=>l.includes('|')).map(l=>'|'+l.split('|').slice(1,-1).map(x=>x.trim()).join('|')+'|').join('\n')}
+  ]});
+}
+
+function t_json2env(root){
+  convTool(root,{def:'{"APP_NAME":"小羽工具箱","VERSION":"1.7","DEBUG":false}',outLabel:'ENV',modes:[{label:'JSON → .env',
+    fn:s=>Object.entries(JSON.parse(s)).map(([k,v])=>k.toUpperCase()+'='+(typeof v==='string'?v:String(v))).join('\n')}]});
+}
+
+function t_codecount(root){
+  convTool(root,{def:'function a(){\n  // 注释\n  return 1;\n}\n\n\nfunction b(){}',outLabel:'统计',modes:[{label:'统计行数',fn:s=>{const total=s.split('\n').length;const code=s.split('\n').filter(l=>l.trim()&&!l.trim().startsWith('//')).length;const blank=s.split('\n').filter(l=>!l.trim()).length;return `总行 ${total}\n有效代码 ${code}\n空行 ${blank}`;}},
+    {label:'估算字符',fn:s=>`${s.length} 个字符（含空白）`},
+    {label:'查看最长行',fn:s=>{const a=s.split('\n');const m=Math.max(...a.map(l=>l.length));return '最长 '+m+' 字符：'+(a.find(l=>l.length===m)||'').slice(0,80);}}
+  ],note:'快速看代码规模，不含注释统计精度。'});
+}
+
+function t_filesize(root){
+  convTool(root,{def:'1048576',outLabel:'换算',modes:[{label:'字节换算',fn:s=>{const n=+s;if(!n||isNaN(n))throw new Error('输入数字');return `${n} B\n${(n/1024).toFixed(2)} KB\n${(n/1048576).toFixed(3)} MB\n${(n/1073741824).toFixed(4)} GB`;}},
+    {label:'MB 转字节',fn:s=>String(Math.round((+s)*1048576))},
+    {label:'换算网速时间',fn:s=>{const mb=+s;if(!mb)throw new Error('输入 MB 大小');return ['10 Mbps 约需 '+(mb*8/10).toFixed(0)+' 秒','50 Mbps 约需 '+(mb*8/50).toFixed(0)+' 秒','100 Mbps 约需 '+(mb*8/100).toFixed(0)+' 秒','500 Mbps 约需 '+(mb*8/500).toFixed(0)+' 秒'].join('\n');}}
+  ]});
+}
+
+function t_rgb2cmyk(root){
+  convTool(root,{def:'44, 99, 240',outLabel:'结果',modes:[{label:'RGB → CMYK',fn:s=>{const [r,g,b]=s.split(/[,\s]+/).map(Number);if([r,g,b].some(x=>isNaN(x)))throw new Error('格式如 44,99,240');const rr=r/255,gg=g/255,bb=b/255;const k=1-Math.max(rr,gg,bb);const c=(1-rr-k)/(1-k||1),m=(1-gg-k)/(1-k||1),y=(1-bb-k)/(1-k||1);return `CMYK ${Math.round(c*100)}, ${Math.round(m*100)}, ${Math.round(y*100)}, ${Math.round(k*100)}`;}},
+    {label:'RGB → 百分比',fn:s=>{const [r,g,b]=s.split(/[,\s]+/).map(Number);return `${(r/255*100).toFixed(1)}% ${(g/255*100).toFixed(1)}% ${(b/255*100).toFixed(1)}%`;}},
+    {label:'RGB → 十六进制',fn:s=>{const [r,g,b]=s.split(/[,\s]+/).map(Number);return '#'+[r,g,b].map(x=>Math.max(0,Math.min(255,x)).toString(16).padStart(2,'0')).join('').toUpperCase();}}
+  ],note:'印刷用 CMYK 是近似换算，实际以打样为准。'});
+}
+
+function t_strftime(root){
+  root.innerHTML=`
+    <div class="box">
+      <div class="lbl">日期时间</div><input type="datetime-local" id="stIn">
+      <div class="lbl" style="margin-top:10px">格式</div><input id="stFmt" value="YYYY-MM-DD HH:MM:SS">
+      <button class="btn block" id="stGo" style="margin-top:12px">格式化</button>
+    </div>
+    ${txtOut('结果','stOut')}
+    <p class="hint">支持 YYYY MM DD HH MM SS，常用于写日志和文件命名。</p>`;
+  const now=new Date(); const local=new Date(now.getTime()-now.getTimezoneOffset()*60000).toISOString().slice(0,16);
+  $('#stIn',root).value=local;
+  $('#stGo',root).onclick=()=>{
+    const d=new Date($('#stIn',root).value||Date.now());
+    const p=n=>String(n).padStart(2,'0');
+    const out=$('#stFmt',root).value
+      .replace(/YYYY/g,d.getFullYear()).replace(/MM/g,p(d.getMonth()+1)).replace(/DD/g,p(d.getDate()))
+      .replace(/HH/g,p(d.getHours())).replace(/MM(?=[^M]*$)/g,p(d.getMinutes())).replace(/SS/g,p(d.getSeconds()));
+    $('#stOut',root).textContent=out;
+  };
+}
+
 
 </script>
 </body>
