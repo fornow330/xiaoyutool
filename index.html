@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>小羽工具箱 · 126 个小工具</title>
+<title>小羽工具箱 · 147 个小工具</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%232C63F0'/%3E%3Cpath d='M7 8h10M7 12h10M7 16h6' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
 /* ===== tokens ===== */
@@ -191,7 +191,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
 <header class="topbar">
   <div class="brand">
     <h1>小羽工具箱</h1>
-    <span>126 个工具</span>
+    <span>147 个工具</span>
   </div>
   <div class="search">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
@@ -436,7 +436,28 @@ const TOOLS = [
   {id:'concrete', n:'混凝土配比', c:'num', col:'#D9822B', ic:'mix'},
   {id:'barcode', n:'条形码', c:'qry', col:'#15181D', ic:'barcode'},
   {id:'qrstyle', n:'二维码美化', c:'qry', col:'#2C63F0', ic:'qr'},
-  {id:'express', n:'快递单号', c:'qry', col:'#E2543B', ic:'truck'}
+  {id:'express', n:'快递单号', c:'qry', col:'#E2543B', ic:'truck'},
+  {id:'tone', n:'音频发生器', c:'dev', col:'#2C63F0', ic:'wave'},
+  {id:'speaker', n:'扬声器除尘', c:'dev', col:'#17A673', ic:'sun'},
+  {id:'motion', n:'加速度曲线', c:'dev', col:'#7A5AF8', ic:'pulse'},
+  {id:'invert', n:'图片反色', c:'img', col:'#E2543B', ic:'palette'},
+  {id:'text2img', n:'文字转图片', c:'img', col:'#0E9AA7', ic:'text'},
+  {id:'towebp', n:'图片转WebP', c:'img', col:'#8A94A6', ic:'image'},
+  {id:'txtsort', n:'文本排序', c:'txt', col:'#2C63F0', ic:'arrows'},
+  {id:'extract', n:'提取链接邮箱', c:'txt', col:'#D9822B', ic:'link'},
+  {id:'mdhtml', n:'Markdown 转HTML', c:'txt', col:'#17A673', ic:'code'},
+  {id:'netpay', n:'税后工资', c:'num', col:'#17A673', ic:'coin'},
+  {id:'fuel', n:'油耗计算', c:'num', col:'#E2543B', ic:'truck'},
+  {id:'calorie', n:'卡路里消耗', c:'num', col:'#2C63F0', ic:'pulse'},
+  {id:'breathe', n:'呼吸训练', c:'eff', col:'#0E9AA7', ic:'wave'},
+  {id:'wake', n:'屏幕常亮', c:'eff', col:'#D9822B', ic:'sun'},
+  {id:'rndnum', n:'随机数字', c:'eff', col:'#7A5AF8', ic:'dice'},
+  {id:'solar', n:'二十四节气', c:'qry', col:'#17A673', ic:'calendar'},
+  {id:'periodic', n:'元素周期表', c:'qry', col:'#2C63F0', ic:'grid'},
+  {id:'hotkeys', n:'快捷键速查', c:'qry', col:'#8A94A6', ic:'code'},
+  {id:'json2csv', n:'JSON 转CSV', c:'kit', col:'#D9822B', ic:'grid'},
+  {id:'csv2json', n:'CSV 转JSON', c:'kit', col:'#0E9AA7', ic:'code'},
+  {id:'urlparams', n:'URL 参数', c:'kit', col:'#2C63F0', ic:'link'}
 ];
 const CATS = [
   {k:'all', n:'全部'}, {k:'dev', n:'设备测量'}, {k:'img', n:'图片'},
@@ -6714,6 +6735,671 @@ function t_express(root){
   $('#exgo',root).onclick=run;
   $('#exin',root).addEventListener('input',run);
   run();
+}
+
+
+/* ================= 新增工具（第三批） ================= */
+
+/* ---------- 音频发生器 ---------- */
+function t_tone(root){
+  root.innerHTML=`
+    <div class="box">
+      <p class="lbl">频率 <b id="toneHz" style="color:var(--ink)">440</b> Hz</p>
+      <input type="range" id="toneR" min="50" max="2000" step="10" value="440">
+      <div class="seg" id="toneW" style="margin-top:10px"><button class="on" data-v="sine">正弦</button><button data-v="square">方波</button><button data-v="triangle">三角</button></div>
+      <div class="row" style="margin-top:10px">
+        <button class="btn" id="tonePlay">开始发声</button>
+        <button class="btn ghost" id="toneStop">停止</button>
+      </div>
+      <p class="lbl" style="margin-top:14px">快捷频率</p>
+      <div class="row"><button class="btn ghost" data-f="440">440</button><button class="btn ghost" data-f="880">880</button><button class="btn ghost" data-f="1000">1000</button><button class="btn ghost" data-f="2000">2000</button></div>
+    </div>
+    <p class="hint">用来测耳机、音箱、听感上限。别贴耳朵、别长时间大音量，会伤听力。</p>`;
+  let ac=null, osc=null, gain=null, type='sine';
+  function stop(){
+    if(osc){ try{osc.stop();}catch(e){} osc=null; }
+    if(ac){ try{ac.close();}catch(e){} ac=null; }
+  }
+  function play(){
+    stop();
+    try{
+      ac=new (window.AudioContext||window.webkitAudioContext)();
+      osc=ac.createOscillator(); gain=ac.createGain();
+      osc.type=type; osc.frequency.value=+$('#toneR',root).value;
+      gain.gain.value=0.35;
+      osc.connect(gain); gain.connect(ac.destination); osc.start();
+      toast('发声频率 '+osc.frequency.value+' Hz');
+    }catch(e){ toast('当前环境不支持音频输出'); }
+  }
+  $('#toneR',root).oninput=e=>{ $('#toneHz',root).textContent=e.target.value; if(osc) osc.frequency.value=+e.target.value; };
+  $('#tonePlay',root).onclick=play;
+  $('#toneStop',root).onclick=()=>{ stop(); toast('已停止'); };
+  segBind(root,'#toneW',v=>{ type=v; if(osc) osc.type=v; });
+  root.addEventListener('click',e=>{
+    const b=e.target.closest('[data-f]'); if(!b) return;
+    $('#toneR',root).value=b.dataset.f; $('#toneHz',root).textContent=b.dataset.f;
+    if(osc) osc.frequency.value=+b.dataset.f;
+  });
+  return stop;
+}
+
+/* ---------- 扬声器除尘 ---------- */
+function t_speaker(root){
+  root.innerHTML=`
+    <div class="box" style="text-align:center;padding:24px 16px">
+      <div id="spkIcon" style="width:110px;height:110px;border-radius:50%;margin:0 auto 16px;display:grid;place-items:center;
+        background:#EEF3FF;border:1px solid #DCE6FB">
+        <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#2C63F0" stroke-width="1.7" stroke-linejoin="round">${ICONS.wave}</svg>
+      </div>
+      <div style="font-size:15px;font-weight:600" id="spkSt">点开始，共 10 秒</div>
+      <button class="btn block" id="spkGo" style="margin-top:16px">开始除尘</button>
+    </div>
+    <div class="box"><p class="hint" style="margin:0">原理：让扬声器低频震动，把喇叭孔里的灰尘震出来。别把手机泡水，也别在水边用。iPhone 无网页低频通道时效果有限。</p></div>`;
+  let ac=null, osc=null, timer=null, left=0;
+  function stop(){
+    clearInterval(timer); timer=null;
+    if(osc){ try{osc.stop();}catch(e){} osc=null; }
+    if(ac){ try{ac.close();}catch(e){} ac=null; }
+    $('#spkSt',root).textContent='点开始，共 10 秒';
+    $('#spkGo',root).textContent='开始除尘';
+  }
+  $('#spkGo',root).onclick=()=>{
+    if(timer){ stop(); return; }
+    try{
+      ac=new (window.AudioContext||window.webkitAudioContext)();
+      osc=ac.createOscillator(); const g=ac.createGain();
+      osc.type='sine'; osc.frequency.value=165; g.gain.value=0.75;
+      osc.connect(g); g.connect(ac.destination); osc.start();
+      left=10; $('#spkSt',root).textContent='震动中… '+left+' 秒'; $('#spkGo',root).textContent='停止';
+      timer=setInterval(()=>{
+        left--;
+        if(left<=0){ stop(); toast('除尘结束'); return; }
+        $('#spkSt',root).textContent='震动中… '+left+' 秒';
+      },1000);
+    }catch(e){ toast('当前环境不支持音频输出'); }
+  };
+  return stop;
+}
+
+/* ---------- 加速度曲线 ---------- */
+function t_motion(root){
+  root.innerHTML=`
+    <div class="box">
+      <canvas id="mcv" style="width:100%;height:180px;border-radius:10px;background:#FAFBFD;border:1px solid var(--line)"></canvas>
+      <div style="display:flex;justify-content:space-between;margin-top:10px;font-size:12.5px;color:var(--sub)">
+        <span style="color:#2C63F0">前后 <b id="mb" style="color:var(--ink)">--</b></span>
+        <span style="color:#E2543B">左右 <b id="mg" style="color:var(--ink)">--</b></span>
+      </div>
+    </div>
+    <p class="hint">两条曲线是手机前后、左右方向的倾角变化。晃动手机看曲线，用来判断传感器是否正常。</p>`;
+  const cv=$('#mcv',root);
+  const ctx=cv.getContext('2d');
+  const dataB=[], dataG=[], N=180;
+  let raf=null;
+  function size(){
+    const dpr=Math.min(2, window.devicePixelRatio||1);
+    cv.width=cv.clientWidth*dpr; cv.height=cv.clientHeight*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  function draw(){
+    ctx.clearRect(0,0,cv.clientWidth,cv.clientHeight);
+    const h=cv.clientHeight, w=cv.clientWidth;
+    ctx.strokeStyle='#E5E8EC'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(0,h/2); ctx.lineTo(w,h/2); ctx.stroke();
+    [[dataB,'#2C63F0'],[dataG,'#E2543B']].forEach(([arr,c])=>{
+      if(arr.length<2) return;
+      ctx.strokeStyle=c; ctx.lineWidth=1.6; ctx.beginPath();
+      arr.forEach((v,i)=>{
+        const x=i/(N-1)*w, y=h/2 - Math.max(-h/2+6, Math.min(h/2-6, v*2));
+        i?ctx.lineTo(x,y):ctx.moveTo(x,y);
+      });
+      ctx.stroke();
+    });
+    raf=requestAnimationFrame(draw);
+  }
+  size(); draw();
+  root.__mcStop=readOrientation(e=>{
+    dataB.push(e.beta||0); dataG.push(e.gamma||0);
+    if(dataB.length>N) dataB.shift();
+    if(dataG.length>N) dataG.shift();
+    $('#mb',root).textContent=deg1(e.beta||0)+'°';
+    $('#mg',root).textContent=deg1(e.gamma||0)+'°';
+  },()=>{ $('#mb',root).textContent='无传感器'; });
+  return ()=>{ cancelAnimationFrame(raf); if(root.__mcStop) root.__mcStop(); };
+}
+
+/* ---------- 图片反色 ---------- */
+function t_invert(root){
+  const api=imgTool(root,`
+    <div class="seg" id="ivMode" style="margin-top:12px"><button class="on" data-v="neg">负片反色</button><button data-v="gray">黑白</button><button data-v="sepia">复古</button></div>`, '反色');
+  let mode='neg';
+  function draw(){
+    const img=api.img; if(!img) return;
+    const s=Math.min(1, api.max/Math.max(img.naturalWidth, img.naturalHeight));
+    const w=Math.round(img.naturalWidth*s), h=Math.round(img.naturalHeight*s);
+    const cv=api.cv; cv.width=w; cv.height=h;
+    const ctx=cv.getContext('2d');
+    ctx.filter = mode==='neg' ? 'invert(1)' : mode==='gray' ? 'grayscale(1)' : 'sepia(0.75) saturate(1.2)';
+    ctx.drawImage(img,0,0,w,h);
+  }
+  segBind(root,'#ivMode',v=>{ mode=v; draw(); });
+  onPick(api,draw);
+}
+
+/* ---------- 文字转图片 ---------- */
+function t_text2img(root){
+  root.innerHTML=`
+    <div class="box">
+      <textarea id="t2t" style="min-height:110px">小羽工具箱</textarea>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+        <div><div class="lbl">字号</div><input type="number" id="t2s" value="64" min="12" max="200"></div>
+        <div><div class="lbl">背景</div><input type="color" id="t2bg" value="#ffffff"></div>
+        <div><div class="lbl">文字色</div><input type="color" id="t2fg" value="#15181D"></div>
+        <div><div class="lbl">内边距</div><input type="number" id="t2p" value="40" min="0" max="200"></div>
+      </div>
+      <button class="btn block" id="t2go" style="margin-top:12px">生成并保存</button>
+    </div>
+    <div class="box" style="display:none" id="t2wrap"><canvas id="t2cv" style="width:100%;border-radius:10px"></canvas></div>`;
+  $('#t2go',root).onclick=()=>{
+    const text=$('#t2t',root).value||' ';
+    const size=Math.max(12,+$('#t2s',root).value||64);
+    const pad=Math.max(0,+$('#t2p',root).value||0);
+    const lines=text.split('\n');
+    const m=document.createElement('canvas').getContext('2d');
+    m.font=size+'px system-ui,-apple-system,sans-serif';
+    const w=Math.ceil(Math.max.apply(null, lines.map(l=>m.measureText(l).width)));
+    const h=Math.ceil(size*1.45*lines.length);
+    const cv=$('#t2cv',root); cv.width=w+pad*2; cv.height=h+pad*2;
+    const ctx=cv.getContext('2d');
+    ctx.fillStyle=$('#t2bg',root).value; ctx.fillRect(0,0,cv.width,cv.height);
+    ctx.fillStyle=$('#t2fg',root).value; ctx.font=size+'px system-ui,-apple-system,sans-serif';
+    ctx.textBaseline='top';
+    lines.forEach((l,i)=>ctx.fillText(l,pad,pad+i*size*1.45));
+    $('#t2wrap',root).style.display='';
+    cv.toBlob(b=>{ download(b,'文字图_'+Date.now()+'.png'); toast('已生成 PNG'); }, 'image/png');
+  };
+}
+
+/* ---------- 图片转 WebP ---------- */
+function t_towebp(root){
+  const api=imgTool(root,`
+    <div class="lbl" style="display:flex;justify-content:space-between;margin-top:12px"><span>质量</span><b id="wqv" style="color:var(--ink)">80</b></div>
+    <input type="range" id="wq" min="30" max="100" value="80">
+    <p class="hint">WebP 通常比 JPG 小 25%–40%，适合发网页和聊天工具。</p>`,'图片');
+  let q=80;
+  $('#wq',root).oninput=e=>{ q=+e.target.value; $('#wqv',root).textContent=q; };
+  root.querySelector('[data-iw-save]').onclick=()=>{
+    if(!api.cv.width) return toast('先选择图片');
+    api.cv.toBlob(b=>{
+      if(!b || b.type!=='image/webp'){ toast('当前浏览器不支持 WebP 导出'); return; }
+      download(b,'图片_'+Date.now()+'.webp'); toast('已保存 WebP');
+    },'image/webp', q/100);
+  };
+  onPick(api,()=>{
+    const img=api.img; if(!img) return;
+    const s=Math.min(1, api.max/Math.max(img.naturalWidth,img.naturalHeight));
+    api.cv.width=Math.round(img.naturalWidth*s); api.cv.height=Math.round(img.naturalHeight*s);
+    api.cv.getContext('2d').drawImage(img,0,0,api.cv.width,api.cv.height);
+  });
+}
+
+/* ---------- 文本排序 ---------- */
+function t_txtsort(root){
+  root.innerHTML=`
+    <div class="box">
+      <textarea id="tsin" style="min-height:130px" placeholder="一行一条，粘贴后排序">苹果
+香蕉
+橙子
+西瓜</textarea>
+      <div class="row" style="margin-top:10px">
+        <button class="btn" id="tsaz">A → Z</button>
+        <button class="btn ghost" id="tsza">Z → A</button>
+        <button class="btn ghost" id="tslen">按长度</button>
+        <button class="btn ghost" id="tsnum">按数字</button>
+      </div>
+    </div>
+    ${txtOut('排序结果','tsout')}`;
+  function run(kind){
+    let arr=$('#tsin',root).value.split('\n').map(s=>s.trim()).filter(Boolean);
+    if(!arr.length) return toast('没有内容');
+    if(kind==='len') arr.sort((a,b)=>a.length-b.length);
+    else if(kind==='num') arr.sort((a,b)=>(parseFloat(a.replace(/[^\d.-]/g,''))||0)-(parseFloat(b.replace(/[^\d.-]/g,''))||0));
+    else arr.sort((a,b)=>a.localeCompare(b,'zh-Hans-CN'));
+    if(kind==='za') arr.reverse();
+    $('#tsout',root).textContent=arr.join('\n');
+    toast('已排序 '+arr.length+' 行');
+  }
+  $('#tsaz',root).onclick=()=>run('az');
+  $('#tsza',root).onclick=()=>run('za');
+  $('#tslen',root).onclick=()=>run('len');
+  $('#tsnum',root).onclick=()=>run('num');
+}
+
+/* ---------- 提取链接邮箱 ---------- */
+function t_extract(root){
+  root.innerHTML=`
+    <div class="box">
+      <textarea id="exin" style="min-height:130px" placeholder="粘贴一段含链接、邮箱、手机号的文字"></textarea>
+      <div class="row" style="margin-top:10px">
+        <button class="btn" id="exurl">链接</button>
+        <button class="btn ghost" id="exmail">邮箱</button>
+        <button class="btn ghost" id="extel">手机号</button>
+      </div>
+    </div>
+    ${txtOut('提取结果','exout')}`;
+  function run(kind){
+    const t=$('#exin',root).value;
+    let re, list=[];
+    if(kind==='url') re=/https?:\/\/[^\s<>"'）)，。]+/g;
+    else if(kind==='mail') re=/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
+    else re=/1[3-9]\d{9}/g;
+    list=t.match(re)||[];
+    list=Array.from(new Set(list));
+    $('#exout',root).textContent=list.length?list.join('\n'):'没有匹配到内容';
+    toast('共 '+list.length+' 条');
+  }
+  $('#exurl',root).onclick=()=>run('url');
+  $('#exmail',root).onclick=()=>run('mail');
+  $('#extel',root).onclick=()=>run('tel');
+}
+
+/* ---------- Markdown 转 HTML ---------- */
+function t_mdhtml(root){
+  root.innerHTML=`
+    <div class="box">
+      <textarea id="mdin" style="min-height:150px" placeholder="# 标题&#10;&#10;正文 **加粗** 和 \`代码\`"># 小羽工具箱
+
+支持 **加粗**、*斜体*、\`代码\`、[链接](https://example.com)。
+
+- 列表项一
+- 列表项二
+</textarea>
+      <button class="btn block" id="mdgo" style="margin-top:10px">转换</button>
+    </div>
+    ${txtOut('HTML 代码','mdout')}
+    <div class="box"><p class="lbl">预览</p><div id="mdpre" style="font-size:14.5px;line-height:1.7"></div></div>`;
+  function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function conv(md){
+    const out=[];
+    md.split(/\n{2,}/).forEach(block=>{
+      let t=block.trim(); if(!t) return;
+      if(/^#{1,3} /.test(t)){
+        const lv=t.match(/^#+/)[0].length;
+        out.push('<h'+lv+'>'+esc(t.replace(/^#+\s*/,''))+'</h'+lv+'>');
+        return;
+      }
+      const items=t.split('\n').filter(l=>/^[-*]\s+/.test(l));
+      if(items.length){
+        out.push('<ul>'+items.map(l=>'<li>'+inline(esc(l.replace(/^[-*]\s+/,''))) +'</li>').join('')+'</ul>');
+        return;
+      }
+      out.push('<p>'+inline(esc(t).replace(/\n/g,'<br>'))+'</p>');
+    });
+    function inline(s){
+      return s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+              .replace(/\*(.+?)\*/g,'<em>$1</em>')
+              .replace(/`(.+?)`/g,'<code>$1</code>')
+              .replace(/\[(.+?)\]\((https?:\/\/[^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+    }
+    return out.join('\n');
+  }
+  $('#mdgo',root).onclick=()=>{
+    const html=conv($('#mdin',root).value);
+    $('#mdout',root).textContent=html||'—';
+    $('#mdpre',root).innerHTML=html||'<span class="hint">暂无内容</span>';
+  };
+}
+
+/* ---------- 税后工资 ---------- */
+function t_netpay(root){
+  root.innerHTML=`
+    <div class="box">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div><div class="lbl">税前月薪（元）</div><input type="number" id="npW" value="15000" step="100"></div>
+        <div><div class="lbl">社保公积金基数</div><input type="number" id="npB" value="15000" step="100"></div>
+        <div><div class="lbl">个人缴纳比例 %</div><input type="number" id="npR" value="10.5" step="0.5"></div>
+        <div><div class="lbl">专项附加扣除</div><input type="number" id="npD" value="0" step="100"></div>
+      </div>
+      <div class="kv" style="margin-top:12px"><span>五险一金</span><b id="npS">—</b></div>
+      <div class="kv"><span>应纳税所得</span><b id="npT">—</b></div>
+      <div class="kv"><span>个人所得税</span><b id="npX">—</b></div>
+      <div class="kv"><span>到手工资</span><b id="npN" style="color:#17A673">—</b></div>
+    </div>
+    <p class="hint">按月度综合所得速算，起征点 5000 元；比例默认 10.5%（养老 8%、医疗 2%、失业 0.5%），公积金另算时请自行调整。</p>`;
+  function calc(){
+    const w=+$('#npW',root).value||0, b=+$('#npB',root).value||w, r=+$('#npR',root).value||0, d=+$('#npD',root).value||0;
+    const ins=Math.round(b*r/100);
+    const taxable=Math.max(0, w-ins-d-5000);
+    let tax=0;
+    if(taxable<=3000) tax=taxable*0.03;
+    else if(taxable<=12000) tax=taxable*0.1-210;
+    else if(taxable<=25000) tax=taxable*0.2-1410;
+    else if(taxable<=35000) tax=taxable*0.25-2660;
+    else if(taxable<=55000) tax=taxable*0.3-4410;
+    else if(taxable<=80000) tax=taxable*0.35-7160;
+    else tax=taxable*0.45-15160;
+    tax=Math.max(0,Math.round(tax));
+    $('#npS',root).textContent=ins+' 元';
+    $('#npT',root).textContent=taxable+' 元';
+    $('#npX',root).textContent=tax+' 元';
+    $('#npN',root).textContent=(w-ins-tax)+' 元';
+  }
+  root.addEventListener('input',calc); calc();
+}
+
+/* ---------- 油耗计算 ---------- */
+function t_fuel(root){
+  root.innerHTML=`
+    <div class="box">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div><div class="lbl">行驶里程（km）</div><input type="number" id="fuKm" value="500"></div>
+        <div><div class="lbl">加油量（L）</div><input type="number" id="fuL" value="40" step="0.01"></div>
+        <div><div class="lbl">油价（元/L）</div><input type="number" id="fuP" value="8.0" step="0.01"></div>
+        <div><div class="lbl">载客/空载系数</div><input type="number" id="fuF" value="1" step="0.05"></div>
+      </div>
+      <div class="kv" style="margin-top:12px"><span>百公里油耗</span><b id="fuA">—</b></div>
+      <div class="kv"><span>每公里油费</span><b id="fuB">—</b></div>
+      <div class="kv"><span>本次油费</span><b id="fuC">—</b></div>
+    </div>
+    <p class="hint">跑完一箱油再加满时记下里程和加油量最准；系数仅用于粗略修正满载情况。</p>`;
+  function calc(){
+    const km=+$('#fuKm',root).value||0, l=+$('#fuL',root).value||0, p=+$('#fuP',root).value||0, f=+$('#fuF',root).value||1;
+    if(!km||!l){ ['#fuA','#fuB','#fuC'].forEach(s=>$(s,root).textContent='—'); return; }
+    const per100=l/km*100*f;
+    $('#fuA',root).textContent=per100.toFixed(2)+' L/100km';
+    $('#fuB',root).textContent=(per100*p/100).toFixed(3)+' 元/km';
+    $('#fuC',root).textContent=(l*p).toFixed(2)+' 元';
+  }
+  root.addEventListener('input',calc); calc();
+}
+
+/* ---------- 卡路里消耗 ---------- */
+function t_calorie(root){
+  root.innerHTML=`
+    <div class="box">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div><div class="lbl">体重（kg）</div><input type="number" id="caW" value="65"></div>
+        <div><div class="lbl">时长（分钟）</div><input type="number" id="caT" value="30"></div>
+      </div>
+      <div class="lbl" style="margin-top:12px">运动类型</div>
+      <div class="seg" id="caK" style="flex-wrap:wrap">
+        <button class="on" data-v="3.5">走路</button><button data-v="7">跑步</button><button data-v="9">骑行</button>
+        <button data-v="5">瑜伽</button><button data-v="8">游泳</button><button data-v="6">跳绳</button>
+      </div>
+      <div class="kv" style="margin-top:14px"><span>消耗热量</span><b id="caOut" style="color:#17A673">—</b></div>
+      <div class="kv"><span>相当于</span><b id="caEq">—</b></div>
+    </div>
+    <p class="hint">用 MET 公式：热量 = MET × 体重 × 小时数。数值为估算，仅供参考。</p>`;
+  let met=3.5;
+  function calc(){
+    const w=+$('#caW',root).value||0, t=+$('#caT',root).value||0;
+    const kcal=met*w*(t/60);
+    $('#caOut',root).textContent=Math.round(kcal)+' kcal';
+    $('#caEq',root).textContent=kcal>0?('约 '+Math.round(kcal/300*10)/10+' 碗米饭'):'—';
+  }
+  segBind(root,'#caK',v=>{ met=+v; calc(); });
+  root.addEventListener('input',calc); calc();
+}
+
+/* ---------- 呼吸训练 ---------- */
+function t_breathe(root){
+  root.innerHTML=`
+    <div class="box" style="text-align:center;padding:24px 14px">
+      <div id="brCircle" style="width:160px;height:160px;border-radius:50%;margin:0 auto;background:#E8F5EF;border:1px solid #CBEBDF;
+        display:grid;place-items:center;transition:transform 4s ease-in-out">
+        <div><div id="brPhase" style="font-size:15px;font-weight:600">准备</div><div id="brCnt" style="font-size:34px;font-weight:700;font-variant-numeric:tabular-nums;margin-top:4px">0</div></div>
+      </div>
+      <div class="row" style="margin-top:18px">
+        <button class="btn" id="brGo">开始 4-7-8 呼吸</button>
+        <button class="btn ghost" id="brStop">结束</button>
+      </div>
+    </div>
+    <p class="hint">吸气 4 秒 → 屏息 7 秒 → 呼气 8 秒。做 4 轮就够，睡前或紧张时用。</p>`;
+  let timer=null, phase=0, count=4, round=0, scale=0;
+  const circle=$('#brCircle',root);
+  function tick(){
+    count--;
+    if(count>0){ $('#brCnt',root).textContent=count; return; }
+    phase=(phase+1)%3; round += phase===0?1:0;
+    if(phase===0){ $('#brPhase',root).textContent='吸气'; count=4; circle.style.transform='scale(1.12)'; }
+    else if(phase===1){ $('#brPhase',root).textContent='屏息'; count=7; }
+    else { $('#brPhase',root).textContent='呼气'; count=8; circle.style.transform='scale(0.86)'; }
+    $('#brCnt',root).textContent=count;
+    if(round>=4 && phase===0){ stop(); toast('完成 4 轮，放松一下'); }
+  }
+  function stop(){ clearInterval(timer); timer=null; phase=0; round=0; circle.style.transform='scale(1)';
+    $('#brPhase',root).textContent='准备'; $('#brCnt',root).textContent='0'; }
+  $('#brGo',root).onclick=()=>{
+    stop(); $('#brPhase',root).textContent='吸气'; count=4; $('#brCnt',root).textContent=4;
+    circle.style.transform='scale(1.12)';
+    timer=setInterval(tick,1000);
+  };
+  $('#brStop',root).onclick=stop;
+  return stop;
+}
+
+/* ---------- 屏幕常亮 ---------- */
+function t_wake(root){
+  root.innerHTML=`
+    <div class="box" style="text-align:center;padding:24px 16px">
+      <div style="font-size:15px;font-weight:600" id="wkSt">屏幕常亮未开启</div>
+      <div class="hint" id="wkInfo" style="margin-top:6px">开启后浏览本页期间屏幕不会自动熄灭</div>
+      <button class="btn block" id="wkGo" style="margin-top:16px">开启常亮</button>
+    </div>
+    <p class="hint">切到其他页面或锁屏后自动失效，回来重新点一下即可。适合看菜谱、抄表格、拍照对照。</p>`;
+  let lock=null;
+  $('#wkGo',root).onclick=async()=>{
+    if(lock){ try{await lock.release();}catch(e){} lock=null; $('#wkSt',root).textContent='屏幕常亮已关闭'; $('#wkGo',root).textContent='开启常亮'; return; }
+    if(!('wakeLock' in navigator)){ toast('当前浏览器不支持常亮接口'); $('#wkSt',root).textContent='当前环境不支持'; return; }
+    try{
+      lock=await navigator.wakeLock.request('screen');
+      $('#wkSt',root).textContent='屏幕常亮已开启';
+      $('#wkGo',root).textContent='关闭常亮';
+      lock.addEventListener('release',()=>{ lock=null; $('#wkSt',root).textContent='已释放（切后台或锁屏）'; $('#wkGo',root).textContent='开启常亮'; });
+    }catch(e){ toast('开启失败，可能电量过低'); }
+  };
+  return ()=>{ if(lock){ try{lock.release();}catch(e){} lock=null; } };
+}
+
+/* ---------- 随机数字 ---------- */
+function t_rndnum(root){
+  root.innerHTML=`
+    <div class="box">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+        <div><div class="lbl">最小</div><input type="number" id="rnA" value="1"></div>
+        <div><div class="lbl">最大</div><input type="number" id="rnB" value="100"></div>
+        <div><div class="lbl">个数</div><input type="number" id="rnC" value="1" min="1" max="200"></div>
+      </div>
+      <div class="row" style="margin-top:12px">
+        <button class="btn" id="rnGo">生成</button>
+        <button class="btn ghost" id="rnDice">掷骰子</button>
+        <button class="btn ghost" id="rnCoin">正反面</button>
+      </div>
+      <div class="out" id="rnOut" style="margin-top:12px;font-size:20px;font-weight:700">—</div>
+    </div>
+    <p class="hint">使用系统随机数，可用于抽奖、分组、模拟掷骰。</p>`;
+  function rnd(a,b){ return Math.floor(Math.random()*(b-a+1))+a; }
+  $('#rnGo',root).onclick=()=>{
+    let a=Math.ceil(+$('#rnA',root).value), b=Math.floor(+$('#rnB',root).value), n=Math.min(200,Math.max(1,+$('#rnC',root).value||1));
+    if(a>b){ const t=a; a=b; b=t; }
+    const list=[]; for(let i=0;i<n;i++) list.push(rnd(a,b));
+    $('#rnOut',root).textContent=list.join('  ');
+  };
+  $('#rnDice',root).onclick=()=>{ $('#rnOut',root).textContent=rnd(1,6); toast('掷出 '+$('#rnOut',root).textContent); };
+  $('#rnCoin',root).onclick=()=>{ $('#rnOut',root).textContent=Math.random()<0.5?'正面':'反面'; };
+}
+
+/* ---------- 二十四节气 ---------- */
+function t_solar(root){
+  const list=[['小寒','01-05'],['大寒','01-20'],['立春','02-04'],['雨水','02-19'],['惊蛰','03-05'],['春分','03-20'],
+    ['清明','04-05'],['谷雨','04-20'],['立夏','05-05'],['小满','05-21'],['芒种','06-06'],['夏至','06-21'],
+    ['小暑','07-07'],['大暑','07-23'],['立秋','08-07'],['处暑','08-23'],['白露','09-08'],['秋分','09-23'],
+    ['寒露','10-08'],['霜降','10-23'],['立冬','11-07'],['小雪','11-22'],['大雪','12-07'],['冬至','12-22']];
+  const now=new Date();
+  const today=(now.getMonth()+1)*100+now.getDate();
+  const next=list.map(([n,d])=>({n,d,t:+d.replace('-','')})).filter(x=>x.t>=today)[0] || {n:list[0][0],d:list[0][1],t:10105};
+  root.innerHTML=`
+    <div class="box">
+      <div class="kv"><span>今天</span><b>${now.getFullYear()} 年 ${now.getMonth()+1} 月 ${now.getDate()} 日</b></div>
+      <div class="kv"><span>下一个节气</span><b style="color:#2C63F0">${next.n} · ${next.d}</b></div>
+    </div>
+    <div class="box">
+      <p class="lbl">全年 24 节气（日期为常数表，个别年份差 1 天）</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:13.5px">
+        ${list.map(([n,d])=>`<div style="display:flex;justify-content:space-between;padding:5px 8px;background:#FAFBFD;border-radius:8px"><span>${n}</span><span style="color:var(--sub)">${d}</span></div>`).join('')}
+      </div>
+    </div>`;
+}
+
+/* ---------- 元素周期表 ---------- */
+function t_periodic(root){
+  const el=[['H','氢'],['He','氦'],['Li','锂'],['Be','铍'],['B','硼'],['C','碳'],['N','氮'],['O','氧'],['F','氟'],['Ne','氖'],
+    ['Na','钠'],['Mg','镁'],['Al','铝'],['Si','硅'],['P','磷'],['S','硫'],['Cl','氯'],['Ar','氩'],['K','钾'],['Ca','钙'],
+    ['Sc','钪'],['Ti','钛'],['V','钒'],['Cr','铬'],['Mn','锰'],['Fe','铁'],['Co','钴'],['Ni','镍'],['Cu','铜'],['Zn','锌'],
+    ['Ga','镓'],['Ge','锗'],['As','砷'],['Se','硒'],['Br','溴'],['Kr','氪'],['Rb','铷'],['Sr','锶'],['Y','钇'],['Zr','锆'],
+    ['Nb','铌'],['Mo','钼'],['Tc','锝'],['Ru','钌'],['Rh','铑'],['Pd','钯'],['Ag','银'],['Cd','镉'],['In','铟'],['Sn','锡'],
+    ['Sb','锑'],['Te','碲'],['I','碘'],['Xe','氙'],['Cs','铯'],['Ba','钡'],['La','镧'],['Ce','铈'],['Pr','镨'],['Nd','钕'],
+    ['Pm','钷'],['Sm','钐'],['Eu','铕'],['Gd','钆'],['Tb','铽'],['Dy','镝'],['Ho','钬'],['Er','铒'],['Tm','铥'],['Yb','镱'],
+    ['Lu','镥'],['Hf','铪'],['Ta','钽'],['W','钨'],['Re','铼'],['Os','锇'],['Ir','铱'],['Pt','铂'],['Au','金'],['Hg','汞'],
+    ['Tl','铊'],['Pb','铅'],['Bi','铋'],['Po','钋'],['At','砹'],['Rn','氡'],['Fr','钫'],['Ra','镭'],['Ac','锕'],['Th','钍'],
+    ['Pa','镤'],['U','铀'],['Np','镎'],['Pu','钚'],['Am','镅'],['Cm','锔'],['Bk','锫'],['Cf','锎'],['Es','锿'],['Fm','镄'],
+    ['Md','钔'],['No','锘'],['Lr','铹'],['Rf','钅卢'],['Db','钅杜'],['Sg','钅喜'],['Bh','钅波'],['Hs','钅黑'],['Mt','钅麦'],
+    ['Ds','钅达'],['Rg','钅仑'],['Cn','钅哥'],['Nh','钅尔'],['Fl','钅夫'],['Mc','钅莫'],['Lv','钅立'],['Ts','钅田'],['Og','钅奥']];
+  root.innerHTML=`
+    <div class="box">
+      <input id="peQ" placeholder="搜索元素符号或中文名，如 Fe / 铁">
+      <div id="peGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px"></div>
+    </div>
+    <p class="hint">超重元素中文名为生造字，部分字体可能显示为方框。共 118 种元素（1–118 号）。</p>`;
+  function render(q){
+    const g=$('#peGrid',root);
+    const arr=el.map(([s,n],i)=>({s,n,i:i+1}));
+    const list=q?arr.filter(x=>x.s.toLowerCase().includes(q.toLowerCase())||x.n.includes(q)):arr;
+    g.innerHTML=list.map(x=>`<div style="padding:8px 6px;background:#FAFBFD;border:1px solid var(--line);border-radius:8px;text-align:center">
+      <div style="font-size:11px;color:var(--sub)">${x.i}</div>
+      <div style="font-weight:700;font-size:16px">${x.s}</div>
+      <div style="font-size:12.5px;color:var(--sub)">${x.n}</div></div>`).join('') || '<p class="hint">没有匹配的元素</p>';
+  }
+  $('#peQ',root).oninput=e=>render(e.target.value.trim());
+  render('');
+}
+
+/* ---------- 快捷键速查 ---------- */
+function t_hotkeys(root){
+  const data=[['通用',[['Ctrl+C','复制'],['Ctrl+V','粘贴'],['Ctrl+Z','撤销'],['Ctrl+Y','重做'],['Ctrl+S','保存'],['Ctrl+A','全选'],['Alt+Tab','切换窗口'],['Win+D','显示桌面'],['Win+L','锁屏'],['PrtSc','截屏']]],
+    ['浏览器',[['Ctrl+T','新标签'],['Ctrl+W','关闭标签'],['Ctrl+Shift+T','恢复标签'],['Ctrl+L','定位地址栏'],['F5 / Ctrl+R','刷新'],['F11','全屏'],['Ctrl+F','页内查找'],['Ctrl+Shift+I','开发者工具']]],
+    ['文本编辑',[['Ctrl+←/→','按词移动'],['Ctrl+Home/End','首/尾'],['Shift+方向键','选中'],['Ctrl+Shift+↑','上移段落'],['Ctrl+D','选中下一个相同词']]],
+    ['表格',[['Ctrl+;','插入日期'],['Alt+=','自动求和'],['F4','重复上次操作'],['Ctrl+Shift+L','筛选'],['Ctrl+1','格式设置']]]];
+  root.innerHTML=`
+    <div class="box">
+      ${data.map(([g,rows])=>`<div style="margin-bottom:14px">
+        <p class="lbl" style="margin:0 0 8px">${g}</p>
+        ${rows.map(([k,v])=>`<div style="display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid #F1F3F7">
+          <span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;color:#2C63F0">${k}</span>
+          <span style="font-size:13.5px;color:var(--sub)">${v}</span></div>`).join('')}
+      </div>`).join('')}
+    </div>
+    <p class="hint">Windows 键位；macOS 把 Ctrl 换成 Cmd、Alt 换成 Option 基本通用。</p>`;
+}
+
+/* ---------- JSON 转 CSV ---------- */
+function t_json2csv(root){
+  root.innerHTML=`
+    <div class="box">
+      <textarea id="jcIn" style="min-height:140px">[{"name":"张三","age":20},{"name":"李四","age":22}]</textarea>
+      <button class="btn block" id="jcGo" style="margin-top:10px">转 CSV</button>
+    </div>
+    ${txtOut('CSV 结果','jcOut')}`;
+  $('#jcGo',root).onclick=()=>{
+    let d;
+    try{ d=JSON.parse($('#jcIn',root).value); }catch(e){ return toast('JSON 格式有误'); }
+    const arr=Array.isArray(d)?d:[d];
+    const cols=Array.from(new Set(arr.flatMap(o=>Object.keys(o||{}))));
+    const cell=v=>{
+      if(v==null) return '';
+      if(typeof v==='object') v=JSON.stringify(v);
+      v=String(v);
+      return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;
+    };
+    const csv=[cols.join(','), ...arr.map(o=>cols.map(c=>cell(o[c])).join(','))].join('\n');
+    $('#jcOut',root).textContent=csv;
+    toast('已转换 '+arr.length+' 行');
+  };
+}
+
+/* ---------- CSV 转 JSON ---------- */
+function t_csv2json(root){
+  root.innerHTML=`
+    <div class="box">
+      <textarea id="cjIn" style="min-height:140px" placeholder="name,age&#10;张三,20&#10;李四,22"></textarea>
+      <div class="row" style="margin-top:10px">
+        <button class="btn" id="cjGo">转 JSON</button>
+        <button class="btn ghost" id="cjDl">下载 .json</button>
+      </div>
+    </div>
+    ${txtOut('JSON 结果','cjOut')}`;
+  function parse(){
+    const t=$('#cjIn',root).value.trim();
+    if(!t) return null;
+    const rows=[]; let row=[], cur='', q=false;
+    for(let i=0;i<t.length;i++){
+      const c=t[i];
+      if(q){
+        if(c==='"'){ if(t[i+1]==='"'){ cur+='"'; i++; } else q=false; }
+        else cur+=c;
+      } else if(c==='"') q=true;
+      else if(c===','){ row.push(cur); cur=''; }
+      else if(c==='\n'){ row.push(cur); rows.push(row); row=[]; cur=''; }
+      else if(c==='\r'){}
+      else cur+=c;
+    }
+    row.push(cur); if(row.length>1) rows.push(row);
+    if(!rows.length) return null;
+    const head=rows[0].map(h=>h.trim());
+    return rows.slice(1).map(r=>{ const o={}; head.forEach((h,i)=>o[h]=(r[i]||'').trim()); return o; });
+  }
+  $('#cjGo',root).onclick=()=>{
+    const d=parse();
+    if(!d) return toast('没有可转换的内容');
+    $('#cjOut',root).textContent=JSON.stringify(d,null,2);
+    toast('已转换 '+d.length+' 行');
+  };
+  $('#cjDl',root).onclick=()=>{
+    const d=parse(); if(!d) return toast('没有可转换的内容');
+    download(new Blob([JSON.stringify(d,null,2)],{type:'application/json'}),'data_'+Date.now()+'.json');
+    toast('已下载');
+  };
+}
+
+/* ---------- URL 参数构建 ---------- */
+function t_urlparams(root){
+  root.innerHTML=`
+    <div class="box">
+      <p class="lbl">解析：粘贴完整链接</p>
+      <div class="row"><input id="upIn" placeholder="https://example.com/path?a=1&b=2"><button class="btn" id="upGo" style="flex:0 0 84px">解析</button></div>
+      <div id="upOut" style="margin-top:12px"></div>
+    </div>
+    <div class="box">
+      <p class="lbl">构建：每行 key=value</p>
+      <textarea id="upBuild" style="min-height:100px">q=工具箱
+page=1</textarea>
+      <button class="btn block" id="upMake" style="margin-top:10px">生成查询串</button>
+      <div class="out" id="upRes" style="min-height:40px">—</div>
+    </div>`;
+  $('#upGo',root).onclick=()=>{
+    let u; try{ u=new URL($('#upIn',root).value.trim()); }catch(e){ return toast('链接格式不对'); }
+    const rows=[['协议',u.protocol.replace(':','')],['主机',u.host],['路径',u.pathname],['Hash',u.hash||'—']];
+    const params=Array.from(u.searchParams.entries());
+    $('#upOut',root).innerHTML=rows.map(([k,v])=>`<div class="kv"><span>${k}</span><b style="font-weight:500">${escHtml(v)}</b></div>`).join('')
+      + (params.length?`<p class="lbl" style="margin-top:10px">查询参数</p>`+params.map(([k,v])=>`<div class="kv"><span>${escHtml(k)}</span><b style="font-weight:500">${escHtml(v)}</b></div>`).join(''):'');
+  };
+  $('#upMake',root).onclick=()=>{
+    const lines=$('#upBuild',root).value.split('\n').map(s=>s.trim()).filter(Boolean);
+    const sp=new URLSearchParams();
+    lines.forEach(l=>{ const i=l.indexOf('='); if(i<0){ sp.append(l,''); } else sp.append(l.slice(0,i).trim(), l.slice(i+1).trim()); });
+    $('#upRes',root).textContent=sp.toString()||'—';
+  };
+  function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 }
 
 </script>
