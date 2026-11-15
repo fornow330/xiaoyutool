@@ -769,7 +769,509 @@ const TOOLS = [
   {id:'codecount', n:'代码行数', c:'kit', col:'#0E9AA7', ic:'tally'},
   {id:'filesize', n:'文件大小换算', c:'kit', col:'#5B7CFA', ic:'calc'},
   {id:'rgb2cmyk', n:'RGB 转 CMYK', c:'kit', col:'#D9822B', ic:'palette'},
-  {id:'strftime', n:'日期格式化', c:'kit', col:'#3B8A67', ic:'calendar'}
+  {id:'strftime', n:'日期格式化', c:'kit', col:'#3B8A67', ic:'calendar'},
+ /* ---- 第六批（501）---- */
+  {id:'rm1', n:'1RM 估算', c:'hl', col:'#17A673', ic:'pulse'},
+  {id:'cardio_burn', n:'有氧消耗', c:'hl', col:'#2C63F0', ic:'truck'},
+  {id:'steps_cal', n:'步数热量', c:'hl', col:'#D9822B', ic:'person'},
+  {id:'swim_pace', n:'游泳配速', c:'hl', col:'#8A6D3B', ic:'wave'},
+  {id:'run_predict', n:'跑步成绩预测', c:'hl', col:'#17A673', ic:'pulse'},
+  {id:'marathon_pace', n:'马拉松配速', c:'hl', col:'#2C63F0', ic:'timer'},
+  {id:'bodyfat', n:'体脂估算', c:'hl', col:'#D9822B', ic:'person'},
+  {id:'whr', n:'腰臀比', c:'hl', col:'#8A6D3B', ic:'wave'},
+  {id:'waterintake', n:'每日饮水量', c:'hl', col:'#17A673', ic:'drop'},
+  {id:'protein', n:'蛋白质需求', c:'hl', col:'#2C63F0', ic:'timer'},
+  {id:'carb', n:'碳水需求', c:'hl', col:'#D9822B', ic:'truck'},
+  {id:'sleep_cycle', n:'睡眠周期', c:'hl', col:'#8A6D3B', ic:'clock'},
+  {id:'stretch_dur', n:'拉伸时长', c:'hl', col:'#17A673', ic:'pulse'},
+  {id:'exercise_table', n:'动作速查', c:'hl', col:'#2C63F0', ic:'tally'},
+  {id:'food_protein', n:'食物蛋白', c:'hl', col:'#D9822B', ic:'person'},
+  {id:'stretch_moves', n:'拉伸动作', c:'hl', col:'#8A6D3B', ic:'wave'},
+  {id:'home_workout', n:'居家训练', c:'hl', col:'#17A673', ic:'pulse'},
+  {id:'gym_equip', n:'器械速查', c:'hl', col:'#2C63F0', ic:'timer'},
+  {id:'yoga', n:'瑜伽体式', c:'hl', col:'#D9822B', ic:'person'},
+  {id:'bmi_table', n:'BMI 对照', c:'hl', col:'#8A6D3B', ic:'tally'},
+  {id:'exercise_order', n:'训练顺序', c:'hl', col:'#17A673', ic:'pulse'},
+  {id:'supplement', n:'补剂常识', c:'hl', col:'#2C63F0', ic:'timer'},
+  {id:'injury_prevent', n:'损伤预防', c:'hl', col:'#D9822B', ic:'person'},
+  {id:'heart_zone', n:'心率区间', c:'hl', col:'#8A6D3B', ic:'clock'},
+  {id:'recovery', n:'恢复建议', c:'hl', col:'#17A673', ic:'image'},
+  {id:'posture', n:'体态自检', c:'hl', col:'#2C63F0', ic:'timer'},
+  {id:'metric_body', n:'身材数据', c:'hl', col:'#D9822B', ic:'person'},
+  {id:'water_checkin', n:'喝水打卡', c:'hl', col:'#8A6D3B', ic:'drop'},
+  {id:'workout_checkin', n:'训练打卡', c:'hl', col:'#17A673', ic:'pulse'},
+  {id:'weight_log', n:'体重记录', c:'hl', col:'#2C63F0', ic:'timer'},
+  {id:'stain_remove', n:'污渍去除', c:'life', col:'#D9822B', ic:'house'},
+  {id:'storage_tips', n:'收纳技巧', c:'life', col:'#17A673', ic:'drop'},
+  {id:'kitchen_conv', n:'厨房换算', c:'life', col:'#5B7CFA', ic:'mix'},
+  {id:'temp_conv', n:'温度换算', c:'life', col:'#E2543B', ic:'mix'},
+  {id:'oven_temp', n:'烤箱温度', c:'life', col:'#D9822B', ic:'house'},
+  {id:'airfryer', n:'气炸锅换算', c:'life', col:'#17A673', ic:'drop'},
+  {id:'rice_ratio', n:'米水比例', c:'life', col:'#5B7CFA', ic:'calc'},
+  {id:'coffee_ratio', n:'咖啡粉水比', c:'life', col:'#E2543B', ic:'grid'},
+  {id:'tea_ratio', n:'茶水比例', c:'life', col:'#D9822B', ic:'house'},
+  {id:'food_storage', n:'食材保存', c:'life', col:'#17A673', ic:'drop'},
+  {id:'food_swap', n:'食材替换', c:'life', col:'#5B7CFA', ic:'calc'},
+  {id:'laundry_symbol', n:'洗标符号', c:'life', col:'#E2543B', ic:'grid'},
+  {id:'clothes_care', n:'面料护理', c:'life', col:'#D9822B', ic:'truck'},
+  {id:'appliance_care', n:'家电保养', c:'life', col:'#17A673', ic:'truck'},
+  {id:'odor_remove', n:'除味方法', c:'life', col:'#5B7CFA', ic:'calc'},
+  {id:'cleaning_tools', n:'清洁工具', c:'life', col:'#E2543B', ic:'grid'},
+  {id:'moving_list', n:'搬家清单', c:'life', col:'#D9822B', ic:'tally'},
+  {id:'home_emergency', n:'家庭应急包', c:'life', col:'#17A673', ic:'drop'},
+  {id:'life_hacks', n:'生活窍门', c:'life', col:'#5B7CFA', ic:'calc'},
+  {id:'battery_size', n:'电池型号', c:'life', col:'#E2543B', ic:'grid'},
+  {id:'bulb_type', n:'灯泡灯头', c:'life', col:'#D9822B', ic:'house'},
+  {id:'screw_type', n:'螺丝类型', c:'life', col:'#17A673', ic:'drop'},
+  {id:'glue_type', n:'胶水选择', c:'life', col:'#5B7CFA', ic:'calc'},
+  {id:'tool_kit', n:'家用工具', c:'life', col:'#E2543B', ic:'grid'},
+  {id:'leak_fix', n:'漏水处理', c:'life', col:'#D9822B', ic:'house'},
+  {id:'drain_clear', n:'管道疏通', c:'life', col:'#17A673', ic:'drop'},
+  {id:'pest_control', n:'除虫方法', c:'life', col:'#5B7CFA', ic:'calc'},
+  {id:'pet_age', n:'宠物年龄', c:'life', col:'#E2543B', ic:'grid'},
+  {id:'pet_feed', n:'宠物喂食量', c:'life', col:'#D9822B', ic:'house'},
+  {id:'cat_age', n:'猫龄换算', c:'life', col:'#17A673', ic:'drop'},
+  {id:'dog_age', n:'狗龄换算', c:'life', col:'#5B7CFA', ic:'calc'},
+  {id:'plant_water', n:'植物浇水', c:'life', col:'#E2543B', ic:'drop'},
+  {id:'flower_lang', n:'花语', c:'life', col:'#D9822B', ic:'sun'},
+  {id:'flower_season', n:'花期', c:'life', col:'#17A673', ic:'sun'},
+  {id:'medbox', n:'家庭药箱', c:'life', col:'#5B7CFA', ic:'calc'},
+  {id:'med_note', n:'用药常识', c:'life', col:'#E2543B', ic:'text'},
+  {id:'body_temp', n:'体温参考', c:'life', col:'#D9822B', ic:'house'},
+  {id:'bp_ref', n:'血压参考', c:'life', col:'#17A673', ic:'drop'},
+  {id:'sleep_need', n:'睡眠时长', c:'life', col:'#5B7CFA', ic:'clock'},
+  {id:'overnight_food', n:'隔夜菜', c:'life', col:'#E2543B', ic:'grid'},
+  {id:'fridge_zone', n:'冰箱分区', c:'life', col:'#D9822B', ic:'clock'},
+  {id:'microwave_no', n:'微波禁忌', c:'life', col:'#17A673', ic:'drop'},
+  {id:'knife_guide', n:'刀具用途', c:'life', col:'#5B7CFA', ic:'calc'},
+  {id:'tea_type', n:'茶叶种类', c:'life', col:'#E2543B', ic:'grid'},
+  {id:'disinfect_ratio', n:'消毒配比', c:'life', col:'#D9822B', ic:'house'},
+  {id:'laundry_dose', n:'洗衣液用量', c:'life', col:'#17A673', ic:'drop'},
+  {id:'moving_boxes', n:'搬家纸箱', c:'life', col:'#5B7CFA', ic:'calc'},
+  {id:'light_watt', n:'灯光功率', c:'life', col:'#E2543B', ic:'sun'},
+  {id:'kettle_scale', n:'水垢清除', c:'life', col:'#D9822B', ic:'house'},
+  {id:'electric_bill', n:'电费估算', c:'life', col:'#17A673', ic:'coin'},
+  {id:'standby_power', n:'待机能耗', c:'life', col:'#5B7CFA', ic:'calc'},
+  {id:'socket_count', n:'插座数量', c:'life', col:'#E2543B', ic:'grid'},
+  {id:'washer_capacity', n:'洗衣机容量', c:'life', col:'#D9822B', ic:'house'},
+  {id:'fridge_capacity', n:'冰箱容积', c:'life', col:'#17A673', ic:'drop'},
+  {id:'wardrobe_capacity', n:'衣柜容量', c:'life', col:'#5B7CFA', ic:'calc'},
+  {id:'storage_box', n:'收纳箱数量', c:'life', col:'#E2543B', ic:'grid'},
+  {id:'dehumidify', n:'除湿量', c:'life', col:'#D9822B', ic:'house'},
+  {id:'humidify', n:'加湿量', c:'life', col:'#17A673', ic:'drop'},
+  {id:'purifier_area', n:'净化器面积', c:'life', col:'#5B7CFA', ic:'calc'},
+  {id:'filter_life', n:'滤芯寿命', c:'life', col:'#E2543B', ic:'grid'},
+  {id:'charge_time', n:'充电时间', c:'life', col:'#D9822B', ic:'clock'},
+  {id:'powerbank', n:'充电宝折算', c:'life', col:'#17A673', ic:'drop'},
+  {id:'volume_weight', n:'体积重', c:'life', col:'#5B7CFA', ic:'calc'},
+  {id:'storage_conv', n:'存储换算', c:'life', col:'#E2543B', ic:'mix'},
+  {id:'netspeed', n:'网速换算', c:'life', col:'#D9822B', ic:'wave'},
+  {id:'paper_size', n:'纸张尺寸', c:'life', col:'#17A673', ic:'drop'},
+  {id:'study_plan', n:'学习计划', c:'study', col:'#2C63F0', ic:'text'},
+  {id:'review_interval', n:'复习间隔', c:'study', col:'#7A5AF8', ic:'calc'},
+  {id:'mistake_book', n:'错题本', c:'study', col:'#0E9AA7', ic:'text'},
+  {id:'word_book', n:'单词本', c:'study', col:'#17A673', ic:'text'},
+  {id:'ebbinghaus', n:'记忆曲线', c:'study', col:'#2C63F0', ic:'text'},
+  {id:'multiplication', n:'乘法口诀', c:'study', col:'#7A5AF8', ic:'calc'},
+  {id:'square_table', n:'平方表', c:'study', col:'#0E9AA7', ic:'tally'},
+  {id:'cube_table', n:'立方表', c:'study', col:'#17A673', ic:'tally'},
+  {id:'prime_table', n:'质数表', c:'study', col:'#2C63F0', ic:'tally'},
+  {id:'trig_table', n:'三角函数值', c:'study', col:'#7A5AF8', ic:'tally'},
+  {id:'geo_formula', n:'几何公式', c:'study', col:'#0E9AA7', ic:'timer'},
+  {id:'physics_formula', n:'物理公式', c:'study', col:'#17A673', ic:'grid'},
+  {id:'chem_formula', n:'化学公式', c:'study', col:'#2C63F0', ic:'text'},
+  {id:'unit_prefix', n:'单位前缀', c:'study', col:'#7A5AF8', ic:'calc'},
+  {id:'fraction_conv', n:'分数小数', c:'study', col:'#0E9AA7', ic:'mix'},
+  {id:'sci_notation', n:'科学计数', c:'study', col:'#17A673', ic:'grid'},
+  {id:'pi_digits', n:'圆周率', c:'study', col:'#2C63F0', ic:'text'},
+  {id:'english_tense', n:'英语时态', c:'study', col:'#7A5AF8', ic:'calc'},
+  {id:'irregular_verb', n:'不规则动词', c:'study', col:'#0E9AA7', ic:'timer'},
+  {id:'root_affix', n:'词根词缀', c:'study', col:'#17A673', ic:'grid'},
+  {id:'preposition', n:'介词用法', c:'study', col:'#2C63F0', ic:'text'},
+  {id:'linking', n:'连读规则', c:'study', col:'#7A5AF8', ic:'calc'},
+  {id:'essay_pattern', n:'英语句型', c:'study', col:'#0E9AA7', ic:'timer'},
+  {id:'idiom_misuse', n:'成语误用', c:'study', col:'#17A673', ic:'grid'},
+  {id:'synonym', n:'近义词', c:'study', col:'#2C63F0', ic:'text'},
+  {id:'antonym', n:'反义词', c:'study', col:'#7A5AF8', ic:'calc'},
+  {id:'measure_word', n:'量词搭配', c:'study', col:'#0E9AA7', ic:'text'},
+  {id:'punctuation', n:'标点用法', c:'study', col:'#17A673', ic:'grid'},
+  {id:'rhetoric', n:'修辞手法', c:'study', col:'#2C63F0', ic:'text'},
+  {id:'poem_line', n:'名句出处', c:'study', col:'#7A5AF8', ic:'calc'},
+  {id:'literature', n:'文学常识', c:'study', col:'#0E9AA7', ic:'timer'},
+  {id:'dynasty', n:'朝代年表', c:'study', col:'#17A673', ic:'grid'},
+  {id:'geo_extreme', n:'中国地理之最', c:'study', col:'#2C63F0', ic:'text'},
+  {id:'world_extreme', n:'世界之最', c:'study', col:'#7A5AF8', ic:'calc'},
+  {id:'chem_phenomenon', n:'实验现象', c:'study', col:'#0E9AA7', ic:'timer'},
+  {id:'bio_fact', n:'生物常识', c:'study', col:'#17A673', ic:'grid'},
+  {id:'physics_symbol', n:'物理量符号', c:'study', col:'#2C63F0', ic:'text'},
+  {id:'math_symbol', n:'数学符号', c:'study', col:'#7A5AF8', ic:'calc'},
+  {id:'circle_calc', n:'圆与扇形', c:'study', col:'#0E9AA7', ic:'calc'},
+  {id:'triangle_calc', n:'三角形计算', c:'study', col:'#17A673', ic:'calc'},
+  {id:'combination', n:'排列组合', c:'study', col:'#2C63F0', ic:'text'},
+  {id:'stats_basic', n:'统计量', c:'study', col:'#7A5AF8', ic:'calc'},
+  {id:'gpa', n:'绩点换算', c:'study', col:'#0E9AA7', ic:'timer'},
+  {id:'exam_score', n:'得分换算', c:'study', col:'#17A673', ic:'grid'},
+  {id:'reading_speed', n:'阅读速度', c:'study', col:'#2C63F0', ic:'wave'},
+  {id:'note_method', n:'笔记方法', c:'study', col:'#7A5AF8', ic:'text'},
+  {id:'memory_method', n:'记忆方法', c:'study', col:'#0E9AA7', ic:'timer'},
+  {id:'time_mgmt', n:'时间管理', c:'study', col:'#17A673', ic:'clock'},
+  {id:'paper_format', n:'论文格式', c:'study', col:'#2C63F0', ic:'text'},
+  {id:'hex_convert', n:'进制转换', c:'study', col:'#7A5AF8', ic:'mix'},
+  {id:'percent_calc', n:'百分比计算', c:'study', col:'#0E9AA7', ic:'calc'},
+  {id:'sqrt_calc', n:'根号计算', c:'study', col:'#17A673', ic:'calc'},
+  {id:'gcd_lcm', n:'公约公倍', c:'study', col:'#2C63F0', ic:'text'},
+  {id:'quadratic', n:'二次方程', c:'study', col:'#7A5AF8', ic:'calc'},
+  {id:'sequence', n:'数列求和', c:'study', col:'#0E9AA7', ic:'timer'},
+  {id:'angle_conv', n:'角度弧度', c:'study', col:'#17A673', ic:'mix'},
+  {id:'log_calc', n:'对数计算', c:'study', col:'#2C63F0', ic:'calc'},
+  {id:'power_calc', n:'乘方计算', c:'study', col:'#7A5AF8', ic:'calc'},
+  {id:'rank_percentile', n:'成绩百分位', c:'study', col:'#0E9AA7', ic:'tally'},
+  {id:'study_time', n:'学习打卡', c:'study', col:'#17A673', ic:'clock'},
+  {id:'video_bitrate', n:'视频码率', c:'media', col:'#7A5AF8', ic:'image'},
+  {id:'file_size_est', n:'文件体积', c:'media', col:'#2C63F0', ic:'image'},
+  {id:'aspect_ratio', n:'画面比例', c:'media', col:'#0E9AA7', ic:'timer'},
+  {id:'duration_conv', n:'时长换算', c:'media', col:'#E2543B', ic:'mix'},
+  {id:'fps_conv', n:'帧率换算', c:'media', col:'#7A5AF8', ic:'mix'},
+  {id:'frame_grab', n:'抽帧计算', c:'media', col:'#2C63F0', ic:'image'},
+  {id:'speed_duration', n:'变速时长', c:'media', col:'#0E9AA7', ic:'wave'},
+  {id:'audio_sample', n:'采样体积', c:'media', col:'#E2543B', ic:'wave'},
+  {id:'audio_bitrate', n:'音频码率', c:'media', col:'#7A5AF8', ic:'wave'},
+  {id:'record_time', n:'可录时长', c:'media', col:'#2C63F0', ic:'clock'},
+  {id:'db_sum', n:'分贝叠加', c:'media', col:'#0E9AA7', ic:'timer'},
+  {id:'freq_table', n:'频率音名', c:'media', col:'#E2543B', ic:'tally'},
+  {id:'interval_table', n:'音程表', c:'media', col:'#7A5AF8', ic:'tally'},
+  {id:'chord_table', n:'和弦构成', c:'media', col:'#2C63F0', ic:'tally'},
+  {id:'guitar_tune', n:'吉他调弦', c:'media', col:'#0E9AA7', ic:'timer'},
+  {id:'piano_keys', n:'钢琴键位', c:'media', col:'#E2543B', ic:'palette'},
+  {id:'bpm_delay', n:'BPM 延迟', c:'media', col:'#7A5AF8', ic:'wave'},
+  {id:'time_signature', n:'拍号', c:'media', col:'#2C63F0', ic:'clock'},
+  {id:'video_codec', n:'视频编码', c:'media', col:'#0E9AA7', ic:'image'},
+  {id:'color_space', n:'色彩空间', c:'media', col:'#E2543B', ic:'palette'},
+  {id:'color_depth', n:'色彩位深', c:'media', col:'#7A5AF8', ic:'palette'},
+  {id:'ratio_table', n:'画幅比例', c:'media', col:'#2C63F0', ic:'tally'},
+  {id:'lens_equiv', n:'等效焦距', c:'media', col:'#0E9AA7', ic:'timer'},
+  {id:'nd_calc', n:'ND 减光', c:'media', col:'#E2543B', ic:'calc'},
+  {id:'shutter_angle', n:'快门角度', c:'media', col:'#7A5AF8', ic:'wave'},
+  {id:'ev_comp', n:'曝光补偿', c:'media', col:'#2C63F0', ic:'image'},
+  {id:'dof', n:'景深估算', c:'media', col:'#0E9AA7', ic:'timer'},
+  {id:'safe_shutter', n:'安全快门', c:'media', col:'#E2543B', ic:'palette'},
+  {id:'subtitle_fmt', n:'字幕格式', c:'media', col:'#7A5AF8', ic:'wave'},
+  {id:'srt_shift', n:'字幕偏移', c:'media', col:'#2C63F0', ic:'image'},
+  {id:'cover_size', n:'封面尺寸', c:'media', col:'#0E9AA7', ic:'image'},
+  {id:'mix_level', n:'混音电平', c:'media', col:'#E2543B', ic:'palette'},
+  {id:'music_key', n:'音乐调性', c:'media', col:'#7A5AF8', ic:'wave'},
+  {id:'video_concat', n:'视频拼接', c:'media', col:'#2C63F0', ic:'image'},
+  {id:'transcode_param', n:'转码参数', c:'media', col:'#0E9AA7', ic:'timer'},
+  {id:'sync_offset', n:'音画同步', c:'media', col:'#E2543B', ic:'palette'},
+  {id:'audio_denoise_step', n:'录音降噪', c:'media', col:'#7A5AF8', ic:'wave'},
+  {id:'audio_vis', n:'音频可视化', c:'media', col:'#2C63F0', ic:'wave'},
+  {id:'video_storyboard', n:'分镜要素', c:'media', col:'#0E9AA7', ic:'image'},
+  {id:'color_grade', n:'调色风格', c:'media', col:'#E2543B', ic:'palette'},
+  {id:'frame_size', n:'画面尺寸', c:'media', col:'#7A5AF8', ic:'wave'},
+  {id:'audio_channel', n:'声道配置', c:'media', col:'#2C63F0', ic:'wave'},
+  {id:'video_letter', n:'竖屏处理', c:'media', col:'#0E9AA7', ic:'image'},
+  {id:'loudness', n:'响度换算', c:'media', col:'#E2543B', ic:'palette'},
+  {id:'audio_fade', n:'淡入淡出', c:'media', col:'#7A5AF8', ic:'wave'},
+  {id:'fire_escape', n:'火灾逃生', c:'safe', col:'#E2543B', ic:'shield'},
+  {id:'extinguisher_type', n:'灭火器类型', c:'safe', col:'#F0A22B', ic:'drop'},
+  {id:'extinguisher_use', n:'灭火器用法', c:'safe', col:'#2C63F0', ic:'calc'},
+  {id:'earthquake', n:'地震避险', c:'safe', col:'#5B7CFA', ic:'pulse'},
+  {id:'flood', n:'洪水应对', c:'safe', col:'#E2543B', ic:'shield'},
+  {id:'typhoon', n:'台风防范', c:'safe', col:'#F0A22B', ic:'drop'},
+  {id:'lightning', n:'雷电防护', c:'safe', col:'#2C63F0', ic:'sun'},
+  {id:'elevator_trap', n:'电梯困人', c:'safe', col:'#5B7CFA', ic:'pulse'},
+  {id:'drowning', n:'溺水救援', c:'safe', col:'#E2543B', ic:'shield'},
+  {id:'electric_shock', n:'触电急救', c:'safe', col:'#F0A22B', ic:'drop'},
+  {id:'heatstroke', n:'中暑处理', c:'safe', col:'#2C63F0', ic:'calc'},
+  {id:'hypothermia', n:'失温处理', c:'safe', col:'#5B7CFA', ic:'pulse'},
+  {id:'burn', n:'烫伤处理', c:'safe', col:'#E2543B', ic:'shield'},
+  {id:'cut_wound', n:'割伤止血', c:'safe', col:'#F0A22B', ic:'drop'},
+  {id:'nosebleed', n:'鼻出血', c:'safe', col:'#2C63F0', ic:'calc'},
+  {id:'fracture', n:'骨折固定', c:'safe', col:'#5B7CFA', ic:'pulse'},
+  {id:'sprain', n:'扭伤处理', c:'safe', col:'#E2543B', ic:'shield'},
+  {id:'faint', n:'晕厥急救', c:'safe', col:'#F0A22B', ic:'drop'},
+  {id:'seizure', n:'癫痫发作', c:'safe', col:'#2C63F0', ic:'calc'},
+  {id:'choking', n:'气道异物', c:'safe', col:'#5B7CFA', ic:'pulse'},
+  {id:'cpr', n:'心肺复苏', c:'safe', col:'#E2543B', ic:'pulse'},
+  {id:'aed', n:'AED 使用', c:'safe', col:'#F0A22B', ic:'drop'},
+  {id:'poisoning', n:'中毒急救', c:'safe', col:'#2C63F0', ic:'calc'},
+  {id:'gas_leak', n:'燃气泄漏', c:'safe', col:'#5B7CFA', ic:'pulse'},
+  {id:'gas_alarm', n:'报警器安装', c:'safe', col:'#E2543B', ic:'shield'},
+  {id:'co_poison', n:'一氧化碳中毒', c:'safe', col:'#F0A22B', ic:'drop'},
+  {id:'emergency_bag', n:'应急包清单', c:'safe', col:'#2C63F0', ic:'calc'},
+  {id:'emergency_contact', n:'应急联系人', c:'safe', col:'#5B7CFA', ic:'pulse'},
+  {id:'extinguisher_count', n:'灭火器配置', c:'safe', col:'#E2543B', ic:'shield'},
+  {id:'evacuation_time', n:'疏散时间', c:'safe', col:'#F0A22B', ic:'clock'},
+  {id:'shelter', n:'避难场所', c:'safe', col:'#2C63F0', ic:'calc'},
+  {id:'sos_signal', n:'求救信号', c:'safe', col:'#5B7CFA', ic:'pulse'},
+  {id:'wild_lost', n:'野外迷路', c:'safe', col:'#E2543B', ic:'shield'},
+  {id:'snake_bite', n:'蛇咬处理', c:'safe', col:'#F0A22B', ic:'drop'},
+  {id:'bee_sting', n:'蜂蜇处理', c:'safe', col:'#2C63F0', ic:'calc'},
+  {id:'dog_bite', n:'狗咬处理', c:'safe', col:'#5B7CFA', ic:'pulse'},
+  {id:'food_poison', n:'食物中毒', c:'safe', col:'#E2543B', ic:'shield'},
+  {id:'weather_warn', n:'预警等级', c:'safe', col:'#F0A22B', ic:'drop'},
+  {id:'quake_level', n:'震级参考', c:'safe', col:'#2C63F0', ic:'calc'},
+  {id:'hotline', n:'紧急电话', c:'safe', col:'#5B7CFA', ic:'pulse'},
+  {id:'escape_route', n:'逃生路线', c:'safe', col:'#E2543B', ic:'compass'},
+  {id:'first_aid_kit', n:'急救包配置', c:'safe', col:'#F0A22B', ic:'drop'},
+  {id:'water_safety', n:'水域安全', c:'safe', col:'#2C63F0', ic:'drop'},
+  {id:'heat_index', n:'体感温度', c:'safe', col:'#5B7CFA', ic:'pulse'},
+  {id:'wind_scale', n:'风力等级', c:'safe', col:'#E2543B', ic:'shield'},
+  {id:'meeting_note', n:'会议纪要', c:'work', col:'#1F8A70', ic:'text'},
+  {id:'weekly_report', n:'周报模板', c:'work', col:'#2C63F0', ic:'text'},
+  {id:'mail_tmpl', n:'邮件模板', c:'work', col:'#D9822B', ic:'clock'},
+  {id:'resume_tmpl', n:'简历模板', c:'work', col:'#7A5AF8', ic:'grid'},
+  {id:'resign_letter', n:'辞职信', c:'work', col:'#1F8A70', ic:'tally'},
+  {id:'leave_note', n:'请假条', c:'work', col:'#2C63F0', ic:'text'},
+  {id:'invitation', n:'邀请函', c:'work', col:'#D9822B', ic:'clock'},
+  {id:'thanks_letter', n:'感谢信', c:'work', col:'#7A5AF8', ic:'grid'},
+  {id:'apology', n:'道歉信', c:'work', col:'#1F8A70', ic:'tally'},
+  {id:'recommend_letter', n:'推荐信', c:'work', col:'#2C63F0', ic:'text'},
+  {id:'memo', n:'备忘录', c:'work', col:'#D9822B', ic:'clock'},
+  {id:'meeting_notice', n:'会议通知', c:'work', col:'#7A5AF8', ic:'grid'},
+  {id:'retro', n:'项目复盘', c:'work', col:'#1F8A70', ic:'tally'},
+  {id:'prd_outline', n:'需求文档要素', c:'work', col:'#2C63F0', ic:'text'},
+  {id:'request_note', n:'请示模板', c:'work', col:'#D9822B', ic:'text'},
+  {id:'report_struct', n:'汇报结构', c:'work', col:'#7A5AF8', ic:'text'},
+  {id:'interview_q', n:'面试问题', c:'work', col:'#1F8A70', ic:'tally'},
+  {id:'interview_feedback', n:'面试反馈', c:'work', col:'#2C63F0', ic:'text'},
+  {id:'self_review', n:'绩效自评', c:'work', col:'#D9822B', ic:'clock'},
+  {id:'priority_matrix', n:'四象限', c:'work', col:'#7A5AF8', ic:'grid'},
+  {id:'task_breakdown', n:'任务拆解', c:'work', col:'#1F8A70', ic:'tally'},
+  {id:'estimation', n:'工时估算', c:'work', col:'#2C63F0', ic:'text'},
+  {id:'salary_calc', n:'年薪测算', c:'work', col:'#D9822B', ic:'calc'},
+  {id:'annual_leave', n:'年假计算', c:'work', col:'#7A5AF8', ic:'grid'},
+  {id:'overtime', n:'加班费', c:'work', col:'#1F8A70', ic:'clock'},
+  {id:'reimburse', n:'报销清单', c:'work', col:'#2C63F0', ic:'text'},
+  {id:'business_trip', n:'出差清单', c:'work', col:'#D9822B', ic:'compass'},
+  {id:'gantt', n:'排期要点', c:'work', col:'#7A5AF8', ic:'grid'},
+  {id:'risk_log', n:'风险清单', c:'work', col:'#1F8A70', ic:'tally'},
+  {id:'ppt_struct', n:'PPT 结构', c:'work', col:'#2C63F0', ic:'text'},
+  {id:'data_report', n:'数据汇报', c:'work', col:'#D9822B', ic:'text'},
+  {id:'email_etiquette', n:'邮件礼仪', c:'work', col:'#7A5AF8', ic:'grid'},
+  {id:'phone_script', n:'电话话术', c:'work', col:'#1F8A70', ic:'tally'},
+  {id:'negotiation', n:'谈判技巧', c:'work', col:'#2C63F0', ic:'text'},
+  {id:'manage_up', n:'向上管理', c:'work', col:'#D9822B', ic:'clock'},
+  {id:'feedback_model', n:'反馈模型', c:'work', col:'#7A5AF8', ic:'grid'},
+  {id:'conflict', n:'冲突处理', c:'work', col:'#1F8A70', ic:'tally'},
+  {id:'team_role', n:'团队角色', c:'work', col:'#2C63F0', ic:'text'},
+  {id:'okr', n:'OKR 模板', c:'work', col:'#D9822B', ic:'clock'},
+  {id:'kpi', n:'KPI 测算', c:'work', col:'#7A5AF8', ic:'grid'},
+  {id:'standup', n:'站会模板', c:'work', col:'#1F8A70', ic:'tally'},
+  {id:'meeting_minutes_short', n:'会议要点', c:'work', col:'#2C63F0', ic:'text'},
+  {id:'delegation', n:'任务交办', c:'work', col:'#D9822B', ic:'clock'},
+  {id:'onboarding', n:'新人清单', c:'work', col:'#7A5AF8', ic:'grid'},
+  {id:'handover', n:'交接清单', c:'work', col:'#1F8A70', ic:'tally'},
+  {id:'customer_complaint', n:'投诉处理', c:'work', col:'#2C63F0', ic:'text'},
+  {id:'sales_pitch', n:'销售话术', c:'work', col:'#D9822B', ic:'clock'},
+  {id:'work_habit', n:'工作习惯', c:'work', col:'#7A5AF8', ic:'grid'},
+  {id:'office_manner', n:'办公室礼仪', c:'work', col:'#1F8A70', ic:'tally'},
+  {id:'ppt_page', n:'页数估算', c:'work', col:'#2C63F0', ic:'text'},
+  {id:'meeting_cost', n:'会议成本', c:'work', col:'#D9822B', ic:'coin'},
+  {id:'daily_report', n:'日报模板', c:'work', col:'#7A5AF8', ic:'text'},
+  {id:'debrief', n:'述职要点', c:'work', col:'#1F8A70', ic:'tally'},
+  {id:'agenda', n:'会议议程', c:'work', col:'#2C63F0', ic:'text'},
+  {id:'client_visit', n:'客户拜访', c:'work', col:'#D9822B', ic:'clock'},
+  {id:'review_prd', n:'需求评审', c:'work', col:'#7A5AF8', ic:'grid'},
+  {id:'code_review', n:'代码评审', c:'work', col:'#1F8A70', ic:'tally'},
+  {id:'launch_check', n:'上线检查', c:'work', col:'#2C63F0', ic:'text'},
+  {id:'shift_handover', n:'值班交接', c:'work', col:'#D9822B', ic:'clock'},
+  {id:'training_plan', n:'培训设计', c:'work', col:'#7A5AF8', ic:'grid'},
+  {id:'kid_math', n:'口算出题', c:'kid', col:'#E86A92', ic:'person'},
+  {id:'kid_oral', n:'口算要求', c:'kid', col:'#F0A22B', ic:'text'},
+  {id:'kid_pattern', n:'找规律', c:'kid', col:'#17A673', ic:'palette'},
+  {id:'kid_shape', n:'图形认知', c:'kid', col:'#5B7CFA', ic:'gift'},
+  {id:'kid_color', n:'颜色中英', c:'kid', col:'#E86A92', ic:'palette'},
+  {id:'kid_song', n:'儿歌', c:'kid', col:'#F0A22B', ic:'text'},
+  {id:'kid_riddle', n:'谜语', c:'kid', col:'#17A673', ic:'text'},
+  {id:'kid_brain', n:'脑筋急转弯', c:'kid', col:'#5B7CFA', ic:'gift'},
+  {id:'kid_idiom', n:'成语启蒙', c:'kid', col:'#E86A92', ic:'person'},
+  {id:'kid_antonym', n:'反义词', c:'kid', col:'#F0A22B', ic:'text'},
+  {id:'kid_animal', n:'动物认知', c:'kid', col:'#17A673', ic:'palette'},
+  {id:'kid_dino', n:'恐龙认知', c:'kid', col:'#5B7CFA', ic:'gift'},
+  {id:'kid_space', n:'太阳系', c:'kid', col:'#E86A92', ic:'person'},
+  {id:'kid_body', n:'身体部位', c:'kid', col:'#F0A22B', ic:'text'},
+  {id:'kid_traffic', n:'交通标志', c:'kid', col:'#17A673', ic:'palette'},
+  {id:'kid_safety', n:'安全常识', c:'kid', col:'#5B7CFA', ic:'gift'},
+  {id:'kid_manner', n:'礼貌礼仪', c:'kid', col:'#E86A92', ic:'person'},
+  {id:'kid_chore', n:'小任务打卡', c:'kid', col:'#F0A22B', ic:'text'},
+  {id:'kid_schedule', n:'作息表', c:'kid', col:'#17A673', ic:'palette'},
+  {id:'kid_screen', n:'屏幕时间', c:'kid', col:'#5B7CFA', ic:'gift'},
+  {id:'kid_height', n:'身高参考', c:'kid', col:'#E86A92', ic:'person'},
+  {id:'kid_vaccine', n:'疫苗时间', c:'kid', col:'#F0A22B', ic:'text'},
+  {id:'kid_book', n:'绘本推荐', c:'kid', col:'#17A673', ic:'text'},
+  {id:'kid_game', n:'亲子游戏', c:'kid', col:'#5B7CFA', ic:'dice'},
+  {id:'kid_craft', n:'手工活动', c:'kid', col:'#E86A92', ic:'person'},
+  {id:'kid_origami', n:'折纸步骤', c:'kid', col:'#F0A22B', ic:'text'},
+  {id:'kid_draw', n:'简笔画', c:'kid', col:'#17A673', ic:'image'},
+  {id:'kid_english', n:'英语启蒙词', c:'kid', col:'#5B7CFA', ic:'gift'},
+  {id:'kid_phonics', n:'自然拼读', c:'kid', col:'#E86A92', ic:'person'},
+  {id:'kid_alphabet', n:'字母单词', c:'kid', col:'#F0A22B', ic:'text'},
+  {id:'kid_count', n:'数字中英', c:'kid', col:'#17A673', ic:'palette'},
+  {id:'kid_time', n:'时间认知', c:'kid', col:'#5B7CFA', ic:'clock'},
+  {id:'kid_money', n:'钱币认知', c:'kid', col:'#E86A92', ic:'coin'},
+  {id:'kid_focus', n:'专注力游戏', c:'kid', col:'#F0A22B', ic:'text'},
+  {id:'kid_memory', n:'记忆方法', c:'kid', col:'#17A673', ic:'palette'},
+  {id:'kid_logic', n:'逻辑题', c:'kid', col:'#5B7CFA', ic:'gift'},
+  {id:'kid_story', n:'故事模板', c:'kid', col:'#E86A92', ic:'text'},
+  {id:'kid_emotion', n:'情绪认知', c:'kid', col:'#F0A22B', ic:'text'},
+  {id:'kid_praise', n:'表扬方式', c:'kid', col:'#17A673', ic:'palette'},
+  {id:'kid_punish', n:'管教原则', c:'kid', col:'#5B7CFA', ic:'gift'},
+  {id:'kid_reading', n:'阅读量', c:'kid', col:'#E86A92', ic:'person'},
+  {id:'kid_homework', n:'作业打卡', c:'kid', col:'#F0A22B', ic:'text'},
+  {id:'kid_birthday', n:'生日会准备', c:'kid', col:'#17A673', ic:'sun'},
+  {id:'kid_question', n:'聊天问题', c:'kid', col:'#5B7CFA', ic:'gift'},
+  {id:'kid_phone', n:'设备规则', c:'kid', col:'#E86A92', ic:'person'},
+  {id:'pack_list', n:'打包清单', c:'trip', col:'#0E9AA7', ic:'tally'},
+  {id:'travel_doc', n:'证件核对', c:'trip', col:'#17A673', ic:'truck'},
+  {id:'pack_calc', n:'衣物数量', c:'trip', col:'#2C63F0', ic:'calc'},
+  {id:'time_zone', n:'时差换算', c:'trip', col:'#D9822B', ic:'clock'},
+  {id:'flight_time', n:'倒时差', c:'trip', col:'#0E9AA7', ic:'clock'},
+  {id:'currency', n:'汇率换算', c:'trip', col:'#17A673', ic:'truck'},
+  {id:'mileage', n:'油费估算', c:'trip', col:'#2C63F0', ic:'calc'},
+  {id:'toll', n:'通行费', c:'trip', col:'#D9822B', ic:'distance'},
+  {id:'trip_budget', n:'旅行预算', c:'trip', col:'#0E9AA7', ic:'compass'},
+  {id:'split_cost', n:'费用均分', c:'trip', col:'#17A673', ic:'coin'},
+  {id:'itinerary', n:'行程模板', c:'trip', col:'#2C63F0', ic:'calc'},
+  {id:'visa_doc', n:'签证材料', c:'trip', col:'#D9822B', ic:'distance'},
+  {id:'abroad_tips', n:'出境要点', c:'trip', col:'#0E9AA7', ic:'compass'},
+  {id:'plug_type', n:'插座类型', c:'trip', col:'#17A673', ic:'truck'},
+  {id:'hotel_pick', n:'选酒店', c:'trip', col:'#2C63F0', ic:'calc'},
+  {id:'bnb_check', n:'入住检查', c:'trip', col:'#D9822B', ic:'distance'},
+  {id:'weather_gear', n:'天气装备', c:'trip', col:'#0E9AA7', ic:'compass'},
+  {id:'altitude', n:'高原注意', c:'trip', col:'#17A673', ic:'truck'},
+  {id:'car_sick', n:'晕车应对', c:'trip', col:'#2C63F0', ic:'truck'},
+  {id:'jetlag', n:'时差调整', c:'trip', col:'#D9822B', ic:'distance'},
+  {id:'language_phrase', n:'旅行英语', c:'trip', col:'#0E9AA7', ic:'compass'},
+  {id:'travel_safety', n:'独自安全', c:'trip', col:'#17A673', ic:'truck'},
+  {id:'travel_insurance', n:'旅行保险', c:'trip', col:'#2C63F0', ic:'calc'},
+  {id:'tax_refund', n:'境外退税', c:'trip', col:'#D9822B', ic:'distance'},
+  {id:'liquid_rule', n:'液体规定', c:'trip', col:'#0E9AA7', ic:'compass'},
+  {id:'luggage_weight', n:'行李重量', c:'trip', col:'#17A673', ic:'truck'},
+  {id:'sun_time', n:'日出日落', c:'trip', col:'#2C63F0', ic:'clock'},
+  {id:'hike_time', n:'徒步用时', c:'trip', col:'#D9822B', ic:'clock'},
+  {id:'cycle_speed', n:'骑行配速', c:'trip', col:'#0E9AA7', ic:'wave'},
+  {id:'distance_conv', n:'距离换算', c:'trip', col:'#17A673', ic:'mix'},
+  {id:'speed_conv', n:'速度换算', c:'trip', col:'#2C63F0', ic:'mix'},
+  {id:'travel_medicine', n:'旅行药品', c:'trip', col:'#D9822B', ic:'distance'},
+  {id:'photo_spot', n:'拍照光线', c:'trip', col:'#0E9AA7', ic:'image'},
+  {id:'local_food', n:'找吃的方法', c:'trip', col:'#17A673', ic:'truck'},
+  {id:'emergency_abroad', n:'境外应急', c:'trip', col:'#2C63F0', ic:'calc'},
+  {id:'camping_list', n:'露营装备', c:'trip', col:'#D9822B', ic:'tally'},
+  {id:'hotel_tips', n:'住店技巧', c:'trip', col:'#0E9AA7', ic:'compass'},
+  {id:'budget_split', n:'预算分配', c:'trip', col:'#17A673', ic:'truck'},
+  {id:'weekend_trip', n:'周末去哪', c:'trip', col:'#2C63F0', ic:'compass'},
+  {id:'travel_journal', n:'旅行日记', c:'trip', col:'#D9822B', ic:'distance'},
+  {id:'train_seat', n:'高铁选座', c:'trip', col:'#0E9AA7', ic:'compass'},
+  {id:'airport_flow', n:'乘机流程', c:'trip', col:'#17A673', ic:'truck'},
+  {id:'passport', n:'护照办理', c:'trip', col:'#2C63F0', ic:'calc'},
+  {id:'car_check', n:'自驾检查', c:'trip', col:'#D9822B', ic:'truck'},
+  {id:'pack_trick', n:'打包技巧', c:'trip', col:'#0E9AA7', ic:'gift'},
+  {id:'reno_budget', n:'装修预算', c:'home', col:'#B08968', ic:'house'},
+  {id:'paint_need', n:'涂料用量', c:'home', col:'#3B8A67', ic:'ruler'},
+  {id:'tile_count', n:'瓷砖数量', c:'home', col:'#8A6D3B', ic:'calc'},
+  {id:'floor_need', n:'地板用量', c:'home', col:'#17A673', ic:'palette'},
+  {id:'cement_mix', n:'砂浆配比', c:'home', col:'#B08968', ic:'house'},
+  {id:'wire_gauge', n:'电线规格', c:'home', col:'#3B8A67', ic:'ruler'},
+  {id:'pipe_size', n:'水管管径', c:'home', col:'#8A6D3B', ic:'calc'},
+  {id:'socket_height', n:'插座高度', c:'home', col:'#17A673', ic:'palette'},
+  {id:'light_count', n:'灯具功率', c:'home', col:'#B08968', ic:'sun'},
+  {id:'curtain_size', n:'窗帘尺寸', c:'home', col:'#3B8A67', ic:'ruler'},
+  {id:'furniture_size', n:'家具尺寸', c:'home', col:'#8A6D3B', ic:'calc'},
+  {id:'mattress', n:'床垫选择', c:'home', col:'#17A673', ic:'palette'},
+  {id:'kitchen_counter', n:'台面高度', c:'home', col:'#B08968', ic:'house'},
+  {id:'waterproof', n:'防水检查', c:'home', col:'#3B8A67', ic:'drop'},
+  {id:'formaldehyde', n:'甲醛治理', c:'home', col:'#8A6D3B', ic:'calc'},
+  {id:'reno_order', n:'施工顺序', c:'home', col:'#17A673', ic:'palette'},
+  {id:'reno_duration', n:'工期估算', c:'home', col:'#B08968', ic:'house'},
+  {id:'reno_check', n:'验收清单', c:'home', col:'#3B8A67', ic:'ruler'},
+  {id:'hydro_check', n:'水电交底', c:'home', col:'#8A6D3B', ic:'calc'},
+  {id:'tile_lay', n:'瓷砖铺贴', c:'home', col:'#17A673', ic:'palette'},
+  {id:'putty', n:'腻子用量', c:'home', col:'#B08968', ic:'house'},
+  {id:'skirting', n:'踢脚线', c:'home', col:'#3B8A67', ic:'ruler'},
+  {id:'door_size', n:'门洞尺寸', c:'home', col:'#8A6D3B', ic:'calc'},
+  {id:'window_size', n:'窗户尺寸', c:'home', col:'#17A673', ic:'palette'},
+  {id:'stair_size', n:'楼梯尺寸', c:'home', col:'#B08968', ic:'house'},
+  {id:'balcony_load', n:'阳台承重', c:'home', col:'#3B8A67', ic:'ruler'},
+  {id:'ac_power', n:'空调匹数', c:'home', col:'#8A6D3B', ic:'calc'},
+  {id:'fresh_air', n:'新风风量', c:'home', col:'#17A673', ic:'palette'},
+  {id:'floor_heat', n:'地暖功率', c:'home', col:'#B08968', ic:'house'},
+  {id:'water_heater', n:'热水器容量', c:'home', col:'#3B8A67', ic:'drop'},
+  {id:'purifier_size', n:'净水器通量', c:'home', col:'#8A6D3B', ic:'calc'},
+  {id:'smart_home', n:'智能家居', c:'home', col:'#17A673', ic:'palette'},
+  {id:'style_pick', n:'装修风格', c:'home', col:'#B08968', ic:'house'},
+  {id:'color_scheme', n:'配色原则', c:'home', col:'#3B8A67', ic:'palette'},
+  {id:'lighting_plan', n:'灯光分层', c:'home', col:'#8A6D3B', ic:'sun'},
+  {id:'soft_decor', n:'软装预算', c:'home', col:'#17A673', ic:'palette'},
+  {id:'floor_area', n:'面积计算', c:'home', col:'#B08968', ic:'house'},
+  {id:'wall_area', n:'墙面面积', c:'home', col:'#3B8A67', ic:'ruler'},
+  {id:'cabinet_need', n:'橱柜长度', c:'home', col:'#8A6D3B', ic:'calc'},
+  {id:'vent_need', n:'排风量', c:'home', col:'#17A673', ic:'palette'},
+  {id:'home_reno_tip', n:'装修经验', c:'home', col:'#B08968', ic:'house'},
+  {id:'move_in_check', n:'入住检查', c:'home', col:'#3B8A67', ic:'ruler'},
+  {id:'kitchen_layout', n:'厨房布局', c:'home', col:'#8A6D3B', ic:'calc'},
+  {id:'bath_size', n:'卫生间尺寸', c:'home', col:'#17A673', ic:'palette'},
+  {id:'balcony_decor', n:'阳台改造', c:'home', col:'#B08968', ic:'house'},
+  {id:'coin', n:'抛硬币', c:'fun', col:'#6C5CE7', ic:'dice'},
+  {id:'dice', n:'掷骰子', c:'fun', col:'#E2543B', ic:'gift'},
+  {id:'random_number', n:'随机数字', c:'fun', col:'#0E9AA7', ic:'palette'},
+  {id:'random_color', n:'随机色值', c:'fun', col:'#F0A22B', ic:'palette'},
+  {id:'eat_what', n:'今天吃什么', c:'fun', col:'#6C5CE7', ic:'dice'},
+  {id:'weekend_what', n:'周末做什么', c:'fun', col:'#E2543B', ic:'gift'},
+  {id:'movie_pick', n:'电影推荐', c:'fun', col:'#0E9AA7', ic:'image'},
+  {id:'book_pick', n:'书单推荐', c:'fun', col:'#F0A22B', ic:'text'},
+  {id:'board_game', n:'桌游推荐', c:'fun', col:'#6C5CE7', ic:'dice'},
+  {id:'music_mood', n:'音乐推荐', c:'fun', col:'#E2543B', ic:'wave'},
+  {id:'game_type', n:'游戏类型', c:'fun', col:'#0E9AA7', ic:'dice'},
+  {id:'joke', n:'冷笑话', c:'fun', col:'#F0A22B', ic:'text'},
+  {id:'trivia', n:'冷知识', c:'fun', col:'#6C5CE7', ic:'text'},
+  {id:'tongue', n:'绕口令', c:'fun', col:'#E2543B', ic:'gift'},
+  {id:'birthday_flower', n:'生日花', c:'fun', col:'#0E9AA7', ic:'sun'},
+  {id:'zodiac', n:'生肖对照', c:'fun', col:'#F0A22B', ic:'compass'},
+  {id:'constellation', n:'星座日期', c:'fun', col:'#6C5CE7', ic:'compass'},
+  {id:'rps', n:'猜拳对战', c:'fun', col:'#E2543B', ic:'gift'},
+  {id:'24game', n:'24 点', c:'fun', col:'#0E9AA7', ic:'dice'},
+  {id:'guess_number', n:'猜数字', c:'fun', col:'#F0A22B', ic:'hash'},
+  {id:'timer_challenge', n:'60 秒挑战', c:'fun', col:'#6C5CE7', ic:'clock'},
+  {id:'decision', n:'决策卡', c:'fun', col:'#E2543B', ic:'gift'},
+  {id:'wheel_pick', n:'文字转盘', c:'fun', col:'#0E9AA7', ic:'palette'},
+  {id:'group_split', n:'随机分组', c:'fun', col:'#F0A22B', ic:'coin'},
+  {id:'scoreboard', n:'计分板', c:'fun', col:'#6C5CE7', ic:'dice'},
+  {id:'lottery_num', n:'随机抽奖', c:'fun', col:'#E2543B', ic:'gift'},
+  {id:'speak_order', n:'发言顺序', c:'fun', col:'#0E9AA7', ic:'palette'},
+  {id:'wish_list', n:'愿望清单', c:'fun', col:'#F0A22B', ic:'tally'},
+  {id:'bucket_100', n:'100 件小事', c:'fun', col:'#6C5CE7', ic:'dice'},
+  {id:'movie_line', n:'经典台词', c:'fun', col:'#E2543B', ic:'image'},
+  {id:'slogan', n:'一句话卖点', c:'fun', col:'#0E9AA7', ic:'palette'},
+  {id:'copywriting', n:'文案模板', c:'fun', col:'#F0A22B', ic:'coin'},
+  {id:'video_title', n:'视频标题', c:'fun', col:'#6C5CE7', ic:'image'},
+  {id:'names', n:'角色起名', c:'fun', col:'#E2543B', ic:'gift'},
+  {id:'story_start', n:'故事开头', c:'fun', col:'#0E9AA7', ic:'text'},
+  {id:'plot_twist', n:'情节转折', c:'fun', col:'#F0A22B', ic:'coin'},
+  {id:'riddle_fun', n:'趣味谜题', c:'fun', col:'#6C5CE7', ic:'text'},
+  {id:'card_draw', n:'抽扑克牌', c:'fun', col:'#E2543B', ic:'image'},
+  {id:'fortune', n:'每日一句', c:'fun', col:'#0E9AA7', ic:'palette'},
+  {id:'emoji_text', n:'朋友圈文案', c:'fun', col:'#F0A22B', ic:'coin'},
+  {id:'mood_log', n:'心情打卡', c:'fun', col:'#6C5CE7', ic:'dice'},
+  {id:'gratitude', n:'感恩记录', c:'fun', col:'#E2543B', ic:'gift'},
+  {id:'one_line_diary', n:'一行日记', c:'fun', col:'#0E9AA7', ic:'palette'},
+  {id:'time_capsule', n:'时间胶囊', c:'fun', col:'#F0A22B', ic:'clock'},
+  {id:'date_idea', n:'约会点子', c:'fun', col:'#6C5CE7', ic:'calendar'},
+  {id:'gift_idea', n:'送礼建议', c:'fun', col:'#E2543B', ic:'gift'},
+  {id:'party_theme', n:'派对主题', c:'fun', col:'#0E9AA7', ic:'palette'},
+  {id:'word_game', n:'文字游戏', c:'fun', col:'#F0A22B', ic:'dice'},
+  {id:'riddle_math', n:'趣味数学', c:'fun', col:'#6C5CE7', ic:'text'},
+  {id:'truth_dare', n:'真心话大冒险', c:'fun', col:'#E2543B', ic:'gift'},
+  {id:'who_spy', n:'谁是卧底词库', c:'fun', col:'#0E9AA7', ic:'palette'},
+  {id:'poker_rank', n:'牌型速查', c:'fun', col:'#F0A22B', ic:'tally'},
+  {id:'mahjong_term', n:'麻将术语', c:'fun', col:'#6C5CE7', ic:'dice'},
+  {id:'dice_prob', n:'骰子概率', c:'fun', col:'#E2543B', ic:'gift'},
+  {id:'random_penalty', n:'随机惩罚', c:'fun', col:'#0E9AA7', ic:'palette'},
+  {id:'wolf_role', n:'狼人杀角色', c:'fun', col:'#F0A22B', ic:'coin'},
+  {id:'typing_speed', n:'打字速度', c:'fun', col:'#6C5CE7', ic:'wave'},
+  {id:'mirror_text', n:'文字倒序', c:'fun', col:'#E2543B', ic:'gift'},
+  {id:'acrostic', n:'藏头诗', c:'fun', col:'#0E9AA7', ic:'palette'},
+  {id:'fortune_cookie', n:'随机签语', c:'fun', col:'#F0A22B', ic:'coin'},
 ];
 document.addEventListener('DOMContentLoaded',()=>{
   const el=document.getElementById('toolCount');
@@ -779,9 +1281,13 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 const CATS = [
   {k:'all', n:'全部'}, {k:'dev', n:'设备测量'}, {k:'img', n:'图片'},
-  {k:'txt', n:'文字'}, {k:'num', n:'计算'}, {k:'eff', n:'效率'}, {k:'qry', n:'查询'}, {k:'kit', n:'开发者'}
+  {k:'txt', n:'文字'}, {k:'num', n:'计算'}, {k:'eff', n:'效率'}, {k:'qry', n:'查询'}, {k:'kit', n:'开发者'},
+  {k:'hl', n:'健康运动'}, {k:'life', n:'生活实用'}, {k:'study', n:'学习考试'}, {k:'media', n:'音视频'},
+  {k:'safe', n:'安全应急'}, {k:'work', n:'职场办公'}, {k:'kid', n:'儿童启蒙'}, {k:'trip', n:'旅行出行'},
+  {k:'home', n:'家居装修'}, {k:'fun', n:'娱乐随机'}
 ];
-const CATNAME = {dev:'设备测量', img:'图片处理', txt:'文字处理', num:'计算转换', eff:'效率工具', qry:'查询识别', kit:'开发者小工具'};
+const CATNAME = {dev:'设备测量', img:'图片处理', txt:'文字处理', num:'计算转换', eff:'效率工具', qry:'查询识别', kit:'开发者小工具',
+  hl:'健康运动', life:'生活实用', study:'学习考试', media:'音视频', safe:'安全应急', work:'职场办公', kid:'儿童启蒙', trip:'旅行出行', home:'家居装修', fun:'娱乐随机'};
 
 /* ================= 通用工具函数 ================= */
 const $ = (s, r=document) => r.querySelector(s);
@@ -7746,15 +8252,21 @@ function calcTool(root, opt){
   root.innerHTML=`<div class="box">
     <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
     ${opt.fields.map(f=>{
-      const id=f[0], label=f[1], def=f[2];
-      if(Array.isArray(f[3])) return `<div><div class="lbl">${label}</div><select id="cf_${id}">${f[3].map(o=>`<option value="${o[0]}"${o[0]==String(def)?' selected':''}>${o[1]}</option>`).join('')}</select></div>`;
-      return `<div><div class="lbl">${label}</div><input type="number" id="cf_${id}" value="${def}" step="${typeof f[3]==='number'?f[3]:(f[4]||1)}"></div>`;
+      const id=f[0], label=f[1];
+      let rawOpts=null, def=f[2];
+      if(Array.isArray(f[3])){ rawOpts=f[3]; }
+      else if(Array.isArray(f[2])){ rawOpts=f[2]; def=null; }
+      if(rawOpts){
+        const opts = Array.isArray(rawOpts[0]) ? rawOpts : rawOpts.reduce((acc,x,i)=>{ if(i%2===0) acc.push([x,rawOpts[i+1]]); return acc; },[]);
+        return `<div><div class="lbl">${label}</div><select id="cf_${id}">${opts.map(o=>`<option value="${o[0]}"${o[0]==String(def)?' selected':''}>${o[1]}</option>`).join('')}</select></div>`;
+      }
+      return `<div><div class="lbl">${label}</div><input type="number" id="cf_${id}" value="${def==null?'':def}" step="${typeof f[3]==='number'?f[3]:(f[4]||1)}"></div>`;
     }).join('')}</div>
     <div id="cfOut" style="margin-top:14px"></div>
   </div>${opt.note?`<p class="hint">${opt.note}</p>`:''}`;
   function run(){
     const v={};
-    opt.fields.forEach(f=>{ const el=$('#cf_'+f[0],root); if(!el) return; v[f[0]] = Array.isArray(f[3]) ? el.value : (+el.value||0); });
+    opt.fields.forEach(f=>{ const el=$('#cf_'+f[0],root); if(!el) return; v[f[0]] = el.tagName==='SELECT' ? el.value : (+el.value||0); });
     let rows=[];
     try{ rows=opt.run(v)||[]; }catch(e){ rows=[['计算失败','检查输入']]; }
     $('#cfOut',root).innerHTML=rows.map(r=>`<div class="kv"><span>${r[0]}</span><b>${r[1]}</b></div>`).join('');
@@ -10375,7 +10887,8 @@ function t_perms(root){
         rows.push([label, st.state]);
       }catch(e){ rows.push([label,'不支持查询']); }
     }
-    $('#pmOut',root).innerHTML=rows.map(([k,v])=>{
+    const O=$('#pmOut',root); if(!O) return;
+    O.innerHTML=rows.map(([k,v])=>{
       const color=v==='granted'?'#17A673':v==='denied'?'#E2543B':'#D9822B';
       return `<div class="kv"><span>${k}</span><b style="color:${color};font-weight:600">${v}</b></div>`;
     }).join('');
@@ -10395,6 +10908,7 @@ function t_orient(root){
   const cv=$('#orCv',root), ctx=cv.getContext('2d');
   let beta=0, gamma=0;
   function draw(){
+    if(!cv.isConnected){ cancelAnimationFrame(raf); return; }
     const w=cv.clientWidth, h=cv.clientHeight;
     if(cv.width!==w*2 || cv.height!==h*2){ cv.width=w*2; cv.height=h*2; }
     ctx.setTransform(2,0,0,2,0,0);
@@ -10497,12 +11011,14 @@ function t_storage(root){
   async function run(){
     if(!navigator.storage||!navigator.storage.estimate){ $('#sgQuota',root).textContent='不支持'; return; }
     const est=await navigator.storage.estimate();
+    const Q=$('#sgQuota',root), U=$('#sgUse',root), P=$('#sgPct',root), B=$('#sgBar',root);
+    if(!Q||!U||!P||!B) return;
     const q=est.quota||0, u=est.usage||0;
-    $('#sgQuota',root).textContent=bytes(q);
-    $('#sgUse',root).textContent=bytes(u);
+    Q.textContent=bytes(q);
+    U.textContent=bytes(u);
     const pct=q?u/q*100:0;
-    $('#sgPct',root).textContent=pct.toFixed(3)+' %';
-    $('#sgBar',root).style.width=Math.min(100,pct)+'%';
+    P.textContent=pct.toFixed(3)+' %';
+    B.style.width=Math.min(100,pct)+'%';
   }
   $('#sgGo',root).onclick=run; run();
 }
@@ -10524,9 +11040,12 @@ function t_netlatency(root){
         await fetch(location.href,{cache:'no-store'});
         list.push(Math.round(performance.now()-t));
       }catch(e){ list.push(-1); }
-      $('#nlList',root).textContent=list.map((v,i)=>'第 '+(i+1)+' 次：'+(v<0?'失败':v+' ms')).join('\n');
+      const L=$('#nlList',root); if(!L) return;
+      L.textContent=list.map((v,i)=>'第 '+(i+1)+' 次：'+(v<0?'失败':v+' ms')).join('\n');
     }
     const ok=list.filter(v=>v>=0);
+    const V=$('#nlV',root), H=$('#nlH',root);
+    if(!V||!H) return;
     if(ok.length){
       const avg=Math.round(ok.reduce((a,b)=>a+b,0)/ok.length);
       $('#nlV',root).textContent=avg+' ms';
@@ -12470,6 +12989,3429 @@ function t_strftime(root){
   };
 }
 
+
+
+/* ===== 第六批新增工具（501 个） ===== */
+/* ---------- 单位换算工厂 ---------- */
+function unitConvTool(root, opt){
+  root.innerHTML=`<div class="box">
+    <div class="lbl">数值</div>
+    <input type="number" id="ucVal" value="${opt.def!==undefined?opt.def:1}" step="any">
+    <div class="lbl" style="margin-top:10px">单位</div>
+    <select id="ucUnit">${opt.units.map((u,i)=>`<option value="${i}"${i===0?' selected':''}>${u[1]}</option>`).join('')}</select>
+    <div id="ucOut" style="margin-top:14px"></div>
+  </div>${opt.note?`<p class="hint">${opt.note}</p>`:''}`;
+  function run(){
+    const v=+$('#ucVal',root).value||0;
+    const idx=+$('#ucUnit',root).value||0;
+    const base=v*(opt.units[idx][2]);
+    $('#ucOut',root).innerHTML=opt.units.map(u=>{
+      const x=base/(u[2]||1);
+      return `<div class="kv"><span>${u[1]}</span><b>${(Math.abs(x)>=1000?x.toFixed(0):x.toFixed(4).replace(/0+$/,'').replace(/\.$/,''))}</b></div>`;
+    }).join('');
+  }
+  root.addEventListener('input',run);
+  root.addEventListener('change',run);
+  run();
+}
+
+/* ---------- 模板生成工厂 ---------- */
+function tmplTool(root, opt){
+  root.innerHTML=`<div class="box">
+    ${opt.fields.map(f=>`<div class="lbl">${f[1]}</div><input id="tm_${f[0]}" value="${String(f[2]||'').replace(/"/g,'&quot;')}" style="margin-bottom:8px">`).join('')}
+    <div class="row" style="margin-top:6px"><button class="btn" id="tmGo">生成</button><button class="btn ghost" id="tmCp">复制全文</button></div>
+  </div>
+  ${txtOut(opt.outLabel||'生成结果','tmOut')}
+  ${opt.note?`<p class="hint">${opt.note}</p>`:''}`;
+  function build(){
+    const v={};
+    opt.fields.forEach(f=>{ const el=$('#tm_'+f[0],root); v[f[0]]=el?el.value:''; });
+    if(typeof opt.tpl==='function') return opt.tpl(v);
+    return opt.tpl.replace(/\{([^{}]+)\}/g,(m,k)=> v[k]!==undefined?v[k]:m);
+  }
+  $('#tmGo',root).onclick=()=>{ $('#tmOut',root).textContent=build(); };
+  $('#tmCp',root).onclick=()=>{ const t=$('#tmOut',root).textContent||build(); copyText(t); };
+  $('#tmOut',root).textContent=build();
+}
+
+/* ---------- 随机抽取工厂 ---------- */
+function randPickTool(root, opt){
+  root.innerHTML=`<div class="box">
+    <textarea id="rpIn" style="min-height:120px">${opt.items||''}</textarea>
+    <div class="row" style="margin-top:10px;flex-wrap:wrap">
+      <button class="btn" id="rpOne">抽一个</button>
+      <button class="btn ghost" id="rpAll">全部排序</button>
+      <button class="btn ghost" id="rpClr">清空</button>
+    </div>
+    <div id="rpOut" style="margin-top:14px;font-size:20px;font-weight:700;color:#2C63F0;text-align:center;min-height:28px"></div>
+  </div>${opt.note?`<p class="hint">${opt.note}</p>`:''}`;
+  const items=()=>$('#rpIn',root).value.split(/\n|,|，/).map(s=>s.trim()).filter(Boolean);
+  function pick(arr){
+    const i=Math.floor(Math.random()*arr.length);
+    return arr[i];
+  }
+  $('#rpOne',root).onclick=()=>{
+    const a=items();
+    if(!a.length) return toast('先输入候选项');
+    $('#rpOut',root).textContent=pick(a);
+  };
+  $('#rpAll',root).onclick=()=>{
+    const a=items();
+    if(!a.length) return toast('先输入候选项');
+    for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+    $('#rpOut',root).textContent=a.join(' → ');
+  };
+  $('#rpClr',root).onclick=()=>{ $('#rpIn',root).value=''; $('#rpOut',root).textContent=''; };
+}
+/* ===== 第六批：通用生成器 ===== */
+
+/* 单位换算：opt.units = [[key,label,factor]] */
+function unitConvTool(root, opt){
+  const units=opt.units;
+  root.innerHTML=`
+    <div class="box">
+      <div class="lbl">数值</div><input type="number" id="ucIn" value="${opt.def==null?1:opt.def}" step="any">
+      <div class="row" style="margin-top:10px">
+        <div style="flex:1"><div class="lbl">从</div>
+          <select id="ucFrom">${units.map((u,i)=>`<option value="${i}"${i===0?' selected':''}>${u[1]}</option>`).join('')}</select></div>
+        <div style="flex:1"><div class="lbl">到</div>
+          <select id="ucTo">${units.map((u,i)=>`<option value="${i}"${i===1?' selected':''}>${u[1]}</option>`).join('')}</select></div>
+      </div>
+      <div id="ucOut" style="margin-top:14px"></div>
+    </div>${opt.note?`<p class="hint">${opt.note}</p>`:''}`;
+  function run(){
+    const v=+$('#ucIn',root).value||0;
+    const a=units[+$('#ucFrom',root).value], b=units[+$('#ucTo',root).value];
+    const res=v*a[2]/b[2];
+    const digits=Math.abs(res)>=1000?0:Math.abs(res)>=1?3:6;
+    $('#ucOut',root).innerHTML=`<div class="kv"><span>${v} ${a[1]}</span><b>${res.toFixed(digits).replace(/\.0+$/,'')} ${b[1]}</b></div>
+      <div class="kv"><span>换算系数</span><b style="font-weight:500">1 ${a[1]} = ${(a[2]/b[2]).toPrecision(6)} ${b[1]}</b></div>`;
+  }
+  root.addEventListener('input',run); root.addEventListener('change',run); run();
+}
+
+/* 模板填写：opt.fields=[[id,label,def]], opt.tpl=(v)=>string */
+function tmplTool(root, opt){
+  root.innerHTML=`
+    <div class="box">
+      ${opt.fields.map(f=>`<div class="lbl" style="margin-top:${f===opt.fields[0]?0:10}px">${f[1]}</div><input id="tp_${f[0]}" value="${f[2]==null?'':String(f[2]).replace(/"/g,'&quot;')}">`).join('')}
+      <button class="btn block" id="tpGo" style="margin-top:12px">生成</button>
+    </div>
+    ${txtOut(opt.outLabel||'结果','tpOut')}
+    <button class="btn ghost block" id="tpCopy">复制全文</button>
+    ${opt.note?`<p class="hint">${opt.note}</p>`:''}`;
+  function gen(){
+    const v={}; opt.fields.forEach(f=>{ v[f[0]]=($('#tp_'+f[0],root)||{}).value||''; });
+    $('#tpOut',root).textContent=typeof opt.tpl==='function'?opt.tpl(v):String(opt.tpl).replace(/\{(\w+)\}/g,(m,k)=>v[k]||'');
+  }
+  $('#tpGo',root).onclick=gen;
+  $('#tpCopy',root).onclick=()=>copyText($('#tpOut',root).textContent);
+  gen();
+}
+
+/* 随机抽取：opt.items=[] 或 opt.mode='number' */
+function randPickTool(root, opt){
+  root.innerHTML=`
+    <div class="box">
+      <div class="lbl">候选（每行一个）</div>
+      <textarea id="rpIn" style="min-height:110px">${Array.isArray(opt.items)?opt.items.join('\n'):(opt.items||'')}</textarea>
+      <div class="row" style="margin-top:10px">
+        <button class="btn" id="rpOne">抽一个</button>
+        <button class="btn ghost" id="rpAll">全部排序</button>
+        <button class="btn ghost" id="rpClear">清空</button>
+      </div>
+    </div>
+    <div class="box" style="text-align:center">
+      <div id="rpOut" style="font-size:24px;font-weight:700;min-height:44px;display:grid;place-items:center">—</div>
+    </div>
+    ${opt.note?`<p class="hint">${opt.note}</p>`:''}`;
+  const list=()=>$('#rpIn',root).value.split('\n').map(x=>x.trim()).filter(Boolean);
+  $('#rpOne',root).onclick=()=>{
+    const a=list(); if(!a.length) return toast('先填候选');
+    $('#rpOut',root).textContent=a[Math.floor(Math.random()*a.length)];
+  };
+  $('#rpAll',root).onclick=()=>{
+    const a=list(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+    $('#rpOut',root).innerHTML=a.map((x,i)=>`${i+1}. ${x}`).join('<br>');
+    $('#rpOut',root).style.fontSize='15px';
+  };
+  $('#rpClear',root).onclick=()=>{ $('#rpIn',root).value=''; $('#rpOut',root).textContent='—'; };
+}
+
+/* ===== 健康运动（30） ===== */
+
+function t_rm1(root){
+  calcTool(root,{fields:[['w','重量（kg）',60,1],['r','次数（1-15）',8,1]],run:v=>{
+    const w=+v.w, r=Math.max(1,+v.r);
+    const rm=w*(1+r/30);
+    return [['1RM 估算',rm.toFixed(1)+' kg'],['5×5 建议重量',(rm*0.85).toFixed(1)+' kg'],['增肌 8-12 次重量',(rm*0.72).toFixed(1)+' kg'],['耐力 15 次重量',(rm*0.65).toFixed(1)+' kg']];
+  },note:'Epley 公式估算，仅作训练参考。'});
+}
+
+function t_cardio_burn(root){
+  calcTool(root,{fields:[['w','体重（kg）',65,1],['t','时长（分钟）',30,5],['k','项目',['run','跑步 8km/h','walk','快走 5.5km/h','bike','骑行 20km/h','swim','游泳','rope','跳绳']]],run:v=>{
+    const met={'run':8.3,'walk':4.3,'bike':8,'swim':8,'rope':12.3}[v.k];
+    const cal=met*(+v.w)*(+v.t)/60;
+    return [['MET 值',met+' MET'],['消耗热量',cal.toFixed(0)+' kcal'],['相当于',(cal/7700).toFixed(3)+' kg 脂肪']];
+  },note:'按 MET 公式估算，强度差异会影响结果。'});
+}
+
+function t_steps_cal(root){
+  calcTool(root,{fields:[['s','步数',8000,100],['w','体重（kg）',65,1],['h','身高（cm）',170,1]],run:v=>{
+    const stride=+v.h*0.45/100;
+    const dist=+v.s*stride/1000;
+    const cal=+v.s*0.045*(+v.w/65);
+    return [['步幅估算',stride.toFixed(2)+' 米'],['步行距离',dist.toFixed(2)+' km'],['消耗热量',cal.toFixed(0)+' kcal']];
+  },note:'按步长经验公式粗算，快走消耗更高。'});
+}
+
+function t_swim_pace(root){
+  calcTool(root,{fields:[['d','距离（米）',1000,50],['t','时间（分钟）',30,1]],run:v=>{
+    const d=+v.d, t=+v.t;
+    const pace=t/(d/100);
+    return [['每 100 米配速',pace.toFixed(2)+' 分钟'],['折合每 100 米',Math.floor(pace)+"'" +String(Math.round((pace%1)*60)).padStart(2,'0')],['速度',(d/t*60/100).toFixed(2)+' 百米/小时']];
+  },note:'泳池训练常用每 100 米配速。'});
+}
+
+function t_run_predict(root){
+  calcTool(root,{fields:[['d1','已跑距离（km）',5,0.1],['t1','用时（分钟）',25,0.5],['d2','目标距离（km）',10,0.1]],run:v=>{
+    const t2=(+v.t1)*Math.pow((+v.d2)/(+v.d1),1.06);
+    return [['预测用时',t2.toFixed(1)+' 分钟'],['折合配速',(t2/(+v.d2)).toFixed(2)+' 分/km'],['总时长',Math.floor(t2/60)+' 小时 '+Math.round(t2%60)+' 分']];
+  },note:'Riegel 公式预测，距离跨度越大误差越大。'});
+}
+
+function t_marathon_pace(root){
+  calcTool(root,{fields:[['h','目标完赛小时',3,0.25],['m','分钟',30,1]],run:v=>{
+    const total=(+v.h)*60+(+v.m);
+    const pace=total/42.195;
+    return [['全程平均配速',pace.toFixed(2)+' 分/km'],['半程预计',(pace*21.0975).toFixed(0)+' 分钟'],['10 公里预计',(pace*10).toFixed(0)+' 分钟'],['5 公里预计',(pace*5).toFixed(0)+' 分钟']];
+  },note:'不含补给与坡度影响。'});
+}
+
+function t_bodyfat(root){
+  calcTool(root,{fields:[['h','身高（cm）',170,1],['n','颈围（cm）',38,0.5],['wa','腰围（cm）',85,0.5],['s','性别',['m','男','f','女']],['hip','臀围（cm）',95,0.5]],run:v=>{
+    const h=+v.h, n=+v.n, wa=+v.wa, hip=+v.hip;
+    let bf;
+    if(v.s==='m') bf=495/(1.0324-0.19077*Math.log10(wa-n)+0.15456*Math.log10(h))-450;
+    else bf=495/(1.29579-0.35004*Math.log10(wa+hip-n)+0.22100*Math.log10(h))-450;
+    const lean=(+v.h?1:0);
+    return [['体脂率估算',bf.toFixed(1)+' %'],['判定',bf<15?'偏瘦':bf<20?'标准':bf<25?'略高':'偏高']];
+  },note:'美国海军围度公式，误差约 ±3%，不作医学诊断。'});
+}
+
+function t_whr(root){
+  calcTool(root,{fields:[['wa','腰围（cm）',85,0.5],['hip','臀围（cm）',95,0.5]],run:v=>{
+    const r=(+v.wa)/(+v.hip||1);
+    const risk=v.wa&&v.hip?(r<0.8?'较低':r<0.9?'中等':'偏高'):'—';
+    return [['腰臀比',r.toFixed(3)],['健康风险',risk],['参考','男性 <0.9，女性 <0.85']];
+  }});
+}
+
+function t_waterintake(root){
+  calcTool(root,{fields:[['w','体重（kg）',65,1],['k','活动量',['l','久坐','m','中等','h','高强度']],['t','气温',25,1]],run:v=>{
+    const base=(+v.w)*35;
+    const extra=v.k==='l'?0:v.k==='m'?300:600;
+    const heat=(+v.t)>28?300:0;
+    return [['每日建议饮水',Math.round(base+extra+heat)+' ml'],['约合杯数',Math.ceil((base+extra+heat)/250)+' 杯（250ml）'],['运动额外补充',(extra? extra+' ml':'—')]];
+  },note:'含食物水分差异，心肾功能异常者遵医嘱。'});
+}
+
+function t_protein(root){
+  calcTool(root,{fields:[['w','体重（kg）',65,1],['k','目标',['keep','维持','gain','增肌','cut','减脂']]],run:v=>{
+    const g=v.k==='keep'?1.2:v.k==='gain'?1.8:1.6;
+    return [['每日蛋白质量',(g*(+v.w)).toFixed(0)+' g'],['每餐建议',(g*(+v.w)/3).toFixed(0)+' g'],['相当于鸡蛋',Math.round(g*(+v.w)/6)+' 个'],['相当于鸡胸肉',Math.round(g*(+v.w)/25*100)+' g']];
+  },note:'按体重每公斤建议量估算。'});
+}
+
+function t_carb(root){
+  calcTool(root,{fields:[['cal','每日热量（kcal）',1800,100],['p','蛋白质（g）',90,5],['f','脂肪（g）',60,5]],run:v=>{
+    const left=+v.cal-(+v.p)*4-(+v.f)*9;
+    const carb=left/4;
+    return [['剩余热量',left.toFixed(0)+' kcal'],['建议碳水',carb.toFixed(0)+' g'],['约合米饭',(carb/28).toFixed(1)+' 碗（150g）']];
+  },note:'粗略分配，实际按个人代谢与运动量调整。'});
+}
+
+function t_sleep_cycle(root){
+  calcTool(root,{fields:[['t','起床时间（小时）',7,0.5],['c','睡眠周期（分钟）',90,5],['n','入睡耗时（分钟）',15,5]],run:v=>{
+    const wake=(+v.t)*60;
+    const rows=[];
+    for(let i=4;i<=6;i++){
+      const total=i*(+v.c)+(+v.n);
+      let bed=wake-total; while(bed<0) bed+=1440;
+      rows.push([i+' 个周期就寝',String(Math.floor(bed/60)).padStart(2,'0')+':'+String(Math.round(bed%60)).padStart(2,'0')]);
+    }
+    return rows;
+  },note:'按 90 分钟周期倒推入睡时间，起床更清醒。'});
+}
+
+function t_stretch_dur(root){
+  calcTool(root,{fields:[['n','动作数',5,1],['s','每个动作秒数',30,5]],run:v=>{
+    const total=(+v.n)*(+v.s);
+    return [['总计',total+' 秒'],['约合',(total/60).toFixed(1)+' 分钟'],['含切换时间',((total+(+v.n)*10)/60).toFixed(1)+' 分钟']];
+  }});
+}
+
+function t_exercise_table(root){
+  listTool(root,{ph:'运动 / 强度',note:'常见运动 MET 值与每小时消耗（按 60kg 估算）。',rows:[
+    ['走路 4km/h','3.0 MET，约 180 kcal/h'],['快走 6km/h','4.3 MET，约 260 kcal/h'],['慢跑 8km/h','8.3 MET，约 500 kcal/h'],['跑步 10km/h','10 MET，约 600 kcal/h'],['骑车 20km/h','8.0 MET，约 480 kcal/h'],['游泳自由泳','8.0 MET，约 480 kcal/h'],['跳绳','12.3 MET，约 740 kcal/h'],['HIIT','10–14 MET，约 600–840 kcal/h'],['瑜伽','2.5 MET，约 150 kcal/h'],['力量训练','5.0 MET，约 300 kcal/h'],['羽毛球','5.5 MET，约 330 kcal/h'],['篮球','6.5 MET，约 390 kcal/h'],['爬楼','8.8 MET，约 530 kcal/h'],['广场舞','4.5 MET，约 270 kcal/h']
+  ]});
+}
+
+function t_food_protein(root){
+  listTool(root,{ph:'食物 / 蛋白质',note:'常见食物每 100g 蛋白质含量。',rows:[
+    ['鸡胸肉','24 g'],['鸡蛋','13 g（每个约 6g）'],['牛肉','20 g'],['猪里脊','21 g'],['鱼肉','18–20 g'],['虾','18 g'],['豆腐','8 g'],['豆浆','3 g'],['牛奶','3.3 g'],['酸奶','3.5 g'],['燕麦','13 g'],['米饭','2.6 g'],['全麦面包','9 g'],['花生','25 g'],['坚果','15–20 g']
+  ]});
+}
+
+function t_stretch_moves(root){
+  listTool(root,{ph:'部位 / 动作',note:'久坐人群的简易拉伸，每个动作 30 秒。',rows:[
+    ['颈部','缓慢左右转头、下巴内收，各 10 次'],['肩部','双手交叉上举，肩胛下沉'],['胸椎','坐姿抱头后仰，配合呼吸'],['腰背','猫牛式，四点跪姿交替'],['髋部','弓步压腿，换边'],['大腿后侧','站姿前屈，膝盖微屈'],['小腿','前脚掌踩台阶，脚跟下压'],['手腕','键盘手反向压掌 20 秒'],['眼睛','20-20-20，看远处 20 秒'],['呼吸','4-7-8 呼吸，做 4 轮']
+  ]});
+}
+
+function t_home_workout(root){
+  listTool(root,{ph:'动作 / 组数',note:'自重训练计划，量力而行。',rows:[
+    ['深蹲','3 组 × 15 次'],['箭步蹲','3 组 × 12 次/边'],['俯卧撑','3 组 × 10–15 次'],['臀桥','3 组 × 15 次'],['平板支撑','3 组 × 30–60 秒'],['开合跳','3 组 × 30 秒'],['登山跑','3 组 × 20 秒'],['靠墙静蹲','3 组 × 45 秒'],['卷腹','3 组 × 15 次'],['拉伸放松','训练后 5 分钟']
+  ]});
+}
+
+function t_gym_equip(root){
+  listTool(root,{ph:'器械 / 用途',note:'健身房常见器械练什么。',rows:[
+    ['跑步机','有氧热身与耐力'],['椭圆机','低冲击有氧'],['划船机','全身有氧 + 背'],['坐姿推胸','胸大肌'],['高位下拉','背阔肌'],['腿举机','股四头肌与臀'],['腿弯举','腘绳肌'],['史密斯机','深蹲与推举'],['哑铃','自由重量综合'],['龙门架','夹胸与拉力'],['壶铃','爆发力与核心'],['泡沫轴','放松筋膜']
+  ]});
+}
+
+function t_yoga(root){
+  listTool(root,{ph:'体式 / 作用',note:'常见瑜伽体式与主要作用。',rows:[
+    ['山式','基础站姿，调整体态'],['下犬式','拉伸后链，放松肩背'],['战士一式','强化腿部与核心'],['战士二式','开髋，稳定'],['三角式','侧向拉伸'],['树式','平衡与专注'],['猫牛式','脊柱活动'],['婴儿式','放松腰背'],['桥式','打开胸腔，练臀'],['鸽子式','开髋'],['船式','核心力量'],['尸躺式','收尾放松']
+  ]});
+}
+
+function t_bmi_table(root){
+  listTool(root,{ph:'BMI / 区间',note:'中国成人 BMI 参考区间（非诊断）。',rows:[
+    ['<18.5','偏瘦，注意营养'],['18.5–23.9','正常范围'],['24–27.9','超重'],['28–31.9','肥胖'],['≥32','重度肥胖，建议体检'],['腰围 男 ≥90cm','中心性肥胖风险'],['腰围 女 ≥85cm','中心性肥胖风险']
+  ]});
+}
+
+function t_exercise_order(root){
+  listTool(root,{ph:'训练顺序',note:'一次力量训练的常见安排。',rows:[
+    ['热身 5–10 分钟','动态拉伸 + 轻重量'],['主项（复合动作）','深蹲/硬拉/卧推，3–5 组'],['辅助动作','孤立肌群，3 组'],['核心训练','平板支撑等'],['有氧收尾','10–20 分钟可选'],['拉伸放松','5 分钟']
+  ]});
+}
+
+function t_supplement(root){
+  listTool(root,{ph:'补剂 / 作用',note:'常见运动补剂的基础认知，不代替医嘱。',rows:[
+    ['蛋白粉','补充蛋白质，方便达标'],['肌酸','提升力量与爆发（需周期）'],['BCAA','争议较大，优先吃够蛋白'],['鱼油','omega-3，注意来源'],['维生素 D','日照不足时考虑'],['电解质','大量出汗后补充'],['咖啡因','训练前 30 分钟，注意耐受'],['镁','抽筋与睡眠，按需']
+  ]});
+}
+
+function t_injury_prevent(root){
+  listTool(root,{ph:'风险 / 预防',note:'常见运动损伤的预防要点。',rows:[
+    ['膝前痛','加强臀中肌，控制跑量'],['髂胫束','放松外侧，避免下坡过量'],['跟腱炎','渐进加量，练提踵'],['肩峰撞击','减少过顶动作，练肩袖'],['腰扭伤','练核心，注意搬重姿势'],['网球肘','放松前臂，改握拍'],['足底筋膜炎','滚球放松，换鞋'],['抽筋','补水补电解质，热身']
+  ]});
+}
+
+function t_heart_zone(root){
+  listTool(root,{ph:'心率区间',note:'五区训练法与主观感受。',rows:[
+    ['Z1 50–60%','恢复，能轻松聊天'],['Z2 60–70%','有氧基础，鼻呼吸'],['Z3 70–80%','节奏跑，说话变短'],['Z4 80–90%','乳酸阈值，呼吸急促'],['Z5 90–100%','最大摄氧，只能短时']
+  ]});
+}
+
+function t_recovery(root){
+  listTool(root,{ph:'恢复方式',note:'训练后的恢复手段。',rows:[
+    ['睡眠','最有效，7–9 小时'],['补水','按体重流失补充'],['蛋白 + 碳水','训练后 1 小时内'],['泡沫轴','10 分钟放松'],['轻有氧','促进循环'],['冷水浴','高强度后可选'],['拉伸','避免过长时间静态拉伸'],['休息日','每周至少 1 天']
+  ]});
+}
+
+function t_posture(root){
+  listTool(root,{ph:'体态问题',note:'常见体态问题与自测方向。',rows:[
+    ['圆肩','靠墙站立，肩胛能否贴墙'],['头前引','侧面拍照看耳垂与肩线'],['骨盆前倾','仰卧腰下空隙是否过大'],['骨盆后倾','坐姿尾骨后卷'],['X 型腿','膝内扣，双膝并拢难'],['O 型腿','双踝并拢膝间有缝'],['扁平足','湿脚印看足弓'],['高低肩','镜前看肩线']
+  ]});
+}
+
+function t_metric_body(root){
+  unitConvTool(root,{note:'身高体重常用单位互换。',units:[['cm','厘米',1],['m','米',100],['in','英寸',2.54],['ft','英尺',30.48],['kg','千克',1],['lb','磅',0.4536],['jin','市斤',0.5]]});
+}
+
+function t_water_checkin(root){
+  checklistTool(root,{key:'water2',ph:'一杯（250ml）',items:['第 1 杯','第 2 杯','第 3 杯','第 4 杯','第 5 杯','第 6 杯','第 7 杯','第 8 杯'],note:'勾满 8 杯基本达标，运动日再加 2 杯。'});
+}
+function t_workout_checkin(root){
+  checklistTool(root,{key:'workout2',ph:'今天的训练内容',items:['热身','力量训练','有氧','拉伸'],note:'完成打勾，连续打卡更容易坚持。'});
+}
+function t_weight_log(root){
+  checklistTool(root,{key:'weight',ph:'日期 + 体重（如 11-15 65.2）',items:['每周固定同一天同一时间称重'],note:'看趋势不看单日波动，月经期与水肿会影响。'});
+}
+/* ===== 生活实用（66） ===== */
+
+function t_stain_remove(root){
+  listTool(root,{ph:'污渍 / 处理方法',note:'先在不显眼处试，丝绸羊毛慎用强力剂。',rows:[
+    ['油渍','洗洁精原液涂 10 分钟再洗'],['血渍','冷水 + 少量盐，忌热水'],['茶渍咖啡渍','小苏打 + 温水浸泡'],['红酒渍','盐吸色后冷水冲，再用白醋'],['圆珠笔','酒精棉轻拍'],['口红','卸妆油乳化后洗'],['汗渍','白醋 + 小苏打'],['霉斑','稀释漂白水（彩色衣物慎用）'],['锈渍','柠檬汁 + 盐'],['口香糖','冰块冻硬后刮除'],['酱油','冷水冲 + 洗衣液搓'],['墨水','牛奶浸泡后洗']
+  ]});
+}
+
+function t_storage_tips(root){
+  listTool(root,{ph:'区域 / 收纳法',note:'按使用频率分层，常用放手边。',rows:[
+    ['衣柜','竖着叠放，按季节分区'],['厨房','调料上墙，常用锅具挂杆'],['冰箱','生熟分层，叶菜保鲜盒'],['书桌','只留当天用的三样'],['玄关','钥匙托盘 + 挂钩'],['卫生间','镜柜收小件，地面留空'],['阳台','折叠架 + 分类筐'],['抽屉','分隔盒，按类别'],['行李箱','卷衣服省空间'],['儿童玩具','透明箱 + 图片标签']
+  ]});
+}
+
+function t_kitchen_conv(root){
+  unitConvTool(root,{note:'厨房常见容量换算（水/牛奶近似）。',units:[['ml','毫升',1],['cup','杯（240ml）',240],['tbsp','大勺（15ml）',15],['tsp','小勺（5ml）',5],['floz','液体盎司',29.57],['l','升',1000],['jin','市斤水',500]]});
+}
+
+function t_temp_conv(root){
+  root.innerHTML=`
+    <div class="box"><div class="lbl">温度</div><input type="number" id="tcIn" value="180" step="any">
+      <div class="seg" id="tcFrom" style="margin-top:10px"><button class="on" data-v="c">摄氏</button><button data-v="f">华氏</button><button data-v="k">开尔文</button></div>
+      <div id="tcOut" style="margin-top:12px"></div></div>`;
+  let from='c';
+  segBind(root,'#tcFrom',v=>{from=v;run();});
+  root.addEventListener('input',run);
+  function run(){
+    const v=+$('#tcIn',root).value||0;
+    const c=from==='c'?v:from==='f'?(v-32)*5/9:v-273.15;
+    $('#tcOut',root).innerHTML=[['摄氏',c.toFixed(1)+' °C'],['华氏',(c*9/5+32).toFixed(1)+' °F'],['开尔文',(c+273.15).toFixed(1)+' K']]
+      .map(([k,x])=>`<div class="kv"><span>${k}</span><b>${x}</b></div>`).join('');
+  }
+  run();
+}
+
+function t_oven_temp(root){
+  calcTool(root,{fields:[['t','烤箱标注温度（℃）',180,5],['k','烤箱类型',['m','上下火','a','风炉（热风）']]],run:v=>{
+    const base=+v.t;
+    return [['设定温度',(v.k==='a'?base-20:base)+' ℃'],['换算华氏',((base*9/5)+32).toFixed(0)+' °F'],['预热时间','约 10–15 分钟'],['提示',v.k==='a'?'风炉通常降 15–20 ℃':'上下火按原温度']];
+  }});
+}
+
+function t_airfryer(root){
+  calcTool(root,{fields:[['t','原食谱温度（℃）',200,5],['m','原食谱时间（分钟）',25,1]],run:v=>{
+    return [['建议温度',(Math.max(150,+v.t-20))+' ℃'],['建议时间',Math.round(+v.m*0.8)+' 分钟'],['小贴士','中途翻面一次更均匀']];
+  },note:'气炸锅效率更高，通常降 20 ℃、减 20% 时间。'});
+}
+
+function t_rice_ratio(root){
+  calcTool(root,{fields:[['c','米（杯）',2,0.5],['k','米的种类',['j','普通粳米','n','糯米','b','糙米','x','杂粮']]],run:v=>{
+    const ratio={'j':1.2,'n':1.1,'b':1.5,'x':1.6}[v.k];
+    return [['加水量',(+v.c*ratio).toFixed(1)+' 杯'],['比例','米 : 水 = 1 : '+ratio],['份量估算',Math.round(+v.c*2)+' 小碗']];
+  }});
+}
+
+function t_coffee_ratio(root){
+  calcTool(root,{fields:[['w','咖啡豆（g）',15,1],['r','粉水比',15,1],['k','冲法',['pour','手冲','press','法压','moka','摩卡壶']]],run:v=>{
+    const water=+v.w*(+v.r);
+    const k={'pour':'水温 90–93 ℃，2 分钟','press':'水温 92 ℃，浸泡 4 分钟','moka':'热水下壶，中火'}[v.k];
+    return [['建议水量',water.toFixed(0)+' g/ml'],['出杯约',Math.round(water*0.85)+' ml'],['冲煮要点',k]];
+  }});
+}
+
+function t_tea_ratio(root){
+  calcTool(root,{fields:[['k','茶类',['g','绿茶','r','红茶','o','乌龙','p','普洱','w','白茶']],['v','水量（ml）',350,10]],run:v=>{
+    const g={'g':3,'r':5,'o':7,'p':7,'w':5}[v.k];
+    return [['投茶量',g+' g'],['茶水比','1:'+Math.round((+v.v)/g)],['水温',{'g':'80–85 ℃','r':'90–95 ℃','o':'95–100 ℃','p':'100 ℃','w':'90 ℃'}[v.k]]];
+  }});
+}
+
+function t_food_storage(root){
+  listTool(root,{ph:'食材 / 保存',note:'冷藏 4 ℃、冷冻 -18 ℃ 为参考。',rows:[
+    ['绿叶菜','保鲜袋 + 厨房纸，3–5 天'],['肉类冷藏','1–2 天，冷冻 3 个月'],['鱼类','当天或冷冻 1 个月'],['鸡蛋','冷藏 3–5 周'],['牛奶','开封后 3 天'],['剩菜','冷藏 1–2 天，彻底加热'],['米饭','冷藏 1 天，勿反复加热'],['切开的水果','冷藏 1 天，覆膜'],['葱姜蒜','阴凉通风，蒜可冷冻'],['面包','冷冻保存，回烤'],['咖啡豆','密封避光，2 周内'],['坚果','冷藏防氧化']
+  ]});
+}
+
+function t_food_swap(root){
+  listTool(root,{ph:'食材 / 替代',note:'临时缺料时的常见替换。',rows:[
+    ['黄油','等量玉米油（略减）'],['牛奶','豆浆或水 + 奶粉'],['淡奶油','椰浆（风味不同）'],['白砂糖','蜂蜜（减 1/4 液体）'],['柠檬汁','白醋（少量）'],['生抽','老抽 + 盐（颜色会深）'],['蚝油','生抽 + 少许糖'],['料酒','黄酒或啤酒'],['淀粉','玉米淀粉通用，勾芡略不同'],['酵母','泡打粉不可等量替代'],['鸡蛋（粘合）','亚麻籽水或香蕉泥'],['奶油奶酪','酸奶滤水（口感偏酸）']
+  ]});
+}
+
+function t_laundry_symbol(root){
+  listTool(root,{ph:'洗涤符号',note:'常见洗标含义。',rows:[
+    ['水盆 + 数字','最高洗涤温度'],['水盆 + 手','手洗，最高 40 ℃'],['三角形','可漂白'],['三角形加斜线','禁止漂白'],['方块内圆','可烘干'],['方块内圆加叉','禁止烘干'],['熨斗 + 点','熨烫温度（1 低 2 中 3 高）'],['熨斗加叉','禁止熨烫'],['圆形','干洗'],['圆形加叉','禁止干洗'],['晾衣绳','悬挂晾干'],['平铺','平摊晾干']
+  ]});
+}
+
+function t_clothes_care(root){
+  listTool(root,{ph:'面料 / 护理',note:'常见面料的洗护要点。',rows:[
+    ['棉','可机洗，易皱，中温熨烫'],['麻','冷水手洗，避免拧绞'],['羊毛','冷水羊毛档，平铺晾干'],['真丝','冷水手洗，阴干，低温熨'],['涤纶','机洗，低温熨，易起球'],['锦纶','冷水洗，避免暴晒'],['羽绒','专用洗涤剂，低温烘干打散'],['皮革','不可水洗，专用护理剂'],['牛仔','反面冷水洗，少洗'],['雪纺','手洗，装洗衣袋']
+  ]});
+}
+
+function t_appliance_care(root){
+  listTool(root,{ph:'家电 / 保养',note:'定期保养能延长寿命。',rows:[
+    ['冰箱','每季度清冷凝水，背后留 10cm'],['洗衣机','每月筒清洁，洗完开门通风'],['空调','每季洗滤网，2 年深度清洁'],['热水器','每年除垢，检查镁棒'],['油烟机','每月清油杯，半年清叶轮'],['微波炉','柠檬水加热去味'],['电水壶','每月白醋除垢'],['扫地机','每周清主刷，清传感器'],['电视','避免长时间静止画面'],['净水器','按提示换滤芯']
+  ]});
+}
+
+function t_odor_remove(root){
+  listTool(root,{ph:'异味源 / 处理',note:'先找源头，除味只是补救。',rows:[
+    ['冰箱','小苏打 + 活性炭，清过期食物'],['鞋柜','干燥剂 + 茶包'],['卫生间','排气扇常开，洁厕灵定期'],['垃圾桶','勤倒，底部撒小苏打'],['车内','暴晒通风，换空调滤芯'],['衣柜','樟脑丸慎用，通风为主'],['新家具','开窗通风 3 个月以上'],['地毯','小苏打撒后吸尘'],['洗碗池','柠檬皮 + 热水冲'],['宠物区','酶清洁剂分解尿液']
+  ]});
+}
+
+function t_cleaning_tools(root){
+  listTool(root,{ph:'工具 / 用途',note:'基础清洁工具清单。',rows:[
+    ['超细纤维布','擦屏幕、镜面'],['百洁布','锅具，勿用于不粘锅'],['软毛刷','缝隙、键盘'],['刮水器','玻璃、瓷砖'],['拖把','地面，分区使用'],['吸尘器','地毯、沙发'],['蒸汽机','油烟机、缝隙'],['小苏打','去污除味'],['白醋','除垢、软化'],['柠檬酸','水垢克星']
+  ]});
+}
+
+function t_moving_list(root){
+  checklistTool(root,{key:'moving',ph:'搬家待办',items:['提前 2 周断舍离','预约搬家公司','打包标记房间','水电燃气过户','宽带迁移','清点贵重物品'],note:'搬家前逐项勾掉，避免漏事。'});
+}
+
+function t_home_emergency(root){
+  checklistTool(root,{key:'emkit',ph:'应急物品',items:['手电 + 备用电池','饮用水 3 天量','常用药 + 创可贴','充电宝','重要证件复印件','少量现金','口哨'],note:'放在固定位置，家人要知道在哪。'});
+}
+
+function t_life_hacks(root){
+  listTool(root,{ph:'场景 / 小技巧',note:'实用生活小技巧合集。',rows:[
+    ['手机进水','立刻关机，勿充电，送修'],['拉链卡住','铅笔涂石墨润滑'],['快递单隐私','涂掉电话与地址'],['切洋葱流泪','冷藏 10 分钟再切'],['锅底糊了','小苏打 + 水煮 10 分钟'],['新鞋磨脚','凡士林涂磨脚处'],['眼镜下滑','耳后绕皮筋'],['蚊虫叮咬','冷敷止痒，勿抓'],['钥匙生锈','铅笔粉润滑'],['标签撕不净','吹风机加热再撕'],['菜刀变钝','陶瓷碗底反向磨'],['衣服起球','剃毛器轻刮']
+  ]});
+}
+
+function t_battery_size(root){
+  listTool(root,{ph:'电池型号',note:'常见电池型号与用途。',rows:[
+    ['AA / 5 号','1.5V，遥控器、玩具'],['AAA / 7 号','1.5V，鼠标、遥控'],['C / 2 号','1.5V，大功率玩具'],['D / 1 号','1.5V，手电'],['9V','烟雾报警器'],['CR2032','3V 纽扣，主板、车钥匙'],['CR2025','3V 纽扣，更薄'],['LR44','1.5V 纽扣，小玩具'],['18650','3.7V 锂电，手电、充电宝'],['21700','3.7V 大容量锂电']
+  ]});
+}
+
+function t_bulb_type(root){
+  listTool(root,{ph:'灯泡 / 参数',note:'常见灯头与色温选择。',rows:[
+    ['E27','最常见螺口，家用主灯'],['E14','小螺口，吊灯、台灯'],['GU10','射灯卡口'],['MR16','低压射灯'],['T5/T8','日光灯管'],['2700K','暖黄，卧室'],['3000K','暖白，客厅'],['4000K','中性白，厨房'],['5000K','冷白，办公'],['6500K','日光，验货']
+  ]});
+}
+
+function t_screw_type(root){
+  listTool(root,{ph:'螺丝 / 用途',note:'常见螺丝与螺丝刀对应。',rows:[
+    ['十字 PH1','小家电、玩具'],['十字 PH2','家具、插座面板'],['一字','老式锁具'],['内六角','家具、自行车'],['Torx T10','硬盘、电器'],['Torx T20','汽车内饰'],['自攻螺丝','木板、石膏板'],['膨胀螺丝','墙面固定'],['沉头螺丝','隐藏式安装'],['法兰螺母','配法兰面']
+  ]});
+}
+
+function t_glue_type(root){
+  listTool(root,{ph:'胶 / 适用',note:'不同材料选不同胶。',rows:[
+    ['502 瞬干胶','塑料、陶瓷，脆'],['白乳胶','木材、纸张'],['免钉胶','墙面挂钩'],['玻璃胶','浴室密封，防霉型'],['结构胶','承重固定'],['AB 胶','金属、陶瓷'],['热熔胶','手工、包装，耐热差'],['双面胶','轻质固定'],['糯米胶','墙纸'],['防水胶带','临时补漏']
+  ]});
+}
+
+function t_tool_kit(root){
+  checklistTool(root,{key:'tools',ph:'家里该有的工具',items:['十字螺丝刀','一字螺丝刀','小扳手','卷尺','美工刀','钳子','内六角','胶带','手电'],note:'一套基础工具能解决大部分小修小补。'});
+}
+
+function t_leak_fix(root){
+  listTool(root,{ph:'漏水位置 / 处理',note:'先关总阀，再判断能否自己处理。',rows:[
+    ['水龙头滴漏','换阀芯或密封圈'],['角阀渗水','拧紧或换角阀'],['马桶漏水','检查浮球与密封圈'],['下水管接口','生料带 + 拧紧'],['墙面渗水','找物业，别自行打孔'],['热水器接口','关阀后换密封垫'],['水管爆裂','立即关总阀，报修'],['窗框渗水','打胶 + 检查排水孔']
+  ]});
+}
+
+function t_drain_clear(root){
+  listTool(root,{ph:'堵塞位置 / 方法',note:'化学疏通剂慎用，老管道易损伤。',rows:[
+    ['洗手池','拆存水弯清理毛发'],['厨房水槽','热水 + 小苏打 + 白醋'],['马桶','皮搋子，勿用强碱'],['地漏','取出滤网清毛发'],['浴缸','毛发钩 + 热水'],['阳台地漏','高压水枪冲'],['主管道','联系物业疏通']
+  ]});
+}
+
+function t_pest_control(root){
+  listTool(root,{ph:'虫害 / 处理',note:'先断绝食物与入口，再处理。',rows:[
+    ['蟑螂','胶饵点状布放，勿喷杀'],['蚊子','清积水，纱窗 + 驱蚊'],['蚂蚁','硼酸糖饵，找蚁路'],['苍蝇','清厨余，粘蝇板'],['米虫','冷冻米面 24 小时'],['衣鱼','干燥 + 樟木'],['老鼠','封洞 + 粘板，慎用毒饵'],['螨虫','高温洗床品，除湿']
+  ]});
+}
+
+function t_pet_age(root){
+  unitConvTool(root,{note:'宠物年龄粗算，大型犬寿命差异大。',units:[['dog_s','小型犬岁（约）',1],['dog_l','大型犬岁（约）',0.85],['cat','猫岁（约）',1],['human','人类岁（约）',7],['month','月龄',12]]});
+}
+
+function t_pet_feed(root){
+  calcTool(root,{fields:[['w','体重（kg）',5,0.5],['k','宠物',['dog','狗','cat','猫']],['a','活动量',['l','低','m','中','h','高']]],run:v=>{
+    const rer=70*Math.pow(+v.w,0.75);
+    const mult=(v.k==='dog'?1.6:1.2)*(v.a==='l'?1:v.a==='m'?1.2:1.4);
+    return [['静息能量 RER',rer.toFixed(0)+' kcal/天'],['每日建议热量',(rer*mult).toFixed(0)+' kcal'],['分几餐','成年 2 餐，幼年 3–4 餐']];
+  },note:'按体重与活动量估算，具体看粮袋标注。'});
+}
+
+function t_cat_age(root){
+  calcTool(root,{fields:[['y','猫年龄（年）',3,0.5]],run:v=>{
+    const y=+v.y;
+    const human=y<=1?15*y:y<=2?24+(y-1)*9:24+(y-2)*4;
+    return [['相当于人类年龄',human.toFixed(0)+' 岁'],['阶段',y<1?'幼猫':y<7?'成年':y<11?'中老年':'老年猫']];
+  }});
+}
+
+function t_dog_age(root){
+  calcTool(root,{fields:[['y','狗年龄（年）',3,0.5],['s','体型',['s','小型','m','中型','l','大型']]],run:v=>{
+    const mult={'s':4,'m':5,'l':6}[v.s];
+    const human=+v.y<=1?15:+v.y<=2?24+(+v.y-1)*mult*1.5:24+(+v.y-2)*mult;
+    return [['相当于人类年龄',Math.round(human)+' 岁'],['大型犬提示','大型犬老化更快']];
+  }});
+}
+
+function t_plant_water(root){
+  listTool(root,{ph:'植物 / 浇水',note:'宁干勿涝，见干见湿。',rows:[
+    ['绿萝','土表干 2cm 浇透，1 周 1 次'],['吊兰','5–7 天一次，耐旱'],['发财树','2 周一次，忌积水'],['多肉','10–15 天，颗粒土'],['龟背竹','7 天一次，喷雾增湿'],['君子兰','见干见湿，忌积水'],['月季','2–3 天，室外更勤'],['薄荷','保持湿润，喜光'],['文竹','5 天，忌暴晒'],['仙人掌','3–4 周少量']
+  ]});
+}
+
+function t_flower_lang(root){
+  listTool(root,{ph:'花 / 花语',note:'送花参考，注意场合与禁忌。',rows:[
+    ['玫瑰（红）','热烈爱情'],['玫瑰（白）','纯洁、尊敬'],['百合','百年好合'],['康乃馨','母爱、感恩'],['郁金香','爱的告白'],['向日葵','阳光、忠诚'],['满天星','思念、配角'],['勿忘我','永恒记忆'],['栀子花','一生守候'],['茉莉','亲切、质朴'],['菊花','高洁（送礼慎用）'],['绣球','希望、团圆']
+  ]});
+}
+
+function t_flower_season(root){
+  listTool(root,{ph:'花 / 花期',note:'常见花材自然花期参考。',rows:[
+    ['樱花','3–4 月'],['油菜花','3–4 月'],['郁金香','3–5 月'],['牡丹','4–5 月'],['月季','4–10 月'],['荷花','6–8 月'],['向日葵','6–9 月'],['薰衣草','6–8 月'],['桂花','9–10 月'],['菊花','10–11 月'],['梅花','12–2 月'],['山茶','1–3 月']
+  ]});
+}
+
+function t_medbox(root){
+  checklistTool(root,{key:'medbox',ph:'家庭药箱清单',items:['退烧止痛','创可贴','碘伏棉签','纱布绷带','体温计','抗过敏药','肠胃药','防蚊用品'],note:'定期检查有效期，过期及时清理。'});
+}
+
+function t_med_note(root){
+  listTool(root,{ph:'用药常识',note:'一般性原则，具体遵医嘱与说明书。',rows:[
+    ['抗生素','必须按疗程，勿自行停'],['退烧药','间隔 4–6 小时，勿叠加同类'],['胃药','饭前饭后按说明书'],['外用药','先清洁再涂，勿封太厚'],['儿童用药','按体重算，不用成人量'],['孕妇用药','任何药先问医生'],['饮酒','服药期间避免饮酒'],['过期药','勿服用，按要求回收']
+  ]});
+}
+
+function t_body_temp(root){
+  listTool(root,{ph:'测温部位',note:'不同部位参考范围不同。',rows:[
+    ['腋温','36.0–37.2 ℃'],['口温','36.3–37.2 ℃'],['耳温','35.8–37.5 ℃'],['额温','35.8–37.0 ℃'],['肛温','36.5–37.7 ℃'],['低烧','37.3–38.0 ℃'],['中烧','38.1–39.0 ℃'],['高烧','≥39.1 ℃']
+  ]});
+}
+
+function t_bp_ref(root){
+  listTool(root,{ph:'血压 / 分级',note:'家庭自测参考，诊断需就医。',rows:[
+    ['理想','<120/80 mmHg'],['正常','120–129/<80'],['正常高值','130–139/85–89'],['1 级高血压','140–159/90–99'],['2 级高血压','160–179/100–109'],['3 级高血压','≥180/110'],['低血压','<90/60，伴头晕需就医']
+  ]});
+}
+
+function t_sleep_need(root){
+  listTool(root,{ph:'年龄段 / 睡眠',note:'参考睡眠时长区间。',rows:[
+    ['婴儿 0–1 岁','12–16 小时'],['幼儿 1–2 岁','11–14 小时'],['学龄前 3–5 岁','10–13 小时'],['学龄 6–12 岁','9–12 小时'],['青少年 13–18','8–10 小时'],['成人 18–64','7–9 小时'],['老年 65+','7–8 小时']
+  ]});
+}
+
+function t_overnight_food(root){
+  listTool(root,{ph:'剩菜 / 处理',note:'冷藏 + 彻底加热是关键。',rows:[
+    ['绿叶菜','不建议隔夜，亚硝酸盐升高'],['肉类','冷藏 1–2 天，彻底加热'],['海鲜','当天吃完'],['米饭','冷藏 1 天，勿反复加热'],['汤','分装冷藏，煮沸后再喝'],['凉菜','不建议隔夜'],['鸡蛋','煮熟可冷藏 1 天'],['豆浆','当天喝完']
+  ]});
+}
+
+function t_fridge_zone(root){
+  listTool(root,{ph:'冰箱区域',note:'冷气循环决定摆放位置。',rows:[
+    ['冷藏上层','熟食、剩菜'],['冷藏中层','乳制品、鸡蛋'],['冷藏下层','生肉、海鲜（密封）'],['保鲜抽屉','蔬果'],['门架','调料、饮料'],['冷冻室','肉类分小份'],['不宜冷藏','香蕉、土豆、洋葱、蜂蜜'],['热食','放凉再放，勿直接塞']
+  ]});
+}
+
+function t_microwave_no(root){
+  listTool(root,{ph:'禁忌物品',note:'金属与密闭容器是主要风险。',rows:[
+    ['金属餐具','打火/损坏磁控管'],['锡纸','打火'],['带金边瓷器','打火'],['鸡蛋（带壳）','爆裂'],['密封罐头','压力爆裂'],['整颗栗子','爆裂'],['辣椒','挥发刺激'],['母乳','受热不均，不建议'],['一次性塑料','看是否标注可微波']
+  ]});
+}
+
+function t_knife_guide(root){
+  listTool(root,{ph:'刀具 / 用途',note:'一把主厨刀能应付大部分场景。',rows:[
+    ['主厨刀','切菜切肉通用'],['三德刀','日式通用，家庭首选'],['水果刀','削皮切水果'],['剁骨刀','砍骨，勿切硬物'],['面包刀','锯齿切面包'],['削皮刀','果蔬去皮'],['剪刀','厨房剪骨剪包装'],['磨刀棒','日常维护'],['磨刀石','开刃修复']
+  ]});
+}
+
+function t_tea_type(root){
+  listTool(root,{ph:'茶类 / 特点',note:'六大茶类基本认知。',rows:[
+    ['绿茶','不发酵，清香，85 ℃'],['白茶','微发酵，柔和'],['黄茶','闷黄，少见'],['青茶/乌龙','半发酵，香高'],['红茶','全发酵，甜醇'],['黑茶','后发酵，可陈'],['普洱生','可转化，越陈越香'],['普洱熟','渥堆，醇厚']
+  ]});
+}
+
+function t_disinfect_ratio(root){
+  calcTool(root,{fields:[['v','水量（升）',1,0.5],['r','浓度要求（mg/L）',250,50],['k','消毒剂浓度（%）',5,0.5]],run:v=>{
+    const need=(+v.v)*1000*(+v.r)/((+v.k)*10000);
+    return [['需加消毒剂',need.toFixed(1)+' ml'],['配比参考','1 升水加 '+need.toFixed(1)+' ml 原液'],['作用时间','擦抹后静置 10–30 分钟']];
+  },note:'按 84 消毒液常见 5% 浓度估算，通风使用。'});
+}
+
+function t_laundry_dose(root){
+  calcTool(root,{fields:[['w','衣物重量（kg）',5,0.5],['t','洗衣机类型',['f','滚筒','p','波轮']],['n','脏污程度',['l','轻','m','中','h','重']]],run:v=>{
+    const base=v.t==='f'?15:20;
+    const mult=v.n==='l'?0.8:v.n==='m'?1:1.3;
+    return [['建议洗衣液',(base*(+v.w)/5*mult).toFixed(0)+' ml'],['约合量杯',((base*(+v.w)/5*mult)/30).toFixed(1)+' 杯（30ml）'],['柔顺剂','按说明减半使用']];
+  }});
+}
+
+function t_moving_boxes(root){
+  calcTool(root,{fields:[['r','房间数',2,1],['p','人均物品量',['s','少','m','中','l','多']]],run:v=>{
+    const per={'s':4,'m':7,'l':10}[v.p];
+    const n=Math.round((+v.r)*per*0.6)+3;
+    return [['建议纸箱',n+' 个'],['大箱',Math.max(2,Math.round(n*0.3))+' 个'],['中箱',Math.round(n*0.4)+' 个'],['小箱',Math.round(n*0.3)+' 个'],['气泡膜','2–3 卷']];
+  }});
+}
+
+function t_light_watt(root){
+  calcTool(root,{fields:[['a','房间面积（㎡）',15,1],['k','用途',['bed','卧室','live','客厅','study','书房']]],run:v=>{
+    const lux={'bed':150,'live':300,'study':500}[v.k];
+    const w=Math.round(lux*(+v.a)/100);
+    return [['建议照度',lux+' lux'],['LED 总功率',w+' W'],['约合灯泡',Math.ceil(w/9)+' 个 9W 灯泡'],['色温','卧室 2700K，书房 4000–5000K']];
+  }});
+}
+
+function t_kettle_scale(root){
+  listTool(root,{ph:'水垢处理',note:'白醋或柠檬酸即可。',rows:[
+    ['电水壶','白醋 + 水 1:2 煮沸后静置 30 分钟'],['咖啡机','柠檬酸按说明循环'],['加湿器','白醋浸泡雾化片'],['花洒','扎孔塑料袋装醋浸泡'],['热水壶内胆','柠檬酸 20g + 1L 水'],['饮水机','专业除垢剂，按说明']
+  ]});
+}
+
+function t_electric_bill(root){
+  calcTool(root,{fields:[['w','功率（W）',1500,50],['h','每天小时',2,0.5],['p','电价（元/度）',0.6,0.05],['d','天数',30,1]],run:v=>{
+    const kwh=(+v.w)*(+v.h)*(+v.d)/1000;
+    return [['耗电量',kwh.toFixed(1)+' 度'],['电费',(kwh*(+v.p)).toFixed(2)+' 元'],['折合每天',((+v.w)*(+v.h)/1000).toFixed(2)+' 度']];
+  }});
+}
+function t_standby_power(root){
+  calcTool(root,{fields:[['n','待机设备数',5,1],['w','单台待机功率（W）',3,0.5],['p','电价（元/度）',0.6,0.05]],run:v=>{
+    const kwh=(+v.n)*(+v.w)*24*30/1000;
+    return [['月耗电',kwh.toFixed(1)+' 度'],['月电费',(kwh*(+v.p)).toFixed(2)+' 元'],['年电费',(kwh*(+v.p)*12).toFixed(2)+' 元']];
+  },note:'电视、路由器、充电器长期插着的隐性消耗。'});
+}
+function t_socket_count(root){
+  calcTool(root,{fields:[['r','房间数',3,1],['k','装修程度',['s','基础','m','改善','f','全屋智能']]],run:v=>{
+    const per={'s':4,'m':6,'f':9}[v.k];
+    return [['建议插座数',(+v.r)*per+' 个'],['每间约',per+' 个'],['另需','开关按灯位计，网口每间 1 个']];
+  }});
+}
+function t_washer_capacity(root){
+  calcTool(root,{fields:[['p','家庭人数',3,1],['k','洗衣频率',['d','每天','t','两三天一次','w','每周']]],run:v=>{
+    const per={'d':2,'t':4,'w':6}[v.k];
+    return [['建议容量',Math.round((+v.p)*per)+' kg'],['常见规格','8/9/10 kg 为家用主流'],['烘干','洗烘一体建议再加 1–2 kg']];
+  }});
+}
+function t_fridge_capacity(root){
+  calcTool(root,{fields:[['p','家庭人数',3,1],['k','习惯',['f','常做饭','o','外卖为主']]],run:v=>{
+    const per=v.k==='f'?80:60;
+    return [['建议容积',Math.round((+v.p)*per)+' L'],['开门方式','三门/十字对开更实用'],['预留尺寸','左右各 5cm，背后 10cm']];
+  }});
+}
+function t_wardrobe_capacity(root){
+  calcTool(root,{fields:[['p','人数',2,1],['l','衣物量',['s','少','m','中','l','多']]],run:v=>{
+    const per={'s':1.2,'m':1.8,'l':2.6}[v.l];
+    return [['建议进深','60 cm（含门）'],['挂衣杆总长',((+v.p)*per).toFixed(1)+' 米'],['叠放层','每层 35–40 cm 高']];
+  }});
+}
+function t_storage_box(root){
+  calcTool(root,{fields:[['w','柜宽（cm）',100,5],['d','柜深（cm）',50,5],['s','单个箱宽（cm）',40,5]],run:v=>{
+    return [['每排可放',Math.floor((+v.w)/(+v.s))+' 个'],['建议层数','3–4 层'],['单箱容量','约 '+((+v.w)*(+v.d)*30/1000).toFixed(0)+' L（30cm 高）']];
+  }});
+}
+function t_dehumidify(root){
+  calcTool(root,{fields:[['a','房间面积（㎡）',20,1],['h','层高（米）',2.8,0.1],['r','湿度目标（%）',55,5]],run:v=>{
+    const vol=(+v.a)*(+v.h);
+    return [['空间体积',vol.toFixed(1)+' m³'],['建议除湿量',(vol*0.45).toFixed(1)+' L/天'],['水箱容量','建议 ≥2L']];
+  }});
+}
+function t_humidify(root){
+  calcTool(root,{fields:[['a','房间面积（㎡）',20,1],['t','目标湿度（%）',50,5]],run:v=>{
+    return [['建议加湿量',Math.round((+v.a)*8)+' ml/h'],['水箱容量',Math.round((+v.a)*8*8/1000)+' L（8 小时）'],['类型','无雾型更安全']];
+  }});
+}
+function t_purifier_area(root){
+  calcTool(root,{fields:[['c','CADR（m³/h）',300,20],['h','层高（米）',2.8,0.1]],run:v=>{
+    const area=(+v.c)*0.1/(+v.h);
+    return [['适用面积',area.toFixed(0)+' ㎡'],['每小时换气',(5)+' 次（按 CADR 0.1 系数）'],['滤芯建议','6–12 个月或按提示']];
+  }});
+}
+function t_filter_life(root){
+  calcTool(root,{fields:[['u','每天使用小时',10,1],['l','额定寿命（月）',6,1],['q','水质/空气差',['n','正常','b','较差']]],run:v=>{
+    const m=(+v.l)*(v.q==='b'?0.7:1)/((+v.u)/10);
+    return [['预计更换',m.toFixed(1)+' 个月'],['精确日期','约 '+Math.round(m*30)+' 天后'],['提示','出水变小或异味提前更换']];
+  }});
+}
+function t_charge_time(root){
+  calcTool(root,{fields:[['c','电池容量（mAh）',4000,100],['w','充电功率（W）',30,1],['e','效率（%）',85,5]],run:v=>{
+    const hours=(+v.c)/((+v.w)*1000*(+v.e)/100);
+    return [['理论充满',(hours*60).toFixed(0)+' 分钟'],['0–80%',(hours*60*0.7).toFixed(0)+' 分钟'],['实际会更长','受温度与电芯限制']];
+  }});
+}
+function t_powerbank(root){
+  calcTool(root,{fields:[['c','充电宝容量（mAh）',10000,1000],['b','手机电池（mAh）',4000,100],['e','转换效率（%）',65,5]],run:v=>{
+    const times=(+v.c)*(+v.e)/100/(+v.b);
+    return [['可充满手机',times.toFixed(2)+' 次'],['实际输出',((+v.c)*(+v.e)/100).toFixed(0)+' mAh'],['带上飞机','≤100Wh（约 27000mAh）']];
+  }});
+}
+function t_volume_weight(root){
+  calcTool(root,{fields:[['l','长（cm）',40,1],['w','宽（cm）',30,1],['h','高（cm）',20,1],['k','快递类型',['ex','普通快递','air','航空件']]],run:v=>{
+    const vol=(+v.l)*(+v.w)*(+v.h);
+    const div=v.k==='air'?6000:8000;
+    return [['实际体积',(vol/1000000).toFixed(3)+' m³'],['体积重',(vol/div).toFixed(2)+' kg'],['计费重量','取实重与体积重较大值']];
+  }});
+}
+function t_storage_conv(root){
+  unitConvTool(root,{note:'手机与电脑存储换算，厂商按 1000 进制，系统按 1024。',units:[['mb','MB',1],['gb','GB',1000],['tb','TB',1000000],['gib','GiB',1024],['mib','MiB',1]]});
+}
+function t_netspeed(root){
+  unitConvTool(root,{note:'宽带兆数与实际下载速度换算（8 bit = 1 Byte）。',units:[['mbps','Mbps（兆带宽）',1],['mbs','MB/s',8],['kbs','KB/s',0.008],['gbps','Gbps',1000]]});
+}
+function t_paper_size(root){
+  listTool(root,{ph:'纸张 / 尺寸',note:'常见纸张尺寸（mm）。',rows:[
+    ['A4','210 × 297'],['A3','297 × 420'],['A5','148 × 210'],['A6','105 × 148'],['B5','176 × 250'],['B4','250 × 353'],['16 开','195 × 270'],['32 开','130 × 184'],['名片','90 × 54'],['照片 5 寸','89 × 127'],['照片 6 寸','102 × 152'],['Letter','216 × 279']
+  ]});
+}
+/* ===== 学习考试（60） ===== */
+
+function t_study_plan(root){
+  calcTool(root,{fields:[['d','距考试天数',30,1],['h','每天可用小时',3,0.5],['c','科目数',4,1]],run:v=>{
+    const total=(+v.d)*(+v.h);
+    return [['总可用学时',total.toFixed(0)+' 小时'],['每科分配',(total/(+v.c||1)).toFixed(1)+' 小时'],['每日安排',(+v.h).toFixed(1)+' 小时 = '+(+v.c)+' 科 × '+((+v.h)/(+v.c||1)).toFixed(1)+' 小时'],['建议','每 50 分钟休息 10 分钟']];
+  },note:'先算总量再分配，别只列计划不算时间。'});
+}
+
+function t_review_interval(root){
+  calcTool(root,{fields:[['d','首次学习日期距今（天）',0,1],['n','复习轮次',6,1]],run:v=>{
+    const gaps=[1,2,4,7,15,30,60];
+    const rows=gaps.slice(0,Math.min(7,+v.n)).map((g,i)=>['第 '+(i+1)+' 次复习','第 '+((+v.d)+g)+' 天（间隔 '+g+' 天）']);
+    return rows;
+  },note:'艾宾浩斯简化间隔，按实际掌握度调整。'});
+}
+
+function t_mistake_book(root){
+  checklistTool(root,{key:'mistake',ph:'错题：题目 / 错因',items:['抄题 + 标出错步骤','写清错因','隔天重做一遍','一周后再做'],note:'错题本的价值在重做，不在抄写。'});
+}
+
+function t_word_book(root){
+  checklistTool(root,{key:'words',ph:'单词',items:['abandon 放弃','benefit 利益'],note:'每天 20 个，隔天复习前一天。'});
+}
+
+function t_ebbinghaus(root){
+  listTool(root,{ph:'复习节点',note:'记忆保持的粗略规律。',rows:[
+    ['学习后 5 分钟','复习一遍，记忆量最高'],['30 分钟','第二次回顾'],['12 小时','睡前过一遍'],['1 天','第一次系统复习'],['2 天','第二次'],['4 天','第三次'],['7 天','第四次'],['15 天','第五次'],['30 天','第六次，基本固化']
+  ]});
+}
+
+function t_multiplication(root){
+  listTool(root,{ph:'口诀',note:'九九乘法表速查。',rows:[
+    ['1×1=1','2×2=4','3×3=9','4×4=16','5×5=25'],['6×6=36','7×7=49','8×8=64','9×9=81','1×9=9'],['2×9=18','3×9=27','4×9=36','5×9=45','6×9=54'],['7×9=63','8×9=72','12×12=144','15×15=225','25×25=625']
+  ]});
+}
+
+function t_square_table(root){
+  listTool(root,{ph:'平方 / 数值',note:'1–30 的平方，做题常用。',rows:[
+    ['1²–10²','1 4 9 16 25 36 49 64 81 100'],['11²–15²','121 144 169 196 225'],['16²–20²','256 289 324 361 400'],['21²–25²','441 484 529 576 625'],['26²–30²','676 729 784 841 900']
+  ]});
+}
+
+function t_cube_table(root){
+  listTool(root,{ph:'立方 / 数值',note:'1–15 的立方。',rows:[
+    ['1³–5³','1 8 27 64 125'],['6³–10³','216 343 512 729 1000'],['11³–15³','1331 1728 2197 2744 3375'],['常用','2³=8，3³=27，4³=64，5³=125，10³=1000']
+  ]});
+}
+
+function t_prime_table(root){
+  listTool(root,{ph:'质数',note:'100 以内质数，判断用。',rows:[
+    ['1–9','2 3 5 7'],['10–49','11 13 17 19 23 29 31 37 41 43 47'],['50–99','53 59 61 67 71 73 79 83 89 97'],['判断技巧','除 2/3/5/7 外，只需试到平方根']
+  ]});
+}
+
+function t_trig_table(root){
+  listTool(root,{ph:'角度 / 三角函数',note:'特殊角三角函数值。',rows:[
+    ['0°','sin 0，cos 1，tan 0'],['30°','sin 1/2，cos √3/2，tan √3/3'],['45°','sin √2/2，cos √2/2，tan 1'],['60°','sin √3/2，cos 1/2，tan √3'],['90°','sin 1，cos 0，tan 不存在'],['180°','sin 0，cos -1，tan 0']
+  ]});
+}
+
+function t_geo_formula(root){
+  listTool(root,{ph:'图形 / 公式',note:'常见平面图形面积公式。',rows:[
+    ['长方形','S = 长 × 宽'],['正方形','S = 边长²'],['三角形','S = 底 × 高 / 2'],['平行四边形','S = 底 × 高'],['梯形','S = (上底 + 下底) × 高 / 2'],['圆','S = πr²，C = 2πr'],['扇形','S = nπr²/360，弧长 = nπr/180'],['环','S = π(R² - r²)']
+  ]});
+}
+
+function t_physics_formula(root){
+  listTool(root,{ph:'物理量 / 公式',note:'初高中常用公式。',rows:[
+    ['速度','v = s/t'],['加速度','a = (v - v0)/t'],['力','F = ma'],['功','W = Fs cosθ'],['功率','P = W/t = Fv'],['动能','Ek = ½mv²'],['重力势能','Ep = mgh'],['欧姆定律','I = U/R'],['电功率','P = UI = I²R = U²/R'],['密度','ρ = m/V']
+  ]});
+}
+
+function t_chem_formula(root){
+  listTool(root,{ph:'化学 / 公式',note:'常见量与反应式。',rows:[
+    ['物质的量','n = m/M'],['浓度','c = n/V'],['气体摩尔体积','V = n × 22.4 L（标准状况）'],['质量分数','w = m溶质/m溶液 × 100%'],['燃烧','C + O₂ → CO₂'],['碳酸钙分解','CaCO₃ → CaO + CO₂↑'],['中和','H⁺ + OH⁻ → H₂O'],['铁与盐酸','Fe + 2HCl → FeCl₂ + H₂↑']
+  ]});
+}
+
+function t_unit_prefix(root){
+  listTool(root,{ph:'前缀 / 倍数',note:'SI 词头，读图表时常用。',rows:[
+    ['k','千，10³'],['M','兆，10⁶'],['G','吉，10⁹'],['T','太，10¹²'],['m','毫，10⁻³'],['μ','微，10⁻⁶'],['n','纳，10⁻⁹'],['p','皮，10⁻¹²'],['Ki','1024'],['Mi','1024²'],['Gi','1024³']
+  ]});
+}
+
+function t_fraction_conv(root){
+  convTool(root,{def:'3/8\n0.375\n12.5%',outLabel:'结果',modes:[
+    {label:'分数 → 小数',fn:s=>s.split('\n').filter(x=>x.includes('/')).map(x=>{const [a,b]=x.split('/').map(Number);return x+' = '+(a/b).toFixed(4);}).join('\n')},
+    {label:'小数 → 分数',fn:s=>s.trim().split(/\s+/).filter(Boolean).map(x=>{const n=+x;const d=100000;const g=(a,b)=>b?g(b,a%b):a;const k=g(Math.round(n*d),d);return x+' ≈ '+Math.round(n*d)/k+'/'+d/k;}).join('\n')},
+    {label:'百分比互换',fn:s=>s.split('\n').filter(Boolean).map(x=>x.includes('%')?x+' = '+(parseFloat(x)/100):x+' = '+(+x*100).toFixed(2)+'%').join('\n')}
+  ],note:'分数、小数、百分比三者互转。'});
+}
+
+function t_sci_notation(root){
+  convTool(root,{def:'0.00042\n5230000',outLabel:'结果',modes:[{label:'转科学计数法',fn:s=>s.split('\n').filter(Boolean).map(x=>{const n=+x;if(!n)return '0';const e=Math.floor(Math.log10(Math.abs(n)));return x+' = '+(n/Math.pow(10,e)).toFixed(3)+' × 10^'+e;}).join('\n')}]});
+}
+
+function t_pi_digits(root){
+  listTool(root,{ph:'圆周率',note:'常用记忆位数。',rows:[
+    ['π','3.1415926535'],['前 30 位','3.141592653589793238462643383279'],['2π','6.283185307'],['π/2','1.5707963268'],['π/4','0.7853981634'],['记忆口诀','山巅一寺一壶酒（3.14159）']
+  ]});
+}
+
+function t_english_tense(root){
+  listTool(root,{ph:'时态 / 结构',note:'英语 16 时态速查（重点 8 个）。',rows:[
+    ['一般现在','do/does + 动词原形'],['一般过去','did + 动词过去式'],['一般将来','will do / be going to do'],['现在进行','am/is/are + doing'],['过去进行','was/were + doing'],['现在完成','have/has + done'],['过去完成','had + done'],['现在完成进行','have/has been doing']
+  ]});
+}
+
+function t_irregular_verb(root){
+  listTool(root,{ph:'动词 / 过去式',note:'常见不规则动词三态。',rows:[
+    ['go','went / gone'],['do','did / done'],['see','saw / seen'],['take','took / taken'],['write','wrote / written'],['speak','spoke / spoken'],['begin','began / begun'],['break','broke / broken'],['come','came / come'],['buy','bought / bought'],['teach','taught / taught'],['think','thought / thought']
+  ]});
+}
+
+function t_root_affix(root){
+  listTool(root,{ph:'词根 / 含义',note:'常见词根词缀，背单词更快。',rows:[
+    ['un-','否定，unhappy'],['re-','再，rebuild'],['pre-','前，preview'],['sub-','下，subway'],['trans-','跨越，transport'],['-able','可…的，readable'],['-tion','名词后缀，action'],['-ment','名词后缀，movement'],['-less','无…的，careless'],['-ify','使…，simplify'],['tele-','远，telephone'],['bio-','生命，biology']
+  ]});
+}
+
+function t_preposition(root){
+  listTool(root,{ph:'介词 / 用法',note:'常见介词搭配。',rows:[
+    ['at','点：at 8:00 / at night'],['in','内：in 2024 / in the box'],['on','面：on Monday / on the desk'],['for','为了/持续：for 3 days'],['since','自从：since 2020'],['by','截止：by Friday'],['with','伴随：with a pen'],['without','没有'],['between','两者之间'],['among','多者之间']
+  ]});
+}
+
+function t_linking(root){
+  listTool(root,{ph:'连读 / 规则',note:'英语口语连读规律。',rows:[
+    ['辅音 + 元音','take it → ta-ke-it'],['元音 + 元音','go on → go-w-on'],['r 连读','far away → fa-ra-way'],['爆破音失爆','big car → bi(g) car'],['t/d 浊化','water → wader'],['弱读','and → ən'],['缩读','want to → wanna'],['句重音','实词重读，虚词弱读']
+  ]});
+}
+
+function t_essay_pattern(root){
+  listTool(root,{ph:'句型 / 用途',note:'英语写作常用句型。',rows:[
+    ['开头','It is widely acknowledged that…'],['转折','However, opinions vary from person to person.'],['举例','For instance, …'],['因果','As a result, …'],['让步','Although…, …'],['强调','What matters most is…'],['建议','It is advisable to…'],['结尾','In conclusion, …']
+  ]});
+}
+
+function t_idiom_misuse(root){
+  listTool(root,{ph:'成语 / 易错点',note:'常见误用提醒。',rows:[
+    ['差强人意','大体令人满意，不是不满意'],['空穴来风','有根据的传言，不是没根据'],['首当其冲','最先受冲击，不是首先'],['炙手可热','权势大，不是热门'],['明日黄花','过时之物，不是未来'],['七月流火','天气转凉，不是酷热'],['不刊之论','不可修改的言论，不是不能刊登'],['屡试不爽','每次都对，不是不舒服']
+  ]});
+}
+
+function t_synonym(root){
+  listTool(root,{ph:'词 / 辨析',note:'近义词细微差别。',rows:[
+    ['安静 / 宁静','安静偏环境，宁静偏心境'],['希望 / 盼望','盼望程度更深'],['忽然 / 突然','突然更意外'],['成果 / 结果','成果含褒义'],['abandon / give up','abandon 更彻底'],['see / watch','watch 强调持续观看'],['listen / hear','listen 主动，hear 被动'],['say / tell','tell 需有对象']
+  ]});
+}
+
+function t_antonym(root){
+  listTool(root,{ph:'词 / 反义',note:'常用反义词。',rows:[
+    ['大 / 小','高 / 低'],['前 / 后','左 / 右'],['快 / 慢','早 / 晚'],['冷 / 热','干 / 湿'],['明 / 暗','轻 / 重'],['多 / 少','进 / 退'],['rich / poor','happy / sad'],['increase / decrease','accept / refuse']
+  ]});
+}
+
+function t_measure_word(root){
+  listTool(root,{ph:'量词',note:'常见量词搭配。',rows:[
+    ['一本书 / 一支笔','个、本、支'],['一匹马 / 一头牛','匹、头'],['一条鱼 / 一只鸟','条、只'],['一张纸 / 一幅画','张、幅'],['一座山 / 一条河','座、条'],['一棵树 / 一朵花','棵、朵'],['一轮明月','轮'],['一缕阳光','缕'],['一阵风 / 一场雨','阵、场']
+  ]});
+}
+
+function t_punctuation(root){
+  listTool(root,{ph:'标点 / 用法',note:'常见标点误用。',rows:[
+    ['句号 。','陈述句末'],['逗号 ，','句内停顿'],['顿号 、','并列词语'],['分号 ；','并列分句'],['冒号 ：','提示下文'],['问号 ？','疑问句末'],['感叹号 ！','强烈语气，少用'],['引号 “”','引用原话'],['破折号 ——','解释或转折'],['省略号 ……','列举未尽']
+  ]});
+}
+
+function t_rhetoric(root){
+  listTool(root,{ph:'修辞 / 例子',note:'常见修辞手法。',rows:[
+    ['比喻','像、仿佛，化抽象为具体'],['拟人','赋予物以人的动作'],['夸张','扩大或缩小特征'],['排比','三个以上结构相似句'],['对偶','字数结构相对'],['反复','重复以强调'],['设问','自问自答'],['反问','答案在问中']
+  ]});
+}
+
+function t_poem_line(root){
+  listTool(root,{ph:'诗句 / 出处',note:'常引用名句。',rows:[
+    ['海内存知己，天涯若比邻','王勃《送杜少府》'],['会当凌绝顶，一览众山小','杜甫《望岳》'],['长风破浪会有时','李白《行路难》'],['不畏浮云遮望眼','王安石《登飞来峰》'],['雄关漫道真如铁','毛泽东《忆秦娥》'],['落红不是无情物','龚自珍《己亥杂诗》'],['问渠那得清如许','朱熹《观书有感》'],['路漫漫其修远兮','屈原《离骚》']
+  ]});
+}
+
+function t_literature(root){
+  listTool(root,{ph:'常识',note:'文学常识速查。',rows:[
+    ['四书','大学、中庸、论语、孟子'],['五经','诗、书、礼、易、春秋'],['唐宋八大家','韩柳欧苏 + 王安石、曾巩'],['四大名著','红楼梦、西游记、水浒传、三国演义'],['诗经','最早诗歌总集，305 篇'],['楚辞','屈原，浪漫主义源头'],['乐府','汉代民歌'],['婉约 / 豪放','柳永李清照 / 苏轼辛弃疾']
+  ]});
+}
+
+function t_dynasty(root){
+  listTool(root,{ph:'朝代 / 年代',note:'中国主要朝代顺序。',rows:[
+    ['夏','约前 2070–前 1600'],['商','前 1600–前 1046'],['周','前 1046–前 256'],['秦','前 221–前 207'],['汉','前 202–220'],['三国','220–280'],['晋','265–420'],['南北朝','420–589'],['隋','581–618'],['唐','618–907'],['宋','960–1279'],['元','1271–1368'],['明','1368–1644'],['清','1644–1912']
+  ]});
+}
+
+function t_geo_extreme(root){
+  listTool(root,{ph:'地理之最',note:'中国地理常识。',rows:[
+    ['最高峰','珠穆朗玛峰 8848.86 m'],['最长河','长江 6300 km'],['最大湖','青海湖'],['最大沙漠','塔克拉玛干'],['最低点','艾丁湖 -154 m'],['最长城墙','长城'],['最大岛','台湾岛'],['最深峡谷','雅鲁藏布大峡谷']
+  ]});
+}
+
+function t_world_extreme(root){
+  listTool(root,{ph:'世界之最',note:'世界地理常识。',rows:[
+    ['最高峰','珠峰 8848.86 m'],['最长河','尼罗河约 6650 km'],['最深海沟','马里亚纳 11034 m'],['最大洋','太平洋'],['最大洲','亚洲'],['最大沙漠','撒哈拉'],['最大岛','格陵兰'],['最小国','梵蒂冈']
+  ]});
+}
+
+function t_chem_phenomenon(root){
+  listTool(root,{ph:'实验 / 现象',note:'常见实验现象描述。',rows:[
+    ['镁条燃烧','耀眼白光，白色固体'],['铁丝在氧气','火星四射，黑色固体'],['硫在氧气','蓝紫色火焰'],['木炭还原氧化铜','黑色变红，石灰水变浑'],['二氧化碳通石灰水','变浑浊'],['钠与水','浮熔游响红'],['氢气燃烧','淡蓝色火焰，产物只有水'],['酸碱中和','放热，pH 趋近 7']
+  ]});
+}
+
+function t_bio_fact(root){
+  listTool(root,{ph:'生物常识',note:'初高中生物要点。',rows:[
+    ['细胞结构','膜、质、核（植物还有壁、叶绿体）'],['光合作用','CO₂ + H₂O → 有机物 + O₂'],['呼吸作用','有机物 + O₂ → CO₂ + H₂O + 能量'],['遗传物质','DNA，主要载体染色体'],['血细胞','红细胞运氧，白细胞免疫'],['消化','淀粉从口腔开始，蛋白质从胃'],['生态系统','生产者、消费者、分解者'],['食物链','从生产者开始，箭头指捕食者']
+  ]});
+}
+
+function t_physics_symbol(root){
+  listTool(root,{ph:'符号 / 含义',note:'物理量符号与单位。',rows:[
+    ['m','质量，kg'],['v','速度，m/s'],['a','加速度，m/s²'],['F','力，N'],['W','功，J'],['P','功率，W'],['E','能量，J'],['U','电压，V'],['I','电流，A'],['R','电阻，Ω'],['ρ','密度，kg/m³'],['λ','波长，m']
+  ]});
+}
+
+function t_math_symbol(root){
+  listTool(root,{ph:'符号 / 读法',note:'数学符号速查。',rows:[
+    ['∑','求和'],['∏','连乘'],['∫','积分'],['∂','偏导'],['√','根号'],['≈','约等于'],['≤ ≥','小于等于 / 大于等于'],['∈','属于'],['∪ ∩','并集 / 交集'],['∞','无穷'],['!','阶乘'],['|x|','绝对值']
+  ]});
+}
+
+function t_circle_calc(root){
+  calcTool(root,{fields:[['r','半径',5,0.1],['a','圆心角（°）',60,1]],run:v=>{
+    const r=+v.r, a=+v.a;
+    return [['周长',(2*Math.PI*r).toFixed(3)],['面积',(Math.PI*r*r).toFixed(3)],['弧长',(a*Math.PI*r/180).toFixed(3)],['扇形面积',(a*Math.PI*r*r/360).toFixed(3)]];
+  }});
+}
+
+function t_triangle_calc(root){
+  calcTool(root,{fields:[['a','边 a',3,0.1],['b','边 b',4,0.1],['c','边 c',5,0.1]],run:v=>{
+    const a=+v.a,b=+v.b,c=+v.c;
+    const s=(a+b+c)/2;
+    const area=Math.sqrt(Math.max(0,s*(s-a)*(s-b)*(s-c)));
+    const ok=(a+b>c&&a+c>b&&b+c>a);
+    return [['是否构成三角形',ok?'是':'否'],['周长',(a+b+c).toFixed(2)],['面积（海伦）',area?area.toFixed(2):'—'],['最大角',ok?(Math.acos((b*b+c*c-a*a)/(2*b*c))*180/Math.PI).toFixed(1)+'°':'—']];
+  }});
+}
+
+function t_combination(root){
+  calcTool(root,{fields:[['n','n',10,1],['k','k',3,1]],run:v=>{
+    const n=Math.max(0,Math.round(v.n)), k=Math.max(0,Math.round(v.k));
+    if(k>n) return [['C(n,k)','不合法'],['A(n,k)','不合法']];
+    let c=1,a=1;
+    for(let i=0;i<k;i++){ c=c*(n-i)/(i+1); a=a*(n-i); }
+    return [['组合 C(n,k)',Math.round(c)],['排列 A(n,k)',Math.round(a)],['说明','C 不计顺序，A 计顺序']];
+  }});
+}
+
+function t_stats_basic(root){
+  convTool(root,{def:'85 92 78 90 66 88',outLabel:'统计',modes:[{label:'计算统计量',fn:s=>{
+    const a=s.split(/[\s,，]+/).filter(Boolean).map(Number).filter(x=>!isNaN(x));
+    if(!a.length) throw new Error('输入数字');
+    const sorted=[...a].sort((x,y)=>x-y);
+    const sum=a.reduce((x,y)=>x+y,0);
+    const mean=sum/a.length;
+    const med=sorted.length%2?sorted[(sorted.length-1)/2]:(sorted[sorted.length/2-1]+sorted[sorted.length/2])/2;
+    const vari=a.reduce((x,y)=>x+Math.pow(y-mean,2),0)/a.length;
+    return `个数 ${a.length}\n总和 ${sum}\n平均 ${mean.toFixed(2)}\n中位数 ${med}\n最大 ${sorted[sorted.length-1]}\n最小 ${sorted[0]}\n标准差 ${Math.sqrt(vari).toFixed(2)}`;
+  }}]});
+}
+
+function t_gpa(root){
+  calcTool(root,{fields:[['s','平均分（百分制）',85,1],['k','换算方式',['us','4.0 制','uk','英国制','cn','5.0 制']]],run:v=>{
+    const s=+v.s;
+    if(v.k==='us') return [['GPA',(s>=90?4:s>=80?3:s>=70?2:s>=60?1:0).toFixed(1)],['说明','粗略分档，各校算法不同']];
+    if(v.k==='uk') return [['等级',s>=70?'一等':s>=60?'二等一':s>=50?'二等二':'三等']];
+    return [['GPA',(s/100*5).toFixed(2)],['说明','5.0 制按比例']];
+  }});
+}
+
+function t_exam_score(root){
+  calcTool(root,{fields:[['r','答对题数',30,1],['t','总题数',40,1],['w','每题分值',2.5,0.5]],run:v=>{
+    const score=(+v.r)*(+v.w);
+    const total=(+v.t)*(+v.w);
+    return [['得分',score.toFixed(1)+' / '+total.toFixed(1)],['百分制',(score/(total||1)*100).toFixed(1)],['正确率',((+v.r)/(+v.t||1)*100).toFixed(1)+' %']];
+  }});
+}
+
+function t_reading_speed(root){
+  calcTool(root,{fields:[['p','页数',20,1],['t','阅读分钟',30,5],['c','每页字数',600,50]],run:v=>{
+    const total=(+v.p)*(+v.c);
+    const perMin=total/(+v.t||1);
+    return [['总字数',total],['每分钟',Math.round(perMin)+' 字'],['读完 10 万字约需',(100000/(perMin||1)/60).toFixed(1)+' 小时']];
+  }});
+}
+
+function t_note_method(root){
+  listTool(root,{ph:'笔记法',note:'不同场景选不同笔记结构。',rows:[
+    ['康奈尔','左线索、右笔记、下总结'],['思维导图','中心主题向外发散'],['卡片盒','一卡一观点，标编号'],['大纲法','层级缩进'],['时间轴','按时间顺序'],['表格法','对比维度清晰'],['SQ3R','浏览提问精读复述复习'],['费曼','讲给别人听']
+  ]});
+}
+
+function t_memory_method(root){
+  listTool(root,{ph:'记忆法',note:'常见记忆策略。',rows:[
+    ['间隔重复','按遗忘曲线复习'],['主动回忆','合书复述'],['联想','编故事串联'],['记忆宫殿','把内容放进熟悉空间'],['首字母','取首字成词'],['谐音','用读音联想'],['分组','化整为零'],['睡前复习','睡眠巩固记忆']
+  ]});
+}
+
+function t_time_mgmt(root){
+  listTool(root,{ph:'方法',note:'常见时间管理模型。',rows:[
+    ['番茄工作法','25 分钟专注 + 5 分钟休息'],['四象限','重要紧急优先'],['GTD','收集、整理、执行、回顾'],['两分钟法则','两分钟内能做的立刻做'],['时间块','按块安排同类任务'],['吃青蛙','先做最难的一件事'],['周复盘','每周回顾一次'],['80/20','聚焦 20% 关键任务']
+  ]});
+}
+
+function t_paper_format(root){
+  listTool(root,{ph:'论文要素',note:'常见论文结构要素。',rows:[
+    ['标题','20 字内，含关键词'],['摘要','目的、方法、结果、结论'],['关键词','3–5 个'],['引言','背景、问题、意义'],['方法','对象、工具、流程'],['结果','数据与图表'],['讨论','解释与局限'],['参考文献','GB/T 7714 格式']
+  ]});
+}
+
+function t_hex_convert(root){
+  convTool(root,{def:'255\n1010\n777',outLabel:'结果',modes:[
+    {label:'十 → 二/八/十六进制',fn:s=>s.split('\n').filter(Boolean).map(x=>{const n=parseInt(x,10);return `${x} → 二进制 ${n.toString(2)}，八进制 ${n.toString(8)}，十六进制 ${n.toString(16).toUpperCase()}`;}).join('\n')},
+    {label:'任意进制 → 十进制',fn:s=>s.split('\n').filter(Boolean).map(x=>{const v=(x.match(/(\d+)\s*\(\s*(\d+)\s*\)/)||[]);if(v)return x+' = '+parseInt(v[1],+v[2]).toString(10);const n=parseInt(x,2);return x+'（按二进制） = '+n;}).join('\n')}
+  ],note:'需要带进制时写成 1010(2) 这种格式。'});
+}
+
+function t_percent_calc(root){
+  calcTool(root,{fields:[['a','数值',200,1],['p','百分比（%）',15,1]],run:v=>{
+    const a=+v.a,p=+v.p;
+    return [['百分比值',(a*p/100).toFixed(2)],['增加后',(a*(1+p/100)).toFixed(2)],['减少后',(a*(1-p/100)).toFixed(2)],['占比',(a/(p||1)).toFixed(2)]];
+  }});
+}
+
+function t_sqrt_calc(root){
+  calcTool(root,{fields:[['n','数字',2,0.01],['k','次方根',2,1]],run:v=>{
+    const n=+v.n, k=Math.max(2,+v.k);
+    if(k===2) return [['平方根',Math.sqrt(n).toFixed(6)],['平方',(n*n).toFixed(4)]];
+    return [[k+' 次方根',(n<0&&k%2===0?'无实数解':String(Math.pow(n,1/k).slice(0,12)))],['乘方',Math.pow(n,k).toFixed(4)]];
+  }});
+}
+
+function t_gcd_lcm(root){
+  calcTool(root,{fields:[['a','整数 A',24,1],['b','整数 B',36,1]],run:v=>{
+    let a=Math.abs(Math.round(+v.a)), b=Math.abs(Math.round(+v.b));
+    const x=a, y=b;
+    while(b){ const t=a%b; a=b; b=t; }
+    return [['最大公约数',String(a)],['最小公倍数',String(x*y/(a||1))]];
+  }});
+}
+
+function t_quadratic(root){
+  calcTool(root,{fields:[['a','a',1,0.1],['b','b',-3,0.1],['c','c',2,0.1]],run:v=>{
+    const a=+v.a,b=+v.b,c=+v.c;
+    if(!a) return [['不是二次方程','a 不能为 0'],['线性解',String((-c/(b||1)).toFixed(3))]];
+    const d=b*b-4*a*c;
+    if(d<0) return [['判别式',d.toFixed(2)],['实数解','无（两个复根）']];
+    return [['判别式',d.toFixed(2)],['x1',((-b+Math.sqrt(d))/(2*a)).toFixed(4)],['x2',((-b-Math.sqrt(d))/(2*a)).toFixed(4)]];
+  }});
+}
+
+function t_sequence(root){
+  calcTool(root,{fields:[['a','首项',1,0.1],['d','公差/公比',2,0.1],['n','项数',10,1],['k','类型',['a','等差','g','等比']]],run:v=>{
+    const n=Math.round(+v.n), a=+v.a, d=+v.d;
+    if(v.k==='a'){
+      const sum=n*(2*a+(n-1)*d)/2;
+      return [['第 n 项',(a+(n-1)*d).toFixed(3)],['前 n 项和',sum.toFixed(3)]];
+    }
+    const sum=d===1?n*a:a*(1-Math.pow(d,n))/(1-d);
+    return [['第 n 项',(a*Math.pow(d,n-1)).toFixed(3)],['前 n 项和',sum.toFixed(3)]];
+  }});
+}
+
+function t_angle_conv(root){
+  unitConvTool(root,{note:'角度与弧度互换。',units:[['deg','度',1],['rad','弧度',57.2957795],['grad','百分度',0.9],['turn','圈',360]]});
+}
+
+function t_log_calc(root){
+  calcTool(root,{fields:[['x','真数',100,1],['b','底数',10,1]],run:v=>{
+    const x=+v.x,b=+v.b;
+    if(x<=0||b<=0||b===1) return [['结果','输入不合法']];
+    return [['log_b(x)',(Math.log(x)/Math.log(b)).toFixed(6)],['ln(x)',Math.log(x).toFixed(6)],['log10(x)',Math.log10(x).toFixed(6)]];
+  }});
+}
+
+function t_power_calc(root){
+  calcTool(root,{fields:[['a','底数',2,0.1],['n','指数',10,1]],run:v=>{
+    const r=Math.pow(+v.a,+v.n);
+    return [['结果',(r>1e12?r.toExponential(4):r.toFixed(4))],['科学计数',r.toExponential(3)]];
+  }});
+}
+
+function t_rank_percentile(root){
+  calcTool(root,{fields:[['s','我的分数',85,1],['m','平均分',78,1],['sd','标准差',10,0.5]],run:v=>{
+    const z=((+v.s)-(+v.m))/(+v.sd||1);
+    const erf=x=>{const t=1/(1+0.3275911*Math.abs(x));const y=1-((((1.061405429*t-1.453152027)*t+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-x*x);return x>=0?y:-y;};
+    const pct=0.5*(1+erf(z/Math.sqrt(2)))*100;
+    return [['Z 分数',z.toFixed(2)],['百分位（估算）',pct.toFixed(1)+' %'],['说明','近似正态分布']];
+  }});
+}
+function t_study_time(root){
+  checklistTool(root,{key:'study_time',ph:'今天学了什么',items:['数学 50 分钟','英语 30 分钟','错题复习 20 分钟'],note:'每天记三格，周末看总量。'});
+}
+/* ===== 音视频（45） ===== */
+
+function t_video_bitrate(root){
+  calcTool(root,{fields:[['d','时长（分钟）',10,1],['s','目标体积（MB）',50,5],['k','类型',['v','视频','a','音频']]],run:v=>{
+    const bits=(+v.s)*8*1024/60/(+v.d||1);
+    return [['需要码率',Math.round(bits)+' kbps'],['约合',(bits/1024).toFixed(2)+' Mbps'],['按 1080p',''+(+v.s<100?'偏低，可接受':'正常')]];
+  }});
+}
+
+function t_file_size_est(root){
+  calcTool(root,{fields:[['b','码率（Mbps）',5,0.1],['d','时长（分钟）',30,1]],run:v=>{
+    const mb=(+v.b)*(+v.d)*60/8;
+    return [['预计体积',mb.toFixed(1)+' MB'],['约合',(mb/1024).toFixed(2)+' GB'],['上传 100Mbps 约需',(mb*8/100).toFixed(0)+' 秒']];
+  }});
+}
+
+function t_aspect_ratio(root){
+  calcTool(root,{fields:[['w','宽',1920,1],['h','高',1080,1],['n','新宽度',1080,1]],run:v=>{
+    const g=(a,b)=>b?g(b,a%b):a;
+    const k=g(Math.round(+v.w),Math.round(+v.h));
+    const nh=(+v.w)?Math.round((+v.n)*(+v.h)/(+v.w)):0;
+    return [['比例',(Math.round(+v.w)/k)+':'+(Math.round(+v.h)/k)],['小数比',((+v.w)/(+v.h)).toFixed(3)],['等宽缩放高度',nh+' px']];
+  }});
+}
+
+function t_duration_conv(root){
+  unitConvTool(root,{note:'时长单位换算，剪片时常核对。',units:[['s','秒',1],['min','分钟',60],['h','小时',3600],['frame25','帧（25fps）',0.04],['frame30','帧（30fps）',1/30],['frame24','帧（24fps）',1/24]]});
+}
+
+function t_fps_conv(root){
+  calcTool(root,{fields:[['f','帧率',30,1],['d','时长（秒）',10,0.1]],run:v=>{
+    return [['总帧数',((+v.f)*(+v.d)).toFixed(0)+' 帧'],['按 25fps 播放',((+v.f)*(+v.d)/25).toFixed(1)+' 秒'],['按 60fps 播放',((+v.f)*(+v.d)/60).toFixed(1)+' 秒']];
+  }});
+}
+
+function t_frame_grab(root){
+  calcTool(root,{fields:[['f','帧率',30,1],['n','抽帧间隔（帧）',30,1],['t','视频时长（秒）',60,1]],run:v=>{
+    const total=(+v.f)*(+v.t);
+    const count=Math.floor(total/(+v.n||1));
+    return [['总帧数',total+' 帧'],['抽帧数量',count+' 张'],['时间间隔',((+v.n)/(+v.f)).toFixed(2)+' 秒/张']];
+  }});
+}
+
+function t_speed_duration(root){
+  calcTool(root,{fields:[['d','原时长（分钟）',10,0.5],['s','播放倍速',2,0.25]],run:v=>{
+    return [['变速后时长',((+v.d)/(+v.s||1)).toFixed(2)+' 分钟'],['节省时间',((+v.d)*(1-1/(+v.s||1))).toFixed(2)+' 分钟'],['倍速',(+v.s)+'×']];
+  }});
+}
+
+function t_audio_sample(root){
+  calcTool(root,{fields:[['r','采样率（Hz）',44100,1000],['b','位深',16,1],['c','声道',2,1],['d','时长（秒）',60,1]],run:v=>{
+    const size=(+v.r)*(+v.b)*(+v.c)*(+v.d)/8;
+    return [['未压缩体积',(size/1048576).toFixed(1)+' MB'],['比特率',((+v.r)*(+v.b)*(+v.c)).toFixed(0)+' bps'],['CD 标准','44.1kHz / 16bit / 2 声道']];
+  }});
+}
+
+function t_audio_bitrate(root){
+  calcTool(root,{fields:[['b','码率（kbps）',128,8],['d','时长（分钟）',3,0.5]],run:v=>{
+    const mb=(+v.b)*(+v.d)*60/8/1024;
+    return [['体积',mb.toFixed(2)+' MB'],['每分钟',((+v.b)*60/8/1024).toFixed(2)+' MB'],['语音建议','32–64 kbps 单声道']];
+  }});
+}
+
+function t_record_time(root){
+  calcTool(root,{fields:[['s','剩余空间（MB）',512,64],['b','码率（kbps）',128,8]],run:v=>{
+    const sec=(+v.s)*8*1024/(+v.b);
+    return [['可录时长',(sec/60).toFixed(1)+' 分钟'],['约合',(sec/3600).toFixed(2)+' 小时'],['按 44.1kHz WAV','约 '+(sec/5).toFixed(0)+' 分钟']];
+  }});
+}
+
+function t_db_sum(root){
+  calcTool(root,{fields:[['a','声源 A（dB）',70,1],['b','声源 B（dB）',70,1]],run:v=>{
+    const sum=10*Math.log10(Math.pow(10,(+v.a)/10)+Math.pow(10,(+v.b)/10));
+    return [['叠加后',sum.toFixed(1)+' dB'],['比单源增加',(sum-Math.max(+v.a,+v.b)).toFixed(1)+' dB'],['提示','两个相同声源只增约 3 dB']];
+  }});
+}
+
+function t_freq_table(root){
+  listTool(root,{ph:'频率 / 音名',note:'十二平均律频率参考（A4=440Hz）。',rows:[
+    ['A4','440 Hz'],['C4','261.6 Hz'],['G4','392 Hz'],['E5','659.3 Hz'],['C5','523.3 Hz'],['A3','220 Hz'],['低音 A2','110 Hz'],['人声范围','男 85–180Hz，女 165–255Hz'],['可听范围','20 Hz – 20 kHz'],['电话语音','300 Hz – 3.4 kHz']
+  ]});
+}
+
+function t_interval_table(root){
+  listTool(root,{ph:'音程',note:'常见音程与半音数。',rows:[
+    ['小二度','1 个半音'],['大二度','2 个半音'],['大三度','4 个半音'],['纯四度','5 个半音'],['纯五度','7 个半音'],['大六度','9 个半音'],['大七度','11 个半音'],['八度','12 个半音']
+  ]});
+}
+
+function t_chord_table(root){
+  listTool(root,{ph:'和弦',note:'常见三和弦构成。',rows:[
+    ['大三和弦','根音 + 三度 + 五度（C-E-G）'],['小三和弦','根音 + 小三度 + 五度（A-C-E）'],['减三和弦','根音 + 小三度 + 减五度'],['增三和弦','根音 + 大三度 + 增五度'],['挂四和弦','根音 + 四度 + 五度'],['七和弦','三和弦 + 七度'],['强五和弦','根音 + 五度'],['转位','低音换成三音或五音']
+  ]});
+}
+
+function t_guitar_tune(root){
+  listTool(root,{ph:'琴弦 / 音',note:'标准调弦 EADGBE。',rows:[
+    ['6 弦（最粗）','E2 82.4 Hz'],['5 弦','A2 110 Hz'],['4 弦','D3 146.8 Hz'],['3 弦','G3 196 Hz'],['2 弦','B3 246.9 Hz'],['1 弦','E4 329.6 Hz'],['变调夹一品','整体升一个半音']
+  ]});
+}
+
+function t_piano_keys(root){
+  listTool(root,{ph:'键位',note:'八度内白键黑键排列。',rows:[
+    ['白键','C D E F G A B（7 个）'],['黑键','C# D# F# G# A#（5 个）'],['中央 C','C4，261.6 Hz'],['一个八度','12 个半音'],['88 键钢琴','A0 – C8'],['和弦识读','先看根音再看度数']
+  ]});
+}
+
+function t_bpm_delay(root){
+  calcTool(root,{fields:[['b','BPM',120,1],['n','拍数（延迟）',1,1]],run:v=>{
+    const beat=60000/((+v.b)||1);
+    return [['一拍时长',beat.toFixed(1)+' ms'],['延迟',((+v.n)*beat).toFixed(0)+' ms'],['16 分音符',(beat/4).toFixed(0)+' ms']];
+  }});
+}
+
+function t_time_signature(root){
+  listTool(root,{ph:'拍号',note:'常见拍号与感觉。',rows:[
+    ['4/4','最常见，强-弱-次强-弱'],['3/4','圆舞曲，强-弱-弱'],['6/8','摇篮感，复合拍'],['2/4','进行曲'],['5/4','不规则，爵士常见'],['7/8','复杂节奏'],['12/8','慢布鲁斯']
+  ]});
+}
+
+function t_video_codec(root){
+  listTool(root,{ph:'编码 / 特点',note:'视频编码格式速查。',rows:[
+    ['H.264','兼容性最好，主流'],['H.265/HEVC','同画质体积小 30–50%，兼容稍差'],['AV1','开源高压缩，新设备支持'],['VP9','WebM 常用'],['ProRes','苹果剪辑中间格式，体积大'],['DNxHD','Avid 中间格式'],['MPEG-2','老 DVD、广电'],['GIF','动图，无声音']
+  ]});
+}
+
+function t_color_space(root){
+  listTool(root,{ph:'色彩空间',note:'常见色域与用途。',rows:[
+    ['sRGB','网页与手机默认'],['Display P3','苹果设备更宽色域'],['Adobe RGB','印刷与摄影'],['Rec.709','高清视频标准'],['Rec.2020','4K/HDR 广色域'],['DCI-P3','影院'],['CMYK','印刷四色'],['灰度','黑白']
+  ]});
+}
+
+function t_color_depth(root){
+  listTool(root,{ph:'位深',note:'色彩位深与颜色数量。',rows:[
+    ['8 bit','每通道 256 级，约 1677 万色'],['10 bit','约 10.7 亿色，HDR 常用'],['12 bit','专业调色'],['16 bit','图像处理管道'],['32 bit float','音频位深，动态范围大'],['8 bit 音频','CD 级'],['24 bit 音频','录音棚标准']
+  ]});
+}
+
+function t_ratio_table(root){
+  listTool(root,{ph:'比例 / 用途',note:'常见画幅比例。',rows:[
+    ['16:9','视频、显示器'],['9:16','手机竖屏'],['4:3','老电视、相机'],['3:2','单反照片'],['1:1','头像、社交方图'],['2.35:1','宽银幕'],['21:9','带鱼屏'],['5:4','中画幅']
+  ]});
+}
+
+function t_lens_equiv(root){
+  calcTool(root,{fields:[['f','实际焦距（mm）',35,1],['s','传感器系数',1.5,0.1]],run:v=>{
+    const eq=(+v.f)*(+v.s);
+    return [['等效焦距',eq.toFixed(1)+' mm'],['视角',(2*Math.atan(43.3/(2*eq))*180/Math.PI).toFixed(1)+'°'],['类型',eq<24?'超广角':eq<35?'广角':eq<70?'标准':eq<135?'中长焦':'长焦']];
+  }});
+}
+
+function t_nd_calc(root){
+  calcTool(root,{fields:[['t','目标快门（秒）',1,0.1],['n','ND 档数',6,1]],run:v=>{
+    return [['需要的原快门',((+v.t)/Math.pow(2,+v.n)).toFixed(3)+' 秒'],['ND 型号','ND'+Math.round((+v.n)/1)+'（约）'],['减光倍数',Math.round(Math.pow(2,+v.n))+'×']];
+  }});
+}
+
+function t_shutter_angle(root){
+  calcTool(root,{fields:[['f','帧率',25,1],['a','快门角度（°）',180,5]],run:v=>{
+    const t=(+v.a)/360/(+v.f);
+    return [['快门速度','1/'+Math.round(1/t)+' 秒'],['精确值',t.toFixed(4)+' 秒'],['建议','180° 最自然']];
+  }});
+}
+
+function t_ev_comp(root){
+  calcTool(root,{fields:[['e','曝光补偿（EV）',1,0.3]],run:v=>{
+    const k=Math.pow(2,+v.e);
+    return [['亮度倍数',k.toFixed(2)+'×'],['快门变化','快 '+k.toFixed(2)+' 倍（提亮）'],['光圈变化',(Math.log2(k)/2).toFixed(1)+' 档']];
+  }});
+}
+
+function t_dof(root){
+  calcTool(root,{fields:[['f','光圈',2.8,0.1],['d','对焦距离（米）',3,0.1],['c','传感器系数',1.5,0.1]],run:v=>{
+    const coc=0.03/(+v.c);
+    const near=(+v.d)*(+v.d)/1;
+    const hyper=(35*35)/(+v.f*coc)/1000;
+    return [['超焦距',hyper.toFixed(1)+' 米'],['景深范围','约 ±'+(hyper/(+v.d)*0.1).toFixed(2)+' 米'],['提示','光圈越小景深越深']];
+  }});
+}
+
+function t_safe_shutter(root){
+  calcTool(root,{fields:[['f','等效焦距（mm）',50,1],['p','像素密度系数',2,0.5]],run:v=>{
+    const safe=1/((+v.f)*(+v.p));
+    return [['安全快门','约 1/'+Math.round(1/safe)+' 秒'],['等效焦距',(+v.f)+' mm'],['提示','手持拍摄尽量快于此值']];
+  }});
+}
+
+function t_subtitle_fmt(root){
+  listTool(root,{ph:'字幕格式',note:'字幕文件格式区别。',rows:[
+    ['SRT','最简单，序号 + 时间 + 文本'],['ASS/SSA','支持样式与特效'],['VTT','网页视频用'],['LRC','歌词'],['SCC','广电字幕'],['TXT','纯文本，无时间轴'],['转 ASS','保留样式更丰富'],['编码','UTF-8 最稳']
+  ]});
+}
+
+function t_srt_shift(root){
+  calcTool(root,{fields:[['s','偏移秒数',0.5,0.1]],run:v=>{
+    const t=(+v.s);
+    return [['向前偏移',t.toFixed(1)+' 秒'],['向后偏移',(-t).toFixed(1)+' 秒'],['毫秒',Math.round(t*1000)+' ms'],['提示','导入剪辑软件统一调整更省事']];
+  }});
+}
+
+function t_cover_size(root){
+  listTool(root,{ph:'平台 / 封面尺寸',note:'常见封面与头图尺寸。',rows:[
+    ['抖音竖版封面','1080 × 1920'],['视频号封面','1080 × 1260'],['B 站封面','1146 × 717'],['公众号头图','900 × 383'],['小红书封面','1242 × 1660'],['朋友圈方图','1080 × 1080'],['微信头像','800 × 800'],['网页 Banner','1920 × 600']
+  ]});
+}
+
+function t_mix_level(root){
+  listTool(root,{ph:'混音电平',note:'参考电平标准。',rows:[
+    ['人声','-12 至 -6 dBFS'],['背景音乐','-20 至 -12 dBFS'],['音效','-6 至 0 dBFS'],['母带峰值','-1 dBFS 以下'],['播客','-16 LUFS'],['短视频','-14 LUFS'],['影院','-27 LUFS'],['避免削波','峰值不超过 0']
+  ]});
+}
+
+function t_music_key(root){
+  listTool(root,{ph:'调性',note:'常见调性与情绪。',rows:[
+    ['C 大调','明亮、基础'],['G 大调','温暖'],['D 大调','活泼'],['A 小调','忧郁'],['E 小调','深沉'],['F 大调','柔和'],['降 B 大调','爵士常用'],['五声音阶','中国风常用']
+  ]});
+}
+
+function t_video_concat(root){
+  listTool(root,{ph:'拼接注意',note:'多段视频合并前要统一参数。',rows:[
+    ['分辨率','必须一致'],['帧率','必须一致'],['编码','建议同编码同参数'],['色彩空间','一致避免偏色'],['音频采样','统一 48kHz'],['顺序','按叙事或时间排'],['转场','硬切最稳'],['导出','一次编码到位']
+  ]});
+}
+
+function t_transcode_param(root){
+  listTool(root,{ph:'参数 / 建议',note:'常见转码参数参考。',rows:[
+    ['1080p30','H.264，CRF 20–23'],['1080p60','码率 8–12 Mbps'],['4K30','H.265，CRF 22–25'],['竖屏短视频','1080×1920，30fps'],['音频','AAC 128–192 kbps'],['关键帧','2 秒一个'],['像素格式','yuv420p 兼容好'],['封装','mp4 最通用']
+  ]});
+}
+
+function t_sync_offset(root){
+  listTool(root,{ph:'不同步原因',note:'音画不同步的排查方向。',rows:[
+    ['音频滞后','片头音频偏移，剪掉几帧'],['音频超前','补静音或延后'],['变速导致','重新对轴'],['采样率不符','统一 48kHz'],['丢帧','检查设备性能'],['长片漂移','分段对轴'],['录制不同设备','按拍手对齐']
+  ]});
+}
+
+function t_audio_denoise_step(root){
+  listTool(root,{ph:'步骤',note:'录音降噪的基本流程。',rows:[
+    ['1 采样噪声','录 2 秒纯环境音'],['2 降噪处理','强度别拉满'],['3 高通滤波','80–120Hz 去低频'],['4 均衡','提升人声清晰度'],['5 压缩','控制动态'],['6 限幅','峰值 -1dB'],['7 复听','耳机检查细节']
+  ]});
+}
+
+function t_audio_vis(root){
+  listTool(root,{ph:'可视化类型',note:'音频可视化常见形式。',rows:[
+    ['波形','显示振幅'],['频谱','频段能量'],['频谱瀑布','随时间变化'],['节拍闪烁','随鼓点'],['粒子','氛围感'],['环形频谱','封面常用'],['歌词滚动','配合人声']
+  ]});
+}
+
+function t_video_storyboard(root){
+  listTool(root,{ph:'分镜要素',note:'写分镜时每格要写清。',rows:[
+    ['镜号','拍摄顺序编号'],['景别','远/全/中/近/特'],['机位','高度与角度'],['画面内容','谁在做什么'],['运镜','推拉摇移'],['台词/字幕','要说的内容'],['时长','秒数'],['音效','环境与配乐']
+  ]});
+}
+
+function t_color_grade(root){
+  listTool(root,{ph:'风格 / 调法',note:'常见调色方向。',rows:[
+    ['青橙','阴影偏青，肤色偏橙'],['胶片','褪色 + 颗粒'],['日系','低对比高亮'],['黑白','去色 + 对比'],['复古','暖黄 + 暗角'],['赛博','高饱和青紫'],['自然','轻微对比与饱和'],['HDR','提亮暗部压高光']
+  ]});
+}
+
+function t_frame_size(root){
+  unitConvTool(root,{note:'视频尺寸与像素换算。',units:[['px','像素',1],['kp','千像素',1000],['mp','百万像素',1000000]]});
+}
+
+function t_audio_channel(root){
+  listTool(root,{ph:'声道',note:'声道配置说明。',rows:[
+    ['单声道','1 声道，语音常用'],['立体声','2 声道，左右'],['5.1','前置 + 中置 + 环绕'],['7.1','影院环绕'],['全景声','对象化音频'],['矩阵编码','把立体声转环绕']
+  ]});
+}
+
+function t_video_letter(root){
+  listTool(root,{ph:'竖屏注意',note:'把横屏素材放竖屏时的处理。',rows:[
+    ['裁切','放大填满，损失两侧'],['模糊底','原图放大虚化做底'],['拼版','上字幕下图'],['留白','居中留黑边'],['安全区','上下各留 250px 给字幕']
+  ]});
+}
+function t_loudness(root){
+  calcTool(root,{fields:[['l','目标 LUFS',-14,1],['c','当前 LUFS',-22,1]],run:v=>{
+    return [['需要提升',((+v.l)-(+v.c)).toFixed(1)+' dB'],['说明','响度按 LUFS 测量'],['峰值','控制在 -1 dBFS 以下']];
+  }});
+}
+function t_audio_fade(root){
+  listTool(root,{ph:'场景',note:'淡入淡出时长参考。',rows:[
+    ['片头音乐','淡入 1–2 秒'],['片尾','淡出 2–3 秒'],['转场','0.5–1 秒'],['人声进出','0.2 秒'],['环境底','3–5 秒缓慢']
+  ]});
+}
+/* ===== 安全应急（45） ===== */
+
+function t_fire_escape(root){
+  listTool(root,{ph:'场景 / 做法',note:'火场第一原则：先逃生，不贪财物。',rows:[
+    ['楼道有烟','贴地匍匐，湿毛巾捂口鼻'],['门把手烫','不要开门，另找出口'],['被困房间','堵门缝，窗口示警'],['高层','走楼梯，绝不乘电梯'],['身上着火','停、躺、滚，勿奔跑'],['烟雾浓','低姿势沿墙摸行'],['无法逃出','进有窗房间，关门等救援']
+  ]});
+}
+
+function t_extinguisher_type(root){
+  listTool(root,{ph:'类型 / 适用',note:'看标签，别用错类型。',rows:[
+    ['水基型','A 类固体火，也可用于电器（标注）'],['干粉 ABC','通用，家庭首选'],['二氧化碳','电器、精密设备'],['泡沫','油类、B 类'],['卤代烷','受限使用'],['禁止用水','油锅、电器带电']
+  ]});
+}
+
+function t_extinguisher_use(root){
+  listTool(root,{ph:'步骤 PASS',note:'记住 PASS 四步。',rows:[
+    ['P 拔','拔掉保险销'],['A 瞄','喷嘴对准火焰根部'],['S 压','压下手柄'],['S 扫','左右扫射覆盖'],['站位','背风、距火 2–3 米、留退路'],['油锅火','盖锅盖或灭火毯，勿用水']
+  ]});
+}
+
+function t_earthquake(root){
+  listTool(root,{ph:'场景 / 做法',note:'震时就近躲避，震后有序撤离。',rows:[
+    ['室内','蹲在承重墙角或结实桌下，护头'],['高层','远离窗户与外墙，勿跳楼'],['户外','远离建筑、电线杆、广告牌'],['车内','靠边停车，留在车内'],['电梯内','按下所有楼层，尽快离开'],['震后','关燃气电源，走楼梯撤离'],['被困','敲击管道求救，节省体力']
+  ]});
+}
+
+function t_flood(root){
+  listTool(root,{ph:'场景 / 做法',note:'洪水最危险的是急流与暗井。',rows:[
+    ['预警','提前转移，别等水到门口'],['涉水','水深过膝不涉，用棍探路'],['车辆','熄火勿重启，弃车逃生'],['被困高处','打 110/119，报告位置'],['断电','进水前拉总闸'],['卫生','洪水后消毒，勿饮自来水']
+  ]});
+}
+
+function t_typhoon(root){
+  listTool(root,{ph:'阶段 / 做法',note:'台风天减少外出。',rows:[
+    ['来临前','收阳台物品，加固门窗'],['窗户','贴胶带防碎，远离窗边'],['外出','远离大树、广告牌、围墙'],['停电','备手电与充电宝'],['积水','勿涉水，防井盖缺失'],['台风眼','风停不是结束，勿外出']
+  ]});
+}
+
+function t_lightning(root){
+  listTool(root,{ph:'场景 / 做法',note:'雷电时避开高处与水面。',rows:[
+    ['户外','远离大树、孤立高物'],['空旷地','双脚并拢蹲下，减少跨步电压'],['室内','拔电器插头，别用有线电话'],['车内','关窗，金属壳可保护'],['水上','立刻上岸'],['有人被雷击','先断电再施救，可做 CPR']
+  ]});
+}
+
+function t_elevator_trap(root){
+  listTool(root,{ph:'步骤',note:'电梯困人不要强行扒门。',rows:[
+    ['1','按警铃或对讲呼叫'],['2','拨打电梯内救援电话/96333'],['3','说明楼号、单元、人数'],['4','靠墙站稳，勿跳跃'],['5','等待专业救援，勿扒门'],['6','通风不良时保持安静']
+  ]});
+}
+
+function t_drowning(root){
+  listTool(root,{ph:'原则',note:'非专业救援者不要贸然下水。',rows:[
+    ['呼救','大声呼救并拨打 120'],['岸上救援','抛绳、救生圈、长杆'],['入水','仅受过训练者，带浮具'],['上岸后','检查呼吸，无呼吸立即 CPR'],['勿控水','倒挂控水延误抢救'],['保暖','脱去湿衣，盖毯']
+  ]});
+}
+
+function t_electric_shock(root){
+  listTool(root,{ph:'步骤',note:'先断电，再接触伤者。',rows:[
+    ['1','拉总闸或用绝缘物挑开电线'],['2','确认现场安全再靠近'],['3','检查意识与呼吸'],['4','无呼吸立即 CPR + AED'],['5','拨打 120'],['6','电烧伤处覆盖干净敷料'],['禁止','徒手拉拽伤者']
+  ]});
+}
+
+function t_heatstroke(root){
+  listTool(root,{ph:'程度 / 处理',note:'热射病是急症，必须送医。',rows:[
+    ['先兆','头晕乏力，转移阴凉处补水'],['轻症','降温 + 淡盐水，休息'],['重症','高热无汗、意识模糊，立即 120'],['降温','冰袋敷颈部腋下腹股沟'],['禁止','昏迷者强行喂水'],['预防','避开正午，少量多次饮水']
+  ]});
+}
+
+function t_hypothermia(root){
+  listTool(root,{ph:'程度 / 处理',note:'缓慢复温，勿用热水袋直贴。',rows:[
+    ['轻度','发抖，换干衣、避风、热饮'],['中度','反应迟钝，包裹保温，送医'],['重度','意识不清，轻柔搬运，立即送医'],['禁止','搓揉四肢、饮酒取暖'],['复温','毯子 + 温热环境，逐步进行']
+  ]});
+}
+
+function t_burn(root){
+  listTool(root,{ph:'程度 / 处理',note:'冲、脱、泡、盖、送。',rows:[
+    ['一度','红肿痛，冷水冲 15–20 分钟'],['二度','起水泡，勿挑破，覆盖干净纱布'],['三度','发白发黑无痛感，立即送医'],['化学烧伤','大量清水冲洗 20 分钟'],['禁止','涂牙膏、酱油、冰块'],['面积大','立即 120，注意保暖']
+  ]});
+}
+
+function t_cut_wound(root){
+  listTool(root,{ph:'情况 / 处理',note:'先止血，再考虑缝合。',rows:[
+    ['小伤口','清水冲洗 + 按压止血 + 创可贴'],['出血多','干净纱布持续按压 10 分钟'],['伤口深','压迫止血后立即就医'],['污染伤口','就医评估破伤风'],['异物插入','勿拔出，固定后送医'],['动物咬伤','冲洗 15 分钟，尽快打疫苗']
+  ]});
+}
+
+function t_nosebleed(root){
+  listTool(root,{ph:'步骤',note:'身体前倾，不要仰头。',rows:[
+    ['1','坐直，身体略前倾'],['2','捏住鼻翼软部 10 分钟'],['3','口呼吸，勿吞咽血液'],['4','冷敷鼻梁辅助'],['5','仍不止血就医'],['禁止','仰头、塞纸巾乱捅']
+  ]});
+}
+
+function t_fracture(root){
+  listTool(root,{ph:'步骤',note:'固定后搬运，勿复位。',rows:[
+    ['1','不要移动伤肢，先固定'],['2','用硬板 + 软垫固定上下两个关节'],['3','检查末梢血运与感觉'],['4','开放性骨折先覆盖止血'],['5','颈背痛怀疑脊柱伤，整体平移'],['6','拨打 120，等待专业搬运']
+  ]});
+}
+
+function t_sprain(root){
+  listTool(root,{ph:'处理 RICE',note:'急性期 48 小时内按 RICE。',rows:[
+    ['R 休息','停止活动，减少负重'],['I 冰敷','每次 15–20 分钟，间隔 2 小时'],['C 加压','弹力绷带包扎，别太紧'],['E 抬高','高于心脏水平'],['48 小时后','可热敷促进吸收'],['就医','无法负重或明显肿胀变形']
+  ]});
+}
+
+function t_faint(root){
+  listTool(root,{ph:'步骤',note:'先平卧，再判断原因。',rows:[
+    ['1','平卧，抬高双腿 20–30cm'],['2','松开衣领腰带，通风'],['3','检查呼吸与脉搏'],['4','清醒后少量糖水（低血糖）'],['5','10 分钟未醒立即 120'],['禁止','掐人中代替急救，勿强行扶站']
+  ]});
+}
+
+function t_seizure(root){
+  listTool(root,{ph:'步骤',note:'保护头部，勿塞东西入口。',rows:[
+    ['1','移开周围硬物'],['2','头下垫软物，侧卧防误吸'],['3','松开领口，记录时间'],['4','勿按压肢体、勿塞硬物'],['5','超过 5 分钟或反复发作拨打 120'],['6','醒后陪伴，勿立即喂水']
+  ]});
+}
+
+function t_choking(root){
+  listTool(root,{ph:'情况 / 处理',note:'完全梗阻立即海姆立克。',rows:[
+    ['能咳嗽','鼓励咳嗽，勿拍背干扰'],['不能发声','成人腹部冲击（海姆立克）'],['婴儿','背部拍击 5 次 + 胸部按压 5 次'],['孕妇/肥胖','胸部冲击'],['自救','拳头抵上腹，向内向上冲击'],['失去意识','立即 CPR + 120']
+  ]});
+}
+
+function t_cpr(root){
+  listTool(root,{ph:'步骤',note:'按压优先，深度 5–6cm，频率 100–120 次/分。',rows:[
+    ['1 判断','拍肩呼喊，看呼吸 10 秒'],['2 呼救','拨打 120，取 AED'],['3 按压','双手叠扣，胸骨下半段，30 次'],['4 通气','仰头抬颏，人工呼吸 2 次'],['5 循环','30:2 持续，每 2 分钟换人'],['6 AED','到场即开机，按语音操作']
+  ]});
+}
+
+function t_aed(root){
+  listTool(root,{ph:'步骤',note:'AED 会语音提示，跟着做。',rows:[
+    ['1','开机，取出电极片'],['2','按图示贴右上胸与左侧腋下'],['3','离开患者，等待分析'],['4','提示除颤时按下按钮'],['5','除颤后立即继续 CPR'],['注意','胸毛多、出汗、有水需擦干']
+  ]});
+}
+
+function t_poisoning(root){
+  listTool(root,{ph:'途径 / 处理',note:'保留包装与呕吐物，送医时带上。',rows:[
+    ['误服','不要催吐（腐蚀性/石油类），立即送医'],['吸入','转移到通风处，松衣领'],['皮肤接触','脱衣，大量清水冲洗 15 分钟'],['眼睛','翻开眼睑持续冲洗 15 分钟'],['一氧化碳','开窗通风，转移后吸氧'],['农药','脱衣冲洗，携带标签就医']
+  ]});
+}
+
+function t_gas_leak(root){
+  listTool(root,{ph:'步骤',note:'禁火禁电，先通风再离开。',rows:[
+    ['1','关阀门，开窗通风'],['2','不开灯、不打电话、不按门铃'],['3','到室外拨打燃气公司/119'],['4','勿用明火检查漏点'],['5','邻居家泄漏，勿按门铃，敲门通知'],['6','专业人员检修后再使用']
+  ]});
+}
+
+function t_gas_alarm(root){
+  listTool(root,{ph:'报警器',note:'安装位置决定能否救命。',rows:[
+    ['燃气报警','距天花板 30cm 内（天然气上浮）'],['液化气报警','距地面 30cm 内'],['一氧化碳','卧室与客厅，靠近休息区'],['烟感','每层走廊、卧室门外'],['更换周期','5 年或按说明书'],['测试','每月按测试键']
+  ]});
+}
+
+function t_co_poison(root){
+  listTool(root,{ph:'识别 / 处理',note:'无色无味，靠报警器。',rows:[
+    ['症状','头痛、恶心、乏力、意识模糊'],['高危场景','密闭车内开空调、燃气热水器'],['1','立即开窗、关闭燃气'],['2','转移至通风处，解开衣领'],['3','拨打 120，说明疑似 CO'],['4','呼吸停止立即 CPR + 吸氧'],['预防','不密闭使用炭火、定期检热水器']
+  ]});
+}
+
+function t_emergency_bag(root){
+  checklistTool(root,{key:'embag',ph:'应急包',items:['证件复印件','现金','饮用水 3 天','压缩饼干','手电 + 电池','充电宝','急救包','口哨','雨衣','常用药'],note:'每半年检查一次，替换过期物资。'});
+}
+
+function t_emergency_contact(root){
+  checklistTool(root,{key:'emcontact',ph:'应急联系人',items:['家人 A','家人 B','邻居','物业','社区医生'],note:'写在冰箱贴上，老人小孩要会背。'});
+}
+
+function t_extinguisher_count(root){
+  calcTool(root,{fields:[['a','面积（㎡）',100,10],['k','场所',['home','住宅','office','办公','shop','商铺']]],run:v=>{
+    const per={'home':75,'office':50,'shop':40}[v.k];
+    return [['建议数量',Math.max(1,Math.ceil((+v.a)/per))+' 具'],['单具规格','4kg 干粉（ABC）'],['间距','步行距离不超过 15 米'],['位置','出口附近、显眼易取']];
+  }});
+}
+
+function t_evacuation_time(root){
+  calcTool(root,{fields:[['n','人数',200,10],['w','出口数',2,1],['f','每分钟每出口通过人数',40,5]],run:v=>{
+    const t=(+v.n)/((+v.w)*(+v.f)||1);
+    return [['预计疏散时间',t.toFixed(1)+' 分钟'],['建议目标','3 分钟内完成'],['瓶颈','楼梯口与出口宽度']];
+  }});
+}
+
+function t_shelter(root){
+  listTool(root,{ph:'避难场所',note:'灾时就近、安全、有标识。',rows:[
+    ['首选','学校操场、体育场、公园开阔地'],['次选','社区服务中心、应急避难所'],['避开','危房、广告牌、高压线、河堤'],['标识','认准应急避难场所标志'],['到达后','登记、听从指挥、勿返家'],['物资','自带水与药，按需领取']
+  ]});
+}
+
+function t_sos_signal(root){
+  listTool(root,{ph:'方式',note:'国际通用求救信号。',rows:[
+    ['SOS','三短三长三短（···———···）'],['光信号','用手电闪同样节奏'],['哨声','三声一组，间隔 1 分钟'],['烟雾','三堆火，间距相等'],['地面标志','SOS 大字，尺寸尽量大'],['电话','优先 110/119/120，报坐标']
+  ]});
+}
+
+function t_wild_lost(root){
+  listTool(root,{ph:'步骤',note:'停下别乱走，节省体力。',rows:[
+    ['1','原地停留，回忆最后确定地标'],['2','沿溪流下行走（多数情况）'],['3','做标记，避免绕圈'],['4','白天找高点观察，夜间保留光源'],['5','发求救信号，节省电量'],['6','保温，勿空腹失温']
+  ]});
+}
+
+function t_snake_bite(root){
+  listTool(root,{ph:'步骤',note:'勿切开、勿吸毒、勿扎绑过紧。',rows:[
+    ['1','远离蛇，保持静止'],['2','取下戒指手镯等束缚物'],['3','伤口低于心脏位置'],['4','干净敷料覆盖，勿挤压'],['5','记蛇的样子，尽快送医'],['禁止','切开创口、口吸、冰敷、饮酒']
+  ]});
+}
+
+function t_bee_sting(root){
+  listTool(root,{ph:'情况 / 处理',note:'过敏反应是致命点。',rows:[
+    ['蜜蜂','刮除毒刺（勿挤压毒囊）'],['马蜂','可用肥皂水清洗'],['局部','冷敷 + 抗过敏药膏'],['多处蜇伤','立即就医'],['过敏','呼吸困难、全身皮疹，立即 120'],['预防','勿拍打，穿浅色衣物']
+  ]});
+}
+
+function t_dog_bite(root){
+  listTool(root,{ph:'步骤',note:'狂犬病可防不可治。',rows:[
+    ['1','大量清水 + 肥皂冲洗 15 分钟'],['2','碘伏消毒，勿包扎过紧'],['3','尽快（24 小时内）就医打疫苗'],['4','记录犬只信息与主人'],['5','深伤口加打免疫球蛋白'],['6','观察动物 10 天（能观察时）']
+  ]});
+}
+
+function t_food_poison(root){
+  listTool(root,{ph:'步骤',note:'补水防脱水最关键。',rows:[
+    ['1','停止进食可疑食物'],['2','少量多次喝淡盐水/口服补液'],['3','保留剩余食物与呕吐物样本'],['4','高热、血便、意识差立即就医'],['5','老人儿童孕妇尽早就医'],['禁止','自行服用止泻药掩盖症状']
+  ]});
+}
+
+function t_weather_warn(root){
+  listTool(root,{ph:'预警颜色',note:'我国预警等级由低到高：蓝黄橙红。',rows:[
+    ['蓝色','一般，注意防范'],['黄色','较重，减少外出'],['橙色','严重，停课停工准备'],['红色','特别严重，立即避险'],['高温','35/37/40 ℃ 三级'],['暴雨','1 小时降雨量分级'],['台风','风力 6/8/10/12 级分级']
+  ]});
+}
+
+function t_quake_level(root){
+  listTool(root,{ph:'震级 / 影响',note:'震级与烈度是两个概念。',rows:[
+    ['<3.0','微震，多数无感'],['3.0–3.9','小震，室内有感'],['4.0–4.9','轻震，物品摇晃'],['5.0–5.9','中震，轻微破坏'],['6.0–6.9','强震，可致破坏'],['7.0–7.9','大地震，严重破坏'],['≥8.0','巨大地震']
+  ]});
+}
+
+function t_hotline(root){
+  listTool(root,{ph:'电话 / 用途',note:'常用紧急与民生热线。',rows:[
+    ['110','报警'],['119','火警/救援'],['120','急救'],['122','交通事故'],['12345','政务热线'],['12315','消费投诉'],['12395','水上搜救'],['96110','反诈专线'],['12320','卫生热线'],['95598','电力抢修']
+  ]});
+}
+
+function t_escape_route(root){
+  checklistTool(root,{key:'route',ph:'家庭逃生路线',items:['两个以上出口','楼道无杂物','应急灯可用','全家演练过','集合点明确'],note:'半年演练一次，孩子要知道集合点。'});
+}
+
+function t_first_aid_kit(root){
+  listTool(root,{ph:'配置',note:'家庭急救包基础清单。',rows:[
+    ['止血','纱布、绷带、创可贴'],['消毒','碘伏、酒精棉'],['工具','剪刀、镊子、体温计'],['药品','退烧、抗过敏、肠胃药'],['其他','急救毯、手电、口哨'],['文件','急救卡（血型、过敏史）']
+  ]});
+}
+
+function t_water_safety(root){
+  listTool(root,{ph:'场景 / 注意',note:'溺水多发生在无声瞬间。',rows:[
+    ['泳池','儿童不离视线，一臂距离'],['海边','注意离岸流，横游脱离'],['河流','水情不明不下水'],['冰面','厚度不足 15cm 不上'],['酒后','绝不游泳'],['抽筋','仰浮，拉伸小腿，呼救']
+  ]});
+}
+
+function t_heat_index(root){
+  calcTool(root,{fields:[['t','气温（℃）',32,1],['h','相对湿度（%）',70,5]],run:v=>{
+    const T=+v.t*9/5+32, R=+v.h;
+    const hi=-42.379+2.04901523*T+10.14333127*R-0.22475541*T*R-0.00683783*T*T-0.05481717*R*R+0.00122874*T*T*R+0.00085282*T*R*R-0.00000199*T*T*R*R;
+    const c=(hi-32)*5/9;
+    return [['体感温度（热指数）',c.toFixed(1)+' ℃'],['风险等级',c>40?'极高危':c>35?'高危':c>30?'注意':'较低'],['建议','高温高湿时减少户外活动']];
+  }});
+}
+
+function t_wind_scale(root){
+  calcTool(root,{fields:[['v','风速（km/h）',60,1]],run:v=>{
+    const kmh=+v.v;
+    let level=0;
+    const limits=[1,6,12,20,29,39,50,62,75,89,103,118];
+    limits.forEach(l=>{ if(kmh>=l) level++; });
+    return [['风力等级',level+' 级'],['风速',kmh.toFixed(0)+' km/h（'+(kmh/3.6).toFixed(1)+' m/s）'],['影响',level>=8?'危险，避免外出':level>=6?'注意高空坠物':'一般']];
+  }});
+}
+/* ===== 职场办公（60） ===== */
+
+function t_meeting_note(root){
+  tmplTool(root,{fields:[['t','会议主题','产品评审会'],['d','时间','2026-11-15 14:00'],['p','参会人','张三、李四'],['c','结论','通过方案 A，下周上线'],['a','待办','李四 11-20 前完成接口']],tpl:`【会议纪要】{t}
+时间：{d}
+参会：{p}
+结论：{c}
+待办：{a}
+下一步：按待办推进，进度同步群里。`,note:'结论写清楚，待办要有人和时间。'});
+}
+
+function t_weekly_report(root){
+  tmplTool(root,{fields:[['n','姓名','fornow'],['w','本周周期','11.10–11.14'],['done','本周完成','完成工具箱新增 200 个工具'],['next','下周计划','补齐剩余分类并回归测试'],['risk','风险','打包链路偶发超时']],tpl:`【周报】{n} / {w}
+一、本周完成
+{done}
+二、下周计划
+{next}
+三、风险与需要支持
+{risk}`,note:'先结果后过程，风险要带解决建议。'});
+}
+
+function t_mail_tmpl(root){
+  tmplTool(root,{fields:[['to','收件人','王经理'],['s','主题','关于下周一评审的确认'],['c','正文','您好，下周一 10:00 的评审会我这边可以准时参加。需要提前准备哪些材料，请您告知。'],['sig','署名','张三']],tpl:`{to}：
+{s}
+
+{sig}`,note:'主题写清事由，正文一段讲一件事。'});
+}
+
+function t_resume_tmpl(root){
+  tmplTool(root,{fields:[['n','姓名','张三'],['y','工作年限','5 年'],['r','目标岗位','Android 开发'],['exp','核心经历','负责 3 个 App 从 0 到 1，主导性能优化'],['sk','技能','Java、Kotlin、Jetpack，熟悉 WebView 混合开发']],tpl:`{n} · {r}（{y}）
+
+一、核心能力
+{sk}
+
+二、项目经历
+{exp}
+
+三、自我评价
+能独立负责模块从设计到上线，重视工程质量与交付节奏。`,note:'简历写结果和数字，不写职责描述。'});
+}
+
+function t_resign_letter(root){
+  tmplTool(root,{fields:[['to','领导','王经理'],['n','姓名','张三'],['d','离职日期','2026-12-15'],['r','原因','个人职业规划调整']],tpl:`{to}：
+
+您好。因{r}，我申请于 {d} 离职，将按公司流程完成工作交接。
+
+感谢这段时间的信任与培养，我会全力配合交接，确保工作平稳过渡。
+
+{n}`,note:'语气克制，只讲事实与交接。'});
+}
+
+function t_leave_note(root){
+  tmplTool(root,{fields:[['to','领导','王经理'],['n','姓名','张三'],['t','请假类型','年假'],['s','起止','11-20 至 11-21'],['d','天数','2 天'],['r','事由','家中有事需回家处理']],tpl:`{to}：
+
+本人{n}，因{r}，申请{t} {d}（{s}）。期间工作已交接给同事，紧急事项可电话联系。
+
+请批准。
+
+{n}`,note:'写清交接，批准率更高。'});
+}
+
+function t_invitation(root){
+  tmplTool(root,{fields:[['e','活动名称','产品发布会'],['t','时间','2026-12-01 14:00'],['p','地点','B 座 3 层报告厅'],['h','主办','研发中心']],tpl:`邀请函
+
+诚邀您参加「{e}」。
+时间：{t}
+地点：{p}
+
+{h} 敬邀`,note:'时间地点必须齐全，避免二次沟通。'});
+}
+
+function t_thanks_letter(root){
+  tmplTool(root,{fields:[['to','对方','李工'],['t','事由','协助排查线上问题'],['n','署名','张三']],tpl:`{to}：
+
+感谢您在{t}上的帮助，问题已顺利解决。后续如有需要我配合的地方，随时联系。
+
+{n}`,note:'具体写清感谢的事，比空泛致谢有效。'});
+}
+
+function t_apology(root){
+  tmplTool(root,{fields:[['to','对方','李工'],['e','事件','需求交付延期两天'],['c','补救','已补充测试并今晚上线'],['n','署名','张三']],tpl:`{to}：
+
+关于{e}，是我的问题。{c}。后续我会提前识别风险并及时同步，避免同类情况。
+
+{n}`,note:'道歉三步：认错、补救、改进。'});
+}
+
+function t_recommend_letter(root){
+  tmplTool(root,{fields:[['n','被推荐人','张三'],['r','岗位','前端开发'],['y','共事时间','2 年'],['p','亮点','独立完成组件库重构，代码质量稳定']],tpl:`推荐信
+
+推荐{n}担任{r}岗位。
+
+我与{n}共事{y}，期间{p}。工作踏实，沟通顺畅，能够独立承担模块交付。
+
+特此推荐。`,note:'用一件具体事例支撑评价。'});
+}
+
+function t_memo(root){
+  tmplTool(root,{fields:[['t','事项','关于下月排班的调整'],['d','日期','2026-11-15'],['c','内容','自 12 月起实行双周排班，请各组在 25 日前提交人员名单。'],['f','发起','行政部']],tpl:`备忘录
+
+主题：{t}
+日期：{d}
+内容：{c}
+发起：{f}`,note:'备忘录只写执行要求，不写背景故事。'});
+}
+
+function t_meeting_notice(root){
+  tmplTool(root,{fields:[['t','会议主题','季度经营分析会'],['d','时间','11-18 14:00–15:30'],['p','地点','会议室 302'],['a','参会','各部门负责人'],['g','议程','1 数据回顾 2 问题讨论 3 下季目标']],tpl:`【会议通知】
+主题：{t}
+时间：{d}
+地点：{p}
+参会：{a}
+议程：
+{g}
+
+请提前准备数据，准时参加。`});
+}
+
+function t_retro(root){
+  tmplTool(root,{fields:[['p','项目','小羽工具箱 1.9'],['g','做得好','工具数量翻倍，回归流程稳定'],['b','待改进','分片编写易漏括号，缺少静态检查'],['a','行动项','打包前强制 node --check，补自动化脚本']],tpl:`【复盘】{p}
+做得好的：
+{g}
+待改进：
+{b}
+行动项：
+{a}`,note:'复盘重点在行动项，要有负责人与时间。'});
+}
+
+function t_prd_outline(root){
+  listTool(root,{ph:'需求文档要素',note:'一份能落地的需求文档结构。',rows:[
+    ['1 背景','为什么要做，解决什么问题'],['2 目标','可量化的指标'],['3 用户与场景','谁在什么情况下用'],['4 功能范围','做什么、不做什么'],['5 交互说明','关键流程与状态'],['6 边界与异常','空态、失败、超时'],['7 验收标准','怎样算完成'],['8 排期','里程碑与依赖']
+  ]});
+}
+
+function t_request_note(root){
+  tmplTool(root,{fields:[['to','上级','王总'],['m','事项','申请增加 1 台测试机'],['r','理由','现有设备无法覆盖 Android 14 兼容测试'],['b','预算','约 2000 元'],['n','署名','张三']],tpl:`{to}：
+
+现就{m}请示如下：
+理由：{r}
+预算：{b}
+
+请审批。
+
+{n}`,note:'请示一段一事，理由与金额写清楚。'});
+}
+
+function t_report_struct(root){
+  listTool(root,{ph:'汇报结构',note:'向上汇报的常用骨架。',rows:[
+    ['结论先行','一句话说清结果'],['依据','关键数据与事实'],['过程','做了什么、怎么做的'],['问题','风险与卡点'],['方案','给两个可选方案'],['请求','需要的支持'],['时间','下一步节点']
+  ]});
+}
+
+function t_interview_q(root){
+  listTool(root,{ph:'问题 / 考察点',note:'常见面试问题与考察维度。',rows:[
+    ['自我介绍','表达与经历匹配度'],['最有挑战的项目','问题解决能力'],['为什么离职','动机与稳定性'],['缺点是什么','自我认知'],['如何面对冲突','协作能力'],['职业规划','目标清晰度'],['期望薪资','自我定位'],['你有什么问题','对岗位的关注']
+  ]});
+}
+
+function t_interview_feedback(root){
+  tmplTool(root,{fields:[['n','候选人','张三'],['p','岗位','Android 开发'],['s','结论','建议进入二面'],['g','优势','基础扎实，有完整项目经验'],['w','不足','对性能优化细节了解偏浅']],tpl:`【面试反馈】
+候选人：{n}
+岗位：{p}
+结论：{s}
+优势：{g}
+不足：{w}`,note:'结论明确，优势与不足各写具体证据。'});
+}
+
+function t_self_review(root){
+  tmplTool(root,{fields:[['n','姓名','张三'],['p','周期','2026 上半年'],['a','成果','完成工具箱 960 个工具并开源'],['b','不足','文档更新滞后'],['c','下阶段','补齐文档与自动化测试']],tpl:`【绩效自评】{n} / {p}
+主要成果：
+{a}
+不足：
+{b}
+下阶段计划：
+{c}`,note:'成果尽量量化，不足要带改进动作。'});
+}
+
+function t_priority_matrix(root){
+  listTool(root,{ph:'象限 / 处理',note:'重要紧急四象限。',rows:[
+    ['重要且紧急','立即做，亲自做'],['重要不紧急','排期做，最该投入'],['紧急不重要','委托或简化'],['不重要不紧急','删掉'],['判断法','不做会怎样？延期会怎样？'],['常见错误','被第三象限吃掉整天']
+  ]});
+}
+
+function t_task_breakdown(root){
+  listTool(root,{ph:'拆解原则',note:'任务拆到能估时的粒度。',rows:[
+    ['单任务','不超过半天'],['可验收','有明确完成标准'],['无依赖','或标清前置'],['可并行','标出可同时做'],['估时','乐观/正常/悲观三点'],['缓冲','整体加 20%'],['复盘','记录实际耗时']
+  ]});
+}
+
+function t_estimation(root){
+  calcTool(root,{fields:[['o','乐观（小时）',4,0.5],['m','正常（小时）',8,0.5],['p','悲观（小时）',16,0.5],['n','任务数',5,1]],run:v=>{
+    const e=((+v.o)+4*(+v.m)+(+v.p))/6;
+    const total=e*(+v.n);
+    return [['单任务期望',e.toFixed(1)+' 小时'],['总计',total.toFixed(1)+' 小时'],['加点缓冲',(total*1.2).toFixed(1)+' 小时'],['约合工作日',(total*1.2/8).toFixed(1)+' 天']];
+  },note:'三点估算法（PERT）。'});
+}
+
+function t_salary_calc(root){
+  calcTool(root,{fields:[['s','月薪（税前）',10000,500],['m','月数',12,1],['b','年终奖月数',1,0.5]],run:v=>{
+    const year=(+v.s)*(+v.m)+(+v.s)*(+v.b);
+    return [['年包（税前）',year.toFixed(0)+' 元'],['月均',(year/12).toFixed(0)+' 元'],['税后估算',(year*0.78).toFixed(0)+' 元'],['时薪（22 天 8 小时）',(year/12/22/8).toFixed(1)+' 元']];
+  },note:'税后按 78% 粗估，实际按专项扣除计算。'});
+}
+
+function t_annual_leave(root){
+  calcTool(root,{fields:[['y','累计工龄（年）',5,0.5],['d','今年已休天数',3,0.5]],run:v=>{
+    const base=(+v.y)<1?0:(+v.y)<10?5:(+v.y)<20?10:15;
+    return [['法定年假',base+' 天'],['剩余',Math.max(0,base-(+v.d))+' 天'],['说明','工龄 1–10 年 5 天，10–20 年 10 天，20 年以上 15 天']];
+  }});
+}
+
+function t_overtime(root){
+  calcTool(root,{fields:[['s','月薪',8000,500],['h','加班小时',20,1],['k','类型',['w','工作日 1.5 倍','r','休息日 2 倍','f','法定节假日 3 倍']]],run:v=>{
+    const hourly=(+v.s)/21.75/8;
+    const mult={'w':1.5,'r':2,'f':3}[v.k];
+    return [['时薪',hourly.toFixed(2)+' 元'],['加班费',(hourly*mult*(+v.h)).toFixed(2)+' 元'],['倍数',mult+'×']];
+  },note:'按 21.75 天/月、8 小时/天折算。'});
+}
+
+function t_reimburse(root){
+  checklistTool(root,{key:'reimburse',ph:'报销清单',items:['发票原件/电子票','行程单','审批单号','费用明细','银行卡信息'],note:'发票抬头与税号必须与公司一致。'});
+}
+
+function t_business_trip(root){
+  checklistTool(root,{key:'biztrip',ph:'出差清单',items:['车票/机票','酒店确认','身份证','电脑与充电器','会议材料','备用现金'],note:'出发前核对会议时间与地址。'});
+}
+
+function t_gantt(root){
+  listTool(root,{ph:'排期要点',note:'简单项目排期方法。',rows:[
+    ['列任务','拆到可估时粒度'],['标依赖','谁等谁'],['定里程碑','关键节点'],['留缓冲','关键路径加 20%'],['识别关键路径','最长链决定工期'],['每周更新','进度偏差及时调整']
+  ]});
+}
+
+function t_risk_log(root){
+  listTool(root,{ph:'风险 / 应对',note:'项目风险登记表思路。',rows:[
+    ['需求变更','冻结窗口 + 变更评审'],['人员流动','关键模块双人熟悉'],['依赖延期','提前对齐接口'],['测试不足','回归清单 + 自动化'],['环境问题','提前搭预发环境'],['沟通不畅','固定日报与周会']
+  ]});
+}
+
+function t_ppt_struct(root){
+  listTool(root,{ph:'页序',note:'汇报型 PPT 的通用结构。',rows:[
+    ['封面','标题 + 汇报人 + 日期'],['结论页','一页说清结论与请求'],['背景','问题与现状'],['分析','数据与依据'],['方案','两到三个可选'],['计划','里程碑与资源'],['风险','风险与应对'],['结尾','行动请求']
+  ]});
+}
+
+function t_data_report(root){
+  listTool(root,{ph:'要点',note:'数据汇报的可信写法。',rows:[
+    ['口径','指标怎么算，先说清'],['对比','环比/同比/目标'],['异常','解释异常点'],['归因','相关不等于因果'],['建议','基于数据给行动'],['图表','一图一结论']
+  ]});
+}
+
+function t_email_etiquette(root){
+  listTool(root,{ph:'场景 / 规范',note:'商务邮件基本规范。',rows:[
+    ['主题','动词开头，含关键信息'],['称呼','职务 + 姓'],['正文','一段一事，结论在前'],['附件','正文说明附件内容'],['抄送','只抄送相关人'],['回复','24 小时内'],['签名','姓名 + 部门 + 电话']
+  ]});
+}
+
+function t_phone_script(root){
+  listTool(root,{ph:'场景 / 话术',note:'电话沟通的基本框架。',rows:[
+    ['开场','自报单位与姓名，说明来意'],['确认','您现在方便吗？大约 3 分钟'],['核心','一件事一句话说清'],['倾听','复述关键点确认'],['收尾','明确下一步与时间'],['记录','当场记要点，事后发确认']
+  ]});
+}
+
+function t_negotiation(root){
+  listTool(root,{ph:'技巧',note:'谈判的四条基本功。',rows:[
+    ['先听后说','弄清对方真实诉求'],['锚定','先给出合理区间'],['条件交换','用让步换让步'],['留余地','不被逼到墙角'],['BATNA','想好最佳替代方案'],['记录','把共识落成文字']
+  ]});
+}
+
+function t_manage_up(root){
+  listTool(root,{ph:'原则',note:'向上管理的实用原则。',rows:[
+    ['结论先行','先说结果再说过程'],['带方案','问题配两三个选项'],['对齐预期','开始前确认标准'],['主动同步','关键节点主动报'],['控制频率','不刷存在感'],['承认不知','别硬编答案']
+  ]});
+}
+
+function t_feedback_model(root){
+  listTool(root,{ph:'模型',note:'给反馈的结构化方法。',rows:[
+    ['SBI','情境-行为-影响'],['STAR','情境-任务-行动-结果'],['三明治','肯定-建议-鼓励（慎用）'],['具体化','说行为不说性格'],['及时','当场或当天'],['双向','问对方怎么看']
+  ]});
+}
+
+function t_conflict(root){
+  listTool(root,{ph:'步骤',note:'职场冲突处理顺序。',rows:[
+    ['1 降温','先处理情绪再处理事'],['2 澄清','各自把事实说清'],['3 找共同目标','对齐要达成什么'],['4 拆分歧','逐条列出差异'],['5 定方案','可执行的折中'],['6 固化','写进会议纪要']
+  ]});
+}
+
+function t_team_role(root){
+  listTool(root,{ph:'角色',note:'贝尔宾团队角色简版。',rows:[
+    ['推进者','推动进度、消除障碍'],['协调者','整合意见、分配任务'],['信息者','对外联络、找资源'],['监督者','把关质量与风险'],['执行者','落地具体工作'],['凝聚者','维系氛围与协作']
+  ]});
+}
+
+function t_okr(root){
+  tmplTool(root,{fields:[['q','周期','2026 Q4'],['o','目标','让工具箱覆盖更多生活场景'],['kr1','KR1','工具总数达到 960 个'],['kr2','KR2','回归测试通过率 100%'],['kr3','KR3','开源仓库 star 达到 20']],tpl:`{q} OKR
+
+O：{o}
+KR1：{kr1}
+KR2：{kr2}
+KR3：{kr3}`,note:'O 要有方向感，KR 要可量化。'});
+}
+
+function t_kpi(root){
+  calcTool(root,{fields:[['a','实际完成',82,1],['t','目标值',100,1],['w','权重（%）',40,1]],run:v=>{
+    const rate=(+v.a)/(+v.t||1);
+    return [['完成率',(rate*100).toFixed(1)+' %'],['加权得分',(rate*(+v.w)).toFixed(1)],['评级',rate>=1?'达标':rate>=0.9?'接近':rate>=0.7?'待改进':'未达标']];
+  }});
+}
+
+function t_standup(root){
+  tmplTool(root,{fields:[['y','昨天','完成工具分片 p50/p51'],['t','今天','写 p52–p54 并注入'],['b','阻塞','无']],tpl:`昨日：{y}
+今日：{t}
+阻塞：{b}`,note:'站会三句话，控制在 1 分钟内。'});
+}
+
+function t_meeting_minutes_short(root){
+  listTool(root,{ph:'要素',note:'精简版会议记录必备项。',rows:[
+    ['时间地点','便于追溯'],['参会人','含缺席关键人'],['议题','按顺序编号'],['决议','每条一句话'],['待办','人 + 事 + 时间'],['下次','时间与议题']
+  ]});
+}
+
+function t_delegation(root){
+  listTool(root,{ph:'委托步骤',note:'交办任务要说清的六件事。',rows:[
+    ['目标','要达成什么'],['标准','怎样算做好'],['期限','什么时候要'],['权限','能自主决定什么'],['资源','能给什么支持'],['回报','何时同步进度']
+  ]});
+}
+
+function t_onboarding(root){
+  checklistTool(root,{key:'onboard',ph:'新人第一周',items:['领设备与账号','读团队文档','跑通本地环境','认识协作对象','明确第一个任务'],note:'第一周目标：能独立跑通并交付一件小事。'});
+}
+
+function t_handover(root){
+  checklistTool(root,{key:'handover',ph:'交接清单',items:['项目文档链接','账号与权限','进行中的任务','关键联系人','遗留问题'],note:'交接必须留书面记录。'});
+}
+
+function t_customer_complaint(root){
+  listTool(root,{ph:'步骤',note:'投诉处理的 LAST 原则。',rows:[
+    ['L 倾听','先让对方说完，不打断'],['A 道歉','为体验道歉，不推责任'],['S 解决','给出可执行方案与时间'],['T 感谢','感谢反馈，记录改进']
+  ]});
+}
+
+function t_sales_pitch(root){
+  listTool(root,{ph:'结构',note:'产品介绍的 FAB 结构。',rows:[
+    ['F 特性','产品有什么'],['A 优势','比替代方案好在哪'],['B 利益','对客户意味着什么'],['证据','数据、案例、试用'],['行动','明确的下一步']
+  ]});
+}
+
+function t_work_habit(root){
+  listTool(root,{ph:'习惯',note:'提高交付质量的习惯。',rows:[
+    ['先写清单','每天三件必做'],['收件箱清零','每天两次'],['两分钟法则','小事立刻做'],['留缓冲','排期留 20%'],['当日复盘','三行总结'],['周清理','归档与删减']
+  ]});
+}
+
+function t_office_manner(root){
+  listTool(root,{ph:'场景 / 礼仪',note:'办公室基本礼仪。',rows:[
+    ['敲门','轻敲两声，等回应'],['会议','提前 2 分钟到'],['电话','公共区小声，重要电话外出'],['邮件','不群发无关人'],['借物','归还并致谢'],['午休','保持安静']
+  ]});
+}
+
+function t_ppt_page(root){
+  calcTool(root,{fields:[['c','内容点',12,1],['p','每页要点',3,1]],run:v=>{
+    const pages=Math.ceil((+v.c)/(+v.p||1))+2;
+    return [['建议页数',pages+' 页'],['含封面与结尾','+2'],['每页讲时','约 '+(Math.round(60/(+v.p||1)))+' 秒']];
+  }});
+}
+
+function t_meeting_cost(root){
+  calcTool(root,{fields:[['n','参会人数',8,1],['m','时长（分钟）',60,5],['s','时薪',80,10]],run:v=>{
+    const cost=(+v.n)*(+v.m)/60*(+v.s);
+    return [['会议成本',cost.toFixed(0)+' 元'],['人均',((+v.m)/60*(+v.s)).toFixed(0)+' 元'],['提示','超过 8 人考虑改为文档同步']];
+  }});
+}
+function t_daily_report(root){
+  tmplTool(root,{fields:[['d','日期','11-15'],['a','今日完成','完成 3 个分类工具分片'],['b','明日','注入主文件并回归'],['c','问题','无']],tpl:`【日报】{d}
+完成：{a}
+明日：{b}
+问题：{c}`,note:'日报三行，别写成散文。'});
+}
+function t_debrief(root){
+  tmplTool(root,{fields:[['p','项目','小羽工具箱 1.9'],['g','目标达成','工具总数 960，全部回归通过'],['d','偏差','排期延后 1 天'],['r','原因','分片代码语法返工'],['n','下一步','补自动化检查并更新 README']],tpl:`【述职要点】{p}
+目标达成：{g}
+偏差：{d}
+原因：{r}
+下一步：{n}`,note:'述职讲结果、偏差、改进三件事。'});
+}
+function t_agenda(root){
+  listTool(root,{ph:'议程模板',note:'1 小时会议的标准议程。',rows:[
+    ['0–5 分钟','目标与议程确认'],['5–20 分钟','现状与数据'],['20–45 分钟','方案讨论'],['45–55 分钟','决议与待办'],['55–60 分钟','确认下一步']
+  ]});
+}
+function t_client_visit(root){
+  checklistTool(root,{key:'visit',ph:'客户拜访准备',items:['确认时间地点','准备资料与样品','了解客户背景','设定拜访目标','准备后续跟进话术'],note:'拜访结束当天发纪要给客户。'});
+}
+function t_review_prd(root){
+  checklistTool(root,{key:'prdreview',ph:'需求评审检查',items:['目标可量化','范围明确','异常与空态','验收标准','排期与依赖','埋点需求'],note:'评审前先发文档，会上只讨论分歧。'});
+}
+function t_code_review(root){
+  checklistTool(root,{key:'cr',ph:'代码评审',items:['命名清晰','异常处理','边界条件','安全（注入/XSS）','性能','测试覆盖'],note:'评审看逻辑与边界，不纠结格式。'});
+}
+function t_launch_check(root){
+  checklistTool(root,{key:'launch',ph:'上线检查',items:['回归通过','配置正确','回滚方案','监控告警','通知相关方'],note:'上线前把回滚方案写清楚。'});
+}
+function t_shift_handover(root){
+  tmplTool(root,{fields:[['s','班次','夜班 → 早班'],['i','进行中事项','监控告警 2 条待观察'],['r','风险','磁盘使用率 78%'],['n','联系人','值班手机 138xxxx']],tpl:`【值班交接】{s}
+进行中：{i}
+风险：{r}
+联系人：{n}`,note:'交接必须口头 + 书面双确认。'});
+}
+function t_training_plan(root){
+  listTool(root,{ph:'培训设计',note:'一次有效培训的结构。',rows:[
+    ['目标','学完能做什么'],['对象','先备知识'],['内容','三段以内'],['练习','动手环节'],['检验','小测或作业'],['跟进','一周后复盘']
+  ]});
+}
+/* ===== 儿童启蒙（45） ===== */
+
+function t_kid_math(root){
+  calcTool(root,{fields:[['a','最大数',20,1],['n','题目数',10,1],['k','运算',['+','加法','-','减法','*','乘法']]],run:v=>{
+    const a=Math.max(1,Math.round(+v.a)), n=Math.min(50,Math.round(+v.n));
+    const out=[];
+    for(let i=0;i<n;i++){
+      let x=Math.ceil(Math.random()*a), y=Math.ceil(Math.random()*a), op=v.k, r='';
+      if(op==='-'){ if(y>x) [x,y]=[y,x]; r=x-y; }
+      else if(op==='+') r=x+y;
+      else { x=Math.ceil(Math.random()*Math.min(9,a)); y=Math.ceil(Math.random()*Math.min(9,a)); r=x*y; }
+      out.push(x+' '+op+' '+y+' = '+r);
+    }
+    return [['题目（含答案）',out.join('；')]];
+  },note:'每题随机生成，刷新可换一批。'});
+}
+
+function t_kid_oral(root){
+  calcTool(root,{fields:[['n','题量',20,5],['a','范围',['10','10 以内','20','20 以内','100','100 以内']]],run:v=>{
+    const a={'10':10,'20':20,'100':100}[v.a];
+    return [['建议时长',(+v.n)*5+' 秒左右'],['正确率目标','90% 以上'],['练习方式','每天 1 组，计时完成']];
+  }});
+}
+
+function t_kid_pattern(root){
+  listTool(root,{ph:'规律 / 答案',note:'找规律练习与常见数列。',rows:[
+    ['2 4 6 8','下一个 10'],['1 3 5 7','下一个 9'],['1 1 2 3 5 8','下一个 13'],['1 4 9 16','下一个 25'],['3 6 12 24','下一个 48'],['5 10 15 20','下一个 25']
+  ]});
+}
+
+function t_kid_shape(root){
+  listTool(root,{ph:'图形 / 特征',note:'基础图形认知。',rows:[
+    ['圆形','没有角，能滚动'],['正方形','四条边一样长，四个直角'],['长方形','对边相等'],['三角形','三条边，最稳'],['椭圆','长圆，像鸡蛋'],['五边形','五条边'],['六边形','六条边，蜂巢'],['球体','立体圆'],['正方体','六个正方形面'],['圆柱','上下圆面']
+  ]});
+}
+
+function t_kid_color(root){
+  listTool(root,{ph:'颜色 / 认识',note:'基础颜色中英文。',rows:[
+    ['红','red'],['黄','yellow'],['蓝','blue'],['绿','green'],['白','white'],['黑','black'],['橙','orange'],['紫','purple'],['粉','pink'],['棕','brown'],['灰','grey'],['金','gold']
+  ]});
+}
+
+function t_kid_song(root){
+  listTool(root,{ph:'儿歌',note:'经典中文儿歌。',rows:[
+    ['小星星','一闪一闪亮晶晶'],['两只老虎','两只老虎跑得快'],['数鸭子','门前大桥下'],['拔萝卜','嘿呦嘿呦拔不动'],['小兔子乖乖','把门儿开开'],['泥娃娃','也有那眉毛眼睛'],['鲁冰花','夜夜想起妈妈的话']
+  ]});
+}
+
+function t_kid_riddle(root){
+  randPickTool(root,{items:'千条线万条线，掉到水里看不见（雨）\n有头没有颈，有眼没有眉（鱼）\n一个小姑娘，坐在水中央（荷花）\n身穿黄衣裳，剥开是白肉（香蕉）\n头戴红帽子，身穿白袍子（鹅）\n白天开门，晚上关门（眼睛）\n一座桥，地上架，天上走（彩虹）\n五个兄弟，住在一起，名字不同，高矮不齐（手指）',note:'谜语小游戏，猜不出可点「抽一个」换题。'});
+}
+
+function t_kid_brain(root){
+  randPickTool(root,{items:'什么东西越洗越脏？（水）\n什么马不会跑？（木马）\n什么布剪不断？（瀑布）\n什么门永远关不上？（球门）\n什么人天天过生日？（生日蛋糕）\n什么东西有脚却不会走？（桌子）\n什么车永远不会堵车？（风车）\n什么东西越用越少？（橡皮）',note:'脑筋急转弯，适合亲子互动。'});
+}
+
+function t_kid_idiom(root){
+  listTool(root,{ph:'成语 / 意思',note:'儿童常用成语。',rows:[
+    ['一心一意','专心'],['三心二意','不专心'],['五颜六色','颜色多'],['七上八下','心神不安'],['四面八方','到处'],['九牛一毛','很小一部分'],['十全十美','完美'],['百发百中','非常准']
+  ]});
+}
+
+function t_kid_antonym(root){
+  listTool(root,{ph:'词 / 反义',note:'儿童反义词练习。',rows:[
+    ['大 / 小','高 / 矮'],['胖 / 瘦','长 / 短'],['快 / 慢','冷 / 热'],['白天 / 黑夜','上 / 下'],['开心 / 难过','干净 / 脏'],['新 / 旧','轻 / 重']
+  ]});
+}
+
+function t_kid_animal(root){
+  listTool(root,{ph:'动物 / 特点',note:'常见动物认知。',rows:[
+    ['大象','长鼻子，大耳朵'],['熊猫','黑白相间，爱吃竹子'],['老虎','有条纹，百兽之王'],['兔子','长耳朵，短尾巴'],['长颈鹿','脖子很长'],['猴子','会爬树，爱香蕉'],['鲸鱼','海洋里最大的'],['蝴蝶','由毛毛虫变来'],['青蛙','会跳，吃害虫'],['乌龟','背硬壳，爬得慢']
+  ]});
+}
+
+function t_kid_dino(root){
+  listTool(root,{ph:'恐龙',note:'常见恐龙认知。',rows:[
+    ['霸王龙','食肉，牙齿锋利'],['三角龙','三个角，食草'],['腕龙','脖子超长'],['翼龙','会飞（非恐龙）'],['甲龙','背上有铠甲'],['迅猛龙','跑得快'],['梁龙','尾巴很长']
+  ]});
+}
+
+function t_kid_space(root){
+  listTool(root,{ph:'天体',note:'太阳系启蒙。',rows:[
+    ['太阳','恒星，给地球光和热'],['地球','我们的家，有水和空气'],['月亮','地球的卫星'],['水星','离太阳最近'],['金星','最热的行星'],['火星','红色的星球'],['木星','最大的行星'],['土星','有漂亮的光环']
+  ]});
+}
+
+function t_kid_body(root){
+  listTool(root,{ph:'身体部位',note:'身体部位中英文。',rows:[
+    ['头','head'],['眼睛','eyes'],['鼻子','nose'],['嘴','mouth'],['耳朵','ears'],['手','hands'],['脚','feet'],['肚子','tummy'],['牙齿','teeth'],['膝盖','knee']
+  ]});
+}
+
+function t_kid_traffic(root){
+  listTool(root,{ph:'标志 / 含义',note:'儿童交通安全标志。',rows:[
+    ['红灯','停'],['绿灯','行'],['黄灯','等一等'],['斑马线','行人通道'],['禁止通行','红色圆形'],['注意儿童','黄底三角形'],['限速 40','红圈数字'],['人行通道','蓝底白色']
+  ]});
+}
+
+function t_kid_safety(root){
+  listTool(root,{ph:'场景 / 安全',note:'儿童安全常识。',rows:[
+    ['不跟陌生人走','无论说什么都不走'],['记住电话','爸妈号码与 110'],['插座','不玩插孔，湿手不碰'],['开水','远离热水壶'],['窗户','不攀爬'],['过马路','牵手 + 看灯'],['遇走失','原地等待或找店员']
+  ]});
+}
+
+function t_kid_manner(root){
+  listTool(root,{ph:'场景 / 礼貌',note:'儿童礼仪。',rows:[
+    ['见面','问好，看着对方眼睛'],['请求','请、谢谢、对不起'],['吃饭','不插话、不敲碗'],['做客','不乱翻别人东西'],['打电话','先说我是谁'],['公共场合','不大声喧哗']
+  ]});
+}
+
+function t_kid_chore(root){
+  checklistTool(root,{key:'kid_chore',ph:'今天的小任务',items:['自己穿衣服','收拾玩具','摆好碗筷','擦桌子'],note:'做完打勾，养成习惯比催促有用。'});
+}
+
+function t_kid_schedule(root){
+  tmplTool(root,{fields:[['n','名字','小明'],['w','日期','周一至周五'],['m','起床','7:00'],['s','上学','8:00'],['a','作业','17:00–18:00'],['b','玩耍','18:00–19:00'],['z','睡觉','21:00']],tpl:`{n} 的作息表（{w}）
+{m} 起床
+{s} 上学
+{a} 写作业
+{b} 自由玩耍
+{z} 上床睡觉`,note:'作息稳定比时长更重要。'});
+}
+
+function t_kid_screen(root){
+  calcTool(root,{fields:[['y','年龄',6,1],['d','每天屏幕分钟',60,15]],run:v=>{
+    const y=+v.y, d=+v.d;
+    const limit=y<2?0:y<5?60:y<12?90:120;
+    return [['建议上限',limit+' 分钟/天'],['当前',d+' 分钟'],['状态',d>limit?'超出建议':'在建议内'],['提示','近距离用眼 20 分钟休息 20 秒看远处']];
+  }});
+}
+
+function t_kid_height(root){
+  listTool(root,{ph:'年龄 / 身高参考',note:'儿童身高粗略参考（男孩中位，仅参考）。',rows:[
+    ['1 岁','75 cm'],['2 岁','87 cm'],['3 岁','96 cm'],['4 岁','103 cm'],['5 岁','110 cm'],['6 岁','117 cm'],['7 岁','124 cm'],['8 岁','130 cm'],['9 岁','135 cm'],['10 岁','140 cm'],['11 岁','145 cm'],['12 岁','152 cm']
+  ]});
+}
+
+function t_kid_vaccine(root){
+  listTool(root,{ph:'年龄 / 疫苗',note:'我国免疫规划大致时间，具体按当地。',rows:[
+    ['出生','乙肝 1、卡介苗'],['1 月','乙肝 2'],['2 月','脊灰 1'],['3 月','脊灰 2、百白破 1'],['6 月','乙肝 3'],['8 月','麻腮风 1'],['18 月','百白破加强'],['4 岁','脊灰加强'],['6 岁','白破']
+  ]});
+}
+
+function t_kid_book(root){
+  listTool(root,{ph:'年龄 / 绘本',note:'选书方向参考。',rows:[
+    ['0–2 岁','黑白卡、洞洞书'],['2–3 岁','生活习惯绘本'],['3–5 岁','情绪与社交故事'],['5–6 岁','科普启蒙、桥梁书'],['6–8 岁','注音读物、短篇童话'],['8–10 岁','章节书、历史故事']
+  ]});
+}
+
+function t_kid_game(root){
+  randPickTool(root,{items:'捉迷藏\n拍手歌\n老鹰捉小鸡\n搭积木\n拼图\n影子游戏\n石头剪刀布\n跳绳\n吹泡泡\n找不同',note:'不知道玩什么时点「抽一个」。'});
+}
+
+function t_kid_craft(root){
+  listTool(root,{ph:'手工 / 材料',note:'低龄手工活动。',rows:[
+    ['折纸飞机','A4 纸'],['纸船','方纸'],['剪纸窗花','彩纸 + 安全剪刀'],['橡皮泥','塑形练习'],['手指画','颜料 + 纸'],['树叶拓印','树叶 + 蜡笔'],['纸盘动物','纸盘 + 彩笔'],['串珠','珠子 + 绳']
+  ]});
+}
+
+function t_kid_origami(root){
+  listTool(root,{ph:'折纸步骤',note:'纸飞机折法。',rows:[
+    ['1','长方形纸对折后展开'],['2','两上角向中线折成三角'],['3','整三角再向下折'],['4','两侧再向中线折'],['5','沿中线对折机身'],['6','折出机翼，展平']
+  ]});
+}
+
+function t_kid_draw(root){
+  listTool(root,{ph:'对象 / 画法',note:'简笔画顺序。',rows:[
+    ['小猫','圆头 + 三角耳 + 胡须'],['小狗','长脸 + 垂耳 + 尾巴'],['房子','方形 + 三角屋顶 + 窗'],['太阳','圆 + 放射线'],['树','树干 + 云朵树冠'],['小鱼','椭圆 + 三角尾']
+  ]});
+}
+
+function t_kid_english(root){
+  listTool(root,{ph:'主题 / 单词',note:'英语启蒙高频词。',rows:[
+    ['数字','one two three four five'],['颜色','red blue yellow green'],['动物','cat dog bird fish'],['家庭','dad mom baby'],['水果','apple banana orange'],['身体','head hand foot'],['动作','run jump sit'],['礼貌','please sorry thanks']
+  ]});
+}
+
+function t_kid_phonics(root){
+  listTool(root,{ph:'字母 / 发音',note:'自然拼读入门规则。',rows:[
+    ['a','短音 /æ/ cat'],['e','短音 /e/ bed'],['i','短音 /ɪ/ pig'],['o','短音 /ɒ/ dog'],['u','短音 /ʌ/ bus'],['sh','/ʃ/ ship'],['ch','/tʃ/ chip'],['th','/θ/ thin'],['ck','/k/ duck'],['ee','/iː/ see']
+  ]});
+}
+
+function t_kid_alphabet(root){
+  listTool(root,{ph:'字母 / 单词',note:'26 字母与代表词。',rows:[
+    ['A–E','apple ball cat dog egg'],['F–J','fish girl hat ice juice'],['K–O','kite lion milk nose orange'],['P–T','pen queen rice sun tree'],['U–Z','umbrella van water box yes zoo']
+  ]});
+}
+
+function t_kid_count(root){
+  listTool(root,{ph:'数字 / 中英',note:'1–20 中英文。',rows:[
+    ['1–5','一 二 三 四 五 / one two three four five'],['6–10','六 七 八 九 十 / six seven eight nine ten'],['11–15','eleven twelve thirteen fourteen fifteen'],['16–20','sixteen seventeen eighteen nineteen twenty'],['整十','20 30 40 50 / twenty thirty forty fifty']
+  ]});
+}
+
+function t_kid_time(root){
+  listTool(root,{ph:'概念',note:'时间认知教学要点。',rows:[
+    ['时针','短针，指小时'],['分针','长针，指分钟'],['整点','分针指 12'],['半点','分针指 6'],['一天','24 小时'],['一周','7 天'],['上午/下午','12 点前/后']
+  ]});
+}
+
+function t_kid_money(root){
+  listTool(root,{ph:'面额',note:'人民币认知。',rows:[
+    ['1 元','10 角 = 100 分'],['5 元','五个 1 元'],['10 元','十个 1 元'],['20 元','两个 10 元'],['50 元','五个 10 元'],['100 元','十个 10 元'],['找零','付出 - 价格']
+  ]});
+}
+
+function t_kid_focus(root){
+  listTool(root,{ph:'游戏',note:'提升专注力的小游戏。',rows:[
+    ['找不同','对比两张图'],['复述数字','听完倒着说'],['听指令做动作','两步指令'],['串珠','按颜色排序'],['拼图','从 9 片开始'],['舒尔特表','按顺序找数字']
+  ]});
+}
+
+function t_kid_memory(root){
+  listTool(root,{ph:'方法',note:'儿童记忆小技巧。',rows:[
+    ['图像化','把词变成图画'],['编故事','串成一个故事'],['动作记忆','边念边做动作'],['重复三遍','当场复述'],['睡前回顾','一天一件'],['游戏化','卡片配对']
+  ]});
+}
+
+function t_kid_logic(root){
+  listTool(root,{ph:'题目 / 答案',note:'简单逻辑题。',rows:[
+    ['谁更高','A 比 B 高，B 比 C 高 → A 最高'],['三种水果','苹果不是最大，最大是西瓜'],['排队','小明前面 3 人，共 5 人'],['分类','苹果、香蕉是水果，萝卜是蔬菜'],['时间顺序','先起床后刷牙']
+  ]});
+}
+
+function t_kid_story(root){
+  tmplTool(root,{fields:[['h','主角','小兔子'],['p','地点','森林'],['e','遇到什么','一只迷路的小鸟'],['a','怎么解决','带它找到家'],['m','道理','帮助别人很快乐']],tpl:`{h}在{p}里散步，遇到了{e}。它决定{a}。故事最后，大家都明白了：{m}。`,note:'让孩子自己填，练习表达。'});
+}
+
+function t_kid_emotion(root){
+  listTool(root,{ph:'情绪 / 应对',note:'教孩子识别与表达情绪。',rows:[
+    ['生气','深呼吸，说出我很生气'],['难过','可以哭，抱一抱'],['害怕','说出怕什么，找大人'],['开心','和别人分享'],['委屈','讲清楚发生了什么'],['嫉妒','每个人擅长的不一样']
+  ]});
+}
+
+function t_kid_praise(root){
+  listTool(root,{ph:'方式',note:'有效的表扬方式。',rows:[
+    ['具体','你今天自己收拾了玩具'],['过程','我看到你试了三次'],['努力','你比昨天更认真'],['避免','只说你真棒'],['对比','和过去的自己比'],['不贴标签','不说你真聪明']
+  ]});
+}
+
+function t_kid_punish(root){
+  listTool(root,{ph:'原则',note:'管教原则，不打骂。',rows:[
+    ['讲清后果','事先说好规则'],['自然后果','不收拾就找不到玩具'],['冷静角','情绪平复再沟通'],['一致','父母口径一致'],['不贴标签','说行为不说人'],['修复','引导道歉与弥补']
+  ]});
+}
+
+function t_kid_reading(root){
+  calcTool(root,{fields:[['n','每天页数',3,1],['w','每周天数',5,1],['p','每页字数',300,50]],run:v=>{
+    return [['每周字数',((+v.n)*(+v.w)*(+v.p))+' 字'],['每月约',((+v.n)*(+v.w)*(+v.p)*4.3/10000).toFixed(1)+' 万字'],['一年约',((+v.n)*(+v.w)*(+v.p)*52/10000).toFixed(1)+' 万字']];
+  },note:'阅读量靠每天一点点。'});
+}
+
+function t_kid_homework(root){
+  checklistTool(root,{key:'kid_hw',ph:'今天作业',items:['语文','数学','英语','阅读 20 分钟'],note:'先难后易，写完自己检查。'});
+}
+
+function t_kid_birthday(root){
+  listTool(root,{ph:'准备',note:'儿童生日会准备清单。',rows:[
+    ['时间地点','提前 1 周通知'],['人数','不超过年龄 + 1'],['食物','考虑过敏'],['游戏','2–3 个即可'],['伴手礼','小额实用'],['拍照','指定一人负责']
+  ]});
+}
+
+function t_kid_question(root){
+  listTool(root,{ph:'问题 / 引导',note:'和孩子聊天的问题。',rows:[
+    ['今天最开心的事','引导回忆'],['今天帮了谁','培养共情'],['有什么难的','允许表达困难'],['如果重来一次','练习反思'],['想学什么','发现兴趣']
+  ]});
+}
+
+function t_kid_phone(root){
+  listTool(root,{ph:'规则',note:'儿童使用电子设备的规则。',rows:[
+    ['固定时段','只在约定时间用'],['公开场合','客厅使用'],['内容','家长先看'],['睡前','1 小时不用'],['不换奖励','不用手机当奖励'],['家长示范','自己少刷']
+  ]});
+}
+/* ===== 旅行出行（45） ===== */
+
+function t_pack_list(root){
+  checklistTool(root,{key:'pack',ph:'打包清单',items:['证件与身份证','手机与充电器','充电宝','换洗衣服','洗漱包','常用药','雨具','现金'],note:'按天数 × 1.2 套准备衣物。'});
+}
+
+function t_travel_doc(root){
+  checklistTool(root,{key:'traveldoc',ph:'证件核对',items:['身份证','护照/签证','机票或车票','酒店预订','保险单'],note:'出境把证件拍照存本地，另备复印件。'});
+}
+
+function t_pack_calc(root){
+  calcTool(root,{fields:[['d','天数',5,1],['c','类型',['city','城市观光','beach','海边','cold','寒冷','hike','徒步']]],run:v=>{
+    const per={'city':1.1,'beach':2,'cold':1.4,'hike':1.2}[v.c];
+    return [['衣服套数',Math.ceil(+v.d*per)+' 套'],['内衣数量',(+v.d)+1+' 件'],['鞋','2 双（一双舒适一双备用）'],['洗衣','超过 5 天可带少量洗衣片']];
+  }});
+}
+
+function t_time_zone(root){
+  calcTool(root,{fields:[['b','出发地时差（UTC）',8,1],['d','目的地时差（UTC）',0,1],['h','出发时间（小时）',9,1],['f','飞行时长（小时）',12,0.5]],run:v=>{
+    const arr=(+v.h)+(+v.f)*1;
+    const local=arr+((+v.d)-(+v.b));
+    const hh=((local%24)+24)%24;
+    return [['出发地时间',((+v.h)).toFixed(1)+':00'],['目的地抵达时刻',hh.toFixed(1)+':00（当地时间）'],['时差',((+v.d)-(+v.b))+' 小时'],['建议','抵达后按当地时间作息']];
+  },note:'不考虑经停与夏令时。'});
+}
+
+function t_flight_time(root){
+  calcTool(root,{fields:[['h','时差（小时）',5,1],['f','飞行时长（小时）',10,0.5]],run:v=>{
+    const jetlag=Math.abs(+v.h);
+    return [['身体感知差',jetlag+' 小时'],['倒时差天数','约 '+Math.ceil(jetlag/1.5)+' 天'],['建议','白天多晒太阳，少午睡'],['飞行中','按目的地时间睡眠']];
+  }});
+}
+
+function t_currency(root){
+  calcTool(root,{fields:[['a','金额',1000,1],['r','汇率（1 外币=?本币）',7.2,0.01],['d','方向',['f','外币→本币','b','本币→外币']]],run:v=>{
+    const x=v.d==='f'?(+v.a)*(+v.r):(+v.a)/(+v.r||1);
+    return [['换算结果',x.toFixed(2)],['汇率',(+v.r)],['提示','实际以银行成交价为准']];
+  },note:'汇率手动填写，避免用过期数据。'});
+}
+
+function t_mileage(root){
+  calcTool(root,{fields:[['km','公里数',1000,1],['p','每公里油耗（L）',0.08,0.01],['g','油价（元/L）',7.5,0.1]],run:v=>{
+    const cost=(+v.km)*(+v.p)*(+v.g);
+    return [['油费',cost.toFixed(0)+' 元'],['耗油',((+v.km)*(+v.p)).toFixed(1)+' L'],['人均（4 人）',(cost/4).toFixed(0)+' 元']];
+  }});
+}
+
+function t_toll(root){
+  calcTool(root,{fields:[['km','高速公里',300,10],['r','每公里费率',0.5,0.05]],run:v=>{
+    return [['通行费约',((+v.km)*(+v.r)).toFixed(0)+' 元'],['ETC 折扣','一般 95 折'],['提示','桥隧另计']];
+  }});
+}
+
+function t_trip_budget(root){
+  calcTool(root,{fields:[['d','天数',5,1],['p','人数',2,1],['k','方式',['budget','穷游','normal','常规','lux','舒适']]],run:v=>{
+    const per={'budget':200,'normal':500,'lux':1200}[v.k];
+    const total=(+v.d)*(+v.p)*per;
+    return [['总预算',total.toFixed(0)+' 元'],['人均',total/(+v.p||1)+' 元'],['拆分','交通 35%，住宿 30%，吃 25%，门票 10%']];
+  }});
+}
+
+function t_split_cost(root){
+  calcTool(root,{fields:[['t','总花费',2000,50],['n','人数',4,1]],run:v=>{
+    return [['人均',((+v.t)/(+v.n||1)).toFixed(2)+' 元'],['多付者应退','按实际垫付另算'],['提示','记账用表格，避免事后争议']];
+  }});
+}
+
+function t_itinerary(root){
+  tmplTool(root,{fields:[['d','日期','D1'],['m','上午','抵达 + 酒店入住'],['a','下午','老城区漫步'],['n','晚上','夜市小吃'],['t','交通','地铁 2 号线'],['b','预算','人均 300 元']],tpl:`{d}
+上午：{m}
+下午：{a}
+晚上：{n}
+交通：{t}
+预算：{b}`,note:'每天只排 2–3 个重点，留出机动时间。'});
+}
+
+function t_visa_doc(root){
+  listTool(root,{ph:'材料',note:'出境签证常见材料。',rows:[
+    ['护照','有效期 6 个月以上'],['照片','按国别规格'],['行程单','机票酒店预订'],['财力证明','银行流水 3–6 个月'],['在职证明','含准假说明'],['保险','覆盖全程'],['申请表','如实填写']
+  ]});
+}
+
+function t_abroad_tips(root){
+  listTool(root,{ph:'事项',note:'出国旅行要点。',rows:[
+    ['插头','提前查目的地插座类型'],['电话卡','落地买卡或 eSIM'],['支付','备少量现金 + 国际卡'],['紧急电话','记下使馆电话'],['退税','保留票据与盖章'],['小费','按当地习惯'],['安全','避开高风险区域']
+  ]});
+}
+
+function t_plug_type(root){
+  listTool(root,{ph:'地区 / 插座',note:'常见插座类型与电压。',rows:[
+    ['中国','A/C 型，220V'],['日本','A 型，100V'],['美国','A/B 型，120V'],['英国','G 型，230V'],['欧洲','C/F 型，230V'],['澳洲','I 型，230V'],['韩国','C/F 型，220V'],['瑞士','J 型，230V']
+  ]});
+}
+
+function t_hotel_pick(root){
+  listTool(root,{ph:'判断维度',note:'选酒店看这几点。',rows:[
+    ['位置','离交通与景点步行 10 分钟内'],['评价','看最近 3 个月'],['隔音','看差评关键词'],['卫生','看真实照片'],['退改','优先可免费取消'],['早餐','是否含早影响预算']
+  ]});
+}
+
+function t_bnb_check(root){
+  checklistTool(root,{key:'bnb',ph:'入住检查',items:['门锁是否正常','热水与空调','有无摄像头','消防通道位置','押金与退房规则'],note:'进门先拍房间现状，退房减少纠纷。'});
+}
+
+function t_weather_gear(root){
+  listTool(root,{ph:'天气 / 装备',note:'按天气准备装备。',rows:[
+    ['雨天','雨衣优于伞、防水鞋'],['高温','防晒、帽子、电解质'],['寒冷','分层穿衣、手套'],['大风','防风外套'],['高原','防晒 + 保暖 + 氧气'],['海边','防晒、拖鞋、防水袋']
+  ]});
+}
+
+function t_altitude(root){
+  listTool(root,{ph:'海拔 / 注意',note:'高原反应预防。',rows:[
+    ['2500m','开始可能出现高反'],['3000m','缓慢上升，别剧烈运动'],['3500m','多喝水，少饮酒'],['4000m','备氧气，注意睡眠'],['严重症状','头痛呕吐意识差，立即下降'],['禁忌','感冒上高原风险高']
+  ]});
+}
+
+function t_car_sick(root){
+  listTool(root,{ph:'方法',note:'晕车应对。',rows:[
+    ['座位','前排或靠窗，面向前方'],['视线','看远处地平线'],['通风','开窗或空调外循环'],['饮食','出发前别吃太饱'],['药物','提前 30 分钟服用'],['穴位','按压内关穴']
+  ]});
+}
+
+function t_jetlag(root){
+  listTool(root,{ph:'策略',note:'倒时差方法。',rows:[
+    ['出发前','提前 1–2 天按目的地作息'],['飞行中','按目的地时间睡/醒'],['抵达后','白天多见阳光'],['避免','抵达当天长时间午睡'],['咖啡因','下午后不喝'],['褪黑素','按医嘱短期使用']
+  ]});
+}
+
+function t_language_phrase(root){
+  listTool(root,{ph:'场景 / 英语',note:'旅行常用英语短句。',rows:[
+    ['问路','Excuse me, how do I get to…?'],['点餐','I would like this one, please.'],['买单','Could I have the bill?'],['求助','Could you help me?'],['住宿','I have a reservation.'],['紧急','Call an ambulance, please.']
+  ]});
+}
+
+function t_travel_safety(root){
+  listTool(root,{ph:'场景 / 注意',note:'独自旅行安全要点。',rows:[
+    ['住宿','选评价好、有前台的'],['夜间','不单独走偏僻路'],['财物','分散存放，不外露'],['打车','核对车牌，分享行程'],['证件','复印件与原件分开'],['联系','每天给家人报平安']
+  ]});
+}
+
+function t_travel_insurance(root){
+  listTool(root,{ph:'保障项',note:'旅行险重点看什么。',rows:[
+    ['医疗','含意外医疗与住院'],['紧急救援','含转运'],['航班延误','含延误赔付'],['行李','丢失赔付'],['高风险','含徒步/潜水需单独选'],['免赔额','越低越好']
+  ]});
+}
+
+function t_tax_refund(root){
+  listTool(root,{ph:'步骤',note:'境外退税流程。',rows:[
+    ['1','店内消费达到退税门槛'],['2','索取退税单并填信息'],['3','离境时海关盖章'],['4','到退税柜台或邮寄'],['5','保留凭证待查'],['注意','商品需未使用、可查验']
+  ]});
+}
+
+function t_liquid_rule(root){
+  listTool(root,{ph:'规定',note:'随身液体常见规定。',rows:[
+    ['单瓶','不超过 100ml'],['容器','需装 1L 透明袋'],['每人','一袋'],['药品','凭处方可带'],['婴儿食品','可例外'],['免税品','封袋勿拆']
+  ]});
+}
+
+function t_luggage_weight(root){
+  calcTool(root,{fields:[['d','天数',5,1],['s','季节',['w','夏','m','春秋','c','冬']],['k','类型',['c','城市','o','户外']]],run:v=>{
+    const per={'w':0.6,'m':1,'c':1.4}[v.s]*(v.k==='o'?1.5:1);
+    return [['建议总重',((+v.d)*per*0.6+2).toFixed(1)+' kg'],['登机箱','一般 7kg 内'],['托运','经济舱 20–23kg']];
+  }});
+}
+
+function t_sun_time(root){
+  calcTool(root,{fields:[['la','纬度',30,0.1],['m','月份',6,1],['d','日期',15,1]],run:v=>{
+    const lat=(+v.la)*Math.PI/180, mo=+v.m, da=+v.d;
+    const day=Math.floor(30.4*(mo-1))+da;
+    const decl=23.45*Math.sin(2*Math.PI*(284+day)/365)*Math.PI/180;
+    const h=Math.acos(-Math.tan(lat)*Math.tan(decl))*180/Math.PI/15;
+    return [['白昼时长',(2*h).toFixed(1)+' 小时'],['参考日出','约 '+(12-h).toFixed(1)+':00'],['参考日落','约 '+(12+h).toFixed(1)+':00'],['说明','未计时区与夏令时']];
+  }});
+}
+
+function t_hike_time(root){
+  calcTool(root,{fields:[['d','距离（km）',10,0.5],['u','爬升（m）',500,50],['k','体能',['g','好','n','一般','w','弱']]],run:v=>{
+    const speed={'g':4.5,'n':3.5,'w':2.5}[v.k];
+    const t=(+v.d)/speed+(+v.u)/600;
+    return [['预计用时',t.toFixed(1)+' 小时'],['含休息',(t*1.25).toFixed(1)+' 小时'],['建议','天黑前 1 小时到达终点']];
+  },note:'按距离速度 + 爬升折算，个人差异大。'});
+}
+
+function t_cycle_speed(root){
+  calcTool(root,{fields:[['d','距离（km）',30,1],['t','时间（分钟）',90,5]],run:v=>{
+    const speed=(+v.d)/((+v.t)/60);
+    return [['均速',speed.toFixed(1)+' km/h'],['配速',((+v.t)/(+v.d||1)).toFixed(1)+' 分/km'],['强度','休闲 15–20，训练 25+']];
+  }});
+}
+
+function t_distance_conv(root){
+  unitConvTool(root,{note:'旅行常用长度换算。',units:[['km','公里',1],['mi','英里',1.609344],['nm','海里',1.852],['m','米',0.001],['ft','英尺',0.0003048]]});
+}
+
+function t_speed_conv(root){
+  unitConvTool(root,{note:'速度单位换算。',units:[['kmh','km/h',1],['mph','英里/小时',1.609344],['kn','节',1.852],['ms','米/秒',3.6]]});
+}
+
+function t_travel_medicine(root){
+  checklistTool(root,{key:'travelmed',ph:'旅行药品',items:['退烧止痛','肠胃药','抗过敏','创可贴','晕车药','个人处方药'],note:'处方药带原包装与说明。'});
+}
+
+function t_photo_spot(root){
+  listTool(root,{ph:'时间 / 光线',note:'拍照时间与光线建议。',rows:[
+    ['日出后 1 小时','柔和暖光'],['日落前 1 小时','黄金时刻'],['正午','光硬，找阴影'],['蓝调时刻','日落后 20 分钟'],['夜景','三脚架 + 长曝光'],['阴天','适合人像']
+  ]});
+}
+
+function t_local_food(root){
+  listTool(root,{ph:'找吃的方法',note:'找本地美食的思路。',rows:[
+    ['菜市场','早上最有生活气'],['老街','本地小吃聚集'],['本地人排队','最可靠信号'],['避开','景区正门第一排'],['点菜','问招牌与做法'],['卫生','看人气与翻台']
+  ]});
+}
+
+function t_emergency_abroad(root){
+  listTool(root,{ph:'情况 / 做法',note:'境外应急处理。',rows:[
+    ['护照丢失','报警 + 联系使馆补办'],['生病','联系保险救援热线'],['被抢','先保人身安全，再报警'],['迷路','进店铺求助'],['语言不通','用翻译软件 + 纸笔']
+  ]});
+}
+
+function t_camping_list(root){
+  checklistTool(root,{key:'camp',ph:'露营装备',items:['帐篷与地钉','睡袋与防潮垫','头灯','炉具与餐具','垃圾袋','急救包'],note:'出发前查天气与营地规定。'});
+}
+
+function t_hotel_tips(root){
+  listTool(root,{ph:'场景 / 技巧',note:'住店实用技巧。',rows:[
+    ['进门','先看消防通道'],['防盗','贵重物品随身'],['门锁','反锁 + 挂链'],['卫生','自带拖鞋与洗漱'],['退房','检查充电器与证件'],['开票','提前说清抬头']
+  ]});
+}
+
+function t_budget_split(root){
+  listTool(root,{ph:'项目 / 占比',note:'旅行预算分配参考。',rows:[
+    ['交通','35%'],['住宿','30%'],['餐饮','20%'],['门票活动','10%'],['购物','5%']
+  ]});
+}
+
+function t_weekend_trip(root){
+  randPickTool(root,{items:'周边古镇\n郊野公园徒步\n温泉两天\n博物馆 + 老城区\n海边看日出\n露营看星星\n农家乐采摘\n城市夜游',note:'周末短途没主意时抽一个。'});
+}
+
+function t_travel_journal(root){
+  tmplTool(root,{fields:[['d','日期','2026-11-15'],['p','地点','宜昌'],['s','今天看到','江边日落，雾气很轻'],['f','感受','走了很久，但很安静'],['n','下次','想再去一次清江']],tpl:`{d} · {p}
+今天看到：{s}
+感受：{f}
+下次：{n}`,note:'当天写三行，回来就有完整记录。'});
+}
+function t_train_seat(root){
+  listTool(root,{ph:'座位',note:'高铁选座常识。',rows:[
+    ['二等座','A/F 靠窗，C/D 过道'],['一等座','2+2 布局，更宽'],['商务座','可平躺'],['硬卧','上中下铺，下铺最方便'],['软卧','四人包厢'],['靠窗推荐','A 或 F']
+  ]});
+}
+function t_airport_flow(root){
+  listTool(root,{ph:'流程',note:'国内航班乘机流程。',rows:[
+    ['值机','起飞前 2 小时到，可线上值机'],['托运','液体与超规行李'],['安检','充电宝随身，液体限量'],['登机','按登机牌口候机'],['登机后','随身行李放头顶'],['到达','按指示提取行李']
+  ]});
+}
+function t_passport(root){
+  listTool(root,{ph:'事项',note:'护照办理要点。',rows:[
+    ['办理','户籍地或异地（需居住证明）'],['材料','身份证 + 照片'],['时长','通常 7–10 个工作日'],['有效期','10 年（16 岁以上）'],['签注','出境按目的地另办'],['遗失','先报警再补办']
+  ]});
+}
+function t_car_check(root){
+  checklistTool(root,{key:'carcheck',ph:'自驾前检查',items:['胎压与备胎','机油与冷却液','刹车与灯光','雨刮与玻璃水','三角警示牌'],note:'长途前做一次全面检查。'});
+}
+function t_pack_trick(root){
+  listTool(root,{ph:'技巧',note:'行李打包技巧。',rows:[
+    ['卷衣法','T 恤卷起来省空间'],['分装袋','按天分装'],['鞋子','鞋底朝外塞袜子'],['液体','装密封袋防漏'],['重物','放箱底靠近轮子'],['充电线','收纳袋统一']
+  ]});
+}
+/* ===== 家居装修（45） ===== */
+
+function t_reno_budget(root){
+  calcTool(root,{fields:[['a','面积（㎡）',90,1],['k','档次',['s','简装','m','中等','h','品质']]],run:v=>{
+    const per={'s':800,'m':1500,'h':2600}[v.k];
+    const total=(+v.a)*per;
+    return [['总预算',total.toFixed(0)+' 元'],['每㎡',per+' 元'],['硬装约',(total*0.6).toFixed(0)+' 元'],['软装家电',(total*0.4).toFixed(0)+' 元']];
+  },note:'不含拆改与特殊工艺，实际按地区浮动。'});
+}
+
+function t_paint_need(root){
+  calcTool(root,{fields:[['a','涂刷面积（㎡）',200,10],['c','遍数',2,1],['s','每升可涂（㎡）',10,1]],run:v=>{
+    const l=(+v.a)*(+v.c)/(+v.s||1);
+    return [['需涂料',l.toFixed(1)+' L'],['约合桶数',Math.ceil(l/18)+' 桶（18L）'],['底漆',((+v.a)/(+v.s||1)).toFixed(1)+' L']];
+  },note:'涂刷面积约等于建筑面积 × 2.5–3。'});
+}
+
+function t_tile_count(root){
+  calcTool(root,{fields:[['a','铺贴面积（㎡）',20,1],['w','砖宽（cm）',60,1],['h','砖高（cm）',60,1],['l','损耗率（%）',8,1]],run:v=>{
+    const per=(+v.w)*(+v.h)/10000;
+    const need=(+v.a)/(per||1)*(1+(+v.l)/100);
+    return [['需要的砖',Math.ceil(need)+' 块'],['单块面积',per.toFixed(3)+' ㎡'],['含损耗',(+v.l)+' %']];
+  }});
+}
+
+function t_floor_need(root){
+  calcTool(root,{fields:[['a','面积（㎡）',50,1],['l','损耗率（%）',5,1],['p','每包覆盖（㎡）',2.5,0.1]],run:v=>{
+    const need=(+v.a)*(1+(+v.l)/100);
+    return [['需地板面积',need.toFixed(2)+' ㎡'],['约需包数',Math.ceil(need/(+v.p||1))+' 包'],['踢脚线','按墙周长 × 0.9']];
+  }});
+}
+
+function t_cement_mix(root){
+  calcTool(root,{fields:[['v','体积（m³）',1,0.1],['k','标号',['c20','C20','c25','C25','c30','C30']]],run:v=>{
+    const cement={'c20':300,'c25':350,'c30':400}[v.k];
+    return [['水泥',Math.round(cement*(+v.v))+' kg'],['砂',(Math.round(0.5*(+v.v)*1000))+' kg'],['石子',(Math.round(0.85*(+v.v)*1000))+' kg'],['水',(Math.round(0.5*cement*(+v.v)*0.5))+' kg']];
+  },note:'经验配比，承重结构请按实验室配合比。'});
+}
+
+function t_wire_gauge(root){
+  listTool(root,{ph:'用途 / 线径',note:'家装电线规格参考。',rows:[
+    ['照明','1.5 mm²'],['普通插座','2.5 mm²'],['空调','4 mm² 以上'],['热水器','4–6 mm²'],['厨房总','4 mm²'],['入户','10 mm²'],['选线','铜芯国标，别图便宜']
+  ]});
+}
+
+function t_pipe_size(root){
+  listTool(root,{ph:'用途 / 管径',note:'常见水管管径。',rows:[
+    ['入户主水管','DN20–DN25'],['厨房支管','DN15–DN20'],['卫生间','DN20'],['热水管','PPR DN20'],['排水立管','DN50–DN75'],['地漏','DN50']
+  ]});
+}
+
+function t_socket_height(root){
+  listTool(root,{ph:'位置 / 高度',note:'开关插座常用高度（cm）。',rows:[
+    ['开关','130–140'],['普通插座','30（离地）'],['床头插座','70–75'],['电视墙','40–60（按柜）'],['空调插座','180–200'],['热水器','180'],['厨房台面插座','110–120'],['马桶旁','30']
+  ]});
+}
+
+function t_light_count(root){
+  calcTool(root,{fields:[['a','面积（㎡）',15,1],['k','空间',['bed','卧室','live','客厅','kit','厨房','bath','卫生间']]],run:v=>{
+    const w={'bed':8,'live':10,'kit':12,'bath':10}[v.k];
+    const total=Math.round((+v.a)*w/10);
+    return [['建议总功率',total+' W（LED）'],['主灯',Math.max(1,Math.round(total*0.6))+' W'],['辅助',Math.max(1,Math.round(total*0.4))+' W'],['色温','卧室 3000K，厨房 4000K']];
+  }});
+}
+
+function t_curtain_size(root){
+  calcTool(root,{fields:[['w','窗宽（cm）',200,5],['h','窗高（cm）',250,5],['k','褶倍',['1.5','1.5 倍','2','2 倍','2.5','2.5 倍']]],run:v=>{
+    const wid=Math.round((+v.w)*(+v.k));
+    return [['布宽',wid+' cm（双开各 '+(wid/2)+'）'],['布高',((+v.h)+20)+' cm（含下摆）'],['轨道宽',((+v.w)+30)+' cm']];
+  }});
+}
+
+function t_furniture_size(root){
+  listTool(root,{ph:'家具 / 常用尺寸',note:'常见家具尺寸参考（cm）。',rows:[
+    ['沙发进深','80–95'],['沙发坐高','40–45'],['茶几高','35–45'],['餐桌高','72–76'],['餐椅坐高','42–45'],['床 1.5m','150×200'],['床 1.8m','180×200'],['衣柜进深','55–60'],['书桌高','70–75'],['过道净宽','≥80']
+  ]});
+}
+
+function t_mattress(root){
+  listTool(root,{ph:'类型 / 特点',note:'床垫类型选择。',rows:[
+    ['弹簧','支撑好，偏硬'],['独立袋装弹簧','抗干扰'],['乳胶','贴合，透气一般'],['记忆棉','包裹感强，偏软'],['棕垫','硬，儿童老人'],['选硬度','体重越大越偏硬']
+  ]});
+}
+
+function t_kitchen_counter(root){
+  calcTool(root,{fields:[['h','使用者身高（cm）',165,1],['k','类型',['prep','备餐台','cook','灶台']]],run:v=>{
+    const base=v.k==='cook'?(+v.h)/2+5:(+v.h)/2+10;
+    return [['台面高度',Math.round(base)+' cm'],['公式','身高 / 2 + 5–10'],['水槽深','18–22 cm']];
+  }});
+}
+
+function t_waterproof(root){
+  checklistTool(root,{key:'waterproof',ph:'防水检查',items:['墙面地面基层处理','阴阳角做圆弧','防水涂刷两遍','闭水试验 24 小时','门口挡水条'],note:'卫生间防水高度建议 1.8m。'});
+}
+
+function t_formaldehyde(root){
+  listTool(root,{ph:'来源 / 对策',note:'甲醛治理的正确认知。',rows:[
+    ['来源','板材、胶水、涂料、家具'],['通风','最有效，持续 3–6 个月'],['高温','升温加速释放'],['净化器','选带活性炭滤网'],['除醛剂','仅处理表面'],['检测','找有资质机构']
+  ]});
+}
+
+function t_reno_order(root){
+  listTool(root,{ph:'顺序',note:'基础装修施工顺序。',rows:[
+    ['1 拆改','墙体拆除、砌墙'],['2 水电','开槽布管，拍照留底'],['3 防水','卫生间阳台'],['4 瓦工','贴砖找平'],['5 木工','吊顶、柜体'],['6 油漆','腻子 + 乳胶漆'],['7 安装','灯、洁具、门'],['8 软装','家具家电']
+  ]});
+}
+
+function t_reno_duration(root){
+  calcTool(root,{fields:[['a','面积（㎡）',90,1],['k','程度',['mini','局部改造','full','全屋整装']]],run:v=>{
+    const per=v.k==='mini'?0.6:1.2;
+    const days=Math.round((+v.a)*per)+20;
+    return [['预计工期',days+' 天'],['约合',(days/30).toFixed(1)+' 个月'],['加缓冲',(days+15)+' 天']];
+  }});
+}
+
+function t_reno_check(root){
+  checklistTool(root,{key:'renoaccept',ph:'验收清单',items:['墙面平整无空鼓','地面无起砂','水电打压测试','排水通畅','门窗开合顺畅','开关插座通电'],note:'验收最好带小锤与卷尺。'});
+}
+
+function t_hydro_check(root){
+  listTool(root,{ph:'阶段 / 要点',note:'水电改造关键检查点。',rows:[
+    ['定位','按使用习惯确认高度'],['开槽','横平竖直，别切钢筋'],['水路','左热右冷，打压 0.8MPa'],['电路','分回路，空调独立'],['留底','拍照存全景'],['封槽','水泥砂浆填实']
+  ]});
+}
+
+function t_tile_lay(root){
+  listTool(root,{ph:'要点',note:'瓷砖铺贴注意。',rows:[
+    ['泡水','吸水砖需泡 2 小时'],['留缝','1.5–2mm，配美缝'],['空鼓','单块空鼓面积 ≤5%'],['对缝','阳角 45° 拼角'],['找平','2m 靠尺误差 ≤3mm']
+  ]});
+}
+
+function t_putty(root){
+  calcTool(root,{fields:[['a','墙面面积（㎡）',200,10],['c','遍数',2,1]],run:v=>{
+    const kg=(+v.a)*(+v.c)*1.5;
+    return [['腻子粉用量',kg.toFixed(0)+' kg'],['约合袋数',Math.ceil(kg/20)+' 袋（20kg）'],['打磨','干后用砂纸打磨']];
+  }});
+}
+
+function t_skirting(root){
+  calcTool(root,{fields:[['p','墙周长（米）',30,1],['l','损耗（%）',6,1]],run:v=>{
+    return [['踢脚线长度',((+v.p)*(1+(+v.l)/100)).toFixed(1)+' 米'],['常见高度','8–12 cm'],['材质','实木、PVC、瓷砖']];
+  }});
+}
+
+function t_door_size(root){
+  listTool(root,{ph:'类型 / 尺寸',note:'常见门洞尺寸（cm）。',rows:[
+    ['入户门','100 × 210'],['卧室门','80–90 × 210'],['卫生间门','70–80 × 210'],['厨房门','80–90 × 210'],['阳台推拉门','按洞口'],['门套','门洞 + 5–8 cm']
+  ]});
+}
+
+function t_window_size(root){
+  calcTool(root,{fields:[['w','洞宽（cm）',150,5],['h','洞高（cm）',150,5]],run:v=>{
+    return [['窗框宽',((+v.w)-2)+' cm'],['窗框高',((+v.h)-2)+' cm'],['玻璃','5+12A+5 中空'],['提示','留 5mm 安装缝']];
+  }});
+}
+
+function t_stair_size(root){
+  calcTool(root,{fields:[['h','层高（cm）',280,5],['r','踏步高（cm）',16,0.5]],run:v=>{
+    const steps=Math.ceil((+v.h)/(+v.r));
+    return [['踏步数',steps+' 级'],['踏步宽','26–30 cm'],['梯段净宽','≥90 cm'],['扶手高','90 cm']];
+  }});
+}
+
+function t_balcony_load(root){
+  listTool(root,{ph:'注意',note:'阳台承重与安全。',rows:[
+    ['承重','一般 250kg/㎡，按物业规定'],['改造','不得拆改配重墙'],['封窗','按小区规定报批'],['晾晒','重物勿集中'],['防水','外沿做泛水']
+  ]});
+}
+
+function t_ac_power(root){
+  calcTool(root,{fields:[['a','面积（㎡）',15,1],['k','房间',['bed','卧室','live','客厅']]],run:v=>{
+    const need=(+v.a)*(v.k==='live'?160:130);
+    return [['所需制冷量',need.toFixed(0)+' W'],['建议匹数',(need/2324).toFixed(1)+' 匹'],['常见规格','1 匹≈2324W']];
+  }});
+}
+
+function t_fresh_air(root){
+  calcTool(root,{fields:[['a','面积（㎡）',100,5],['h','层高（米）',2.8,0.1]],run:v=>{
+    const flow=(+v.a)*(+v.h)*0.5;
+    return [['建议风量',flow.toFixed(0)+' m³/h'],['约合每人','30 m³/h'],['安装','主管道 + 分风口']];
+  }});
+}
+
+function t_floor_heat(root){
+  calcTool(root,{fields:[['a','面积（㎡）',80,5],['p','每㎡功率（W）',120,10]],run:v=>{
+    const w=(+v.a)*(+v.p);
+    return [['总功率',(w/1000).toFixed(1)+' kW'],['管长','约 '+((+v.a)*5).toFixed(0)+' 米'],['分路','每路 15–20 ㎡']];
+  }});
+}
+
+function t_water_heater(root){
+  calcTool(root,{fields:[['n','人数',3,1],['k','类型',['e','电热水器','g','燃气热水器']]],run:v=>{
+    if(v.k==='e') return [['建议容量',((+v.n)*50)+' L'],['功率','2000W 以上'],['加热时间','约 1 小时']];
+    return [['建议升数',((+v.n)*3+6)+' L/分钟'],['常见规格','10–16L'],['安装','需排烟与通风']];
+  }});
+}
+
+function t_purifier_size(root){
+  calcTool(root,{fields:[['p','家庭人数',3,1],['k','使用',['d','仅饮用','c','做饭也用水']]],run:v=>{
+    const per=v.k==='c'?120:80;
+    return [['建议通量',((+v.p)*per)+' G/天'],['常见规格','400/600/800G'],['提示','通量越大出水越快']];
+  }});
+}
+
+function t_smart_home(root){
+  checklistTool(root,{key:'smart',ph:'智能家居清单',items:['网关','智能灯','插座','开关','窗帘电机','门锁','传感器'],note:'先定协议（Wi-Fi/蓝牙 Mesh/Zigbee）再买设备。'});
+}
+
+function t_style_pick(root){
+  listTool(root,{ph:'风格 / 特点',note:'常见家装风格。',rows:[
+    ['现代简约','线条干净，少装饰'],['日式','原木、留白、低矮家具'],['北欧','浅色 + 木 + 绿植'],['新中式','木作 + 对称'],['法式','石膏线 + 拱门'],['工业','水泥、金属、裸露'],['奶油风','米白 + 圆角']
+  ]});
+}
+
+function t_color_scheme(root){
+  listTool(root,{ph:'配色法',note:'家居配色原则。',rows:[
+    ['60-30-10','主色 60%，辅色 30%，点缀 10%'],['墙浅地中','墙浅色、地中色、家具深色'],['同色系','同色不同明度'],['冷暖平衡','大面积冷色配少量暖色'],['避免','主色超过 3 种']
+  ]});
+}
+
+function t_lighting_plan(root){
+  listTool(root,{ph:'层次',note:'灯光分层设计。',rows:[
+    ['基础照明','主灯或筒灯'],['重点照明','射灯打柜体与画'],['氛围照明','灯带、落地灯'],['功能照明','床头、镜前、橱柜下'],['色温','客厅 3000K，工作区 4000K'],['显色','Ra ≥ 90']
+  ]});
+}
+
+function t_soft_decor(root){
+  calcTool(root,{fields:[['a','预算（元）',10000,500],['k','侧重',['txt','布艺','fur','家具','lite','灯饰']]],run:v=>{
+    const p={'txt':0.3,'fur':0.5,'lite':0.2}[v.k];
+    return [['该项预算',Math.round((+v.a)*p)+' 元'],['其余分配','按需调整'],['提示','软装可分阶段补']];
+  }});
+}
+
+function t_floor_area(root){
+  calcTool(root,{fields:[['l','长（米）',5,0.1],['w','宽（米）',4,0.1],['n','房间数',1,1]],run:v=>{
+    const a=(+v.l)*(+v.w);
+    return [['单间面积',a.toFixed(2)+' ㎡'],['总面积',(a*(+v.n||1)).toFixed(2)+' ㎡'],['铺砖加损耗',(a*(+v.n||1)*1.08).toFixed(2)+' ㎡']];
+  }});
+}
+
+function t_wall_area(root){
+  calcTool(root,{fields:[['a','建筑面积（㎡）',90,1],['k','系数',2.5,0.1]],run:v=>{
+    return [['墙面面积',((+v.a)*(+v.k)).toFixed(0)+' ㎡'],['含顶面',((+v.a)*(+v.k+1)).toFixed(0)+' ㎡'],['说明','系数 2.5–3，按户型调整']];
+  }});
+}
+
+function t_cabinet_need(root){
+  calcTool(root,{fields:[['w','墙面长度（米）',3,0.1],['k','布局',['l','一字型','l2','L 型','u','U 型']]],run:v=>{
+    const mult={'l':1,'l2':1.6,'u':2.2}[v.k];
+    return [['柜体总长',((+v.w)*mult).toFixed(1)+' 米'],['台面高度','80–90 cm'],['吊柜高','70–90 cm']];
+  }});
+}
+
+function t_vent_need(root){
+  calcTool(root,{fields:[['a','厨房面积（㎡）',8,1],['h','层高（米）',2.8,0.1]],run:v=>{
+    const flow=(+v.a)*(+v.h)*12;
+    return [['建议排风量',flow.toFixed(0)+' m³/h'],['常见规格','17–22 m³/min'],['管道','直径 ≥160mm']];
+  }});
+}
+
+function t_home_reno_tip(root){
+  listTool(root,{ph:'经验',note:'装修过来人经验。',rows:[
+    ['预算','留 10% 机动'],['合同','写明材料品牌与增项'],['水电','拍照存档'],['瓷砖','多备 5% 余量'],['验收','按清单逐项签字'],['工期','写进合同并约定违约']
+  ]});
+}
+
+function t_move_in_check(root){
+  checklistTool(root,{key:'movein',ph:'入住检查',items:['水电燃气开通','网络安装','门锁更换','家电试运行','清洁到位'],note:'入住第一天记录水电气表读数。'});
+}
+function t_kitchen_layout(root){
+  listTool(root,{ph:'布局',note:'厨房布局与动线。',rows:[
+    ['一字型','小厨房，动线单线'],['L 型','最常见，转角利用'],['U 型','空间大，三面操作'],['岛台','大厨房，需 ≥1.2m 通道'],['动线','取→洗→切→炒→盛'],['避免','灶台紧邻冰箱侧面']
+  ]});
+}
+function t_bath_size(root){
+  listTool(root,{ph:'洁具 / 尺寸',note:'卫生间常见尺寸（cm）。',rows:[
+    ['马桶','坑距 30/40，前留 60'],['淋浴区','≥90 × 90'],['浴缸','150–170 长'],['浴室柜','进深 45–50'],['镜柜','距地 100–120'],['门','向外开更安全']
+  ]});
+}
+function t_balcony_decor(root){
+  listTool(root,{ph:'方案',note:'阳台改造思路。',rows:[
+    ['晾晒为主','洗衣机 + 升降晾衣杆'],['休闲','小桌 + 两椅 + 绿植'],['储物','顶柜 + 侧柜'],['花园','花架 + 耐晒植物'],['注意','防水与排水坡度']
+  ]});
+}
+/* ===== 娱乐随机（60） ===== */
+
+function t_coin(root){
+  root.innerHTML=`<div class="box" style="text-align:center">
+    <div id="coinOut" style="font-size:40px;font-weight:800;color:#2C63F0;min-height:60px">—</div>
+    <div class="row" style="justify-content:center"><button class="btn" id="coinGo">抛一次</button></div>
+  </div><p class="hint">正面 or 反面，交给随机决定。</p>`;
+  $('#coinGo',root).onclick=()=>{ $('#coinOut',root).textContent=Math.random()<0.5?'正面':'反面'; };
+}
+
+function t_dice(root){
+  root.innerHTML=`<div class="box">
+    <div class="lbl">骰子数量</div><input type="number" id="dcN" value="2" min="1" max="6" step="1">
+    <div class="lbl" style="margin-top:8px">面数</div><input type="number" id="dcF" value="6" min="2" max="100" step="1">
+    <div class="row" style="margin-top:12px"><button class="btn" id="dcGo">掷骰</button></div>
+    <div id="dcOut" style="margin-top:12px;font-size:22px;font-weight:700;text-align:center;color:#2C63F0">—</div>
+  </div><p class="hint">支持多骰与自定义面数（如 D20）。</p>`;
+  $('#dcGo',root).onclick=()=>{
+    const n=Math.min(6,Math.max(1,+$('#dcN',root).value||1));
+    const f=Math.max(2,+$('#dcF',root).value||6);
+    const r=[];
+    for(let i=0;i<n;i++) r.push(1+Math.floor(Math.random()*f));
+    $('#dcOut',root).textContent=r.join(' + ')+' = '+r.reduce((a,b)=>a+b,0);
+  };
+}
+
+function t_random_number(root){
+  calcTool(root,{fields:[['a','最小值',1,1],['b','最大值',100,1],['n','个数',1,1]],run:v=>{
+    const a=Math.ceil(+v.a), b=Math.floor(+v.b), n=Math.min(50,Math.max(1,Math.round(+v.n)));
+    if(b<a) return [['范围不合法','请让最大值大于最小值']];
+    const r=[]; for(let i=0;i<n;i++) r.push(a+Math.floor(Math.random()*(b-a+1)));
+    return [['生成结果',r.join('、')]];
+  }});
+}
+
+function t_random_color(root){
+  root.innerHTML=`<div class="box" style="text-align:center">
+    <div id="rcSw" style="height:90px;border-radius:12px;border:1px solid #E5E8EF;background:#2C63F0"></div>
+    <div id="rcHex" style="margin-top:10px;font-size:18px;font-weight:700;letter-spacing:1px">#2C63F0</div>
+    <div class="row" style="justify-content:center;margin-top:12px"><button class="btn" id="rcGo">换一个</button><button class="btn ghost" id="rcCp">复制色值</button></div>
+  </div><p class="hint">随机取色，可复制 HEX 直接用于设计。</p>`;
+  let hex='#2C63F0';
+  function gen(){
+    hex='#'+Math.floor(Math.random()*0xFFFFFF).toString(16).padStart(6,'0').toUpperCase();
+    $('#rcSw',root).style.background=hex;
+    $('#rcHex',root).textContent=hex;
+  }
+  $('#rcGo',root).onclick=gen;
+  $('#rcCp',root).onclick=()=>copyText(hex);
+}
+
+function t_eat_what(root){
+  randPickTool(root,{items:'火锅\n麻辣烫\n盖浇饭\n面条\n饺子\n烤肉\n寿司\n汉堡\n沙拉\n家常小炒\n粥 + 小菜\n螺蛳粉',note:'不知道吃什么就抽一个。'});
+}
+
+function t_weekend_what(root){
+  randPickTool(root,{items:'去公园散步\n看电影\n逛书店\n宅家做饭\n骑车出城\n博物馆\n咖啡馆写东西\n打扫整理\n约朋友喝茶\n早睡补觉',note:'周末选择困难症急救。'});
+}
+
+function t_movie_pick(root){
+  listTool(root,{ph:'心情 / 类型',note:'按状态选片。',rows:[
+    ['想放松','轻喜剧、动画'],['想哭一场','亲情、离别题材'],['想紧张','悬疑、犯罪'],['想浪漫','爱情、旅行'],['想热血','体育、战争'],['想思考','纪录片、文艺片'],['想陪孩子','合家欢动画']
+  ]});
+}
+
+function t_book_pick(root){
+  listTool(root,{ph:'需求 / 类型',note:'按需求选书。',rows:[
+    ['想静下来','散文、随笔'],['想有方法','实用工具书'],['想入迷','长篇悬疑'],['想了解世界','历史、科普'],['想有共鸣','小说、传记'],['想睡前读','短篇集']
+  ]});
+}
+
+function t_board_game(root){
+  listTool(root,{ph:'人数 / 推荐',note:'桌游按人数选。',rows:[
+    ['2 人','拼图、棋类'],['3–4 人','卡坦岛、UNO'],['5–6 人','狼人杀、剧本杀'],['多人派对','谁是卧底、你画我猜'],['亲子','飞行棋、大富翁']
+  ]});
+}
+
+function t_music_mood(root){
+  listTool(root,{ph:'状态 / 风格',note:'按心情选音乐。',rows:[
+    ['疲惫','轻音乐、钢琴'],['开心','流行、舞曲'],['专注','Lo-Fi、白噪音'],['难过','民谣、慢歌'],['运动','摇滚、电子'],['睡前','环境音、ASMR']
+  ]});
+}
+
+function t_game_type(root){
+  listTool(root,{ph:'偏好 / 类型',note:'游戏类型速查。',rows:[
+    ['想放松','模拟经营、种田'],['想挑战','魂系、硬核动作'],['想看故事','剧情 RPG'],['想社交','多人联机'],['碎片时间','消除、卡牌'],['想动脑','解谜、策略']
+  ]});
+}
+
+function t_joke(root){
+  randPickTool(root,{items:'为什么程序员总是分不清万圣节和圣诞节？因为 Oct 31 = Dec 25。\n我跟医生说我一到早上就犯困，医生说那就下午再来。\n减肥第一天：买了三袋零食当作纪念。\n老板：这个需求很简单。也是老板：你们什么时候能上线。\n我妈说我花钱大手大脚，我看了看账单，确实都是脚——地铁票。',note:'冷笑话随机播放。'});
+}
+
+function t_trivia(root){
+  randPickTool(root,{items:'蜂蜜几乎不会变质，考古发现的蜂蜜仍可食用。\n章鱼有三个心脏、蓝色的血。\n香蕉是草本植物，不是树。\n企鹅的膝盖藏在羽毛里。\n地球上的黄金大多来自陨石撞击。\n人的骨头数量出生时约 300 块，成年后 206 块。',note:'冷知识，饭桌谈资。'});
+}
+
+function t_tongue(root){
+  randPickTool(root,{items:'四是四，十是十，十四是十四，四十是四十。\n黑化肥发灰会挥发，灰化肥挥发会发黑。\n吃葡萄不吐葡萄皮，不吃葡萄倒吐葡萄皮。\n扁担长，板凳宽，扁担没有板凳宽。\n妈妈骑马，马慢妈妈骂马。',note:'绕口令，读三遍不磕巴算过关。'});
+}
+
+function t_birthday_flower(root){
+  listTool(root,{ph:'月份 / 花',note:'按月对应花（常见说法）。',rows:[
+    ['1 月','康乃馨'],['2 月','紫罗兰'],['3 月','水仙'],['4 月','雏菊'],['5 月','铃兰'],['6 月','玫瑰'],['7 月','飞燕草'],['8 月','剑兰'],['9 月','紫菀'],['10 月','金盏花'],['11 月','菊花'],['12 月','水仙/冬青']
+  ]});
+}
+
+function t_zodiac(root){
+  listTool(root,{ph:'生肖 / 年份末位',note:'按农历年，此处按公历近似。',rows:[
+    ['鼠','2020 2024'],['牛','2021 2025'],['虎','2022 2026'],['兔','2023 2027'],['龙','2024 2028'],['蛇','2025 2029'],['马','2026'],['羊','2027'],['猴','2028'],['鸡','2029'],['狗','2030'],['猪','2031']
+  ]});
+}
+
+function t_constellation(root){
+  listTool(root,{ph:'星座 / 日期',note:'星座日期区间。',rows:[
+    ['白羊','3.21–4.19'],['金牛','4.20–5.20'],['双子','5.21–6.21'],['巨蟹','6.22–7.22'],['狮子','7.23–8.22'],['处女','8.23–9.22'],['天秤','9.23–10.23'],['天蝎','10.24–11.22'],['射手','11.23–12.21'],['摩羯','12.22–1.19'],['水瓶','1.20–2.18'],['双鱼','2.19–3.20']
+  ]});
+}
+
+function t_rps(root){
+  root.innerHTML=`<div class="box" style="text-align:center">
+    <div id="rpMe" style="font-size:26px;font-weight:700;color:#2C63F0">你：—</div>
+    <div id="rpAi" style="font-size:26px;font-weight:700;color:#D9822B;margin-top:6px">电脑：—</div>
+    <div id="rpRes" style="margin-top:10px;font-size:18px;font-weight:700">—</div>
+    <div class="row" style="justify-content:center;margin-top:14px">
+      <button class="btn" data-rps="石头">石头</button><button class="btn" data-rps="剪刀">剪刀</button><button class="btn" data-rps="布">布</button>
+    </div>
+  </div><p class="hint">跟电脑猜拳，看谁赢。</p>`;
+  const w={'石头':'剪刀','剪刀':'布','布':'石头'};
+  root.addEventListener('click',e=>{
+    const b=e.target.closest('[data-rps]'); if(!b) return;
+    const me=b.dataset.rps;
+    const all=['石头','剪刀','布']; const ai=all[Math.floor(Math.random()*3)];
+    $('#rpMe',root).textContent='你：'+me;
+    $('#rpAi',root).textContent='电脑：'+ai;
+    $('#rpRes',root).textContent=me===ai?'平局':(w[me]===ai?'你赢了':'电脑赢了');
+  });
+}
+
+function t_24game(root){
+  root.innerHTML=`<div class="box">
+    <div id="g24Nums" style="font-size:26px;font-weight:800;text-align:center;color:#2C63F0;letter-spacing:6px">—</div>
+    <div class="row" style="justify-content:center;margin-top:12px"><button class="btn" id="g24New">换一组</button><button class="btn ghost" id="g24Show">看答案</button></div>
+    <div id="g24Ans" class="hint" style="text-align:center;margin-top:10px;word-break:break-all"></div>
+  </div><p class="hint">用四个数字与 + − × ÷ 各算一次，凑出 24。答案仅供参考。</p>`;
+  let cur={n:[],a:null};
+  function solveAll(arr){
+    if(arr.length===1) return Math.abs(arr[0].v-24)<1e-6?arr[0].e:null;
+    for(let i=0;i<arr.length;i++)for(let j=0;j<arr.length;j++){
+      if(i===j) continue;
+      const rest=arr.filter((_,k)=>k!==i&&k!==j);
+      const A=arr[i], B=arr[j];
+      const cand=[];
+      cand.push({v:A.v+B.v, e:'('+A.e+' + '+B.e+')'});
+      cand.push({v:A.v*B.v, e:'('+A.e+' × '+B.e+')'});
+      cand.push({v:A.v-B.v, e:'('+A.e+' − '+B.e+')'});
+      if(Math.abs(B.v)>1e-9) cand.push({v:A.v/B.v, e:'('+A.e+' ÷ '+B.e+')'});
+      for(const c of cand){
+        const r=solveAll([...rest,c]);
+        if(r) return r;
+      }
+    }
+    return null;
+  }
+  function gen(){
+    for(let t=0;t<200;t++){
+      const ns=[]; for(let i=0;i<4;i++) ns.push(1+Math.floor(Math.random()*9));
+      const a=solveAll(ns.map(v=>({v,e:String(v)})));
+      if(a){ cur={n:ns,a}; break; }
+      cur={n:ns,a:null};
+    }
+    $('#g24Nums',root).textContent=cur.n.join('  ');
+    $('#g24Ans',root).textContent='';
+  }
+  $('#g24New',root).onclick=gen;
+  $('#g24Show',root).onclick=()=>{ $('#g24Ans',root).textContent=cur.a?('参考答案：'+cur.a+' = 24'):'这组暂无解，换一组'; };
+  gen();
+}
+
+function t_guess_number(root){
+  root.innerHTML=`<div class="box">
+    <div class="hint">我想了一个 1–100 的数，猜猜看。</div>
+    <input type="number" id="gnIn" placeholder="输入你的猜测" style="margin-top:8px">
+    <div class="row" style="margin-top:10px"><button class="btn" id="gnGo">猜</button><button class="btn ghost" id="gnReset">重新开始</button></div>
+    <div id="gnMsg" style="margin-top:12px;font-weight:700;text-align:center;min-height:24px"></div>
+  </div><p class="hint">提示会告诉你偏大还是偏小。</p>`;
+  let target=Math.floor(Math.random()*100)+1, tries=0;
+  $('#gnGo',root).onclick=()=>{
+    const g=+$('#gnIn',root).value;
+    if(!g||g<1||g>100) return toast('请输入 1–100');
+    tries++;
+    const msg=g===target?'猜对了！共 '+tries+' 次':(g>target?'偏大':'偏小');
+    $('#gnMsg',root).textContent=msg;
+    if(g===target) target=Math.floor(Math.random()*100)+1, tries=0;
+  };
+  $('#gnReset',root).onclick=()=>{ target=Math.floor(Math.random()*100)+1; tries=0; $('#gnMsg',root).textContent='重新开始了'; };
+}
+
+function t_timer_challenge(root){
+  timerTool(root,{sec:60,sub:'60 秒挑战',doneMsg:'时间到！做完了吗？',note:'计时挑战，用于专注或游戏。'});
+}
+
+function t_decision(root){
+  tmplTool(root,{fields:[['q','纠结的事','要不要现在开始做'],['a','选项 A','现在做'],['b','选项 B','明天做']],tpl:`决策卡
+
+问题：{q}
+选项 A：{a}
+选项 B：{b}
+
+判断顺序：1 这事 3 天后还重要吗？2 最坏结果能接受吗？3 不做会怎样？`,note:'填完再读一遍，答案常会自己浮现。'});
+}
+
+function t_wheel_pick(root){
+  root.innerHTML=`<div class="box">
+    <div class="lbl">候选项（一行一个）</div>
+    <textarea id="wpIn" style="min-height:110px">吃火锅
+吃烤肉
+吃面条
+随便</textarea>
+    <div class="row" style="margin-top:10px"><button class="btn" id="wpGo">转一下</button></div>
+    <div id="wpOut" style="margin-top:14px;text-align:center;font-size:24px;font-weight:800;color:#2C63F0;min-height:34px">—</div>
+  </div><p class="hint">文字版转盘，快速做决定。</p>`;
+  $('#wpGo',root).onclick=()=>{
+    const a=$('#wpIn',root).value.split('\n').map(s=>s.trim()).filter(Boolean);
+    if(!a.length) return toast('先输入候选项');
+    $('#wpOut',root).textContent=a[Math.floor(Math.random()*a.length)];
+  };
+}
+
+function t_group_split(root){
+  root.innerHTML=`<div class="box">
+    <div class="lbl">名单（一行一个）</div><textarea id="gsIn" style="min-height:110px"></textarea>
+    <div class="lbl" style="margin-top:8px">每组人数</div><input type="number" id="gsN" value="2" min="1" step="1">
+    <div class="row" style="margin-top:10px"><button class="btn" id="gsGo">分组</button></div>
+  </div>
+  <div class="box"><div id="gsOut" style="font-size:14px;line-height:1.9"></div></div>`;
+  $('#gsGo',root).onclick=()=>{
+    const a=$('#gsIn',root).value.split('\n').map(s=>s.trim()).filter(Boolean);
+    if(a.length<2) return toast('至少两个人');
+    for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+    const per=Math.max(1,+$('#gsN',root).value||1);
+    const groups=[];
+    for(let i=0;i<a.length;i+=per) groups.push(a.slice(i,i+per));
+    $('#gsOut',root).innerHTML=groups.map((g,i)=>`<div style="margin-bottom:6px"><b style="color:#2C63F0">第 ${i+1} 组</b>　${g.join('、')}</div>`).join('');
+  };
+}
+
+function t_scoreboard(root){
+  root.innerHTML=`<div class="box">
+    <div class="lbl">玩家（逗号分隔）</div><input id="sbNames" value="A,B">
+    <div class="row" style="margin-top:10px"><button class="btn" id="sbInit">重新开始</button><button class="btn ghost" id="sbReset">清零</button></div>
+  </div><div class="box"><div id="sbOut"></div></div>`;
+  let s={};
+  function render(){
+    $('#sbOut',root).innerHTML=Object.keys(s).map(k=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #F1F3F7">
+      <span style="font-size:14px">${k}</span>
+      <span style="display:flex;align-items:center;gap:10px">
+        <button class="btn ghost" data-sb="${k}" data-d="-1">−</button>
+        <b style="min-width:36px;text-align:center;font-size:18px;color:#2C63F0">${s[k]}</b>
+        <button class="btn ghost" data-sb="${k}" data-d="1">+</button>
+      </span></div>`).join('');
+  }
+  function init(){
+    s={}; ($('#sbNames',root).value||'').split(/[,，]/).map(v=>v.trim()).filter(Boolean).forEach(n=>s[n]=0); render();
+  }
+  $('#sbInit',root).onclick=init;
+  $('#sbReset',root).onclick=()=>{ Object.keys(s).forEach(k=>s[k]=0); render(); };
+  root.addEventListener('click',e=>{
+    const b=e.target.closest('[data-sb]'); if(!b) return;
+    s[b.dataset.sb]+=+b.dataset.d; render();
+  });
+  init();
+}
+
+function t_lottery_num(root){
+  calcTool(root,{fields:[['a','起始编号',1,1],['b','结束编号',100,1],['n','抽取个数',3,1]],run:v=>{
+    const a=Math.ceil(+v.a), b=Math.floor(+v.b), n=Math.min(20,Math.max(1,Math.round(+v.n)));
+    if(b<a) return [['范围不合法','检查起止编号']];
+    const pool=[]; for(let i=a;i<=b;i++) pool.push(i);
+    const out=[]; for(let i=0;i<n&&pool.length;i++){ const k=Math.floor(Math.random()*pool.length); out.push(pool.splice(k,1)[0]); }
+    return [['中签编号',out.join('、')]];
+  },note:'不重复抽签，适合抽奖。'});
+}
+
+function t_speak_order(root){
+  root.innerHTML=`<div class="box">
+    <div class="lbl">参会人（逗号或换行分隔）</div><textarea id="soIn" style="min-height:110px"></textarea>
+    <div class="row" style="margin-top:10px"><button class="btn" id="soGo">生成发言顺序</button></div>
+  </div><div class="box"><div id="soOut" style="line-height:2"></div></div>`;
+  $('#soGo',root).onclick=()=>{
+    const a=$('#soIn',root).value.split(/\n|,|，/).map(v=>v.trim()).filter(Boolean);
+    if(a.length<2) return toast('至少两个人');
+    for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+    $('#soOut',root).innerHTML=a.map((n,i)=>`<div>${i+1}. ${n}</div>`).join('');
+  };
+}
+
+function t_wish_list(root){
+  checklistTool(root,{key:'wishlist',ph:'想做的事',items:['学会一项新技能','去一次没去过的城市','写完一本笔记','跑一次 10 公里'],note:'年度愿望清单，年底回看完成率。'});
+}
+
+function t_bucket_100(root){
+  randPickTool(root,{items:'看一次日出\n独自旅行一次\n学游泳\n读完一本厚书\n做一次志愿者\n给未来的自己写信\n学会一道拿手菜\n跑一次半马',note:'100 件小事随机抽一件，今天就开始。'});
+}
+
+function t_movie_line(root){
+  listTool(root,{ph:'台词',note:'经典台词（凭印象摘录）。',rows:[
+    ['人生就像一盒巧克力','你永远不知道下一块是什么味道'],['我们一路奋战','不是为了改变世界，而是为了不被世界改变'],['生活不是电影','但我们可以把日子过得像电影'],['慢慢来','比较快']
+  ]});
+}
+
+function t_slogan(root){
+  tmplTool(root,{fields:[['p','产品名','小羽工具箱'],['f','特点','960 个本地工具，离线可用'],['a','人群','喜欢折腾手机的人']],tpl:`{p}：{f}，专为{a}准备。`,note:'一句话卖点模板。'});
+}
+
+function t_copywriting(root){
+  tmplTool(root,{fields:[['s','主题','周末一个人去江边散步'],['p','平台','朋友圈'],['t','语气', '松弛']],tpl:`{s}
+
+风比想象中凉一点，走着走着天就暗了。
+没什么大事，就是想把这一小时留给自己。
+
+#{p} #{t}`,note:'文案三行：场景、细节、感受。'});
+}
+
+function t_video_title(root){
+  tmplTool(root,{fields:[['t','内容主题','用手机做 960 个工具'],['a','人群','喜欢折腾的人'],['b','亮点','全离线、无广告']],tpl:`「{t}」我用了一周，{b}，{a}一定要看`,note:'标题公式：对象 + 结果 + 钩子。'});
+}
+
+function t_names(root){
+  randPickTool(root,{items:'林知远\n陈拾光\n苏念\n周叙\n叶清和\n许见微\n沈观澜\n许听白',note:'小说角色名随机抽取。'});
+}
+
+function t_story_start(root){
+  randPickTool(root,{items:'那天雨下得很大，他站在门口没有撑伞。\n她第一次见到那只猫，是在凌晨三点的楼道里。\n电话响的时候，桌上那杯茶已经凉了。\n火车过了第三座桥，窗外的灯突然全灭了。',note:'故事开头，随便挑一个续写。'});
+}
+
+function t_plot_twist(root){
+  randPickTool(root,{items:'主角发现信件是写给自己的。\n所有人都以为死了的人，其实一直在隔壁。\n真相是：那场事故根本没有发生。\n救他的人，正是当年害他的人。',note:'情节转折灵感。'});
+}
+
+function t_riddle_fun(root){
+  randPickTool(root,{items:'什么东西有钥匙却打不开锁？（钢琴）\n什么东西越分享越多？（知识）\n什么东西你能打破却看不见？（承诺）\n什么房间没有门窗？（蘑菇房）',note:'趣味谜题，聚会用。'});
+}
+
+function t_card_draw(root){
+  root.innerHTML=`<div class="box" style="text-align:center">
+    <div id="cdOut" style="font-size:32px;font-weight:800;color:#2C63F0;min-height:52px">—</div>
+    <div class="row" style="justify-content:center"><button class="btn" id="cdGo">抽一张</button></div>
+  </div><p class="hint">随机抽一张扑克牌。</p>`;
+  const suits=['♠','♥','♣','♦'], ranks=['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+  $('#cdGo',root).onclick=()=>{
+    $('#cdOut',root).textContent=suits[Math.floor(Math.random()*4)]+ranks[Math.floor(Math.random()*13)];
+  };
+}
+
+function t_fortune(root){
+  randPickTool(root,{items:'今天适合开始一件小事。\n会遇到一个很久没联系的人。\n少说话，多做事，运气更好。\n想不通的事，明天再说。\n把注意力放回自己身上。\n该休息了，别硬撑。',note:'每日一句随机签（娱乐）。'});
+}
+
+function t_emoji_text(root){
+  tmplTool(root,{fields:[['m','心情','今天有点累但还不错'],['t','场景','下班路上']],tpl:`{t}：{m}。晚安。`,note:'给朋友圈配一句轻文案。'});
+}
+
+function t_mood_log(root){
+  checklistTool(root,{key:'mood',ph:'今天心情',items:['平静','开心','疲惫','焦虑','有成就感'],note:'每天勾一个，一个月后能看出规律。'});
+}
+
+function t_gratitude(root){
+  checklistTool(root,{key:'grat',ph:'今天感谢的三件事',items:['有人帮我分担了一件事','吃到一顿好吃的','天气很好'],note:'写具体的事，比写「感恩生活」有效。'});
+}
+
+function t_one_line_diary(root){
+  tmplTool(root,{fields:[['d','日期','11-15'],['t','一句话','写完三个分类的工具，头有点晕']],tpl:`{d}　{t}`,note:'一行日记，坚持比文采重要。'});
+}
+
+function t_time_capsule(root){
+  tmplTool(root,{fields:[['y','写给几年后的自己','三年后'],['n','现在的我','在做一个工具箱，天天改代码'],['h','希望那时','还记得为什么开始']],tpl:`写给{y}的自己：
+
+现在的我：{n}
+希望那时：{h}
+
+—— 今天`,note:'写完存本地，到期再打开。'});
+}
+
+function t_date_idea(root){
+  randPickTool(root,{items:'一起做顿饭\n去江边散步\n看一场电影\n逛书店各挑一本\n骑车绕城\n在家拼拼图',note:'约会点子随机抽。'});
+}
+
+function t_gift_idea(root){
+  listTool(root,{ph:'对象 / 建议',note:'送礼思路。',rows:[
+    ['父母','实用家电、保健品（问医生）'],['伴侣','体验类：旅行、演出'],['朋友','对方最近提过的小物'],['同事','咖啡、零食礼盒'],['孩子','书、拼装玩具'],['避免','太贵造成压力']
+  ]});
+}
+
+function t_party_theme(root){
+  randPickTool(root,{items:'复古 disco\n电影之夜\n桌游马拉松\n露营烧烤\n中式茶话会\n黑白主题派对',note:'聚会主题随机抽。'});
+}
+
+function t_word_game(root){
+  listTool(root,{ph:'游戏',note:'文字类小游戏。',rows:[
+    ['成语接龙','上句末字接下句'],['飞花令','按字接诗句'],['你画我猜','限时描述'],['谁是卧底','描述近义词'],['故事接龙','一人一句'],['猜歌名','哼旋律']
+  ]});
+}
+
+function t_riddle_math(root){
+  listTool(root,{ph:'题目 / 答案',note:'趣味数学题。',rows:[
+    ['一根绳烧完 1 小时，如何量 45 分钟','两根绳，一根两头点'],['3 个开关配 3 个灯','先开一盏等热再换'],['过河问题','按容量分批'],['鸡兔同笼 35 头 94 脚','鸡 23 兔 12']
+  ]});
+}
+
+function t_truth_dare(root){
+  randPickTool(root,{items:'真心话：最近最想删掉的一条消息是什么？\n大冒险：学三种动物叫。\n真心话：手机相册第 3 张是什么？\n大冒险：给最近联系人发一句晚安。\n真心话：今年最后悔的一件事。\n大冒险：原地跳十下。',note:'聚会小游戏，注意分寸与场合。'});
+}
+function t_who_spy(root){
+  randPickTool(root,{items:'可乐 / 雪碧\n包子 / 饺子\n地铁 / 公交\n苹果 / 梨\n雨伞 / 雨衣\n微信 / 短信',note:'谁是卧底词库，两人一组自定义。'});
+}
+function t_poker_rank(root){
+  listTool(root,{ph:'牌型 / 说明',note:'德州扑克牌型强弱。',rows:[
+    ['皇家同花顺','最大'],['同花顺','同花连续'],['四条','四张同点数'],['葫芦','三条 + 一对'],['同花','同花色非连续'],['顺子','五张连续'],['三条','三张同点'],['两对','两对'],['一对','一对'],['高牌','单张最大']
+  ]});
+}
+function t_mahjong_term(root){
+  listTool(root,{ph:'术语',note:'麻将常见术语。',rows:[
+    ['清一色','全部同花色'],['混一色','一种花色 + 字牌'],['碰碰胡','全部刻子'],['七对','七个对子'],['杠上开花','杠后摸牌胡'],['抢杠胡','抢别人杠的牌'],['听牌','差一张即胡']
+  ]});
+}
+function t_dice_prob(root){
+  calcTool(root,{fields:[['n','骰子数',2,1],['f','面数',6,1],['t','目标和',7,1]],run:v=>{
+    const n=Math.max(1,Math.round(+v.n)), f=Math.max(2,Math.round(+v.f)), t=Math.round(+v.t);
+    const memo={};
+    function ways(k,sum){
+      if(k===0) return sum===0?1:0;
+      const key=k+'_'+sum; if(memo[key]!==undefined) return memo[key];
+      let c=0; for(let i=1;i<=f;i++) c+=ways(k-1,sum-i);
+      return memo[key]=c;
+    }
+    const total=Math.pow(f,n), w=ways(n,t);
+    return [['出现方式',w+' 种'],['总可能',total+' 种'],['概率',(w/total*100).toFixed(2)+' %']];
+  }});
+}
+function t_random_penalty(root){
+  randPickTool(root,{items:'唱一句歌\n做五个俯卧撑\n说一个冷笑话\n给在场某人一个夸奖\n模仿一个人说话\n喝一杯水',note:'输了随机来一项，注意分寸。'});
+}
+function t_wolf_role(root){
+  listTool(root,{ph:'角色 / 能力',note:'狼人杀常见角色。',rows:[
+    ['狼人','夜间刀人'],['预言家','夜间查验'],['女巫','一瓶解药一瓶毒药'],['猎人','死亡可带走一人'],['守卫','夜间保护'],['白痴','被投死可翻牌免死'],['平民','无技能']
+  ]});
+}
+function t_typing_speed(root){
+  calcTool(root,{fields:[['c','字数',120,10],['t','分钟',2,0.5]],run:v=>{
+    const wpm=(+v.c)/(+v.t||1);
+    return [['每分钟字数',wpm.toFixed(0)+' 字'],['每分钟字符',(wpm*1.6).toFixed(0)+' 字符'],['水平',wpm>=80?'很快':wpm>=40?'正常':'偏慢']];
+  }});
+}
+function t_mirror_text(root){
+  convTool(root,{def:'小羽工具箱',outLabel:'结果',modes:[{label:'倒序文字',fn:s=>s.split('\n').map(l=>[...l].reverse().join('')).join('\n')},{label:'倒序 + 标记',fn:s=>s.split('\n').map(l=>[...l].reverse().join('')+'（镜像）').join('\n')}]});
+}
+function t_acrostic(root){
+  tmplTool(root,{fields:[['w','藏头字','小羽工具箱'],['t','主题','一个离线可用的工具集']],tpl:'小处也能做成事，\n羽翼未丰也在飞。\n工具很多，路还长，\n箱底放着初心。\n\n——{t}',note:'藏头诗模板，可自己改写每行。'});
+}
+function t_fortune_cookie(root){
+  randPickTool(root,{items:'你比自己以为的更有耐心。\n今天适合把一个拖很久的事做完。\n别急着证明自己。\n该拒绝的时候就拒绝。\n先照顾好睡眠。\n慢慢来，比较快。',note:'随机签语（娱乐）。'});
+}
 
 </script>
 </body>
