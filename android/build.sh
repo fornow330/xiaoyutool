@@ -6,7 +6,7 @@ cp "/home/user/Doubao/chats/38453450899965698/全能百宝箱/小羽工具箱.ht
 rm -rf build/dex build/classes && mkdir -p build/classes build/dex
 "$SDK/aapt2" compile --dir $APP/res -o build/res.zip
 "$SDK/aapt2" link -o build/base.apk -I "$SDK/android.jar" --manifest $APP/AndroidManifest.xml \
-  -A $APP/assets --min-sdk-version 21 --target-sdk-version 33 --version-code 7 --version-name 1.6 build/res.zip
+  -A $APP/assets --min-sdk-version 21 --target-sdk-version 33 --version-code 8 --version-name 1.7 build/res.zip
 java -jar /tmp/ecj.jar -source 8 -target 8 -cp "$SDK/android.jar" -d build/classes $APP/java/cc/fornow/tool/MainActivity.java 2>&1 | grep -E "ERROR|error:" || true
 "$SDK/d8" --lib "$SDK/android.jar" --min-api 21 --output build/dex $(find build/classes -name '*.class')
 cp build/base.apk build/app.apk

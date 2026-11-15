@@ -3,7 +3,7 @@
 255 个纯本地小工具，单文件网页 + Android APK。打开即用，计算与图片处理全部在本地浏览器完成，不上传任何数据。
 
 - 在线版：https://fornow330.github.io/xiaoyutool/
-- APK 下载：[xiaoyutool-1.6.apk](https://fornow330.github.io/xiaoyutool/xiaoyutool-1.6.apk)（Android 5.0 及以上）
+- APK 下载：[xiaoyutool-1.7.apk](https://fornow330.github.io/xiaoyutool/xiaoyutool-1.7.apk)（Android 5.0 及以上）
 - 作者：fornow
 - 交流群：728403008
 - 开源协议：GPL-3.0（见 `LICENSE`）
@@ -25,7 +25,7 @@
 
 ```
 index.html          网页版全部源码（单文件，内联 CSS/JS，无构建步骤）
-xiaoyutool-1.6.apk  已签名安装包（包名 cc.fornow.tool）
+xiaoyutool-1.7.apk  已签名安装包（包名 cc.fornow.tool）
 android/            Android 壳工程源码（WebView + 原生震动/传感器/摄像头权限）
 LICENSE             GPL-3.0
 ```
