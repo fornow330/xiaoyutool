@@ -3,7 +3,12 @@
 960 个纯本地小工具，单文件网页 + Android APK。打开即用，计算与图片处理全部在本地浏览器完成，不上传任何数据。
 
 - 在线版：https://fornow330.github.io/xiaoyutool/
-- APK 下载：[xiaoyutool-1.9.apk](https://fornow330.github.io/xiaoyutool/xiaoyutool-1.9.apk)（Android 5.0 及以上）
+- APK 下载（Android 5.0 及以上，四个通道任选其一，内容完全一致）：
+  1. GitHub Pages：https://fornow330.github.io/xiaoyutool/xiaoyutool-1.9.apk
+  2. jsDelivr（fastly）：https://fastly.jsdelivr.net/gh/fornow330/xiaoyutool@main/xiaoyutool-1.9.apk
+  3. jsDelivr（cdn）：https://cdn.jsdelivr.net/gh/fornow330/xiaoyutool@main/xiaoyutool-1.9.apk
+  4. ghproxy 镜像：https://ghproxy.net/https://raw.githubusercontent.com/fornow330/xiaoyutool/main/xiaoyutool-1.9.apk
+  - 直链：https://raw.githubusercontent.com/fornow330/xiaoyutool/main/xiaoyutool-1.9.apk
 - 作者：fornow
 - 交流群：728403008
 - 开源协议：GPL-3.0（见 `LICENSE`）
