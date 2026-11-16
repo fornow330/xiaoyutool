@@ -4,15 +4,14 @@
 
 在线版：https://fornow330.github.io/xiaoyutool/（xiaoyutool）
 
-9999 个纯本地小工具，单文件网页 + Android APK。打开即用，计算与图片处理全部在本地浏览器完成，不上传任何数据。
+9999 个纯本地小工具，单文件网页 + Android
 
 - 在线版：https://fornow330.github.io/xiaoyutool/
-- APK 下载（Android 5.0 及以上，四个通道任选其一，内容完全一致；APK 启动后会按同样顺序在内部尝试在线版，全部不通才用内置页面）：
-  1. GitHub Pages：https://fornow330.github.io/xiaoyutool/xiaoyutool-2.9.apk
-  2. jsDelivr（fastly）：https://fastly.jsdelivr.net/gh/fornow330/xiaoyutool@main/xiaoyutool-2.9.apk
-  3. jsDelivr（cdn）：https://cdn.jsdelivr.net/gh/fornow330/xiaoyutool@main/xiaoyutool-2.9.apk
-  4. ghproxy 镜像：https://ghproxy.net/https://raw.githubusercontent.com/fornow330/xiaoyutool/main/xiaoyutool-2.9.apk
-  - 直链：https://raw.githubusercontent.com/fornow330/xiaoyutool/main/xiaoyutool-2.9.apk
+  1. GitHub Pages：https://fornow330.github.io/xiaoyutool/
+  2. jsDelivr（fastly）：https://fastly.jsdelivr.net/gh/fornow330/xiaoyutool@main/
+  3. jsDelivr（cdn）：https://cdn.jsdelivr.net/gh/fornow330/xiaoyutool@main/
+  4. ghproxy 镜像：https://ghproxy.net/https://raw.githubusercontent.com/fornow330/xiaoyutool/main/
+  - 直链：https://raw.githubusercontent.com/fornow330/xiaoyutool/main/
 - 作者：fornow
 - 交流群：728403008
 - 开源协议：GPL-3.0（见 `LICENSE`）
@@ -49,7 +48,7 @@
 
 ```
 index.html          网页版全部源码（单文件，内联 CSS/JS，无构建步骤）
-xiaoyutool-2.9.apk  已签名安装包（2.1 / versionCode 12）（包名 cc.fornow.tool）
+  已签名安装包（2.1 / versionCode 12）（包名 cc.fornow.tool）
 android/            Android 壳工程源码（WebView + 原生震动/传感器/摄像头权限）
 LICENSE             GPL-3.0
 ```
@@ -78,7 +77,7 @@ SDK=~/android-sdk/platforms/android-33
 ./android/build.sh
 ```
 
-脚本会从 `index.html` 复制到 `assets/index.html`，产物为签名好的 APK。
+脚本会从 `index.html` 复制到 `assets/index.html`，产物为签名好的
 
 ## 声明
 
