@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="3.0">
+<meta name="xyver" content="3.1">
 <title>小羽工具箱 · 本地工具集合</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%232C63F0'/%3E%3Cpath d='M7 8h10M7 12h10M7 16h6' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
@@ -424,6 +424,9 @@ const TOOLS = [
   {id:'wordcloud', n:'文字云', c:'txt', col:'#D9822B', ic:'cloud'},
   {id:'hfund', n:'公积金贷款', c:'num', col:'#17A673', ic:'house'},
   {id:'bonustax', n:'年终奖个税', c:'num', col:'#E2543B', ic:'gift'},
+  {id:'unitall', n:'单位换算总汇', c:'eng', col:'#2E7D6F', ic:'level'},
+  {id:'healthall', n:'体征总汇', c:'life', col:'#C0555A', ic:'house'},
+  {id:'calcall', n:'通用计算总汇', c:'fin', col:'#B07C2E', ic:'calc'},
   {id:'socialsec', n:'五险一金', c:'num', col:'#2C63F0', ic:'shield'},
   {id:'rebar', n:'钢筋重量', c:'num', col:'#8A94A6', ic:'rod'},
   {id:'slope', n:'坡度换算', c:'num', col:'#0E9AA7', ic:'angle'},
@@ -2288,8 +2291,6 @@ GX.push(
 '投影变形改正|meas|y:距中央子午线(km):50;H:高程(m):100|长度改正:y*y/(2*6371*6371)*1e0|m/km 概念值',
 '土方平衡计算|meas|cut:挖方(m3):100;fill:填方(m3):90|差值:cut-fill|m³',
 '坡度换算角度|meas|p:坡度(%):5|角度:Math.atan(p/100)*180/3.14159|°',
-'角度换算弧度|meas|d:角度(度):30|弧度:d*3.14159/180|rad',
-'弧度换算角度|meas|r:弧度(rad):0.5236|角度:r*180/3.14159|°',
 '方向角与象限角|meas|A:方位角(度):120|象限角:(A<=90?A:(A<=180?180-A:(A<=270?A-180:360-A)))|°',
 '测量记录检核|meas|a:后视读数:1.523;b:前视读数:1.234;dh:实测高差(m):0.289|检核:a-b|m，与实测比较',
 '水平角观测限差|meas|n:测回数:2;m:仪器标称精度(″):2|限差:n*m*Math.sqrt(n)|″',
@@ -2548,9 +2549,7 @@ GX.push(
 '引水管道流速|hydro|Q:流量(m3/s):0.2;D:管径(m):0.3|流速:Q/(3.14159*0.0225)|m/s',
 '防洪堤超高|hydro|h:设计水位(m):50;s:安全超高(m):0.6|堤顶:h+s|m',
 '灌区用水量|hydro|A:灌溉面积(亩):1000;q:灌水定额(m3/亩):80|用水:A*q|m³',
-'BMI 计算|med|w:体重(kg):65;h:身高(m):1.7|BMI:w/(h*h)|kg/m²，仅供参考',
 '体表面积计算|med|w:体重(kg):65;h:身高(cm):170|BSA:0.0061*h+0.0128*w-0.1529|m²，Stevenson 式',
-'基础代谢率|med|w:体重(kg):65;h:身高(cm):170;a:年龄(岁):30;g:性别 男1女2|BMR:(g===1?(10*w+6.25*h-5*a+5):(10*w+6.25*h-5*a-161))|kcal/d',
 '每日热量需求|med|bmr:基础代谢(kcal):1600;k:活动系数:1.4|需求:bmr*k|kcal',
 '最大心率估算|med|a:年龄(岁):30|最大心率:220-a|bpm',
 '目标心率区间|med|max:最大心率:190;rest:静息心率:60|低:rest+(max-rest)*0.6;高:rest+(max-rest)*0.8|bpm',
@@ -2559,7 +2558,6 @@ GX.push(
 '体重变化率|med|w1:初始体重(kg):70;w2:当前体重(kg):67|变化:w2-w1;比例:w2-w1/w1|kg、%',
 '血糖单位换算|med|v:血糖(mmol/L):5.6|mg/dL:v*18|mg/dL',
 '尿酸单位换算|med|v:尿酸(mmol/L):0.35|mg/dL:v*16.81|mg/dL',
-'体温单位换算|med|c:摄氏温度(℃):37|华氏:c*9/5+32|℉',
 '孕周计算|med|d:末次月经距今(天):70|周:d/7|周',
 '预产期计算|med|d:末次月经日期距今(天):70|剩余:(280-d)|天',
 '儿童身高百分位估算|med|h:身高(cm):120;age:年龄(岁):7|参考均值:age*age+75|cm，粗略',
@@ -2577,7 +2575,6 @@ GX.push(
 '换药次数统计|med|n:换药次数:2;d:住院天数:10|总数:n*d|次',
 '康复训练时长|med|n:组数:3;r:每组次数:15;t:单次秒数:30|时长:n*r*t/60|min',
 '步数与热量|med|s:步数:10000;w:体重(kg):65|热量:s*0.0005*w|kcal，估算',
-'体脂率估算|med|bmi:BMI:22;a:年龄:30;g:性别 男1女2|体脂:(g===1?1.2*bmi+0.23*a-16.2:1.2*bmi+0.23*a-5.4)|%，估算',
 '视力表行数换算|med|v:小数视力:0.8|相当于:Math.log10(v)*10+50|%',
 '加权平均成绩|edu|s1:成绩1:85;w1:学分1:3;s2:成绩2:90;w2:学分2:4|加权:(s1*w1+s2*w2)/(w1+w2)|分',
 'GPA 换算|edu|a:百分制成绩:85|GPA:a/100*4|—，4.0 制粗算',
@@ -3118,7 +3115,6 @@ GX.push(
 '概算编制|cost|C:工程费(元):1000000;r:其他费率:0.1;r2:预备费率:0.03|概算:C*1.1*1.03|元|造价估算，仅供参考',
 '层高影响系数|cost|h:层高(m):3.6;r:基准层高:3|系数:h/r|无量纲|造价估算，仅供参考',
 '利润率校核|cost|p:利润率:0.08;lim:行业基准:0.05|判定:(p>=lim?"达标":"偏低")|—|造价估算，仅供参考',
-'BMI 体质指数|med|h:身高(m):1.7;w:体重(kg):65|BMI:w/(h*h)|kg/m2|健康参考，不替代医嘱',
 '标准体重|med|h:身高(cm):170;age:年龄:35;w:体重(kg):65;n:当前值:30;t:目标值:25|标准:h-105;值:Math.round(w/(h*h)*100)/100;判定:(w/(h*h)<18.5?"偏瘦":(w/(h*h)<24?"正常":"超重"));差值:Math.round((n-t)*100)/100;每周需改变:Math.round((n-t)/w*1000)/1000|kg|综合 3 项',
 '每日能量需求|med|w:体重(kg):65;k:活动系数:30|能量:w*k|kcal|健康参考，不替代医嘱',
 '体表面积|med|w:体重(kg):65;h:身高(cm):170;age:年龄:35;n:当前值:30;t:目标值:25|BSA:Math.sqrt(w*h/3600);值:Math.round(w/(h*h)*100)/100;判定:(w/(h*h)<18.5?"偏瘦":(w/(h*h)<24?"正常":"超重"));差值:Math.round((n-t)*100)/100;每周需改变:Math.round((n-t)/w*1000)/1000|m²|综合 3 项',
@@ -3192,7 +3188,6 @@ GX.push(
 '渗透压|chem|c:浓度(mol/L):0.1;t:温度(K):310|渗透压:c*8.314*t;压力:c*8.314*t|kPa|合并 2 项',
 '阿伏加德罗换算|chem|n:物质的量(mol):1|粒子数:n*6.022*Math.pow(10,23)|个|化学计算',
 '稀释倍数|chem|c1:原浓度:10;c2:目标:2|倍数:c1/c2|倍|化学计算',
-'存储容量换算|it|n:文件数:1000;s:单文件(MB):5|容量:n*s/1024|GB|IT 估算',
 '带宽与下载时间|it|f:文件(GB):1;b:带宽(Mbps):100|时间:f*1024*8/b/60|min|IT 估算',
 '服务器数量|it|u:用户数:1000;q:单机承载:200|数量:Math.ceil(u/q)|台|IT 估算',
 '内存需求|it|n:并发数:100;q:单并发(MB):50|内存:n*q/1024|GB|IT 估算',
@@ -3331,18 +3326,15 @@ GX.push(
 '保本理财对比|cost|r1:理财年化:0.02;r2:通胀率:0.03|实际:r1-r2|无量纲|财务测算，仅供参考',
 '退休缺口|cost|m:月支出(元):5000;n:退休年数:20;S:已储备(元):500000|缺口:m*12*n-S|元|财务测算，仅供参考',
 '基金定投收益率|cost|m:月投(元):1000;n:期数:24;F:市值(元):26000|收益率:(F/(m*n))-1|无量纲|财务测算，仅供参考',
-'BMI 分级|med|h:身高(m):1.7;w:体重(kg):70|BMI:w/(h*h)|kg/m2|健康参考，不替代医嘱',
 '儿童用药体重法|med|d:成人量(mg):500;w:儿童(kg):18|剂量:d*w/60|mg|健康参考，不替代医嘱',
 '血糖 mmol 换算 mg|med|m:mmol/L:5.6|mg/dL:m*18|mg/dL|健康参考，不替代医嘱',
 '血肌酐清除率|med|a:年龄:45;w:体重(kg):65;s:肌酐(μmol/L):100|Ccr:(140-a)*w/(0.818*s)|ml/min|健康参考，不替代医嘱',
 'eGFR 估算|med|s:肌酐(μmol/L):90;a:年龄:40|eGFR:175*Math.pow(s/88.4,-1.154)*Math.pow(a,-0.203)|ml/min/1.73m2 近似|健康参考，不替代医嘱',
-'BMI 与腰围风险|med|b:BMI:26;w:腰围(cm):95|判定:((26>=24||95>=90)?"高风险":"低风险")|—|健康参考，不替代医嘱',
 '每日蛋白质需求|med|w:体重(kg):65;r:每公斤(g):1.2|蛋白:w*r|g|健康参考，不替代医嘱',
 '减重热量缺口|med|w:目标减重(kg):5;k:每公斤热量(kcal):7700;d:天数:60|缺口:w*k/d|kcal/d|健康参考，不替代医嘱',
 '饮水量按体重|med|w:体重(kg):65;r:每公斤(ml):35|饮水:w*r|ml|健康参考，不替代医嘱',
 '睡眠时长建议|med|a:年龄:30|建议:(a<18?9:(a<65?7.5:7))|h|健康参考，不替代医嘱',
 '孕期增重区间|med|b:孕前BMI:21;w:当前周数:28|建议:Math.min(11.5,w*0.4)|kg 参考|健康参考，不替代医嘱',
-'体温换算|med|c:摄氏(℃):36.8|华氏:c*9/5+32|℉|健康参考，不替代医嘱',
 '呼吸频率校核|med|n:30秒呼吸次数:8|每分钟:n*2|次/min|健康参考，不替代医嘱',
 '血氧饱和度参考|med|s:SpO2(%):96|判定:(s>=95?"正常":"偏低")|—|健康参考，不替代医嘱',
 '疼痛评分换算|med|s:评分(0-10):4|等级:(s<=3?"轻":(s<=6?"中":"重"))|—|健康参考，不替代医嘱',
@@ -3356,13 +3348,11 @@ GX.push(
 '体检项目建议|med|a:年龄:35;s:性别:1|项目:(a<40?8:(a<60?13:16))|项|健康参考，不替代医嘱',
 '卡路里换算千焦|med|k:kcal:100|kJ:k*4.184|kJ|健康参考，不替代医嘱',
 '每日步数目标|med|a:年龄:30|目标:(a<60?8000:6000)|步|健康参考，不替代医嘱',
-'BMI 变化预测|med|w:体重(kg):70;d:减重(kg):5;h:身高(m):1.7|BMI:(w-d)/(h*h)|kg/m2|健康参考，不替代医嘱',
 '用药剂量减半校核|med|d:成人量(mg):500;r:比例:0.5|剂量:d*r|mg|健康参考，不替代医嘱',
 '包扎材料长度|med|C:周长(cm):20;n:圈数:3|长度:C*n|cm|健康参考，不替代医嘱',
 '心率储备训练区|med|max:最大心率:190;rest:静息:60;r:强度:0.7|目标:rest+(max-rest)*r|次/min|健康参考，不替代医嘱',
 '食物热量估算|med|p:蛋白(g):30;c:碳水(g):80;f:脂肪(g):20|热量:4*p+4*c+9*f|kcal|健康参考，不替代医嘱',
 '钠摄入校核|med|s:日盐(g):6|钠:s/2.5*1000|mg 近似|健康参考，不替代医嘱',
-'BMI 正常范围体重|med|h:身高(m):1.7|下限:18.5*h*h;上限:23.9*h*h|kg|健康参考，不替代医嘱',
 '儿童剂量按年龄|med|d:成人量(mg):500;a:儿童年龄:6|剂量:d*(a+1)/20|mg 参考|健康参考，不替代医嘱',
 '孕期周数换算|med|d:距末次月经天数:140|孕周:Math.floor(d/7)|周|健康参考，不替代医嘱',
 '康复训练间隔|med|n:周次数:3|间隔:Math.floor(7/n)|天|健康参考，不替代医嘱',
@@ -3623,13 +3613,11 @@ GX.push(
 'VO2max 等级|sport|v:VO2max:45;s:性别:1|等级:(v>=50?"优":(v>=40?"良":"一般"))|—|运动参考',
 '蛋白质摄入|sport|w:体重(kg):65;r:每公斤(g):1.6|蛋白:w*r|g|运动参考',
 '碳水补充|sport|w:体重(kg):65;r:每公斤(g):6|碳水:w*r|g|运动参考',
-'BMI 与运动强度|sport|b:BMI:26|建议:(b>=28?"低冲击":"可中高强度")|—|运动参考',
 '步数换算里程|sport|n:步数:8000;s:步幅(m):0.75|里程:n*s/1000|km|运动参考',
 '跳绳次数热量|sport|n:次数:1000;w:体重(kg):65|消耗:n*w*0.0002|kcal 近似|运动参考',
 '平板支撑时长|sport|n:组数:3;t:每组(s):45|总时长:n*t/60|min|运动参考',
 '运动计划周数|sport|d:目标月数:3;n:周训练:4|周数:d*n|周|运动参考',
 '力量增肌周期|sport|n:周数:8;r:每周增重(kg):0.2|增重:n*r|kg|运动参考',
-'体脂率变化|sport|b:原体脂:0.25;w:减脂kg:3;t:体重kg:65|新体脂:(b*t-w*0.8)/(t-w)|无量纲|运动参考',
 '运动装备预算|sport|n:品类:5;r:均价(元):300|预算:n*r|元|运动参考',
 '训练日志条目|sport|n:周数:12;r:每周条:4|条目:n*r|条|运动参考',
 '心率区间上限|sport|max:最大心率:190;r:比例:0.9|上限:max*r|次/min|运动参考',
@@ -3975,7 +3963,6 @@ GX.push(
 '血糖正常判定|med|g:空腹血糖(mmol/L):6.1|判定:(g<g?"合格/达标":"不合格/超限")|—|健康判定，需就医确认',
 '血脂超标判定|med|t:总胆固醇(mmol/L):5.4|判定:(t<5.2?"合格/达标":"不合格/超限")|—|健康判定，需就医确认',
 '尿酸偏高判定|med|u:尿酸(μmol/L):430;lim:上限:420|判定:(u<=lim?"合格/达标":"不合格/超限")|—|健康判定，需就医确认',
-'BMI 正常判定|med|b:BMI:23|判定:(b>=18.5&&b<24?"合格/达标":"不合格/超限")|—|健康判定，需就医确认',
 '腰围超标判定|med|w:腰围(cm):92;s:性别阈值:90|判定:(w<=s?"合格/达标":"不合格/超限")|—|健康判定，需就医确认',
 '心率正常判定|med|h:心率:78|判定:(h>=60&&h<=100?"合格/达标":"不合格/超限")|—|健康判定，需就医确认',
 '体温发热判定|med|t:体温(℃):37.6|判定:(t<37.3?"合格/达标":"不合格/超限")|—|健康判定，需就医确认',
@@ -4161,7 +4148,6 @@ GX.push(
 '饮水分配|med|v:日饮水(ml):1800|每次:v/8|ml|健康参考，不替代医嘱',
 '睡眠周期完成|med|h:睡眠小时:7.5|周期:h/1.5|个|健康参考，不替代医嘱',
 '用药周期|med|d:日剂量(mg):400;t:总量(mg):2800|天数:t/d|天|健康参考，不替代医嘱',
-'BMI 变化|med|w:体重(kg):70;d:减重(kg):3;h:身高(m):1.72|BMI:(w-d)/(h*h)|kg/m2|健康参考，不替代医嘱',
 '每日步数消耗|med|n:步数:8000;w:体重(kg):65|消耗:n*w*0.0005|kcal 近似|健康参考，不替代医嘱',
 '脂肪摄入上限|med|k:日热量(kcal):1800|上限:k*0.3/9|g|健康参考，不替代医嘱',
 '用水量核算|ware|n:人数:100;q:定额(L):100;d:天数:30|水量:n*q*d/1000|m³|设施运维估算',
@@ -4787,8 +4773,6 @@ GX.push(
 '体温偏差率|med|v:实测:36.65;t:参考中值:36.65|偏差:(v-t)/t|无量纲|体温偏离程度',
 '呼吸频率|med|v:实测值:16.0;lo:下限:12;hi:上限:20|判定:(v>=lo&&v<=hi?"正常":"异常");宽度:hi-lo|综合|合并 2 个计算式',
 '呼吸频率偏差率|med|v:实测:16.0;t:参考中值:16.0|偏差:(v-t)/t|无量纲|呼吸频率偏离程度',
-'BMI|med|v:实测值:21.25;lo:下限:18.5;hi:上限:24|判定:(v>=lo&&v<=hi?"正常":"异常");宽度:hi-lo|综合|合并 2 个计算式',
-'BMI偏差率|med|v:实测:21.25;t:参考中值:21.25|偏差:(v-t)/t|无量纲|BMI偏离程度',
 '腰围|med|v:实测值:45.0;lo:下限:0;hi:上限:90|判定:(v>=lo&&v<=hi?"正常":"异常");宽度:hi-lo|综合|合并 2 个计算式',
 '腰围偏差率|med|v:实测:45.0;t:参考中值:45.0|偏差:(v-t)/t|无量纲|腰围偏离程度',
 '视力|med|v:实测值:0;lo:下限:0;hi:上限:0|判定:(v>=lo&&v<=hi?"正常":"异常");宽度:hi-lo|综合|合并 2 个计算式',
@@ -5217,7 +5201,6 @@ GX.push(
 '运动消耗|med|w:体重(kg):65;t:分钟:30;m:MET:6|消耗:Math.round(w*m*t/60)|综合式计算',
 '康复周期|med|d:已过天:10;t:预计天:20|进度:Math.round(d/t*10000)/10000|综合式计算',
 '睡眠时长评估|med|h:睡眠(h):6.5;lim:建议:7|判定:(h>=lim?"达标":"不足")|综合式计算',
-'基础代谢|med|w:体重(kg):65;h:身高(cm):172;a:年龄:35;age:年龄:35;n:当前值:30;t:目标值:25|BMR:Math.round(10*w+6.25*h-5*a+5);值:Math.round(w/(h*h)*100)/100;判定:(w/(h*h)<18.5?"偏瘦":(w/(h*h)<24?"正常":"超重"));差值:Math.round((n-t)*100)/100;每周需改变:Math.round((n-t)/w*1000)/1000|综合式计算|综合 3 项',
 '运动心率区间|med|a:年龄:35|最大:220-a;有氧:Math.round((220-a)*0.7)|综合式计算',
 '伤口换药周期|med|n:周期天:2;d:已过天:1|下次:n-d|综合式计算',
 '用药疗程|med|d:日次:3;n:天数:7|总数:d*n|综合式计算',
@@ -5810,6 +5793,11 @@ GX.push(
 '年终奖计税对比|fin|b:年终奖(元):30000;m:月薪:12000|单独计税:Math.round(b*0.03);并入计税:Math.round((b+m*12-60000)*0.1)|元|年终奖',
 '提前还款节省利息|fin|p:剩余本金(元):200000;r:年利率:4.5;n:剩余月数:120;x:提前还(元):50000|月供:Math.round(p*(r/1200)*Math.pow(1+r/1200,n)/(Math.pow(1+r/1200,n)-1));节省:Math.round(x*(r/1200)*n)|元|提前还款',
 '长文分章字数规划|txt|w:总字数:50000;c:章节数:20|每章:Math.round(w/c)|字|分章'
+);
+
+GX.push(
+'钢筋理论重量速查|eng|d:直径(mm):16;l:长度(m):9|重量:Math.round(0.00617*d*d*l*100)/100|kg|钢筋',
+'每日蛋白质需求|life|w:体重(kg):65;f:系数(g/kg):1.2;t:训练强度:1|需求:Math.round(w*f*t*10)/10|g|营养'
 );
 
 const GXIC={struct:'frame',hvac:'wave',elec:'flash',water:'drop',cost:'coin',mech:'tally',chem:'mix',farm:'sun',food:'stamp'};
@@ -9018,7 +9006,7 @@ function t_vcardqr(root){
         <div><p class="lbl">公司 / 职位</p><input type="text" id="vo" placeholder="某某科技有限公司 产品经理"></div>
       </div>
       <div class="row" style="margin-top:10px">
-        <div><p class="lbl">邮箱</p><input type="text" id="ve" placeholder="name@fornow.cc" inputmode="email"></div>
+        <div><p class="lbl">邮箱</p><input type="text" id="ve" placeholder="name@example.com" inputmode="email"></div>
         <div><p class="lbl">网址</p><input type="text" id="vu" placeholder="https://"></div>
       </div>
       <button class="btn block" id="vgo" style="margin-top:14px">生成名片二维码</button>
@@ -11097,7 +11085,7 @@ function t_mdpreview(root){
 
 > 引用一段话
 
-[链接](https://fornow.cc)
+[链接](https://example.com)
 
 \`\`\`
 代码块
@@ -11205,7 +11193,7 @@ function t_pwstrength(root){
 function t_urlparse(root){
   root.innerHTML=`
     <div class="box">
-      <input type="text" id="uurl" value="https://fornow.cc:8080/path/to/page?id=123&name=%E6%B5%8B%E8%AF%95#top">
+      <input type="text" id="uurl" value="https://example.com:8080/path/to/page?id=123&name=%E6%B5%8B%E8%AF%95#top">
       <button class="btn block" id="ugo" style="margin-top:10px">解析</button>
     </div>
     <div class="box" id="ures"></div>
@@ -11614,6 +11602,131 @@ function t_hfund(root){
       ['期数', n+' 期（'+yr+' 年）']
     ].map(([k,v])=>`<div class="kv"><span>${k}</span><b>${v}</b></div>`).join('');
   }
+  run();
+}
+
+/* ---------- 单位换算总汇 ---------- */
+function t_unitall(root){
+  const U={
+    '长度':[['米',1],['千米',1000],['厘米',0.01],['毫米',0.001],['英寸',0.0254],['英尺',0.3048],['码',0.9144],['英里',1609.344],['海里',1852],['市尺',0.33333],['市寸',0.033333]],
+    '重量':[['千克',1],['克',0.001],['吨',1000],['市斤',0.5],['市两',0.05],['磅',0.45359],['盎司',0.02835],['克拉',0.0002]],
+    '面积':[['平方米',1],['平方厘米',0.0001],['平方毫米',0.000001],['公顷',10000],['亩',666.6667],['平方千米',1000000],['平方英尺',0.0929],['英亩',4046.86]],
+    '体积':[['立方米',1],['升',0.001],['毫升',0.000001],['立方厘米',0.000001],['加仑(美)',0.003785],['桶(油)',0.159]],
+    '速度':[['米/秒',1],['千米/时',0.277778],['英里/时',0.44704],['节',0.514444]],
+    '压力':[['帕',1],['千帕',1000],['兆帕',1000000],['巴',100000],['标准大气压',101325],['毫米汞柱',133.322],['psi',6894.76]],
+    '功率':[['瓦',1],['千瓦',1000],['兆瓦',1000000],['马力',735.5]],
+    '能量':[['焦',1],['千焦',1000],['卡',4.184],['千卡',4184],['千瓦时',3600000]],
+    '数据':[['字节',1],['KB',1024],['MB',1048576],['GB',1073741824],['TB',1099511627776],['bit',0.125]],
+    '时间':[['秒',1],['分钟',60],['小时',3600],['天',86400],['周',604800],['年',31536000]],
+    '角度':[['度',1],['弧度',57.29578],['角分',0.016667],['角秒',0.000278]],
+    '流量':[['升/秒',1],['升/分',0.016667],['立方米/时',0.277778]],
+    '温度':[['摄氏度',1],['华氏度',1],['开尔文',1]]
+  };
+  const K=Object.keys(U);
+  root.innerHTML='<div class="box"><div class="lbl">换算类型</div><select id="uaT"></select>'
+   +'<div class="lbl" style="margin-top:10px">数值</div><input id="uaV" type="number" step="any" value="1">'
+   +'<div style="display:flex;gap:10px;margin-top:10px"><div style="flex:1"><p class="lbl">从</p><select id="uaF"></select></div>'
+   +'<div style="flex:1"><p class="lbl">到</p><select id="uaO"></select></div></div></div><div class="box" id="uaOut"></div>';
+  const T=root.querySelector('#uaT'), F=root.querySelector('#uaF'), O=root.querySelector('#uaO'), V=root.querySelector('#uaV'), OUT=root.querySelector('#uaOut');
+  T.innerHTML=K.map(k=>'<option>'+k+'</option>').join('');
+  function fill(){
+    const l=U[T.value].map(x=>x[0]);
+    F.innerHTML=l.map(x=>'<option>'+x+'</option>').join('');
+    O.innerHTML=l.map(x=>'<option>'+x+'</option>').join('');
+    O.selectedIndex=l.length>1?1:0; run();
+  }
+  function run(){
+    const k=T.value, v=parseFloat(V.value); const f=F.value, o=O.value;
+    if(!isFinite(v)){ OUT.innerHTML='<p class="hint">请输入数值。</p>'; return; }
+    let r, txt;
+    if(k==='温度'){
+      const c = f==='摄氏度'?v:(f==='华氏度'?(v-32)/1.8:v-273.15);
+      r = o==='摄氏度'?c:(o==='华氏度'?c*1.8+32:c+273.15);
+      txt=r;
+    } else {
+      const a=U[k].find(x=>x[0]===f)[1], b=U[k].find(x=>x[0]===o)[1];
+      r=v*a/b; txt=Math.abs(r)>=1e-6?(+r.toPrecision(10)):r.toExponential(6);
+    }
+    OUT.innerHTML='<div class="kv"><span>结果</span><b>'+txt+' '+o+'</b></div>'
+      +'<div class="kv"><span>换算口径</span><span>'+v+' '+f+' → '+o+'</span></div>'
+      +'<p class="hint">覆盖 '+K.length+' 类共 '+K.reduce((n,x)=>n+U[x].length,0)+' 个单位，全部自动对换。</p>';
+  }
+  T.addEventListener('change',fill); F.addEventListener('change',run); O.addEventListener('change',run); V.addEventListener('input',run);
+  fill();
+}
+
+/* ---------- 体征总汇 ---------- */
+function t_healthall(root){
+  root.innerHTML='<div class="box">'
+   +'<div style="display:flex;gap:10px"><div style="flex:1"><p class="lbl">身高(cm)</p><input id="hh" type="number" value="170"></div>'
+   +'<div style="flex:1"><p class="lbl">体重(kg)</p><input id="hw" type="number" value="65"></div></div>'
+   +'<div style="display:flex;gap:10px;margin-top:8px"><div style="flex:1"><p class="lbl">年龄</p><input id="ha" type="number" value="30"></div>'
+   +'<div style="flex:1"><p class="lbl">性别</p><select id="hg"><option value="1">男</option><option value="0">女</option></select></div></div>'
+   +'<div class="lbl" style="margin-top:10px">腰围(cm)</div><input id="hu" type="number" value="85">'
+   +'<div class="lbl" style="margin-top:10px">活动量</div><select id="hc"><option value="1.2">久坐</option><option value="1.375">轻度</option><option value="1.55">中度</option><option value="1.725">高强度</option></select>'
+   +'</div><div class="box" id="hOut"></div>';
+  const g=(id)=>root.querySelector('#'+id);
+  function run(){
+    const h=g('hh').value/100, w=+g('hw').value, a=+g('ha').value, sex=g('hg').value==='1'?1:0, waist=+g('hu').value, act=+g('hc').value;
+    if(h<=0||w<=0){ g('hOut').innerHTML='<p class="hint">请输入身高与体重。</p>'; return; }
+    const bmi=w/(h*h);
+    const level=bmi<18.5?'偏瘦':bmi<24?'正常':bmi<28?'超重':'肥胖';
+    const fat=1.2*bmi+0.23*a-10.8*sex-5.4;
+    const bmr=10*w+6.25*(h*100)-5*a+(sex?5:-161);
+    const low=18.5*h*h, high=23.9*h*h;
+    const water=Math.round(w*35);
+    const risk=(sex? waist>=90:waist>=85)?'腹型肥胖风险高':'腰围在参考范围内';
+    g('hOut').innerHTML='<div class="kv"><span>BMI</span><b>'+bmi.toFixed(1)+' kg/m²</b></div>'
+     +'<div class="kv"><span>BMI 分级</span><span>'+level+'</span></div>'
+     +'<div class="kv"><span>体脂率估算</span><span>'+fat.toFixed(1)+'%</span></div>'
+     +'<div class="kv"><span>基础代谢</span><span>'+Math.round(bmr)+' kcal/天</span></div>'
+     +'<div class="kv"><span>每日总消耗</span><span>'+Math.round(bmr*act)+' kcal/天</span></div>'
+     +'<div class="kv"><span>每日饮水建议</span><span>'+water+' ml</span></div>'
+     +'<div class="kv"><span>标准体重区间</span><span>'+low.toFixed(1)+' ~ '+high.toFixed(1)+' kg</span></div>'
+     +'<div class="kv"><span>腰围判定</span><span>'+risk+'</span></div>'
+     +'<p class="hint">BMI 与体脂为通用估算（Deurenberg 公式），BMR 用 Mifflin-St Jeor；仅供健康参考，不替代医生诊断。</p>';
+  }
+  ['hh','hw','ha','hu'].forEach(id=>g(id).addEventListener('input',run));
+  ['hg','hc'].forEach(id=>g(id).addEventListener('change',run));
+  run();
+}
+
+/* ---------- 通用计算总汇 ---------- */
+function t_calcall(root){
+  const MODES={
+    '数量×单价':['数量','单价','预算','金额:Math.round(a*b*100)/100;结余:Math.round((c-a*b)*100)/100'],
+    '含税拆分':['不含税金额','税率(%)','—','税额:Math.round(a*b/100*100)/100;含税合计:Math.round(a*(1+b/100)*100)/100'],
+    '折扣':['原价','折扣(%)','—','折后价:Math.round(a*b/100*100)/100;省下:Math.round(a*(1-b/100)*100)/100'],
+    '百分比增减':['基数','变化(%)','—','结果:Math.round(a*(1+b/100)*100)/100;变化量:Math.round(a*b/100*100)/100'],
+    '人均分摊':['总额','人数','—','人均:Math.round(a/b*100)/100;余数:Math.round((a-a%b)*100)/100'],
+    '复利':['本金','年利率(%)','年数','终值:Math.round(a*Math.pow(1+b/100,c)*100)/100;利息:Math.round((a*Math.pow(1+b/100,c)-a)*100)/100'],
+    '面积×单价':['面积(m²)','单价(元/m²)','—','造价:Math.round(a*b*100)/100;含10%损耗:Math.round(a*1.1*b*100)/100'],
+    '体积×容重':['体积(m³)','容重(kg/m³)','—','重量:Math.round(a*b*100)/100;吨数:Math.round(a*b/1000*100)/100'],
+    '工期天数':['工程量','日产能','—','工期(天):Math.ceil(a/b);日均需完成:Math.round(b*100)/100']
+  };
+  const K=Object.keys(MODES);
+  root.innerHTML='<div class="box"><div class="lbl">计算类型</div><select id="caM"></select>'
+   +'<div style="display:flex;gap:8px;margin-top:10px"><div style="flex:1"><p class="lbl" id="caL1">数量</p><input id="caA" type="number" value="100"></div>'
+   +'<div style="flex:1"><p class="lbl" id="caL2">单价</p><input id="caB" type="number" step="any" value="25"></div>'
+   +'<div style="flex:1"><p class="lbl" id="caL3">预算</p><input id="caC" type="number" value="3000"></div></div></div>'
+   +'<div class="box" id="caOut"></div>';
+  const g=id=>root.querySelector('#'+id);
+  g('caM').innerHTML=K.map(k=>'<option>'+k+'</option>').join('');
+  const fns={};
+  K.forEach(k=>{
+    const parts=MODES[k][3].split(';');
+    fns[k]=parts.map(p=>{const [lb,ex]=p.split(':');return [lb,new Function('a','b','c','return ('+ex+')')];});
+  });
+  function run(){
+    const k=g('caM').value, spec=MODES[k];
+    g('caL1').textContent=spec[0]; g('caL2').textContent=spec[1]; g('caL3').textContent=spec.length>2?spec[2]:'—';
+    const a=+g('caA').value, b=+g('caB').value, c=+g('caC').value;
+    if(!isFinite(a)||!isFinite(b)){ g('caOut').innerHTML='<p class="hint">请输入参数。</p>'; return; }
+    let html='';
+    fns[k].forEach(([lb,f])=>{ let v; try{ v=f(a,b,c); }catch(e){ v='—'; } html+='<div class="kv"><span>'+lb+'</span><b>'+v+'</b></div>'; });
+    g('caOut').innerHTML=html+'<p class="hint">通用算式覆盖 '+K.length+' 类，第三项在该类型下可忽略。</p>';
+  }
+  g('caM').addEventListener('change',run); ['caA','caB','caC'].forEach(id=>g(id).addEventListener('input',run));
   run();
 }
 
@@ -12228,7 +12341,7 @@ function t_mdhtml(root){
     <div class="box">
       <textarea id="mdin" style="min-height:150px" placeholder="# 标题&#10;&#10;正文 **加粗** 和 \`代码\`"># 小羽工具箱
 
-支持 **加粗**、*斜体*、\`代码\`、[链接](https://fornow.cc)。
+支持 **加粗**、*斜体*、\`代码\`、[链接](https://example.com)。
 
 - 列表项一
 - 列表项二
@@ -12595,7 +12708,7 @@ function t_urlparams(root){
   root.innerHTML=`
     <div class="box">
       <p class="lbl">解析：粘贴完整链接</p>
-      <div class="row"><input id="upIn" placeholder="https://fornow.cc/path?a=1&b=2"><button class="btn" id="upGo" style="flex:0 0 84px">解析</button></div>
+      <div class="row"><input id="upIn" placeholder="https://example.com/path?a=1&b=2"><button class="btn" id="upGo" style="flex:0 0 84px">解析</button></div>
       <div id="upOut" style="margin-top:12px"></div>
     </div>
     <div class="box">
@@ -17173,7 +17286,7 @@ function t_base58(root){
 }
 
 function t_urlmerge(root){
-  convTool(root,{def:'https://fornow.cc/search?q=工具箱&page=1&sort=new',outLabel:'结果',modes:[
+  convTool(root,{def:'https://example.com/search?q=工具箱&page=1&sort=new',outLabel:'结果',modes:[
     {label:'拆出参数表',fn:s=>{const u=new URL(s);return [...u.searchParams.entries()].map(([k,v])=>k+' = '+v).join('\n')||'没有参数';}},
     {label:'去重排序参数',fn:s=>{const u=new URL(s);const arr=[...u.searchParams.entries()].sort((a,b)=>a[0].localeCompare(b[0]));u.search='';arr.forEach(([k,v])=>u.searchParams.append(k,v));return u.toString();}},
     {label:'只保留域名',fn:s=>new URL(s).origin}
@@ -17300,7 +17413,7 @@ function t_httphdr(root){
 }
 
 function t_cookie(root){
-  convTool(root,{def:'uid=abc123; Path=/; Domain=.fornow.cc; Max-Age=86400; HttpOnly; Secure',outLabel:'解析',modes:[{label:'拆分属性',
+  convTool(root,{def:'uid=abc123; Path=/; Domain=.example.com; Max-Age=86400; HttpOnly; Secure',outLabel:'解析',modes:[{label:'拆分属性',
     fn:s=>s.split(';').map(x=>x.trim()).filter(Boolean).map(x=>{const i=x.indexOf('=');return i<0?x+'（标记）':x.slice(0,i)+' = '+x.slice(i+1);}).join('\n')},
     {label:'只看键值',fn:s=>s.split(';').filter(x=>x.includes('=')).map(x=>x.trim()).join('\n')},
     {label:'检查安全项',fn:s=>{const low=s.toLowerCase();return ['Secure '+(low.includes('secure')?'已设置':'缺失'),'HttpOnly '+(low.includes('httponly')?'已设置':'缺失'),'SameSite '+(low.includes('samesite')?'已设置':'缺失')].join('\n');}}
