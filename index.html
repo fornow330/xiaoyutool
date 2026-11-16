@@ -1323,18 +1323,11 @@ function renderChips(){
 function renderList(){
   const list = TOOLS.filter(t=> (curCat==='all'||t.c===curCat) && (!curQuery || t.n.includes(curQuery) || CATNAME[t.c].includes(curQuery)));
   if(!list.length){ $('#list').innerHTML = '<div class="empty">没有找到相关工具</div>'; return; }
-  let html='';
-  if(curCat==='all' && !curQuery){
-    html += `<div class="sec-t"><h2>设备测量 · 瑞士刀</h2><i>需手机传感器</i></div>`;
-    html += `<div class="cardgrid">${cards(TOOLS.filter(t=>t.c==='dev'))}</div>`;
-    ['img','txt','num','eff','qry','kit'].forEach(k=>{
-      html += `<div class="sec-t"><h2>${CATNAME[k]}</h2></div>`;
-      html += `<div class="cardgrid">${cards(TOOLS.filter(t=>t.c===k))}</div>`;
-    });
-  } else {
-    html = `<div class="cardgrid" style="margin-top:14px">${cards(list)}</div>`;
-  }
-  $('#list').innerHTML = html;
+  const order = CATS.map(c=>c.k);
+  const sorted = curCat==='all' && !curQuery
+    ? list.slice().sort((a,b)=>order.indexOf(a.c)-order.indexOf(b.c))
+    : list;
+  $('#list').innerHTML = `<div class="cardgrid" style="margin-top:14px">${cards(sorted)}</div>`;
 }
 function cards(list){
   return list.map(t=>`
