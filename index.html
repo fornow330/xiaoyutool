@@ -9018,7 +9018,7 @@ function t_vcardqr(root){
         <div><p class="lbl">公司 / 职位</p><input type="text" id="vo" placeholder="某某科技有限公司 产品经理"></div>
       </div>
       <div class="row" style="margin-top:10px">
-        <div><p class="lbl">邮箱</p><input type="text" id="ve" placeholder="name@example.com" inputmode="email"></div>
+        <div><p class="lbl">邮箱</p><input type="text" id="ve" placeholder="name@fornow.cc" inputmode="email"></div>
         <div><p class="lbl">网址</p><input type="text" id="vu" placeholder="https://"></div>
       </div>
       <button class="btn block" id="vgo" style="margin-top:14px">生成名片二维码</button>
@@ -11097,7 +11097,7 @@ function t_mdpreview(root){
 
 > 引用一段话
 
-[链接](https://example.com)
+[链接](https://fornow.cc)
 
 \`\`\`
 代码块
@@ -11205,7 +11205,7 @@ function t_pwstrength(root){
 function t_urlparse(root){
   root.innerHTML=`
     <div class="box">
-      <input type="text" id="uurl" value="https://example.com:8080/path/to/page?id=123&name=%E6%B5%8B%E8%AF%95#top">
+      <input type="text" id="uurl" value="https://fornow.cc:8080/path/to/page?id=123&name=%E6%B5%8B%E8%AF%95#top">
       <button class="btn block" id="ugo" style="margin-top:10px">解析</button>
     </div>
     <div class="box" id="ures"></div>
@@ -12228,7 +12228,7 @@ function t_mdhtml(root){
     <div class="box">
       <textarea id="mdin" style="min-height:150px" placeholder="# 标题&#10;&#10;正文 **加粗** 和 \`代码\`"># 小羽工具箱
 
-支持 **加粗**、*斜体*、\`代码\`、[链接](https://example.com)。
+支持 **加粗**、*斜体*、\`代码\`、[链接](https://fornow.cc)。
 
 - 列表项一
 - 列表项二
@@ -12595,7 +12595,7 @@ function t_urlparams(root){
   root.innerHTML=`
     <div class="box">
       <p class="lbl">解析：粘贴完整链接</p>
-      <div class="row"><input id="upIn" placeholder="https://example.com/path?a=1&b=2"><button class="btn" id="upGo" style="flex:0 0 84px">解析</button></div>
+      <div class="row"><input id="upIn" placeholder="https://fornow.cc/path?a=1&b=2"><button class="btn" id="upGo" style="flex:0 0 84px">解析</button></div>
       <div id="upOut" style="margin-top:12px"></div>
     </div>
     <div class="box">
@@ -17173,7 +17173,7 @@ function t_base58(root){
 }
 
 function t_urlmerge(root){
-  convTool(root,{def:'https://example.com/search?q=工具箱&page=1&sort=new',outLabel:'结果',modes:[
+  convTool(root,{def:'https://fornow.cc/search?q=工具箱&page=1&sort=new',outLabel:'结果',modes:[
     {label:'拆出参数表',fn:s=>{const u=new URL(s);return [...u.searchParams.entries()].map(([k,v])=>k+' = '+v).join('\n')||'没有参数';}},
     {label:'去重排序参数',fn:s=>{const u=new URL(s);const arr=[...u.searchParams.entries()].sort((a,b)=>a[0].localeCompare(b[0]));u.search='';arr.forEach(([k,v])=>u.searchParams.append(k,v));return u.toString();}},
     {label:'只保留域名',fn:s=>new URL(s).origin}
@@ -17300,7 +17300,7 @@ function t_httphdr(root){
 }
 
 function t_cookie(root){
-  convTool(root,{def:'uid=abc123; Path=/; Domain=.example.com; Max-Age=86400; HttpOnly; Secure',outLabel:'解析',modes:[{label:'拆分属性',
+  convTool(root,{def:'uid=abc123; Path=/; Domain=.fornow.cc; Max-Age=86400; HttpOnly; Secure',outLabel:'解析',modes:[{label:'拆分属性',
     fn:s=>s.split(';').map(x=>x.trim()).filter(Boolean).map(x=>{const i=x.indexOf('=');return i<0?x+'（标记）':x.slice(0,i)+' = '+x.slice(i+1);}).join('\n')},
     {label:'只看键值',fn:s=>s.split(';').filter(x=>x.includes('=')).map(x=>x.trim()).join('\n')},
     {label:'检查安全项',fn:s=>{const low=s.toLowerCase();return ['Secure '+(low.includes('secure')?'已设置':'缺失'),'HttpOnly '+(low.includes('httponly')?'已设置':'缺失'),'SameSite '+(low.includes('samesite')?'已设置':'缺失')].join('\n');}}

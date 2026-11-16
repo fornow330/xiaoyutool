@@ -2,7 +2,7 @@
 set -e
 SDK="$HOME/android-sdk/platforms/android-33"
 APP=app/src/main
-cp "/home/user/Doubao/chats/38453450899965698/全能百宝箱/小羽工具箱.html" $APP/assets/index.html
+cp "${SRC_HTML:-../小羽工具箱.html}" "$APP/assets/index.html"
 rm -rf build/dex build/classes && mkdir -p build/classes build/dex
 "$SDK/aapt2" compile --dir $APP/res -o build/res.zip
 "$SDK/aapt2" link -o build/base.apk -I "$SDK/android.jar" --manifest $APP/AndroidManifest.xml \
