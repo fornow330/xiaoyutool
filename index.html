@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="4.1">
+<meta name="xyver" content="4.2">
 <title>小羽工具箱 · 本地工具集合</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%232C63F0'/%3E%3Cpath d='M7 8h10M7 12h10M7 16h6' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
@@ -17,8 +17,32 @@
   --accent:#2C63F0;
   --warn:#E2543B;
   --ok:#17A673;
+  --soft:#F3F5F9;
+  --field:#FBFCFD;
+  --bar:rgba(241,243,245,.92);
   --r:14px;
   --shadow:0 1px 2px rgba(16,24,40,.05),0 10px 24px -14px rgba(16,24,40,.18);
+}
+/* ===== 深色 ===== */
+@media (prefers-color-scheme: dark){
+  html:not([data-theme="light"]){
+    --bg:#101216;--card:#191C21;--ink:#E9ECF1;--sub:#99A2AE;--line:#2B313A;
+    --soft:#232830;--field:#1E2228;--bar:rgba(16,18,22,.94);
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 24px -14px rgba(0,0,0,.5);
+  }
+}
+html[data-theme="dark"]{
+  --bg:#101216;--card:#191C21;--ink:#E9ECF1;--sub:#99A2AE;--line:#2B313A;
+  --soft:#232830;--field:#1E2228;--bar:rgba(16,18,22,.94);
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 24px -14px rgba(0,0,0,.5);
+}
+html[data-theme="dark"] .chip.on{background:var(--accent);border-color:var(--accent)}
+html[data-theme="dark"] .btn.danger{background:rgba(226,84,59,.14);border-color:rgba(226,84,59,.34);color:#FF9A86}
+html[data-theme="dark"] .toolcard .fav{color:#6C7683}
+@media (prefers-color-scheme: dark){
+  html:not([data-theme="light"]) .chip.on{background:var(--accent);border-color:var(--accent)}
+  html:not([data-theme="light"]) .btn.danger{background:rgba(226,84,59,.14);border-color:rgba(226,84,59,.34);color:#FF9A86}
+  html:not([data-theme="light"]) .toolcard .fav{color:#6C7683}
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;height:100%}
@@ -34,13 +58,15 @@ input,textarea,select{font-family:inherit;font-size:16px}
 /* ===== 顶栏 ===== */
 .topbar{
   position:sticky;top:0;z-index:20;
-  background:rgba(241,243,245,.92);
+  background:var(--bar);
   backdrop-filter:saturate(180%) blur(16px);
   padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 8px;
 }
 .brand{display:flex;align-items:baseline;gap:8px;margin:0 2px 12px}
 .brand h1{font-size:20px;font-weight:700;letter-spacing:-.3px;margin:0}
 .brand span{font-size:12px;color:var(--sub);letter-spacing:.4px}
+.themebtn{margin-left:auto;width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;padding:0}
+.themebtn svg{width:17px;height:17px;stroke:var(--sub)}
 .search{
   display:flex;align-items:center;gap:8px;
   background:var(--card);border:1px solid var(--line);
@@ -53,8 +79,8 @@ input,textarea,select{font-family:inherit;font-size:16px}
 .recent{display:flex;gap:8px;align-items:center;overflow-x:auto;padding:10px 0 0;scrollbar-width:none}
 .recent[hidden]{display:none}
 .recent .rlbl{flex:0 0 auto;font-size:12px;color:#8a94a6}
-.recent .rchip{flex:0 0 auto;display:flex;align-items:center;gap:5px;min-height:34px;padding:0 12px;border:1px solid #e6e9f0;border-radius:17px;background:#fff;color:#2b3445;font-size:12.5px;white-space:nowrap}
-.recent .rchip:active{background:#f3f5f9}
+.recent .rchip{flex:0 0 auto;display:flex;align-items:center;gap:5px;min-height:34px;padding:0 12px;border:1px solid var(--line);border-radius:17px;background:var(--card);color:var(--ink);font-size:12.5px;white-space:nowrap}
+.recent .rchip:active{background:var(--soft)}
 .chips::-webkit-scrollbar{display:none}
 .chip{
   flex:none;border:1px solid var(--line);background:var(--card);color:var(--sub);
@@ -69,6 +95,13 @@ main{padding:0 16px calc(env(safe-area-inset-bottom,0px) + 28px)}
 .sec-t h2{font-size:13px;font-weight:600;color:var(--sub);letter-spacing:.6px;margin:0}
 .sec-t i{font-size:12px;color:#A9AFB8;font-style:normal}
 .cardgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+
+.toolcard .fav{position:absolute;top:2px;right:2px;width:30px;height:30px;display:grid;place-items:center;background:none;border:0;padding:0;color:#B4BCCB;opacity:.55}
+.toolcard .fav.on{color:#F0A22B;opacity:1}
+.toolcard .fav svg{width:14px;height:14px}
+.toolcard .fav.on svg{fill:#F0A22B}
+.copytool{margin-left:auto;flex:0 0 auto;min-height:32px;padding:0 12px;border:1px solid var(--line);border-radius:16px;background:var(--card);color:#4A5568;font-size:12.5px}
+.copytool:active{background:var(--soft)}
 .toolcard{
   position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);
   padding:13px 4px 11px;display:flex;flex-direction:column;align-items:center;gap:7px;
@@ -79,16 +112,17 @@ main{padding:0 16px calc(env(safe-area-inset-bottom,0px) + 28px)}
 .toolcard:hover{box-shadow:var(--shadow)}
 .toolcard .ico{
   width:38px;height:38px;border-radius:11px;display:grid;place-items:center;
-  background:#F3F5F9;
+  background:var(--soft);
 }
 .toolcard .ico svg{width:21px;height:21px;stroke-width:1.7}
-.toolcard b{font-size:12.5px;font-weight:500;line-height:1.25;text-align:center;color:#2A2E36;
+.toolcard b{font-size:12.5px;font-weight:500;line-height:1.25;text-align:center;color:var(--ink);
   max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .toolcard.knife::after{
   content:"";position:absolute;top:9px;right:9px;width:5px;height:5px;border-radius:50%;
   background:var(--warn);opacity:.9;
 }
 .empty{color:var(--sub);font-size:14px;text-align:center;padding:48px 0}
+.morebtn{display:block;width:100%;margin:14px 0 4px;min-height:46px;border:1px dashed var(--line);border-radius:12px;background:var(--card);color:var(--sub);font-size:13.5px}
 
 /* ===== 工具面板 ===== */
 .sheet{
@@ -100,7 +134,7 @@ main{padding:0 16px calc(env(safe-area-inset-bottom,0px) + 28px)}
 .sheet.open{transform:none;visibility:visible}
 .sheet-head{
   display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 10px) 12px 10px;
-  background:rgba(241,243,245,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);
+  background:var(--bar);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);
   position:sticky;top:0;z-index:5;flex:none;
 }
 .backbtn{
@@ -134,10 +168,10 @@ main{padding:0 16px calc(env(safe-area-inset-bottom,0px) + 28px)}
 .start .btn{flex:1 1 120px}
 input[type=text],input[type=number],input[type=date],textarea,select{
   width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;
-  background:#FBFCFD;color:var(--ink);outline:none;-webkit-appearance:none;appearance:none;
+  background:var(--field);color:var(--ink);outline:none;-webkit-appearance:none;appearance:none;
 }
 textarea{resize:vertical;line-height:1.55;min-height:96px}
-input:focus,textarea:focus,select:focus{border-color:#B9CBF8;background:#fff;box-shadow:0 0 0 3px rgba(44,99,240,.10)}
+input:focus,textarea:focus,select:focus{border-color:#B9CBF8;background:var(--card);box-shadow:0 0 0 3px rgba(44,99,240,.10)}
 input[type=range]{width:100%;-webkit-appearance:none;height:28px;background:transparent}
 input[type=range]::-webkit-slider-runnable-track{height:4px;background:#DDE2EA;border-radius:4px}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--accent);margin-top:-9px;box-shadow:0 2px 8px rgba(44,99,240,.35)}
@@ -198,11 +232,13 @@ canvas{max-width:100%;display:block;border-radius:10px}
   <div class="brand">
     <h1>小羽工具箱</h1>
     <span id="toolCount">0 个工具</span>
+    <button class="themebtn" id="themebtn" aria-label="切换深浅色"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><circle cx="12" cy="12" r="4.2"/><path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8L5.6 18.4"/></svg></button>
   </div>
   <div class="search">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
     <input id="q" type="search" placeholder="搜索工具，如 二维码 / 单位换算" autocomplete="off">
   </div>
+  <div class="recent" id="favbar" hidden></div>
   <div class="recent" id="recent" hidden></div>
   <div class="chips" id="chips"></div>
 </header>
@@ -219,6 +255,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg>
     </button>
     <div class="sheet-title" id="sheetTitle"></div>
+    <button class="copytool" id="copytool" aria-label="复制结果">复制结果</button>
   </div>
   <div class="sheet-body" id="sheetBody"></div>
 </div>
@@ -1336,6 +1373,21 @@ function renderRecent(){
   box.hidden=false;
   box.innerHTML='<span class="rlbl">最近</span>'+ts.map(t=>`<button class="rchip" data-rid="${t.id}">${t.n}</button>`).join('');
 }
+const FVKEY='xy_fav';
+function getFav(){ try{ return new Set(JSON.parse(localStorage.getItem(FVKEY)||'[]')); }catch(e){ return new Set(); } }
+function setFav(set){ try{ localStorage.setItem(FVKEY, JSON.stringify([...set])); }catch(e){} }
+function toggleFav(id){
+  const f=getFav();
+  if(f.has(id)){ f.delete(id); toast('已取消收藏'); } else { f.add(id); toast('已收藏，首页置顶'); }
+  setFav(f); renderFav(); renderList();
+}
+function renderFav(){
+  const box=$('#favbar'); if(!box) return;
+  const ts=[...getFav()].map(i=>TOOLS.find(t=>t.id===i)).filter(Boolean);
+  if(!ts.length){ box.hidden=true; box.innerHTML=''; return; }
+  box.hidden=false;
+  box.innerHTML='<span class="rlbl">收藏</span>'+ts.map(t=>`<button class="rchip on" data-fav2="${t.id}">${t.n}</button>`).join('');
+}
 function renderChips(){
   $('#chips').innerHTML = CATS.map(c=>`<button class="chip${c.k===curCat?' on':''}" data-cat="${c.k}">${c.n}</button>`).join('');
 }
@@ -1347,28 +1399,65 @@ const HOT=[['二维码',9],['单位换算',9],['图片压缩',8],['文字统计'
 ['房贷',6],['汇率',6],['BMI',6],['日期',6],['密码',5],['命名转换',5],['文本处理',5],['字数',5],['换算',5],['计算',4]];
 function hotRank(n){if(HOTEXACT.indexOf(n)>=0) return 30-HOTEXACT.indexOf(n);let r=0;for(const [k,w] of HOT){if(n.includes(k)&&w>r)r=w;}return r;}
 
+/* 搜索别名：搜口语词也能命中正式名 */
+const ALIAS={
+  '卡路里':['热量','卡路里','千卡','kcal'],'热量':['热量','卡','千卡','kcal','能量'],
+  '除法':['百分比','分摊','折算','比例'],'面积':['面积','平方','㎡'],'体积':['体积','容积','立方','方量'],
+  '功率':['功率','瓦','千瓦','马力','耗电'],'电阻':['电阻','欧姆','Ω'],'电流':['电流','安培','线径','载流'],
+  '电线':['电线','电缆','线径','载流','平方毫米'],'钢筋':['钢筋','螺纹钢','HRB','搭接'],
+  '混凝土':['混凝土','砼','水泥','砂浆','方量'],'贷款':['贷款','房贷','月供','按揭','还款'],
+  '利息':['利息','利率','复利','收益'],'税':['税','个税','增值税','所得税','含税'],
+  '汇率':['汇率','外币','美元','欧元','换汇'],'体重':['体重','BMI','体脂','减重'],
+  '配速':['配速','跑步','马拉松','骑'],
+  '时间':['时间','时长','日期','时刻','倒计时'],'颜色':['颜色','色值','HEX','RGB','取色'],
+  '图片':['图片','图像','照片','压缩','裁剪'],'加密':['加密','哈希','MD5','SHA','校验'],
+  '编码':['编码','Base64','URL','进制','转码'],'密码':['密码','随机','口令','强度'],
+  '二维码':['二维码','QR','扫码'],'字体':['字体','字号','行高','排版'],
+  '发票':['发票','报销','含税','报价'],'工时':['工时','人工','工期','排期'],
+  '热量表':['热量','嘌呤','GI','营养'],'血压':['血压','心率','体征'],
+  '单位':['单位','换算','转换'],'钢':['钢','型钢','钢板','螺纹钢','重量']
+};
+function expandQ(q){
+  q=(q||'').trim(); if(!q) return [];
+  const out=[q];
+  for(const k in ALIAS){
+    if(k.length>=2 && (k.indexOf(q)>=0 || k===q)) out.push(...ALIAS[k]);
+  }
+  return [...new Set(out)];
+}
+let pageLimit = 120;
 function renderList(){
-  const list = TOOLS.filter(t=> (curCat==='all'||t.c===curCat) && (!curQuery || t.n.includes(curQuery) || CATNAME[t.c].includes(curQuery)));
+  const qs = expandQ(curQuery);
+  const list = TOOLS.filter(t=> (curCat==='all'||t.c===curCat) && (!curQuery || qs.some(q=> t.n.includes(q) || CATNAME[t.c].includes(q))));
   if(!list.length){ $('#list').innerHTML = '<div class="empty">没有找到相关工具</div>'; return; }
   const order = CATS.map(c=>c.k);
   const sorted = curCat==='all' && !curQuery
     ? list.slice().sort((a,b)=>hotRank(b.n)-hotRank(a.n) || order.indexOf(a.c)-order.indexOf(b.c))
     : (curCat==='all' && curQuery ? list.slice().sort((a,b)=>hotRank(b.n)-hotRank(a.n)) : list);
-  $('#list').innerHTML = `<div class="cardgrid" style="margin-top:14px">${cards(sorted)}</div>`;
+  const total = sorted.length;
+  const show = curQuery ? sorted : sorted.slice(0, pageLimit);
+  const more = sorted.length - show.length;
+  $('#list').innerHTML = `<div class="cardgrid" style="margin-top:14px">${cards(show)}</div>`
+    + (more>0 ? `<button class="morebtn" id="morebtn">显示更多（还有 ${more} 个）</button>` : '');
 }
 function cards(list){
+  const favs=getFav();
   return list.map(t=>`
     <div class="toolcard${t.knife?' knife':''}" data-id="${t.id}">
+      <button class="fav${favs.has(t.id)?' on':''}" data-fav="${t.id}" aria-label="${favs.has(t.id)?'取消收藏':'收藏'}"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.2 5.9-.8z"/></svg></button>
       <div class="ico" style="background:${t.col}14">${icon(t.ic,t.col)}</div>
       <b>${t.n}</b>
     </div>`).join('');
 }
 document.addEventListener('click', e=>{
-  const chip=e.target.closest('#chips .chip'); if(chip && chip.dataset.cat){ curCat=chip.dataset.cat; renderChips(); renderRecent(); renderList(); return; }
+  const chip=e.target.closest('#chips .chip'); if(chip && chip.dataset.cat){ curCat=chip.dataset.cat; pageLimit=120; renderChips(); renderFav(); renderRecent(); renderList(); return; }
+  const fb=e.target.closest('.toolcard .fav'); if(fb){ e.stopPropagation(); toggleFav(fb.dataset.fav); return; }
   const rc=e.target.closest('#recent .rchip'); if(rc){ openTool(rc.dataset.rid); return; }
+  const fv=e.target.closest('#favbar .rchip'); if(fv){ openTool(fv.dataset.fav2); return; }
   const card=e.target.closest('.toolcard'); if(card){ openTool(card.dataset.id); }
 });
 $('#q').addEventListener('input', e=>{ curQuery=e.target.value.trim(); renderList(); });
+document.addEventListener('click', function(e){ const mb=e.target.closest('#morebtn'); if(mb){ pageLimit+=180; renderList(); } });
 
 let activeCleanup = null;
 function openTool(id){
@@ -1386,12 +1475,27 @@ function openTool(id){
   if(typeof fn==='function'){ activeCleanup = fn(body) || null; }
   else body.innerHTML = `<div class="box"><p class="hint" style="margin:0">该工具正在完善中。</p></div>`;
 }
+function copyResult(){
+  const b=$('#sheetBody'); if(!b) return;
+  const rows=[...b.querySelectorAll('.kv')];
+  const vals=rows.map(function(kv){
+    const lb=kv.querySelector('span'), vb=kv.querySelector('b');
+    if(lb&&vb) return lb.textContent.trim()+'：'+vb.textContent.trim();
+    return kv.textContent.replace(/\s+/g,' ').trim();
+  }).filter(Boolean);
+  let txt = vals.length? vals.join('\n') : '';
+  if(!txt){ const ta=b.querySelector('textarea'); if(ta && ta.value.trim()) txt=ta.value; }
+  if(!txt){ const is=[...b.querySelectorAll('input[type=text],input[type=search]')].map(i=>i.value.trim()).filter(Boolean); txt=is.join('、'); }
+  if(!txt){ toast('这里没有可复制的结果'); return; }
+  copyText(txt);
+}
 function closeSheet(){
   const sheet=$('#sheet'); sheet.classList.remove('open'); sheet.setAttribute('aria-hidden','true');
   if(activeCleanup){ try{activeCleanup();}catch(e){} activeCleanup=null; }
   const b=$('#sheetBody'); if(b){ const f=b.cloneNode(false); b.replaceWith(f); }
 }
 $('#backbtn').addEventListener('click', closeSheet);
+$('#copytool').addEventListener('click', copyResult);
 document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeSheet(); });
 
 /* 全屏浮层（手持弹幕 / 时钟 / 补光灯 / 摄像头类共用） */
@@ -1816,10 +1920,6 @@ function gxRender(root, sp){
     return out;
   }, note:sp.note});
 }
-function gxParse(row){
-  const p=row.split('|');
-  return {n:p[0], c:p[1], fields:gxFields(p[2]||''), out:gxOut(p[3]||''), note:(p[4]==='—'?'':(p[4]||''))};
-}
 const GX=[];
 /* 结构设计 */
 
@@ -2036,46 +2136,6 @@ const GX=[];
 
 
 /* ===== 规格族合并工具 ===== */
-function specRender(root, sp){
-  const many = sp.m.length>12;
-  root.innerHTML='<div class="box">'
-   +(many?'<input id="spQ" type="search" placeholder="筛选口径，如 电流 / 荷载" style="width:100%;margin-bottom:10px;padding:10px 12px;font-size:16px;border:1px solid #dcdfe6;border-radius:10px"><div class="lbl">选择口径</div>':'')
-   +'<select id="spSel"></select><div id="spF" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px"></div></div><div class="box" id="spOut"></div>';
-  const O=root.querySelector('#spOut'), S=root.querySelector('#spSel'), F=root.querySelector('#spF');
-  let cur=-1;
-  function fill(q){
-    const list=[];
-    sp.m.forEach(function(m,i){ if(!q || m.n.toLowerCase().indexOf(q.toLowerCase())>=0) list.push([i,m.n]); });
-    S.innerHTML = list.length? list.map(function(x){return '<option value="'+x[0]+'">'+x[1]+'</option>';}).join('') : '<option value="-1">无匹配口径</option>';
-    cur = list.length? list[0][0] : -1;
-    buildFields(); run();
-  }
-  function buildFields(){
-    const m=sp.m[cur]; if(!m||!F){ if(F) F.innerHTML=''; return; }
-    const f=m.f||sp.f||[];
-    F.innerHTML=f.map(function(x){return '<div><div class="lbl">'+x[1]+'</div><input type="number" id="spf_'+x[0]+'" value="'+(x[2]||'')+'" step="any"></div>';}).join('');
-  }
-  function run(){
-    const m=sp.m[cur]; if(!m||!O||!F) return;
-    const f=m.f||sp.f||[], ol=m.o||sp.o||[], unit=(m.u!==undefined?m.u:sp.u)||'';
-    const keys=f.map(function(x){return x[0];}), v={};
-    f.forEach(function(x){ const el=F.querySelector('#spf_'+x[0]); v[x[0]]=el?(parseFloat(el.value)||0):0; });
-    const rows=ol.map(function(lb,i){
-      let r='—';
-      try{ r=(new Function(keys.join(','), GX_PRE+'return ('+(m.e[i]||'0')+');')).apply(null, keys.map(function(k){return v[k];})); }catch(e){ r='—'; }
-      return [lb, typeof r==='number'?extNum(r):String(r)];
-    });
-    O.innerHTML=rows.map(function(r){return '<div class="kv"><span>'+r[0]+'</span><b>'+r[1]+(unit?' '+unit:'')+'</b></div>';}).join('')
-     +'<p class="hint">'+m.n+(m.note?'　'+m.note:'')+'　共 '+sp.m.length+' 种口径</p>';
-  }
-  function onSel(){ cur=+S.value; buildFields(); run(); }
-  function onInput(){ run(); }
-  function onQ(){ fill(root.querySelector('#spQ').value.trim()); }
-  S.addEventListener('change',onSel); F.addEventListener('input',onInput); F.addEventListener('change',onInput);
-  const Q=root.querySelector('#spQ'); if(Q) Q.addEventListener('input',onQ);
-  fill('');
-  return function(){ S&&S.removeEventListener('change',onSel); F&&F.removeEventListener('input',onInput); Q&&Q.removeEventListener('input',onQ); };
-}
 
 
 
@@ -2096,7 +2156,8 @@ function bigRender(root, bd){
   }
   function filt(){
     const q=(Q.value||'').trim().toLowerCase();
-    list=all.filter(function(x){ return (curP<0 || x.g===bd.groups[curP].g) && (!q || x.m.n.toLowerCase().indexOf(q)>=0 || x.g.indexOf(q)>=0); });
+    const qs=q?expandQ(q):[];
+    list=all.filter(function(x){ return (curP<0 || x.g===bd.groups[curP].g) && (!q || qs.some(function(k){ return x.m.n.toLowerCase().indexOf(k.toLowerCase())>=0 || x.g.indexOf(k)>=0; })); });
     S.innerHTML=list.length? list.map(function(x,i){return '<option value="'+i+'">'+x.g+' · '+x.m.n+'</option>';}).join('') : '<option value="-1">无匹配口径</option>';
     cur=list.length?0:-1; fields(); run();
   }
@@ -2115,7 +2176,9 @@ function bigRender(root, bd){
       try{ r=(new Function(keys.join(','), GX_PRE+'return ('+(m.e[i]||'0')+');')).apply(null, keys.map(function(k){return v[k];})); }catch(err){ r='—'; }
       return [lb, typeof r==='number'?extNum(r):String(r)];
     });
-    O.innerHTML=rows.map(function(r){return '<div class="kv"><span>'+r[0]+'</span><b>'+r[1]+(m.u?' '+m.u:'')+'</b></div>';}).join('')
+    var isU=m.u && m.u.length<=7 && !/[\u4e00-\u9fa5]/.test(m.u);
+    O.innerHTML=rows.map(function(r){return '<div class="kv"><span>'+r[0]+'</span><b>'+r[1]+(isU?' '+m.u:'')+'</b></div>';}).join('')
+      + (m.u && !isU ? '<p class="hint">'+m.u+'</p>' : '')
       +'<p class="hint">'+m.n+'　'+bd.n+'共 '+all.length+' 个口径，可选专业或直接搜索</p>';
   }
   function onChip(ev){
@@ -2188,7 +2251,20 @@ BIGCALC.forEach(function(bd,bi){
 TOOLS.forEach(function(t){ var n=t.c, k=0; while(CATMAP[n] && CATMAP[n]!==n && k<5){ n=CATMAP[n]; k++; } t.c=n; });
 (function(){ var keep=TOOLS.filter(function(t){return DROPMAP.ids.indexOf(t.id)<0;}); TOOLS.length=0; keep.forEach(function(t){TOOLS.push(t);}); })();
 
-renderChips(); renderList();
+/* 深浅色 */
+(function(){
+  let t=null; try{ t=localStorage.getItem('xy_theme'); }catch(e){}
+  if(t==='dark'||t==='light') document.documentElement.dataset.theme=t;
+  const b=$('#themebtn');
+  if(b) b.addEventListener('click',function(){
+    const cur=document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+    const next=cur==='dark'?'light':'dark';
+    document.documentElement.dataset.theme=next;
+    try{ localStorage.setItem('xy_theme',next); }catch(e){}
+    toast(next==='dark'?'已切换到深色':'已切换到浅色');
+  });
+})();
+renderChips(); renderFav(); renderRecent(); renderList();
 </script>
 <script>
 /* ================= 工具实现 ================= */
