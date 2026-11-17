@@ -1,37 +1,44 @@
 # 小羽工具箱
 
-单文件离线工具箱：**984 个工具 / 4 个分类**，其中四类计算已各自压成 1 个计算器（合计 2526 个口径）。一个 HTML 打开即用，无需联网、无需安装。
+离线优先的单文件工具集：一个 `index.html` 装下全部小工具，浏览器打开即用，不依赖服务器。
 
-在线版：https://fornow330.github.io/xiaoyutool/
-
-- GitHub Pages：https://fornow330.github.io/xiaoyutool/
-- jsDelivr（fastly）：https://fastly.jsdelivr.net/gh/fornow330/xiaoyutool@main/index.html
-- jsDelivr（cdn）：https://cdn.jsdelivr.net/gh/fornow330/xiaoyutool@main/index.html
-- ghproxy 镜像：https://ghproxy.net/https://raw.githubusercontent.com/fornow330/xiaoyutool/main/index.html
-- 直链：https://raw.githubusercontent.com/fornow330/xiaoyutool/main/index.html
-
+- 在线：<https://fornow330.github.io/xiaoyutool/>
 - 作者：fornow
-- 交流群：728403008
-- 开源协议：GPL-3.0（见 `LICENSE`）
+- 许可：GPL-3.0（见 `LICENSE`）
+
+分流镜像（Pages 慢时用）：`fastly.jsdelivr.net/gh/fornow330/xiaoyutool@main/`、`cdn.jsdelivr.net/gh/fornow330/xiaoyutool@main/`、`ghproxy.net` + raw 地址。
 
 ## 分类与计算器
 
-| 分类 | 工具数 | 内含计算器 |
-| --- | --- | --- |
-| 工程与化工 | 12 | 工程计算器（1215 口径 / 20 个专业：结构、暖通、电气、给排水、消防、道路、桥梁、水利、测量、检测、园林、电梯、安装、钢结构、幕墙、化工、机械、造价等） |
-| 财务与职场、数字 | 324 | 财务计算器（448 口径 / 12 个专业：造价、机房、法律、数字、电商、仓储、职场…） |
-| 生活·饮食·健康 | 357 | 生活计算器（565 口径 / 14 个专业：健康、烹饪、农艺、出行、居家、安全、运动、宠物、儿童…） |
-| 文本学习与设计 | 291 | 文本学习计算器（298 口径 / 9 个专业：教学、学习、媒体、摄影、音频、排版、图像…） |
+工具按分类组织，覆盖财务理财、工程建筑、设计排版、设备测量、图片处理、文字处理、计算转换、效率工具、查询识别、开发者小工具、健康运动、生活实用、学习考试、音视频、安全应急、职场办公、儿童启蒙、旅行出行、家居装修、娱乐随机等方向；同一功能的多个入口已合并为综合计算器，完整清单以在线页为准。
 
-另有单位换算总汇、经验系数速查、体征总汇、通用计算总汇四个专项入口。
+全部功能在本地完成，不依赖服务器接口，不联网也能用（二维码与 PDF 生成首次需联网加载库）。
 
-## 用法
+## 目录
 
-1. 下载 `index.html`，双击用浏览器打开即可，全部计算在本机完成。
-2. 顶部搜索框定位工具；进入计算器后，先用专业横条筛选，再点口径下拉或在搜索框输入关键词（如「混凝土」「电流」「房贷」）。
-3. 同族参数（管径、钢筋、电缆截面、型钢规格等）已合并为规格下拉，切换即换口径。
+| 路径 | 说明 |
+|---|---|
+| `index.html` | 网页版全部源码，单文件内联 CSS/JS，无构建步骤 |
+| `android/` | Android 壳工程源码（WebView + 原生震动/传感器/摄像头权限） |
+| `LICENSE` | GPL-3.0 |
 
 ## 说明
 
-- 全部为离线计算与本地处理，不上传任何数据。
-- 工程、医疗、法律类结果仅供估算参考，正式使用请以规范与专业意见为准。
+直接用浏览器打开 `index.html` 或访问在线地址。相机、麦克风、传感器类工具需浏览器授权，且必须在 **https 或 localhost** 环境下，`file://` 打开时这些硬件工具不可用。
+
+## Android 版
+
+`android/` 是完整可编译的壳工程：
+
+- `MainActivity.java`：WebView 承载页面，提供 `AndroidSaver`（保存文件）、`AndroidHaptic`（震动）、`AndroidSensor`（加速度）、`AndroidPerm`（摄像头/麦克风授权），并处理拍照、相册多选与返回键。
+- 在线优先：启动先用内置/缓存页面秒开，后台按 Pages → jsDelivr(fastly) → jsDelivr(cdn) → ghproxy 拉取最新 `index.html` 写入缓存，下次启动生效；全部不通则继续用内置页面，离线可用。
+- `AndroidManifest.xml`：权限声明 CAMERA / RECORD_AUDIO / VIBRATE / INTERNET。
+- `build.sh`：不依赖 Gradle，用 aapt2 + d8 + zipalign + apksigner 直接打包；源文件可用 `SRC_HTML` 变量指定，默认 `../小羽工具箱.html`。
+
+```bash
+SDK=~/android-sdk/platforms/android-33 ./android/build.sh
+```
+
+## 声明
+
+所有工具均为本项目独立实现，未复制第三方源码；二维码、PDF 等库通过 jsDelivr 加载，其余功能完全离线。
