@@ -3,8 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="4.4">
+<meta name="xyver" content="4.5">
 <title>小羽工具箱 · 本地工具集合</title>
+<meta name="theme-color" content="#2C63F0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="小羽工具箱">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%232C63F0'/%3E%3Cpath d='M7 8h10M7 12h10M7 16h6' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
 /* ===== tokens ===== */
@@ -416,9 +422,9 @@ const TOOLS = [
   {id:'vcardqr', n:'名片二维码', c:'qry', col:'#2C63F0', ic:'person'},
   {id:'dbmeter', n:'分贝计', c:'eng', col:'#17A673', ic:'wave'},
   {id:'metronome', n:'节拍器', c:'eng', col:'#E2543B', ic:'timer'},
-  {id:'touchtest', n:'触摸测试', c:'eng', col:'#5B7CFA', ic:'grid'},
-  {id:'refreshtest', n:'刷新率测试', c:'eng', col:'#0E9AA7', ic:'clock'},
-  {id:'vibrate', n:'震动测试', c:'eng', col:'#7A5AF8', ic:'pulse'},
+  {id:'touchtest', n:'触摸测试', c:'life', col:'#5B7CFA', ic:'grid'},
+  {id:'refreshtest', n:'刷新率测试', c:'life', col:'#0E9AA7', ic:'clock'},
+  {id:'vibrate', n:'震动测试', c:'life', col:'#7A5AF8', ic:'pulse'},
   {id:'recorder', n:'录音机', c:'dev', col:'#D9822B', ic:'wave'},
   {id:'imgresize', n:'修改尺寸', c:'img', col:'#2C63F0', ic:'frame'},
   {id:'imgpixel', n:'图片像素化', c:'img', col:'#0E9AA7', ic:'grid'},
@@ -485,8 +491,8 @@ const TOOLS = [
   {id:'barcode', n:'条形码', c:'qry', col:'#15181D', ic:'barcode'},
   {id:'qrstyle', n:'二维码美化', c:'qry', col:'#2C63F0', ic:'qr'},
   {id:'express', n:'快递单号', c:'qry', col:'#E2543B', ic:'truck'},
-  {id:'tone', n:'音频发生器', c:'eng', col:'#2C63F0', ic:'wave'},
-  {id:'speaker', n:'扬声器除尘', c:'eng', col:'#17A673', ic:'sun'},
+  {id:'tone', n:'音频发生器', c:'life', col:'#2C63F0', ic:'wave'},
+  {id:'speaker', n:'扬声器除尘', c:'life', col:'#17A673', ic:'sun'},
   {id:'motion', n:'加速度曲线', c:'dev', col:'#7A5AF8', ic:'pulse'},
   {id:'invert', n:'图片反色', c:'img', col:'#E2543B', ic:'palette'},
   {id:'text2img', n:'文字转图片', c:'img', col:'#0E9AA7', ic:'text'},
@@ -498,28 +504,28 @@ const TOOLS = [
   {id:'fuel', n:'油耗计算', c:'num', col:'#E2543B', ic:'truck'},
   {id:'calorie', n:'卡路里消耗', c:'num', col:'#2C63F0', ic:'pulse'},
   {id:'breathe', n:'呼吸训练', c:'eff', col:'#0E9AA7', ic:'wave'},
-  {id:'wake', n:'屏幕常亮', c:'eng', col:'#D9822B', ic:'sun'},
+  {id:'wake', n:'屏幕常亮', c:'life', col:'#D9822B', ic:'sun'},
   {id:'solar', n:'二十四节气', c:'qry', col:'#17A673', ic:'calendar'},
   {id:'periodic', n:'元素周期表', c:'qry', col:'#2C63F0', ic:'grid'},
   {id:'hotkeys', n:'快捷键速查', c:'qry', col:'#8A94A6', ic:'code'},
   {id:'json2csv', n:'JSON 转CSV', c:'txt', col:'#D9822B', ic:'grid'},
   {id:'csv2json', n:'CSV 转JSON', c:'txt', col:'#0E9AA7', ic:'code'},
   {id:'urlparams', n:'URL 参数', c:'txt', col:'#2C63F0', ic:'link'},
-  {id:'miclevel', n:'麦克风电平', c:'eng', col:'#17A673', ic:'wave'},
+  {id:'miclevel', n:'麦克风电平', c:'life', col:'#17A673', ic:'wave'},
   {id:'battery', n:'电池状态', c:'dev', col:'#D9822B', ic:'pulse'},
   {id:'netinfo', n:'网络信息', c:'dev', col:'#2C63F0', ic:'link'},
-  {id:'multitouch', n:'多点触控', c:'eng', col:'#7A5AF8', ic:'grid'},
-  {id:'light', n:'环境光', c:'eng', col:'#D9822B', ic:'sun'},
-  {id:'keytest', n:'按键检测', c:'eng', col:'#8A94A6', ic:'code'},
-  {id:'gamepad', n:'手柄检测', c:'eng', col:'#E2543B', ic:'dice'},
-  {id:'gpsinfo', n:'定位信息', c:'eng', col:'#17A673', ic:'distance'},
-  {id:'camtest', n:'摄像头预览', c:'eng', col:'#2C63F0', ic:'image'},
+  {id:'multitouch', n:'多点触控', c:'life', col:'#7A5AF8', ic:'grid'},
+  {id:'light', n:'环境光', c:'life', col:'#D9822B', ic:'sun'},
+  {id:'keytest', n:'按键检测', c:'life', col:'#8A94A6', ic:'code'},
+  {id:'gamepad', n:'手柄检测', c:'life', col:'#E2543B', ic:'dice'},
+  {id:'gpsinfo', n:'定位信息', c:'life', col:'#17A673', ic:'distance'},
+  {id:'camtest', n:'摄像头预览', c:'life', col:'#2C63F0', ic:'image'},
   {id:'clipboard', n:'剪贴板', c:'eng', col:'#0E9AA7', ic:'text'},
   {id:'fullscreen', n:'全屏测试', c:'eng', col:'#7A5AF8', ic:'frame'},
-  {id:'channel', n:'声道测试', c:'eng', col:'#E2543B', ic:'wave'},
+  {id:'channel', n:'声道测试', c:'life', col:'#E2543B', ic:'wave'},
   {id:'dpr', n:'屏幕参数', c:'eng', col:'#8A94A6', ic:'grid'},
-  {id:'vibpattern', n:'震动节奏', c:'eng', col:'#D9822B', ic:'pulse'},
-  {id:'feats', n:'能力检测', c:'eng', col:'#17A673', ic:'shield'},
+  {id:'vibpattern', n:'震动节奏', c:'life', col:'#D9822B', ic:'pulse'},
+  {id:'feats', n:'能力检测', c:'life', col:'#17A673', ic:'shield'},
   {id:'ico', n:'图标生成', c:'img', col:'#2C63F0', ic:'image'},
   {id:'shadow', n:'阴影卡片', c:'img', col:'#8A94A6', ic:'frame'},
   {id:'sharpen', n:'锐化滤镜', c:'img', col:'#0E9AA7', ic:'sun'},
@@ -608,26 +614,26 @@ const TOOLS = [
   {id:'sqlfmt', n:'SQL美化', c:'txt', col:'#2C63F0', ic:'code'},
   {id:'uuidbatch', n:'批量UUID', c:'txt', col:'#17A673', ic:'hash'},
   {id:'tsbatch', n:'时间戳批量', c:'txt', col:'#D9822B', ic:'clock'},
-  {id:'gyro', n:'陀螺仪', c:'eng', col:'#2C63F0', ic:'compass'},
-  {id:'proximity', n:'距离传感器', c:'eng', col:'#17A673', ic:'distance'},
-  {id:'spectrum', n:'音频频谱', c:'eng', col:'#F0A22B', ic:'wave'},
+  {id:'gyro', n:'陀螺仪', c:'life', col:'#2C63F0', ic:'compass'},
+  {id:'proximity', n:'距离传感器', c:'life', col:'#17A673', ic:'distance'},
+  {id:'spectrum', n:'音频频谱', c:'life', col:'#F0A22B', ic:'wave'},
   {id:'camres', n:'摄像头分辨率', c:'eng', col:'#E2543B', ic:'scan'},
-  {id:'micplay', n:'录音回放', c:'eng', col:'#7A5AF8', ic:'wave'},
-  {id:'colorbars', n:'彩条测试', c:'eng', col:'#0E9AA7', ic:'palette'},
-  {id:'clipwrite', n:'剪贴板写入', c:'eng', col:'#5B7CFA', ic:'code'},
+  {id:'micplay', n:'录音回放', c:'life', col:'#7A5AF8', ic:'wave'},
+  {id:'colorbars', n:'彩条测试', c:'life', col:'#0E9AA7', ic:'palette'},
+  {id:'clipwrite', n:'剪贴板写入', c:'life', col:'#5B7CFA', ic:'code'},
   {id:'fileinfo', n:'文件信息', c:'eng', col:'#D9822B', ic:'text'},
   {id:'perms', n:'权限状态', c:'eng', col:'#3B8A67', ic:'shield'},
-  {id:'orient', n:'方向仪表', c:'eng', col:'#8A6D3B', ic:'compass'},
-  {id:'swipe', n:'滑动方向', c:'eng', col:'#2C63F0', ic:'arrows'},
-  {id:'tapspeed', n:'连点测试', c:'eng', col:'#17A673', ic:'pulse'},
-  {id:'pointerpressure', n:'触控压力', c:'eng', col:'#F0A22B', ic:'pulse'},
+  {id:'orient', n:'方向仪表', c:'life', col:'#8A6D3B', ic:'compass'},
+  {id:'swipe', n:'滑动方向', c:'life', col:'#2C63F0', ic:'arrows'},
+  {id:'tapspeed', n:'连点测试', c:'life', col:'#17A673', ic:'pulse'},
+  {id:'pointerpressure', n:'触控压力', c:'life', col:'#F0A22B', ic:'pulse'},
   {id:'storage', n:'存储估算', c:'eng', col:'#E2543B', ic:'cloud'},
   {id:'netlatency', n:'网络延迟', c:'eng', col:'#7A5AF8', ic:'wave'},
   {id:'savefile', n:'另存文件', c:'eng', col:'#0E9AA7', ic:'text'},
-  {id:'longpress', n:'长按测试', c:'eng', col:'#5B7CFA', ic:'timer'},
-  {id:'pointertrack', n:'指针轨迹', c:'eng', col:'#D9822B', ic:'link'},
-  {id:'zoomtest', n:'缩放检测', c:'eng', col:'#3B8A67', ic:'magnify'},
-  {id:'sensors', n:'传感器支持', c:'eng', col:'#8A6D3B', ic:'grid'},
+  {id:'longpress', n:'长按测试', c:'life', col:'#5B7CFA', ic:'timer'},
+  {id:'pointertrack', n:'指针轨迹', c:'life', col:'#D9822B', ic:'link'},
+  {id:'zoomtest', n:'缩放检测', c:'life', col:'#3B8A67', ic:'magnify'},
+  {id:'sensors', n:'传感器支持', c:'life', col:'#8A6D3B', ic:'grid'},
   {id:'orientlock', n:'屏幕方向锁', c:'eng', col:'#2C63F0', ic:'frame'},
   {id:'vignette', n:'暗角', c:'img', col:'#17A673', ic:'image'},
   {id:'grain', n:'噪点', c:'img', col:'#F0A22B', ic:'dots'},
@@ -1293,7 +1299,7 @@ const CATS = [
   {k:'fin', n:'财务与职场、数字'},
 
   {k:'txt', n:'文本学习与设计'},
-  {k:'life', n:'生活·饮食·健康'},
+  {k:'life', n:'生活·健康·测量'},
 ];
 const CATMAP={build:'eng',meas:'eng',fire:'eng',lift:'eng',struct:'eng',road:'eng',water:'eng',elec:'eng',hvac:'eng',mech:'eng',steel:'eng',glass:'eng',install:'eng',test:'eng',hvacsel:'eng',elecsel:'eng',bridge:'eng',hydro:'eng',land:'eng',chem:'eng',cost:'fin',ecom:'fin',office:'fin',eff:'fin',ware:'fin',work:'fin',law:'fin',garden:'food',farm:'food',sport:'med',safe:'med',home:'life',kid:'life',fun:'life',kit:'life',pet:'life',trip:'life',auto:'life',write:'txt',hl:'txt',media:'txt',audio:'txt',photo:'img',design:'img',qry:'num',num:'num',dev:'num',it:'num',edu:'study',img:'txt',study:'txt',num:'fin',med:'life',food:'life'};
 const DROPMAP={ids:['st_ohm','angle_conv','ceilingframe','extinguisher_count','ac_power','tile_count','electric_bill','dehumidify','gx1150','gx1413','gx1553','mileage']};
@@ -1508,7 +1514,12 @@ function closeSheet(){
 }
 $('#backbtn').addEventListener('click', closeSheet);
 $('#copytool').addEventListener('click', copyResult);
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeSheet(); });
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape') closeSheet();
+  if((e.key==='/'||e.key==='／') && !/input|textarea|select/i.test(document.activeElement.tagName) && !$('#sheet').classList.contains('open')){
+    e.preventDefault(); const q=$('#q'); if(q) q.focus();
+  }
+});
 
 /* 全屏浮层（手持弹幕 / 时钟 / 补光灯 / 摄像头类共用） */
 function fullscreenLayer(html, cls=''){
@@ -2151,18 +2162,34 @@ const GX=[];
 
 
 
+const BIGFAV='xy_bigfav', BIGUSE='xy_biguse', BIGHIST='xy_bighist';
+function lsGet(k,d){ try{ const v=JSON.parse(localStorage.getItem(k)||'null'); return v==null?d:v; }catch(e){ return d; } }
+function lsSet(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+
 function bigRender(root, bd){
   const all=[];
-  bd.groups.forEach(function(g,gi){ g.m.forEach(function(m){ all.push({g:g.g, m:m}); }); });
+  bd.groups.forEach(function(g){ g.m.forEach(function(m){ all.push({g:g.g, m:m, key:bd.k+'|'+g.g+'|'+m.n}); }); });
   root.innerHTML='<div class="box">'
-   +'<input id="bigQ" type="search" placeholder="搜口径，如 混凝土 / 电流 / 房贷" style="width:100%;margin-bottom:8px;padding:10px 12px;font-size:16px;border:1px solid #dcdfe6;border-radius:10px">'
+   +'<input id="bigQ" type="search" placeholder="搜口径 / 参数 / 单位，如 混凝土 / 壁厚 / kN" style="width:100%;margin-bottom:8px;padding:10px 12px;font-size:16px;border:1px solid var(--line);border-radius:10px;background:var(--field);color:var(--ink)">'
    +'<div id="bigChips" style="display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;-webkit-overflow-scrolling:touch"></div>'
    +'<select id="bigSel"></select>'
-   +'<div id="bigF" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px"></div></div>'
-   +'<div class="box" id="bigOut"></div>';
-  const Q=root.querySelector('#bigQ'), C=root.querySelector('#bigChips'), S=root.querySelector('#bigSel'), F=root.querySelector('#bigF'), O=root.querySelector('#bigOut');
+   +'<div id="bigF" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px"></div>'
+   +'<div id="bigBtns" style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">'
+   +'<button class="btn ghost" id="bigFavBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">☆ 收藏口径</button>'
+   +'<button class="btn ghost" id="bigShareBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">分享结果</button>'
+   +'<button class="btn ghost" id="bigBatchBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">批量计算</button>'
+   +'<button class="btn ghost" id="bigHistBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">历史</button>'
+   +'</div></div>'
+   +'<div class="box" id="bigOut"></div>'
+   +'<div class="box" id="bigBatch" style="display:none"><div class="lbl">批量计算（每行一个数，套用第一个参数）</div>'
+   +'<textarea id="bigBatchIn" rows="5" placeholder="每行一个数，例如&#10;250&#10;300&#10;400"></textarea>'
+   +'<button class="btn block" id="bigBatchRun" style="margin-top:8px">开始批量</button></div>'
+   +'<div class="box" id="bigHist" style="display:none"></div>';
+  const Q=root.querySelector('#bigQ'), C=root.querySelector('#bigChips'), S=root.querySelector('#bigSel'),
+        F=root.querySelector('#bigF'), O=root.querySelector('#bigOut'), BOX=root.querySelector('#bigBatch'),
+        H=root.querySelector('#bigHist'), FB=root.querySelector('#bigFavBtn');
   const profs=bd.groups.map(function(g,i){return {g:g.g, i:i, n:g.m.length};}).sort(function(a,b){return b.n-a.n;});
-  let curP=-1, cur=-1, list=[];
+  let curP=-1, cur=-1, list=[], histTimer=null;
   function chips(){
     C.innerHTML='<button class="chip'+(curP<0?' on':'')+'" data-p="-1" style="flex:0 0 auto">全部</button>'
       + profs.map(function(o){return '<button class="chip'+(curP===o.i?' on':'')+'" data-p="'+o.i+'" style="flex:0 0 auto">'+o.g+'</button>';}).join('');
@@ -2170,8 +2197,29 @@ function bigRender(root, bd){
   function filt(){
     const q=(Q.value||'').trim().toLowerCase();
     const qs=q?expandQ(q):[];
-    list=all.filter(function(x){ return (curP<0 || x.g===bd.groups[curP].g) && (!q || qs.some(function(k){ return x.m.n.toLowerCase().indexOf(k.toLowerCase())>=0 || x.g.indexOf(k)>=0; })); });
-    S.innerHTML=list.length? list.map(function(x,i){return '<option value="'+i+'">'+x.g+' · '+x.m.n+'</option>';}).join('') : '<option value="-1">无匹配口径</option>';
+    const fv=lsGet(BIGFAV,{});
+    list=all.filter(function(x){
+      if(curP>=0 && x.g!==bd.groups[curP].g) return false;
+      if(!q) return true;
+      return qs.some(function(k){
+        const kl=String(k).toLowerCase();
+        if(x.m.n.toLowerCase().indexOf(kl)>=0 || x.g.indexOf(k)>=0) return true;
+        if(x.m.f.some(function(f){ return String(f[1]).toLowerCase().indexOf(kl)>=0; })) return true;
+        if(typeof x.m.u==='string' && x.m.u.toLowerCase().indexOf(kl)>=0) return true;
+        return false;
+      });
+    });
+    const us=lsGet(BIGUSE,{});
+    list.sort(function(a,b){
+      const fa=fv[a.key]?0:1, fb=fv[b.key]?0:1;
+      if(fa!==fb) return fa-fb;
+      const ua=us[a.key]||0, ub=us[b.key]||0;
+      if(ua!==ub) return ub-ua;
+      return 0;
+    });
+    S.innerHTML=list.length? list.map(function(x,i){
+      return '<option value="'+i+'">'+(fv[x.key]?'★ ':'')+(us[x.key]?'· ':'')+x.g+' · '+x.m.n+'</option>';
+    }).join('') : '<option value="-1">无匹配口径</option>';
     cur=list.length?0:-1; fields(); run();
   }
   function fields(){
@@ -2179,9 +2227,13 @@ function bigRender(root, bd){
     if(!m){ F.innerHTML=''; return; }
     F.innerHTML=m.f.map(function(x){return '<div><div class="lbl">'+x[1]+'</div><input type="number" id="bigf_'+x[0]+'" value="'+(x[2]||'')+'" step="any"></div>';}).join('');
   }
+  function curKey(){ return list[cur]? list[cur].key : ''; }
+  function isFav(k){ return !!lsGet(BIGFAV,{})[k]; }
+  function favBtnState(){ if(FB) FB.textContent = isFav(curKey()) ? '★ 已收藏' : '☆ 收藏口径'; }
   function run(){
     const e=list[cur];
-    if(!e){ if(O) O.innerHTML='<p class="hint">没有匹配的口径，换个关键词试试。</p>'; return; }
+    if(!e){ if(O) O.innerHTML='<p class="hint">没有匹配的口径，换个关键词试试。</p>'; if(FB) FB.style.display='none'; return; }
+    if(FB) FB.style.display='';
     const m=e.m, keys=m.f.map(function(x){return x[0];}), v={};
     m.f.forEach(function(x){ const el=F.querySelector('#bigf_'+x[0]); v[x[0]]=el?(parseFloat(el.value)||0):0; });
     const rows=m.o.map(function(lb,i){
@@ -2190,28 +2242,141 @@ function bigRender(root, bd){
       if(typeof r==='number'&&isFinite(r)) raw=String(+r.toPrecision(12));
       return [lb, typeof r==='number'?extNum(r):String(r), raw];
     });
-    var isU=m.u && m.u.length<=7 && !/[\u4e00-\u9fa5]/.test(m.u);
-    O.innerHTML=rows.map(function(r){return '<div class="kv"><span>'+r[0]+'</span><b'+(r[2]?' class="tapraw" data-fmt="'+r[1]+'" data-raw="'+r[2]+'" data-unit="'+(isU?' '+m.u:'')+'" title="点一下切换原值"':'')+'>'+r[1]+(isU?' '+m.u:'')+'</b></div>';}).join('')
-      + (m.u && !isU ? '<p class="hint">'+m.u+'</p>' : '')
-      +'<p class="hint">'+m.n+'　'+bd.n+'共 '+all.length+' 个口径，可选专业或直接搜索</p>';
+    const isU=m.u && m.u.length<=7 && !/[\u4e00-\u9fa5]/.test(m.u);
+    O.innerHTML=rows.map(function(r){
+      return '<div class="kv"><span>'+r[0]+'</span><b'+(r[2]?' class="tapraw" data-fmt="'+r[1]+'" data-raw="'+r[2]+'" data-unit="'+(isU?' '+m.u:'')+'" title="点一下切换原值"':'')+'>'+r[1]+(isU?' '+m.u:'')+'</b>'
+        +(r[2]?'<button class="usebtn" data-use="'+r[2]+'" title="填入第一个参数">→</button>':'')+'</div>';
+    }).join('') + (m.u && !isU ? '<p class="hint">'+m.u+'</p>' : '')
+      + '<p class="hint">'+m.n+'　'+bd.n+'共 '+all.length+' 个口径，可选专业或直接搜索</p>';
+    favBtnState();
+    clearTimeout(histTimer);
+    histTimer=setTimeout(function(){
+      if(!list[cur]) return;
+      const hs=lsGet(BIGHIST,[]);
+      hs.unshift({k:bd.k, n:list[cur].g+' · '+m.n, v:keys.map(function(k){return v[k];}), r:rows.length? rows[0][1]:'—', t:Date.now()});
+      lsSet(BIGHIST, hs.slice(0,40));
+    }, 600);
   }
-  function onChip(ev){
-    const el=ev.target.closest('[data-p]'); if(!el) return;
-    curP=+el.dataset.p; chips(); Q.value=''; filt();
+  function bump(){
+    const k=curKey(); if(!k) return;
+    const us=lsGet(BIGUSE,{});
+    us[k]=(us[k]||0)+1; lsSet(BIGUSE, us);
   }
-  function onQ(){ filt(); }
-  function onSel(){ cur=+S.value; fields(); run(); }
-  function onIn(){ run(); }
+  function renderHist(){
+    const hs=lsGet(BIGHIST,[]);
+    H.innerHTML='<div class="lbl">最近计算</div>'+(hs.length? hs.map(function(h){
+      const d=new Date(h.t); const t=(d.getMonth()+1)+'/'+d.getDate()+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+      return '<div class="kv"><span>'+t+'　'+h.n+'</span><b>'+h.r+'</b></div>';
+    }).join('') : '<p class="hint">还没有计算记录。</p>');
+  }
+  function shareCard(){
+    const e=list[cur]; if(!e){ toast('先选一个口径'); return; }
+    const m=e.m;
+    const lines=[];
+    [...O.querySelectorAll('.kv')].forEach(function(kv){
+      const lb=kv.querySelector('span'), b=kv.querySelector('b');
+      if(lb&&b) lines.push(lb.textContent.trim()+'  '+b.textContent.trim());
+    });
+    if(!lines.length){ toast('没有可分享的结果'); return; }
+    const ins=m.f.map(function(x){
+      const el=root.querySelector('#bigf_'+x[0]);
+      return x[1]+' '+(el?el.value:'');
+    });
+    const W=760, H0=150+lines.length*44+ins.length*30;
+    const cv=document.createElement('canvas'); const dpr=window.devicePixelRatio||1;
+    cv.width=W*dpr; cv.height=Math.min(H0,1400)*dpr;
+    const ctx=cv.getContext('2d'); ctx.scale(dpr,dpr);
+    ctx.fillStyle='#FFFFFF'; ctx.fillRect(0,0,W,Math.min(H0,1400));
+    ctx.fillStyle='#2C63F0'; ctx.fillRect(0,0,W,8);
+    ctx.fillStyle='#15181D'; ctx.font='bold 30px -apple-system,PingFang SC,sans-serif';
+    ctx.fillText(m.n, 40, 74);
+    ctx.fillStyle='#6E7580'; ctx.font='20px -apple-system,PingFang SC,sans-serif';
+    ctx.fillText(bd.n+' · '+list[cur].g, 40, 108);
+    let y=160;
+    ctx.font='19px -apple-system,PingFang SC,sans-serif'; ctx.fillStyle='#6E7580';
+    ins.slice(0,4).forEach(function(t){ ctx.fillText(t, 40, y); y+=28; });
+    y+=10;
+    lines.slice(0,10).forEach(function(t){
+      ctx.fillStyle='#6E7580'; ctx.font='21px -apple-system,PingFang SC,sans-serif'; ctx.fillText(t.split('  ')[0], 40, y);
+      ctx.fillStyle='#15181D'; ctx.font='bold 26px -apple-system,PingFang SC,sans-serif'; ctx.fillText(t.split('  ')[1]||'', 340, y+2);
+      y+=44;
+    });
+    ctx.fillStyle='#A9AFB8'; ctx.font='17px -apple-system,PingFang SC,sans-serif';
+    ctx.fillText('小羽工具箱 · fornow330.github.io/xiaoyutool', 40, y+20);
+    cv.toBlob(function(blob){
+      if(!blob){ toast('生成失败'); return; }
+      if(navigator.share && navigator.canShare && navigator.canShare({files:[new File([blob],'calc.png',{type:'image/png'})]})){
+        navigator.share({files:[new File([blob],'计算.png',{type:'image/png'})], title:m.n}).catch(function(){});
+      } else {
+        const a=document.createElement('a');
+        a.href=URL.createObjectURL(blob); a.download=m.n+'.png'; a.click();
+        setTimeout(function(){ URL.revokeObjectURL(a.href); }, 3000);
+        toast('已生成结果图');
+      }
+    }, 'image/png');
+  }
   function onOut(ev){
+    const ub=ev.target.closest('.usebtn');
+    if(ub){
+      const first=F.querySelector('input[type=number]');
+      if(first){ first.value=ub.dataset.use; first.dispatchEvent(new Event('input',{bubbles:true})); toast('已填入第一个参数'); }
+      return;
+    }
     const b=ev.target.closest('.kv b.tapraw'); if(!b) return;
     if(!b.dataset.s || b.dataset.s==='fmt'){ b.dataset.s='raw'; b.textContent=b.dataset.raw+(b.dataset.unit||'')+'（原值）'; }
     else { b.dataset.s='fmt'; b.textContent=b.dataset.fmt+(b.dataset.unit||''); }
   }
+  function onChip(ev){ const el=ev.target.closest('[data-p]'); if(!el) return; curP=+el.dataset.p; chips(); Q.value=''; filt(); }
+  function onQ(){ filt(); }
+  function onSel(){ cur=+S.value; bump(); fields(); run(); }
+  function onIn(){ run(); }
+  function onFav(){
+    const k=curKey(); if(!k) return;
+    const fv=lsGet(BIGFAV,{});
+    if(fv[k]) delete fv[k]; else fv[k]=1;
+    lsSet(BIGFAV, fv); favBtnState(); toast(fv[k]?'已收藏，会排在前面':'已取消收藏');
+    filt();
+  }
+  function onBatchToggle(){
+    BOX.style.display = BOX.style.display==='none' ? '' : 'none';
+    if(BOX.style.display===''){ BOX.querySelector('#bigBatchIn').focus(); }
+  }
+  function onBatchRun(){
+    const e=list[cur]; if(!e){ toast('先选一个口径'); return; }
+    const m=e.m, keys=m.f.map(function(x){return x[0];});
+    const lines=(BOX.querySelector('#bigBatchIn').value||'').split(/[\s,，]+/).filter(function(x){return x!=='';});
+    if(!lines.length){ toast('请输入数据'); return; }
+    const out=lines.slice(0,200).map(function(t){
+      const v0=parseFloat(t);
+      let r='—';
+      try{ r=(new Function(keys.join(','), GX_PRE+'return ('+(m.e[0]||'0')+');')).apply(null, keys.map(function(k,i){return i===0? (isFinite(v0)?v0:0) : 1;})); }catch(err){ r='—'; }
+      return [t, typeof r==='number'?extNum(r):String(r)];
+    });
+    O.innerHTML='<div class="lbl">批量结果（'+m.o[0]+'）</div>'+out.map(function(x){
+      return '<div class="kv"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>';
+    }).join('')+'<p class="hint">每行第一个参数取对应数值，其余参数取 1，仅算首项结果。</p>';
+  }
+  function onHist(){ const on=H.style.display==='none'; H.style.display=on?'':'none'; if(on) renderHist(); }
+  function onKey(e){ if((e.key==='/'||e.key==='／') && !/input|textarea|select/i.test(document.activeElement.tagName)){ e.preventDefault(); Q.focus(); } }
   O.addEventListener('click',onOut);
-  C.addEventListener('click',onChip); Q.addEventListener('input',onQ); S.addEventListener('change',onSel);
   F.addEventListener('input',onIn); F.addEventListener('change',onIn);
+  S.addEventListener('change',onSel);
+  Q.addEventListener('input',onQ);
+  C.addEventListener('click',onChip);
+  FB.addEventListener('click',onFav);
+  root.querySelector('#bigShareBtn').addEventListener('click',shareCard);
+  root.querySelector('#bigBatchBtn').addEventListener('click',onBatchToggle);
+  root.querySelector('#bigBatchRun').addEventListener('click',onBatchRun);
+  root.querySelector('#bigHistBtn').addEventListener('click',onHist);
+  document.addEventListener('keydown',onKey);
+  if(document.getElementById('bigBatchIn')) root.querySelector('#bigBatchIn').addEventListener('keydown',function(e){ if(e.key==='/'||e.key==='／') e.stopPropagation(); });
   chips(); filt();
-  return function(){ O.removeEventListener('click',onOut); C.removeEventListener('click',onChip); Q.removeEventListener('input',onQ); S.removeEventListener('change',onSel); F.removeEventListener('input',onIn); F.removeEventListener('change',onIn); };
+  return function(){
+    O.removeEventListener('click',onOut); F.removeEventListener('input',onIn); F.removeEventListener('change',onIn);
+    S.removeEventListener('change',onSel); Q.removeEventListener('input',onQ); C.removeEventListener('click',onChip);
+    FB.removeEventListener('click',onFav); document.removeEventListener('keydown',onKey);
+    clearTimeout(histTimer);
+  };
 }
 
 /* ===== 速算总汇（一步式公式合并） ===== */
@@ -17375,6 +17540,11 @@ function t_fortune_cookie(root){
   document.addEventListener('scroll',upd,{passive:true, capture:true});
   upd();
 })();
+
+/* PWA：可安装 + 离线兜底 */
+if('serviceWorker' in navigator && location.protocol.indexOf('http')===0){
+  window.addEventListener('load',function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
+}
 
 </script>
 </body>
