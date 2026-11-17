@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="4.9">
+<meta name="xyver" content="5.0">
 <title>小羽工具箱 · 本地工具集合</title>
 <meta name="theme-color" content="#2C63F0">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -217,7 +217,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
 .fs-top button{height:36px;padding:0 14px;border-radius:999px;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:13px;backdrop-filter:blur(8px);cursor:pointer}
 @media (min-width:768px){
   .topbar{padding-left:28px;padding-right:28px}
-  main{padding-left:28px;padding-right:28px;max-width:1080px;margin:0 auto}
+  main{padding-left:28px;padding-right:28px;max-width:1180px;margin:0 auto}
   .cardgrid{grid-template-columns:repeat(6,1fr);gap:12px}
   .toolcard{padding:16px 6px 14px}
   .toolcard .ico{width:42px;height:42px}
@@ -232,6 +232,38 @@ canvas{max-width:100%;display:block;border-radius:10px}
   font-size:12.5px;color:var(--sub);letter-spacing:.2px}
 .foot span:last-child{color:#8A94A6}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ===== 自适应增强 ===== */
+/* 平板竖屏：4 列 */
+@media (min-width:520px) and (max-width:767px){
+  .cardgrid{grid-template-columns:repeat(4,1fr);gap:11px}
+}
+/* 桌面：内容加宽 + 分类标签换行不横滑 */
+@media (min-width:1200px){
+  .topbar{max-width:1180px;margin:0 auto;width:100%}
+  main{max-width:1180px}
+  .cardgrid{grid-template-columns:repeat(6,1fr);gap:14px}
+  .chips{flex-wrap:wrap;overflow:visible}
+  .recent{flex-wrap:wrap}
+}
+@media (min-width:768px){
+  .chips{flex-wrap:wrap;overflow:visible}
+  .recent{flex-wrap:wrap}
+}
+/* 计算器字段多列 */
+@media (min-width:900px){
+  #bigF{grid-template-columns:repeat(3,1fr)!important}
+  .sheet-body{padding-left:32px;padding-right:32px}
+}
+/* 横屏矮屏：压缩头部与面板留白 */
+@media (max-height:520px){
+  .sheet-body{padding-top:10px}
+  .sheet-head{padding-top:8px}
+}
+/* 大字模式 / 系统放大字号时不让卡片挤成一行一列 */
+@media (min-width:380px){
+  .toolcard b{font-size:13px}
+}
 </style>
 </head>
 <body>
@@ -1445,7 +1477,7 @@ if(k.length>=2 && (k.indexOf(q)>=0 || k===q)) out.push(...ALIAS[k]);
 }
 return [...new Set(out)];
 }
-let pageLimit = 120;
+let pageLimit = 0;
 const BIGKIDX={eng:0, fin:1, life:2, txt:3};
 function bigTipHTML(){
 if(!curQuery) return '';
@@ -1475,6 +1507,8 @@ return '<div class="bigtip"><span class="hint" style="margin:0 4px 0 0">猜你�
 + '</div>';
 }
 let lastKey='', lastCount=0;
+function colCount(){ const w=window.innerWidth; return w>=768?6:(w>=520?4:3); }
+pageLimit = colCount()*40;
 function renderList(){
 const qs = expandQ(curQuery);
 const pyq = (curQuery && /^[a-z0-9]+$/i.test(curQuery)) ? curQuery.toLowerCase() : '';
@@ -1532,14 +1566,14 @@ const bt=e.target.closest('[data-bi]');
 if(bt){ window.__bigQ=bt.dataset.q||''; openTool('big'+bt.dataset.bi); return; }
 const rl=e.target.closest('.relchip');
 if(rl){ openTool(rl.dataset.rid); return; }
-const chip=e.target.closest('#chips .chip'); if(chip && chip.dataset.cat){ curCat=chip.dataset.cat; pageLimit=120; renderChips(); renderFav(); renderRank(); renderRecent(); renderList(); return; }
+const chip=e.target.closest('#chips .chip'); if(chip && chip.dataset.cat){ curCat=chip.dataset.cat; pageLimit=colCount()*40; renderChips(); renderFav(); renderRank(); renderRecent(); renderList(); return; }
 const fb=e.target.closest('.toolcard .fav'); if(fb){ e.stopPropagation(); toggleFav(fb.dataset.fav); return; }
 const rc=e.target.closest('#recent .rchip'); if(rc){ openTool(rc.dataset.rid); return; }
 const fv=e.target.closest('#favbar .rchip'); if(fv){ openTool(fv.dataset.fav2); return; }
 const card=e.target.closest('.toolcard'); if(card){ openTool(card.dataset.id); }
 });
 $('#q').addEventListener('input', e=>{ curQuery=e.target.value.trim(); renderList(); });
-document.addEventListener('click', function(e){ const mb=e.target.closest('#morebtn'); if(mb){ pageLimit+=180; renderList(); } });
+document.addEventListener('click', function(e){ const mb=e.target.closest('#morebtn'); if(mb){ pageLimit+=colCount()*50; renderList(); } });
 let activeCleanup = null;
 function relatedHTML(t){
 const same=TOOLS.filter(x=>x.c===t.c && x.id!==t.id);
@@ -16380,7 +16414,7 @@ function watch(){
 if(obs) obs.disconnect();
 const mb=$('#morebtn'); if(!mb || !('IntersectionObserver' in window)) return;
 obs=new IntersectionObserver(function(es){
-es.forEach(function(en){ if(en.isIntersecting){ obs.disconnect(); pageLimit+=150; renderList(); } });
+es.forEach(function(en){ if(en.isIntersecting){ obs.disconnect(); pageLimit+=colCount()*50; renderList(); } });
 }, {rootMargin:'200px'});
 obs.observe(mb);
 }
