@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="4.0">
+<meta name="xyver" content="4.1">
 <title>小羽工具箱 · 本地工具集合</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%232C63F0'/%3E%3Cpath d='M7 8h10M7 12h10M7 16h6' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
@@ -50,6 +50,11 @@ input,textarea,select{font-family:inherit;font-size:16px}
 .search input{border:0;outline:0;background:transparent;width:100%;min-width:0;font-size:16px;color:var(--ink)}
 .search input::placeholder{color:#A9AFB8;font-size:15px}
 .chips{display:flex;gap:8px;overflow-x:auto;padding:12px 0 2px;scrollbar-width:none}
+.recent{display:flex;gap:8px;align-items:center;overflow-x:auto;padding:10px 0 0;scrollbar-width:none}
+.recent[hidden]{display:none}
+.recent .rlbl{flex:0 0 auto;font-size:12px;color:#8a94a6}
+.recent .rchip{flex:0 0 auto;display:flex;align-items:center;gap:5px;min-height:34px;padding:0 12px;border:1px solid #e6e9f0;border-radius:17px;background:#fff;color:#2b3445;font-size:12.5px;white-space:nowrap}
+.recent .rchip:active{background:#f3f5f9}
 .chips::-webkit-scrollbar{display:none}
 .chip{
   flex:none;border:1px solid var(--line);background:var(--card);color:var(--sub);
@@ -198,6 +203,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
     <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
     <input id="q" type="search" placeholder="搜索工具，如 二维码 / 单位换算" autocomplete="off">
   </div>
+  <div class="recent" id="recent" hidden></div>
   <div class="chips" id="chips"></div>
 </header>
 
@@ -307,15 +313,15 @@ const ICONS = {
 /* ================= 工具注册表 ================= */
 /* cat: dev 设备测量 / img 图片处理 / txt 文字处理 / num 计算转换 / eff 效率工具 / qry 查询识别 */
 const TOOLS = [
-  {id:'flash', n:'手电筒', c:'dev', col:'#F0A22B', ic:'flash'},
-  {id:'compass', n:'指南针', c:'dev', col:'#2C63F0', ic:'compass'},
-  {id:'level', n:'水平仪', c:'dev', col:'#17A673', ic:'level'},
-  {id:'plumb', n:'铅垂线', c:'dev', col:'#5B7CFA', ic:'plumb'},
+  {id:'flash', n:'手电筒', c:'eng', col:'#F0A22B', ic:'flash'},
+  {id:'compass', n:'指南针', c:'eng', col:'#2C63F0', ic:'compass'},
+  {id:'level', n:'水平仪', c:'eng', col:'#17A673', ic:'level'},
+  {id:'plumb', n:'铅垂线', c:'eng', col:'#5B7CFA', ic:'plumb'},
   {id:'hang', n:'挂画助手', c:'dev', col:'#E2543B', ic:'frame'},
-  {id:'magnify', n:'放大镜', c:'dev', col:'#0E9AA7', ic:'magnify'},
-  {id:'ruler', n:'屏幕直尺', c:'dev', col:'#7A5AF8', ic:'ruler'},
-  {id:'rangefinder', n:'远距离测距', c:'dev', col:'#D9822B', ic:'distance'},
-  {id:'inclinometer', n:'倾角仪', c:'dev', col:'#17917B', ic:'angle'},
+  {id:'magnify', n:'放大镜', c:'eng', col:'#0E9AA7', ic:'magnify'},
+  {id:'ruler', n:'屏幕直尺', c:'eng', col:'#7A5AF8', ic:'ruler'},
+  {id:'rangefinder', n:'远距离测距', c:'eng', col:'#D9822B', ic:'distance'},
+  {id:'inclinometer', n:'倾角仪', c:'eng', col:'#17917B', ic:'angle'},
   {id:'imgcompress', n:'图片压缩', c:'img', col:'#2C63F0', ic:'image'},
   {id:'imgconvert', n:'格式转换', c:'img', col:'#0E9AA7', ic:'arrows'},
   {id:'imggrid', n:'九宫格切图', c:'img', col:'#7A5AF8', ic:'grid'},
@@ -356,7 +362,7 @@ const TOOLS = [
   {id:'uuid', n:'UUID 生成', c:'kit', col:'#2C63F0', ic:'hash'},
   {id:'jsonfmt', n:'JSON 格式化', c:'kit', col:'#0E9AA7', ic:'code'},
   {id:'diff', n:'文本对比', c:'kit', col:'#17A673', ic:'dots'},
-  {id:'colorconv', n:'颜色转换', c:'kit', col:'#D9822B', ic:'palette'},
+  {id:'colorconv', n:'颜色转换', c:'txt', col:'#D9822B', ic:'palette'},
   {id:'deviceinfo', n:'设备信息', c:'kit', col:'#7A5AF8', ic:'compass'},
   {id:'screentest', n:'屏幕检测', c:'kit', col:'#15181D', ic:'grid'},
   {id:'speech', n:'文字转语音', c:'txt', col:'#D9822B', ic:'wave'},
@@ -364,11 +370,11 @@ const TOOLS = [
   {id:'todo', n:'待办清单', c:'eff', col:'#17A673', ic:'dots'},
   {id:'wifiqr', n:'WiFi 二维码', c:'qry', col:'#0E9AA7', ic:'qr'},
   {id:'vcardqr', n:'名片二维码', c:'qry', col:'#2C63F0', ic:'person'},
-  {id:'dbmeter', n:'分贝计', c:'dev', col:'#17A673', ic:'wave'},
-  {id:'metronome', n:'节拍器', c:'dev', col:'#E2543B', ic:'timer'},
-  {id:'touchtest', n:'触摸测试', c:'dev', col:'#5B7CFA', ic:'grid'},
-  {id:'refreshtest', n:'刷新率测试', c:'dev', col:'#0E9AA7', ic:'clock'},
-  {id:'vibrate', n:'震动测试', c:'dev', col:'#7A5AF8', ic:'pulse'},
+  {id:'dbmeter', n:'分贝计', c:'eng', col:'#17A673', ic:'wave'},
+  {id:'metronome', n:'节拍器', c:'eng', col:'#E2543B', ic:'timer'},
+  {id:'touchtest', n:'触摸测试', c:'eng', col:'#5B7CFA', ic:'grid'},
+  {id:'refreshtest', n:'刷新率测试', c:'eng', col:'#0E9AA7', ic:'clock'},
+  {id:'vibrate', n:'震动测试', c:'eng', col:'#7A5AF8', ic:'pulse'},
   {id:'recorder', n:'录音机', c:'dev', col:'#D9822B', ic:'wave'},
   {id:'imgresize', n:'修改尺寸', c:'img', col:'#2C63F0', ic:'frame'},
   {id:'imgpixel', n:'图片像素化', c:'img', col:'#0E9AA7', ic:'grid'},
@@ -435,8 +441,8 @@ const TOOLS = [
   {id:'barcode', n:'条形码', c:'qry', col:'#15181D', ic:'barcode'},
   {id:'qrstyle', n:'二维码美化', c:'qry', col:'#2C63F0', ic:'qr'},
   {id:'express', n:'快递单号', c:'qry', col:'#E2543B', ic:'truck'},
-  {id:'tone', n:'音频发生器', c:'dev', col:'#2C63F0', ic:'wave'},
-  {id:'speaker', n:'扬声器除尘', c:'dev', col:'#17A673', ic:'sun'},
+  {id:'tone', n:'音频发生器', c:'eng', col:'#2C63F0', ic:'wave'},
+  {id:'speaker', n:'扬声器除尘', c:'eng', col:'#17A673', ic:'sun'},
   {id:'motion', n:'加速度曲线', c:'dev', col:'#7A5AF8', ic:'pulse'},
   {id:'invert', n:'图片反色', c:'img', col:'#E2543B', ic:'palette'},
   {id:'text2img', n:'文字转图片', c:'img', col:'#0E9AA7', ic:'text'},
@@ -448,28 +454,28 @@ const TOOLS = [
   {id:'fuel', n:'油耗计算', c:'num', col:'#E2543B', ic:'truck'},
   {id:'calorie', n:'卡路里消耗', c:'num', col:'#2C63F0', ic:'pulse'},
   {id:'breathe', n:'呼吸训练', c:'eff', col:'#0E9AA7', ic:'wave'},
-  {id:'wake', n:'屏幕常亮', c:'eff', col:'#D9822B', ic:'sun'},
+  {id:'wake', n:'屏幕常亮', c:'eng', col:'#D9822B', ic:'sun'},
   {id:'solar', n:'二十四节气', c:'qry', col:'#17A673', ic:'calendar'},
   {id:'periodic', n:'元素周期表', c:'qry', col:'#2C63F0', ic:'grid'},
   {id:'hotkeys', n:'快捷键速查', c:'qry', col:'#8A94A6', ic:'code'},
   {id:'json2csv', n:'JSON 转CSV', c:'kit', col:'#D9822B', ic:'grid'},
   {id:'csv2json', n:'CSV 转JSON', c:'kit', col:'#0E9AA7', ic:'code'},
   {id:'urlparams', n:'URL 参数', c:'kit', col:'#2C63F0', ic:'link'},
-  {id:'miclevel', n:'麦克风电平', c:'dev', col:'#17A673', ic:'wave'},
+  {id:'miclevel', n:'麦克风电平', c:'eng', col:'#17A673', ic:'wave'},
   {id:'battery', n:'电池状态', c:'dev', col:'#D9822B', ic:'pulse'},
   {id:'netinfo', n:'网络信息', c:'dev', col:'#2C63F0', ic:'link'},
-  {id:'multitouch', n:'多点触控', c:'dev', col:'#7A5AF8', ic:'grid'},
-  {id:'light', n:'环境光', c:'dev', col:'#D9822B', ic:'sun'},
-  {id:'keytest', n:'按键检测', c:'dev', col:'#8A94A6', ic:'code'},
-  {id:'gamepad', n:'手柄检测', c:'dev', col:'#E2543B', ic:'dice'},
-  {id:'gpsinfo', n:'定位信息', c:'dev', col:'#17A673', ic:'distance'},
-  {id:'camtest', n:'摄像头预览', c:'dev', col:'#2C63F0', ic:'image'},
-  {id:'clipboard', n:'剪贴板', c:'dev', col:'#0E9AA7', ic:'text'},
-  {id:'fullscreen', n:'全屏测试', c:'dev', col:'#7A5AF8', ic:'frame'},
-  {id:'channel', n:'声道测试', c:'dev', col:'#E2543B', ic:'wave'},
-  {id:'dpr', n:'屏幕参数', c:'dev', col:'#8A94A6', ic:'grid'},
-  {id:'vibpattern', n:'震动节奏', c:'dev', col:'#D9822B', ic:'pulse'},
-  {id:'feats', n:'能力检测', c:'dev', col:'#17A673', ic:'shield'},
+  {id:'multitouch', n:'多点触控', c:'eng', col:'#7A5AF8', ic:'grid'},
+  {id:'light', n:'环境光', c:'eng', col:'#D9822B', ic:'sun'},
+  {id:'keytest', n:'按键检测', c:'eng', col:'#8A94A6', ic:'code'},
+  {id:'gamepad', n:'手柄检测', c:'eng', col:'#E2543B', ic:'dice'},
+  {id:'gpsinfo', n:'定位信息', c:'eng', col:'#17A673', ic:'distance'},
+  {id:'camtest', n:'摄像头预览', c:'eng', col:'#2C63F0', ic:'image'},
+  {id:'clipboard', n:'剪贴板', c:'eng', col:'#0E9AA7', ic:'text'},
+  {id:'fullscreen', n:'全屏测试', c:'eng', col:'#7A5AF8', ic:'frame'},
+  {id:'channel', n:'声道测试', c:'eng', col:'#E2543B', ic:'wave'},
+  {id:'dpr', n:'屏幕参数', c:'eng', col:'#8A94A6', ic:'grid'},
+  {id:'vibpattern', n:'震动节奏', c:'eng', col:'#D9822B', ic:'pulse'},
+  {id:'feats', n:'能力检测', c:'eng', col:'#17A673', ic:'shield'},
   {id:'ico', n:'图标生成', c:'img', col:'#2C63F0', ic:'image'},
   {id:'shadow', n:'阴影卡片', c:'img', col:'#8A94A6', ic:'frame'},
   {id:'sharpen', n:'锐化滤镜', c:'img', col:'#0E9AA7', ic:'sun'},
@@ -503,7 +509,7 @@ const TOOLS = [
   {id:'prepay', n:'提前还款', c:'num', col:'#17A673', ic:'house'},
   {id:'hourly', n:'时薪换算', c:'num', col:'#2C63F0', ic:'coin'},
   {id:'paint', n:'乳胶漆量', c:'num', col:'#0E9AA7', ic:'mix'},
-  {id:'screeninch', n:'屏幕尺寸', c:'num', col:'#E2543B', ic:'ruler'},
+  {id:'screeninch', n:'屏幕尺寸', c:'eng', col:'#E2543B', ic:'ruler'},
   {id:'pregnancy', n:'预产期', c:'num', col:'#17A673', ic:'calendar'},
   {id:'pace', n:'配速计算', c:'num', col:'#2C63F0', ic:'clock'},
   {id:'steps', n:'步数距离', c:'num', col:'#D9822B', ic:'pulse'},
@@ -529,7 +535,7 @@ const TOOLS = [
   {id:'idcard', n:'身份证解析', c:'qry', col:'#17A673', ic:'person'},
   {id:'phone', n:'手机号段', c:'qry', col:'#D9822B', ic:'link'},
   {id:'bankcard', n:'银行卡校验', c:'qry', col:'#8A94A6', ic:'coin'},
-  {id:'colorname', n:'颜色名称', c:'qry', col:'#E2543B', ic:'palette'},
+  {id:'colorname', n:'颜色名称', c:'eng', col:'#E2543B', ic:'palette'},
   {id:'foodkcal', n:'食物热量', c:'qry', col:'#0E9AA7', ic:'pulse'},
   {id:'purine', n:'嘌呤表', c:'qry', col:'#7A5AF8', ic:'pulse'},
   {id:'gi', n:'GI值表', c:'qry', col:'#2C63F0', ic:'percent'},
@@ -546,7 +552,7 @@ const TOOLS = [
   {id:'jsonmin', n:'JSON压缩', c:'kit', col:'#8A94A6', ic:'code'},
   {id:'htmlfmt', n:'HTML格式化', c:'kit', col:'#0E9AA7', ic:'code'},
   {id:'cssmin', n:'CSS压缩', c:'kit', col:'#7A5AF8', ic:'drop'},
-  {id:'contrast', n:'颜色对比度', c:'kit', col:'#E2543B', ic:'palette'},
+  {id:'contrast', n:'颜色对比度', c:'txt', col:'#E2543B', ic:'palette'},
   {id:'palette', n:'配色生成', c:'img', col:'#2C63F0', ic:'palette'},
   {id:'unicode', n:'Unicode码点', c:'kit', col:'#D9822B', ic:'hash'},
   {id:'entities', n:'实体对照', c:'kit', col:'#8A94A6', ic:'code'},
@@ -558,27 +564,27 @@ const TOOLS = [
   {id:'sqlfmt', n:'SQL美化', c:'kit', col:'#2C63F0', ic:'code'},
   {id:'uuidbatch', n:'批量UUID', c:'kit', col:'#17A673', ic:'hash'},
   {id:'tsbatch', n:'时间戳批量', c:'kit', col:'#D9822B', ic:'clock'},
-  {id:'gyro', n:'陀螺仪', c:'dev', col:'#2C63F0', ic:'compass'},
-  {id:'proximity', n:'距离传感器', c:'dev', col:'#17A673', ic:'distance'},
-  {id:'spectrum', n:'音频频谱', c:'dev', col:'#F0A22B', ic:'wave'},
-  {id:'camres', n:'摄像头分辨率', c:'dev', col:'#E2543B', ic:'scan'},
-  {id:'micplay', n:'录音回放', c:'dev', col:'#7A5AF8', ic:'wave'},
-  {id:'colorbars', n:'彩条测试', c:'dev', col:'#0E9AA7', ic:'palette'},
-  {id:'clipwrite', n:'剪贴板写入', c:'dev', col:'#5B7CFA', ic:'code'},
-  {id:'fileinfo', n:'文件信息', c:'dev', col:'#D9822B', ic:'text'},
-  {id:'perms', n:'权限状态', c:'dev', col:'#3B8A67', ic:'shield'},
-  {id:'orient', n:'方向仪表', c:'dev', col:'#8A6D3B', ic:'compass'},
-  {id:'swipe', n:'滑动方向', c:'dev', col:'#2C63F0', ic:'arrows'},
-  {id:'tapspeed', n:'连点测试', c:'dev', col:'#17A673', ic:'pulse'},
-  {id:'pointerpressure', n:'触控压力', c:'dev', col:'#F0A22B', ic:'pulse'},
-  {id:'storage', n:'存储估算', c:'dev', col:'#E2543B', ic:'cloud'},
-  {id:'netlatency', n:'网络延迟', c:'dev', col:'#7A5AF8', ic:'wave'},
-  {id:'savefile', n:'另存文件', c:'dev', col:'#0E9AA7', ic:'text'},
-  {id:'longpress', n:'长按测试', c:'dev', col:'#5B7CFA', ic:'timer'},
-  {id:'pointertrack', n:'指针轨迹', c:'dev', col:'#D9822B', ic:'link'},
-  {id:'zoomtest', n:'缩放检测', c:'dev', col:'#3B8A67', ic:'magnify'},
-  {id:'sensors', n:'传感器支持', c:'dev', col:'#8A6D3B', ic:'grid'},
-  {id:'orientlock', n:'屏幕方向锁', c:'dev', col:'#2C63F0', ic:'frame'},
+  {id:'gyro', n:'陀螺仪', c:'eng', col:'#2C63F0', ic:'compass'},
+  {id:'proximity', n:'距离传感器', c:'eng', col:'#17A673', ic:'distance'},
+  {id:'spectrum', n:'音频频谱', c:'eng', col:'#F0A22B', ic:'wave'},
+  {id:'camres', n:'摄像头分辨率', c:'eng', col:'#E2543B', ic:'scan'},
+  {id:'micplay', n:'录音回放', c:'eng', col:'#7A5AF8', ic:'wave'},
+  {id:'colorbars', n:'彩条测试', c:'eng', col:'#0E9AA7', ic:'palette'},
+  {id:'clipwrite', n:'剪贴板写入', c:'eng', col:'#5B7CFA', ic:'code'},
+  {id:'fileinfo', n:'文件信息', c:'eng', col:'#D9822B', ic:'text'},
+  {id:'perms', n:'权限状态', c:'eng', col:'#3B8A67', ic:'shield'},
+  {id:'orient', n:'方向仪表', c:'eng', col:'#8A6D3B', ic:'compass'},
+  {id:'swipe', n:'滑动方向', c:'eng', col:'#2C63F0', ic:'arrows'},
+  {id:'tapspeed', n:'连点测试', c:'eng', col:'#17A673', ic:'pulse'},
+  {id:'pointerpressure', n:'触控压力', c:'eng', col:'#F0A22B', ic:'pulse'},
+  {id:'storage', n:'存储估算', c:'eng', col:'#E2543B', ic:'cloud'},
+  {id:'netlatency', n:'网络延迟', c:'eng', col:'#7A5AF8', ic:'wave'},
+  {id:'savefile', n:'另存文件', c:'eng', col:'#0E9AA7', ic:'text'},
+  {id:'longpress', n:'长按测试', c:'eng', col:'#5B7CFA', ic:'timer'},
+  {id:'pointertrack', n:'指针轨迹', c:'eng', col:'#D9822B', ic:'link'},
+  {id:'zoomtest', n:'缩放检测', c:'eng', col:'#3B8A67', ic:'magnify'},
+  {id:'sensors', n:'传感器支持', c:'eng', col:'#8A6D3B', ic:'grid'},
+  {id:'orientlock', n:'屏幕方向锁', c:'eng', col:'#2C63F0', ic:'frame'},
   {id:'vignette', n:'暗角', c:'img', col:'#17A673', ic:'image'},
   {id:'grain', n:'噪点', c:'img', col:'#F0A22B', ic:'dots'},
   {id:'warmth', n:'冷暖色调', c:'img', col:'#E2543B', ic:'sun'},
@@ -711,7 +717,7 @@ const TOOLS = [
   {id:'screenres', n:'屏幕分辨率', c:'qry', col:'#3B8A67', ic:'grid'},
   {id:'videores', n:'视频分辨率', c:'qry', col:'#8A6D3B', ic:'frame'},
   {id:'audiofmt', n:'音频格式', c:'qry', col:'#2C63F0', ic:'wave'},
-  {id:'imgfmt', n:'图片格式', c:'qry', col:'#17A673', ic:'image'},
+  {id:'imgfmt', n:'图片格式', c:'eng', col:'#17A673', ic:'image'},
   {id:'extname', n:'文件扩展名', c:'qry', col:'#F0A22B', ic:'text'},
   {id:'chargeproto', n:'充电协议', c:'qry', col:'#E2543B', ic:'flash'},
   {id:'usbtype', n:'USB 接口', c:'qry', col:'#7A5AF8', ic:'link'},
@@ -750,15 +756,15 @@ const TOOLS = [
   {id:'filesize', n:'文件大小换算', c:'kit', col:'#5B7CFA', ic:'calc'},
   {id:'rgb2cmyk', n:'RGB 转 CMYK', c:'img', col:'#D9822B', ic:'palette'},
   {id:'strftime', n:'日期格式化', c:'kit', col:'#3B8A67', ic:'calendar'},
-  {id:'rm1', n:'1RM 估算', c:'hl', col:'#17A673', ic:'pulse'},
-  {id:'cardio_burn', n:'有氧消耗', c:'hl', col:'#2C63F0', ic:'truck'},
-  {id:'steps_cal', n:'步数热量', c:'hl', col:'#D9822B', ic:'person'},
-  {id:'swim_pace', n:'游泳配速', c:'hl', col:'#8A6D3B', ic:'wave'},
-  {id:'run_predict', n:'跑步成绩预测', c:'hl', col:'#17A673', ic:'pulse'},
-  {id:'marathon_pace', n:'马拉松配速', c:'hl', col:'#2C63F0', ic:'timer'},
-  {id:'whr', n:'腰臀比', c:'hl', col:'#8A6D3B', ic:'wave'},
-  {id:'waterintake', n:'每日饮水量', c:'hl', col:'#17A673', ic:'drop'},
-  {id:'protein', n:'蛋白质需求', c:'hl', col:'#2C63F0', ic:'timer'},
+  {id:'rm1', n:'1RM 估算', c:'life', col:'#17A673', ic:'pulse'},
+  {id:'cardio_burn', n:'有氧消耗', c:'life', col:'#2C63F0', ic:'truck'},
+  {id:'steps_cal', n:'步数热量', c:'life', col:'#D9822B', ic:'person'},
+  {id:'swim_pace', n:'游泳配速', c:'life', col:'#8A6D3B', ic:'wave'},
+  {id:'run_predict', n:'跑步成绩预测', c:'life', col:'#17A673', ic:'pulse'},
+  {id:'marathon_pace', n:'马拉松配速', c:'life', col:'#2C63F0', ic:'timer'},
+  {id:'whr', n:'腰臀比', c:'life', col:'#8A6D3B', ic:'wave'},
+  {id:'waterintake', n:'每日饮水量', c:'life', col:'#17A673', ic:'drop'},
+  {id:'protein', n:'蛋白质需求', c:'life', col:'#2C63F0', ic:'timer'},
   {id:'carb', n:'碳水需求', c:'hl', col:'#D9822B', ic:'truck'},
   {id:'sleep_cycle', n:'睡眠周期', c:'hl', col:'#8A6D3B', ic:'clock'},
   {id:'stretch_dur', n:'拉伸时长', c:'hl', col:'#17A673', ic:'pulse'},
@@ -1045,12 +1051,12 @@ const TOOLS = [
   {id:'code_review', n:'代码评审', c:'work', col:'#1F8A70', ic:'tally'},
   {id:'launch_check', n:'上线检查', c:'work', col:'#2C63F0', ic:'text'},
   {id:'shift_handover', n:'值班交接', c:'work', col:'#D9822B', ic:'clock'},
-  {id:'training_plan', n:'培训设计', c:'work', col:'#7A5AF8', ic:'grid'},
+  {id:'training_plan', n:'培训设计', c:'eng', col:'#7A5AF8', ic:'grid'},
   {id:'kid_math', n:'口算出题', c:'kid', col:'#E86A92', ic:'person'},
   {id:'kid_oral', n:'口算要求', c:'kid', col:'#F0A22B', ic:'text'},
   {id:'kid_pattern', n:'找规律', c:'kid', col:'#17A673', ic:'palette'},
   {id:'kid_shape', n:'图形认知', c:'kid', col:'#5B7CFA', ic:'gift'},
-  {id:'kid_color', n:'颜色中英', c:'kid', col:'#E86A92', ic:'palette'},
+  {id:'kid_color', n:'颜色中英', c:'txt', col:'#E86A92', ic:'palette'},
   {id:'kid_song', n:'儿歌', c:'kid', col:'#F0A22B', ic:'text'},
   {id:'kid_riddle', n:'谜语', c:'fun', col:'#17A673', ic:'text'},
   {id:'kid_brain', n:'脑筋急转弯', c:'kid', col:'#5B7CFA', ic:'gift'},
@@ -1320,6 +1326,16 @@ function loadImgUrl(url){
 }
 /* ================= 页面外壳 ================= */
 let curCat='all', curQuery='';
+const RCKEY='xy_recent';
+function getRecent(){ try{ return JSON.parse(localStorage.getItem(RCKEY)||'[]'); }catch(e){ return []; } }
+function pushRecent(id){ try{ const a=getRecent().filter(x=>x!==id); a.unshift(id); localStorage.setItem(RCKEY, JSON.stringify(a.slice(0,8))); }catch(e){} }
+function renderRecent(){
+  const box=$('#recent'); if(!box) return;
+  const ts=getRecent().map(i=>TOOLS.find(t=>t.id===i)).filter(Boolean).slice(0,6);
+  if(!ts.length){ box.hidden=true; box.innerHTML=''; return; }
+  box.hidden=false;
+  box.innerHTML='<span class="rlbl">最近</span>'+ts.map(t=>`<button class="rchip" data-rid="${t.id}">${t.n}</button>`).join('');
+}
 function renderChips(){
   $('#chips').innerHTML = CATS.map(c=>`<button class="chip${c.k===curCat?' on':''}" data-cat="${c.k}">${c.n}</button>`).join('');
 }
@@ -1348,7 +1364,8 @@ function cards(list){
     </div>`).join('');
 }
 document.addEventListener('click', e=>{
-  const chip=e.target.closest('#chips .chip'); if(chip && chip.dataset.cat){ curCat=chip.dataset.cat; renderChips(); renderList(); return; }
+  const chip=e.target.closest('#chips .chip'); if(chip && chip.dataset.cat){ curCat=chip.dataset.cat; renderChips(); renderRecent(); renderList(); return; }
+  const rc=e.target.closest('#recent .rchip'); if(rc){ openTool(rc.dataset.rid); return; }
   const card=e.target.closest('.toolcard'); if(card){ openTool(card.dataset.id); }
 });
 $('#q').addEventListener('input', e=>{ curQuery=e.target.value.trim(); renderList(); });
@@ -1364,6 +1381,7 @@ function openTool(id){
   $('#sheetTitle').textContent = t.n + (t.knife?' · 瑞士刀':'');
   const sheet = $('#sheet'); sheet.classList.add('open'); sheet.setAttribute('aria-hidden','false');
   body.scrollTop = 0;
+  pushRecent(id); renderRecent();
   const fn = window['t_'+id];
   if(typeof fn==='function'){ activeCleanup = fn(body) || null; }
   else body.innerHTML = `<div class="box"><p class="hint" style="margin:0">该工具正在完善中。</p></div>`;
