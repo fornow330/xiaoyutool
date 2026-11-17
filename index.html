@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="4.7">
+<meta name="xyver" content="4.8">
 <title>小羽工具箱 · 本地工具集合</title>
 <meta name="theme-color" content="#2C63F0">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -259,6 +259,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
   </div>
   <div class="recent" id="favbar" hidden></div>
   <div class="recent" id="recent" hidden></div>
+  <div class="recent" id="rankbar" hidden></div>
   <div class="chips" id="chips"></div>
   <div id="ioRow" style="display:flex;gap:8px;align-items:center;margin:2px 0 0;font-size:12px;color:var(--sub)">
     <button class="io" id="expBtn">导出收藏</button>
@@ -374,6 +375,7 @@ const ICONS = {
 };
 /* ================= 工具注册表 ================= */
 /* cat: dev 设备测量 / img 图片处理 / txt 文字处理 / num 计算转换 / eff 效率工具 / qry 查询识别 */
+const PYCACHE={"flash":"sdt","compass":"znz","level":"spy","plumb":"qcx","hang":"ghzs","magnify":"fdj","ruler":"pmzc","rangefinder":"yjlcj","inclinometer":"qjy","imgcompress":"tpys","imgconvert":"gszh","imggrid":"jggqt","imgwater":"tpsy","colorpicker":"qsq","imgstitch":"tppzt","imgbase64":"tpzbase64","textstat":"wztj","textcase":"mmzh","texttool":"wbcl","morse":"msdm","b64":"base64","urlcode":"urlbjm","radix":"jzzh","hash":"hxjy","unit":"dwhs","currency":"hlhs","loan":"fdjs","tax":"gsjs","bmi":"bmijs","datecalc":"rqjs","percent":"bfbjs","random":"sjcq","timestamp":"sjczh","pomodoro":"fqz","stopwatch":"mb","noise":"bzy","marquee":"scdm","clock":"qpsz","filllight":"bgd","counter":"jsq","kinship":"qqgx","trashclass":"ljfl","qrgen":"ewmsc","qrscan":"smsb","imgcrop":"cjxz","imgbw":"tplj","uuid":"uuidsc","jsonfmt":"jsongsh","diff":"wbdb","colorconv":"yszh","deviceinfo":"sbxx","screentest":"pmjc","speech":"wzzyy","timer":"djs","todo":"dbqd","wifiqr":"wifiewm","vcardqr":"mpewm","dbmeter":"fbj","metronome":"jpq","touchtest":"cmcs","refreshtest":"sxlcs","vibrate":"zdcs","recorder":"lyj","imgresize":"xgcc","imgpixel":"tpxsh","imgblur":"tpmh","imground":"yjtp","imgflip":"jxfz","imgadjust":"tpts","imgpalette":"zstq","imgframe":"tpbk","imgvintage":"lzp","textclean":"wbqx","cipher":"wzjm","textreverse":"wzdz","wordfreq":"zptj","rmb":"rmbdx","cnnum":"zwsz","htmlesc":"htmlzy","csv2md":"bgzmarkdown","dedup":"zxqz","calc":"kxjsq","compound":"fljs","deposit":"cklx","discount":"zkjs","split":"aafz","bmr":"jcdx","bodyfat":"tzl","geodist":"ldjl","tzconv":"sqhs","note":"bq","wheel":"cjzp","names":"sjdm","pwdgen":"mmsc","worldclock":"sjsz","ledger":"jzb","typing":"dzcs","zodiac":"sxxz","roman":"lmsz","httpcode":"httpztm","sizeconv":"cmhs","birthdays":"csts","weeknum":"djz","jwt":"jwtjx","regex":"zzcs","mdpreview":"markdownyl","pwstrength":"mmqd","urlparse":"urljx","cron":"cronjx","imgbatch":"plys","imgascii":"zzfh","img2pdf":"zpdf","braille":"mwzh","fullhalf":"qjbj","wordcloud":"wzy","hfund":"gjjdk","bonustax":"nzjgs","unitall":"dwhszh","healthall":"tzzh","calcall":"tyjszh","coefall":"jyxssc","socialsec":"wxyj","rebar":"gjzl","slope":"pdhs","concrete":"hntpb","barcode":"txm","qrstyle":"ewmmh","express":"kddh","tone":"ypfsq","speaker":"ysqcc","motion":"jsdqx","invert":"tpfs","text2img":"wzztp","towebp":"tpzwebp","txtsort":"wbpx","extract":"tqljyx","mdhtml":"markdownzhtml","netpay":"shgz","fuel":"yhjs","calorie":"kllxh","breathe":"hxxl","wake":"pmcl","solar":"essjq","periodic":"yszqb","hotkeys":"kjjsc","json2csv":"jsonzcsv","csv2json":"csvzjson","urlparams":"urlcs","miclevel":"mkfdp","battery":"dczt","netinfo":"wlxx","multitouch":"ddck","light":"hjg","keytest":"ajjc","gamepad":"sbjc","gpsinfo":"dwxx","camtest":"sxtyl","clipboard":"jtb","fullscreen":"qpcs","channel":"sdcs","dpr":"pmcs","vibpattern":"zdjz","feats":"nljc","ico":"tbsc","shadow":"yykp","sharpen":"rhlj","targetsize":"ydzdkb","collage":"zppt","rotatefree":"ryxz","overlay":"hzh","gradient":"jbzz","tiledwater":"ppsy","polaroid":"pld","halftone":"bdyd","splitlong":"ztqd","ratio":"blcj","scaleup":"gqfd","circleavatar":"yxtx","upperlower":"dxx","replace":"czth","punct":"bdzh","blanklines":"kxql","lineaffix":"xsxw","numbering":"zdbh","wrap":"dzhh","quotes":"yhzh","slug":"urldm","aligncols":"ldq","template":"mbtc","mdtable2csv":"mdbzcsv","striphtml":"qhtmlbq","list2md":"lbzmd","dedupws":"kbql","prepay":"tqhk","hourly":"sxhs","paint":"rjql","screeninch":"pmcc","pregnancy":"ycq","pace":"psjs","steps":"bsjl","sleep":"smgh","deficit":"jzzq","alcohol":"jjdx","roi":"tzhb","equalprincipal":"debj","laptimer":"ddjs","speechtimer":"fyjs","hiit":"hiitjs","shopping":"mcqd","anniv":"jnr","rotation":"lzpb","decide":"jcq","review":"mrfp","weekly":"zbsc","lunch":"wcxz","timeblock":"sjk","formgen":"dkb","progress":"mbjd","plate":"cpjc","idcard":"sfzjx","phone":"sjhd","bankcard":"yhkjy","colorname":"ysmc","foodkcal":"swrl","purine":"plb","gi":"gizb","batterytype":"dcxh","screw":"lsgg","awg":"xgawg","paper":"zzcc","port":"cydk","stdcode":"bzdh","pipesize":"gjdz","json2ts":"jsonzts","json2sql":"jsonzsql","jsonpath":"jsonqz","jsonmin":"jsonys","htmlfmt":"htmlgsh","cssmin":"cssys","contrast":"ysdbd","palette":"pssc","unicode":"unicodemd","entities":"stdz","mime":"mimelx","regexlib":"zzsc","gitcmds":"gitsc","dockercmds":"dockersc","asciitable":"asciib","sqlfmt":"sqlmh","uuidbatch":"pluuid","tsbatch":"sjcpl","gyro":"tly","proximity":"jlcgq","spectrum":"yppp","camres":"sxtfbl","micplay":"lyhf","colorbars":"ctcs","clipwrite":"jtbxr","fileinfo":"wjxx","perms":"qxzt","orient":"fxyb","swipe":"hdfx","tapspeed":"ldcs","pointerpressure":"ckyl","storage":"ccgs","netlatency":"wlyc","savefile":"lcwj","longpress":"zacs","pointertrack":"zzgj","zoomtest":"sfjc","sensors":"cgqzc","orientlock":"pmfxs","vignette":"aj","grain":"zd","warmth":"lnsd","oil":"yh","cartoon":"kth","film":"jp","double":"scbg","mirror":"jxpt","bgblur":"bjxh","label":"wzbq","gridlines":"gtx","compare":"qhdb","dot":"dzh","levels":"sj","lomo":"lomo","tilt":"yz","sat":"bhd","hue":"sx","denoise":"jz","pencil":"cq","poster":"hbs","threshold":"hbyz","glow":"rg","diag":"sy","tiling":"pptt","infocard":"xxkp","widecrop":"kfcj","gallery":"pjzt","txtnum":"tqsz","txten":"tqyw","txtzh":"tqzw","txttrim":"qlkg","txtcomma":"xwjfh","txtquote":"pljyh","txtjsonarr":"qdzjson","txtsqlin":"qdzsql","txtcenter":"wbdq","txtv":"spwz","txttian":"tzg","txtbox":"wzjk","txtgroup":"fzcf","txtrevlines":"xdx","txtshuffle":"sjxx","txtnumlines":"plbh","txtcsvcol":"zcsvl","txtmd":"zmarkdown","txtcodeblock":"zdmk","txtmask":"xxdm","txtwidth":"zfkd","txtwords":"zstj","txtrepeat":"cfwb","txtbetween":"qjtq","txtsplit":"fjqf","txtjoin":"hbdl","txtrename":"plgm","txttable":"wbzbg","txtfreq":"cptj","creditinstallment":"fqhk","vat":"zzs","overtime":"jbf","areaconv":"mjhs","curtain":"clyl","wiregauge":"dxxj","waterbill":"sf","gasbill":"rqf","tiresize":"ltcc","brakepath":"scjl","childheight":"etsg","bsa":"tbmj","fishtank":"ygsl","mortar":"sjyl","brickcount":"qzyl","cableamp":"dlzl","pipeflow":"gdll","caffeine":"kfydx","sipreturn":"dtsy","minpayment":"zdhk","breakeven":"ykph","grossmargin":"mll","inflation":"tzhs","rentyield":"fzhb","rpm":"cszs","annualreturn":"nhsy","ceilingframe":"ddlg","countdown_to":"dsr","reminder_loop":"xhtx","focus_timer":"zzjs","stand_reminder":"jztx","eye_care":"hytx","stretch_timer":"lsjs","reading_log":"ydjl","scoreboard":"jfb","vote_box":"tpq","flashcard":"dck","mathquiz":"kslx","random_order":"sjsx","seatmap":"zwb","budget_list":"ysqd","recipe_log":"cpjl","workout_plan":"jsjh","book_list":"dsqd","movie_list":"gyqd","wish_list":"xyqd","daily_plan":"mrjh","weekly_plan":"zjh","month_review":"ydfp","year_goals":"ndmb","habit_grid":"xgdk","pomodoro_log":"fqtj","festival":"jrsc","province":"sfjc","areacode":"ctqh","traincode":"cczm","trafficsign":"jtbz","fireequip":"xfqc","weathericon":"tqfh","typhoon":"tfdj","windscale":"fldj","rainlevel":"jydj","uvindex":"zwxzs","aqi":"kqzlzs","intlcode":"gjqh","langcode":"yydm","airport":"jcszm","airline":"hsdm","bloodtype":"xxyc","ganzhi":"tgdz","sanfu":"sfsj","holiday":"fdjr","screenres":"pmfbl","videores":"spfbl","audiofmt":"ypgs","imgfmt":"tpgs","extname":"wjkzm","chargeproto":"cdxy","usbtype":"usbjk","appliance":"jdgl","unitsym":"dwfh","json2yaml":"jsonzyaml","yaml2json":"yamlzjson","xml2json":"xmlzjson","json2xml":"jsonzxml","csv2sql":"csvzsql","jsonflat":"jsonbph","jsondiff":"jsondb","jsonschema":"scschema","hex2text":"hexzwb","text2hex":"wbzhex","bin2text":"ejzzwb","text2bin":"wbzejz","base32":"base32","base58":"base58","urlmerge":"urlcszl","randstr":"sjzfc","passphrase":"sjkl","cronbuild":"cronsc","tsdiff":"sjccz","subnet":"zwjs","cidr":"cidrhs","macvendor":"macjx","uaparse":"uajx","httphdr":"qqtjx","cookie":"cookiejx","envparse":"envjx","cssvar":"cssbltq","mdtable":"markdownbg","json2env":"jsonzenv","codecount":"dmxs","filesize":"wjdxhs","rgb2cmyk":"rgbzcmyk","strftime":"rqgsh","rm1":"1rmgs","cardio_burn":"yyxh","steps_cal":"bsrl","swim_pace":"yyps","run_predict":"pbcjyc","marathon_pace":"mlsps","whr":"ytb","waterintake":"mrysl","protein":"dbzxq","carb":"tsxq","sleep_cycle":"smzq","stretch_dur":"lssc","exercise_table":"dzsc","food_protein":"swdb","stretch_moves":"lsdz","home_workout":"jjxl","gym_equip":"qxsc","yoga":"yjts","bmi_table":"bmidz","exercise_order":"xlsx","supplement":"bjcs","injury_prevent":"ssyf","heart_zone":"xlqj","recovery":"hfjy","posture":"ttzj","metric_body":"scsj","water_checkin":"hsdk","workout_checkin":"xldk","weight_log":"tzjl","stain_remove":"wzqc","storage_tips":"snjq","kitchen_conv":"cfhs","temp_conv":"wdhs","oven_temp":"kxwd","airfryer":"qzghs","rice_ratio":"msbl","tea_ratio":"csbl","food_storage":"scbc","food_swap":"scth","laundry_symbol":"xbfh","clothes_care":"mlhl","appliance_care":"jdby","odor_remove":"cwff","cleaning_tools":"qjgj","moving_list":"bjqd","home_emergency":"jtyjb","life_hacks":"shqm","bulb_type":"dpdt","screw_type":"lslx","glue_type":"jsxz","tool_kit":"jygj","leak_fix":"lscl","drain_clear":"gdst","pest_control":"ccff","pet_age":"cwnl","pet_feed":"cwwsl","cat_age":"mlhs","dog_age":"glhs","plant_water":"zwjs","flower_lang":"hy","flower_season":"hq","medbox":"jtyx","med_note":"yycs","body_temp":"twck","bp_ref":"xyck","sleep_need":"smsc","overnight_food":"gyc","fridge_zone":"bxfq","microwave_no":"wbjj","knife_guide":"djyt","tea_type":"cyzl","disinfect_ratio":"xdpb","laundry_dose":"xyyyl","moving_boxes":"bjzx","light_watt":"dggl","kettle_scale":"sgqc","electric_bill":"dfgs","standby_power":"djnh","socket_count":"czsl","washer_capacity":"xyjrl","fridge_capacity":"bxrj","wardrobe_capacity":"ygrl","storage_box":"snxsl","dehumidify":"csl","humidify":"jsl","purifier_area":"jhqmj","filter_life":"lxsm","powerbank":"cdbzs","volume_weight":"tjz","storage_conv":"cchs","netspeed":"wshs","study_plan":"xxjh","review_interval":"fxjg","mistake_book":"ctb","word_book":"dcb","ebbinghaus":"jyqx","multiplication":"cfkj","square_table":"pfb","cube_table":"lfb","prime_table":"zsb","trig_table":"sjhsz","geo_formula":"jhgs","physics_formula":"wlgs","chem_formula":"hxgs","unit_prefix":"dwqz","fraction_conv":"fsxs","sci_notation":"kxjs","pi_digits":"yzl","english_tense":"yyst","irregular_verb":"bgzdc","root_affix":"cgcz","preposition":"jcyf","linking":"ldgz","essay_pattern":"yyjx","idiom_misuse":"cywy","synonym":"jyc","antonym":"fyc","measure_word":"lcdp","punctuation":"bdyf","rhetoric":"xcsf","poem_line":"mjcc","literature":"wxcs","dynasty":"cdnb","geo_extreme":"zgdlzz","world_extreme":"sjzz","chem_phenomenon":"syxx","bio_fact":"swcs","physics_symbol":"wllfh","math_symbol":"sxfh","circle_calc":"yysx","triangle_calc":"sjxjs","combination":"plzh","stats_basic":"tjl","gpa":"jdhs","exam_score":"dfhs","reading_speed":"ydsd","note_method":"bjff","memory_method":"jyff","time_mgmt":"sjgl","paper_format":"lwgs","sqrt_calc":"ghjs","gcd_lcm":"gygb","quadratic":"ecfc","sequence":"slqh","angle_conv":"jdhd","log_calc":"dsjs","power_calc":"cfjs","rank_percentile":"cjbfw","study_time":"xxdk","video_bitrate":"spml","file_size_est":"wjtj","aspect_ratio":"hmbl","duration_conv":"schs","fps_conv":"zlhs","frame_grab":"czjs","speed_duration":"bssc","audio_sample":"cytj","audio_bitrate":"ypml","record_time":"klsc","db_sum":"fbdj","freq_table":"plym","interval_table":"ycb","chord_table":"hxgc","guitar_tune":"jtdx","piano_keys":"gqjw","bpm_delay":"bpmyc","time_signature":"ph","video_codec":"spbm","color_space":"sckj","color_depth":"scws","ratio_table":"hfbl","lens_equiv":"dxjj","nd_calc":"ndjg","shutter_angle":"kmjd","ev_comp":"bgbc","dof":"jsgs","safe_shutter":"aqkm","subtitle_fmt":"zmgs","srt_shift":"zmpy","cover_size":"fmcc","mix_level":"hydp","music_key":"yydx","video_concat":"sppj","transcode_param":"zmcs","sync_offset":"yhtb","audio_denoise_step":"lyjz","audio_vis":"ypksh","video_storyboard":"fjys","color_grade":"tsfg","frame_size":"hmcc","audio_channel":"sdpz","video_letter":"spcl","loudness":"xdhs","audio_fade":"drdc","fire_escape":"hzts","extinguisher_type":"mhqlx","extinguisher_use":"mhqyf","earthquake":"dzbx","flood":"hsyd","lightning":"ldfh","elevator_trap":"dtkr","drowning":"nsjy","electric_shock":"cdjj","heatstroke":"zscl","hypothermia":"swcl","burn":"tscl","cut_wound":"gszx","nosebleed":"bcx","fracture":"gzgd","sprain":"nscl","faint":"yjjj","seizure":"dxfz","choking":"qdyw","cpr":"xffs","aed":"aedsy","poisoning":"zdjj","gas_leak":"rqxl","gas_alarm":"bjqaz","co_poison":"yyhtzd","emergency_bag":"yjbqd","emergency_contact":"yjlxr","extinguisher_count":"mhqpz","evacuation_time":"sssj","shelter":"bncs","sos_signal":"qjxh","wild_lost":"ywml","snake_bite":"sycl","bee_sting":"fzcl","dog_bite":"gycl","food_poison":"swzd","weather_warn":"yjdj","quake_level":"zjck","hotline":"jjdh","escape_route":"tslx","first_aid_kit":"jjbpz","water_safety":"syaq","heat_index":"tgwd","meeting_note":"hyjy","weekly_report":"zbmb","mail_tmpl":"yjmb","resume_tmpl":"jlmb","resign_letter":"czx","leave_note":"qjt","invitation":"yqh","thanks_letter":"gxx","apology":"dqx","recommend_letter":"tjx","memo":"bwl","meeting_notice":"hytz","retro":"xmfp","prd_outline":"xqwdys","request_note":"qsmb","report_struct":"hbjg","interview_q":"mswt","interview_feedback":"msfk","self_review":"jxzp","priority_matrix":"sxx","task_breakdown":"rwcj","estimation":"gsgs","salary_calc":"nxcs","annual_leave":"njjs","reimburse":"bxqd","business_trip":"ccqd","gantt":"pqyd","risk_log":"fxqd","ppt_struct":"pptjg","data_report":"sjhb","email_etiquette":"yjly","phone_script":"dhhs","negotiation":"tpjq","manage_up":"xsgl","feedback_model":"fkmx","conflict":"ctcl","team_role":"tdjs","okr":"okrmb","kpi":"kpics","standup":"zhmb","meeting_minutes_short":"hyyd","delegation":"rwjb","onboarding":"xrqd","handover":"jjqd","customer_complaint":"tscl","sales_pitch":"xshs","work_habit":"gzxg","office_manner":"bgsly","ppt_page":"ysgs","meeting_cost":"hycb","daily_report":"rbmb","debrief":"szyd","agenda":"hyyc","client_visit":"khbf","review_prd":"xqps","code_review":"dmps","launch_check":"sxjc","shift_handover":"zbjj","training_plan":"pxsj","kid_math":"ksct","kid_oral":"ksyq","kid_pattern":"zgl","kid_shape":"txrz","kid_color":"yszy","kid_song":"eg","kid_riddle":"my","kid_brain":"njjzw","kid_idiom":"cyqm","kid_animal":"dwrz","kid_dino":"klrz","kid_space":"tyx","kid_body":"stbw","kid_safety":"aqcs","kid_manner":"lmly","kid_chore":"xrwdk","kid_schedule":"zxb","kid_screen":"pmsj","kid_height":"sgck","kid_vaccine":"ymsj","kid_book":"hbtj","kid_game":"qzyx","kid_craft":"sghd","kid_origami":"zzbz","kid_draw":"jbh","kid_english":"yyqmc","kid_phonics":"zrpd","kid_alphabet":"zmdc","kid_count":"szzy","kid_time":"sjrz","kid_money":"qbrz","kid_focus":"zzlyx","kid_logic":"ljt","kid_story":"gsmb","kid_emotion":"qxrz","kid_praise":"byfs","kid_punish":"gjyz","kid_reading":"ydl","kid_homework":"zydk","kid_birthday":"srhzb","kid_question":"ltwt","kid_phone":"sbgz","pack_list":"dbqd","travel_doc":"zjhd","pack_calc":"ywsl","time_zone":"schs","flight_time":"dsc","mileage":"yfgs","toll":"txf","trip_budget":"lxys","split_cost":"fyjf","itinerary":"xcmb","visa_doc":"qzcl","abroad_tips":"cjyd","plug_type":"czlx","hotel_pick":"xjd","bnb_check":"rzjc","weather_gear":"tqzb","altitude":"gyzy","car_sick":"ycyd","jetlag":"sctz","language_phrase":"lxyy","travel_safety":"dzaq","travel_insurance":"lxbx","tax_refund":"jwts","liquid_rule":"ytgd","luggage_weight":"xlzl","sun_time":"rcrl","hike_time":"tbys","cycle_speed":"qxps","distance_conv":"jlhs","speed_conv":"sdhs","travel_medicine":"lxyp","photo_spot":"pzgx","local_food":"zcdff","emergency_abroad":"jwyj","camping_list":"lyzb","hotel_tips":"zdjq","budget_split":"ysfp","weekend_trip":"zmqn","travel_journal":"lxrj","train_seat":"gtxz","airport_flow":"cjlc","passport":"hzbl","car_check":"zjjc","pack_trick":"dbjq","reno_budget":"zxys","tile_count":"czsl","cement_mix":"sjpb","wire_gauge":"dxgg","pipe_size":"sggj","socket_height":"czgd","light_count":"djgl","curtain_size":"clcc","furniture_size":"jjcc","mattress":"cdxz","kitchen_counter":"tmgd","waterproof":"fsjc","formaldehyde":"jqzl","reno_order":"sgsx","reno_duration":"gqgs","reno_check":"ysqd","hydro_check":"sdjd","tile_lay":"czpt","skirting":"tjx","door_size":"mdcc","window_size":"chcc","stair_size":"ltcc","balcony_load":"ytcz","ac_power":"ktps","fresh_air":"xffl","floor_heat":"dngl","water_heater":"rsqrl","purifier_size":"jsqtl","smart_home":"znjj","style_pick":"zxfg","color_scheme":"psyz","lighting_plan":"dgfc","soft_decor":"rzys","floor_area":"mjjs","wall_area":"qmmj","cabinet_need":"cgcd","vent_need":"pfl","home_reno_tip":"zxjy","kitchen_layout":"cfbj","bath_size":"wsjcc","balcony_decor":"ytgz","coin":"pyb","dice":"ztz","random_number":"sjsz","random_color":"sjsz","eat_what":"jtcsm","weekend_what":"zmzsm","movie_pick":"dytj","book_pick":"sdtj","board_game":"zytj","music_mood":"yytj","game_type":"yxlx","joke":"lxh","trivia":"lzs","tongue":"rkl","birthday_flower":"srh","constellation":"xzrq","rps":"cqdz","24game":"24d","guess_number":"csz","timer_challenge":"60mtz","decision":"jck","wheel_pick":"wzzp","group_split":"sjfz","lottery_num":"sjcj","speak_order":"fysx","bucket_100":"100jxs","movie_line":"jdtc","slogan":"yjhmd","copywriting":"wamb","video_title":"spbt","story_start":"gskt","plot_twist":"qjzz","riddle_fun":"qwmt","card_draw":"cpkp","fortune":"mryj","emoji_text":"pyqwa","mood_log":"xqdk","gratitude":"gejl","one_line_diary":"yxrj","time_capsule":"sjjn","date_idea":"yhdz","gift_idea":"sljy","party_theme":"pdzt","word_game":"wzyx","riddle_math":"qwsx","truth_dare":"zxhdmx","who_spy":"sswdck","poker_rank":"pxsc","mahjong_term":"mjsy","dice_prob":"tzgl","random_penalty":"sjcf","wolf_role":"lrsjs","typing_speed":"dzsd","mirror_text":"wzdx","acrostic":"cts","fortune_cookie":"sjqy"};
 const TOOLS = [
   {id:'flash', n:'手电筒', c:'eng', col:'#F0A22B', ic:'flash'},
   {id:'compass', n:'指南针', c:'eng', col:'#2C63F0', ic:'compass'},
@@ -1391,6 +1393,25 @@ let curCat='all', curQuery='';
 const RCKEY='xy_recent';
 function getRecent(){ try{ return JSON.parse(localStorage.getItem(RCKEY)||'[]'); }catch(e){ return []; } }
 function pushRecent(id){ try{ const a=getRecent().filter(x=>x!==id); a.unshift(id); localStorage.setItem(RCKEY, JSON.stringify(a.slice(0,8))); }catch(e){} }
+const RANKKEY='xy_toolrank';
+function pushRank(id){
+  try{
+    const r=JSON.parse(localStorage.getItem(RANKKEY)||'{}');
+    r[id]=(r[id]||0)+1;
+    localStorage.setItem(RANKKEY, JSON.stringify(r));
+    renderRank();
+  }catch(e){}
+}
+function renderRank(){
+  const box=$('#rankbar'); if(!box) return;
+  let r={}; try{ r=JSON.parse(localStorage.getItem(RANKKEY)||'{}'); }catch(e){}
+  const items=Object.keys(r).map(function(k){return [k, r[k]];}).filter(function(x){return x[1]>=2;})
+    .sort(function(a,b){return b[1]-a[1];}).slice(0,8)
+    .map(function(x){ return TOOLS.find(function(t){return t.id===x[0];}); }).filter(Boolean);
+  if(!items.length){ box.hidden=true; box.innerHTML=''; return; }
+  box.hidden=false;
+  box.innerHTML='<span class="rlbl">常用</span>'+items.map(function(t){ return '<button class="rchip" data-rid="'+t.id+'">'+t.n+'</button>'; }).join('');
+}
 function renderRecent(){
   const box=$('#recent'); if(!box) return;
   const ts=getRecent().map(i=>TOOLS.find(t=>t.id===i)).filter(Boolean).slice(0,5);
@@ -1471,9 +1492,22 @@ function bigTipHTML(){
     + hits.map(function(h){return '<button class="btn ghost" data-bi="'+h.i+'" data-q="'+curQuery.replace(/"/g,'')+'" style="height:34px;font-size:13px;padding:0 10px">'+h.name+' '+h.n+' 个</button>';}).join('')
     + '</div>';
 }
+function sugHTML(){
+  if(!curQuery) return '';
+  const pyq = /^[a-z0-9]+$/i.test(curQuery) ? curQuery.toLowerCase() : '';
+  const qs = expandQ(curQuery);
+  const cand = TOOLS.filter(function(t){
+    return t.n.includes(curQuery) || (pyq && (PYCACHE[t.id]||'').indexOf(pyq)>=0) || qs.some(function(q){return t.n.includes(q);});
+  }).slice(0,5);
+  if(!cand.length) return '';
+  return '<div class="bigtip"><span class="hint" style="margin:0 4px 0 0">猜你要</span>'
+    + cand.map(function(t){ return '<button class="relchip" style="margin-top:0" data-rid="'+t.id+'">'+hlName(t.n)+'</button>'; }).join('')
+    + '</div>';
+}
 function renderList(){
   const qs = expandQ(curQuery);
-  const list = TOOLS.filter(t=> (curCat==='all'||t.c===curCat) && (!curQuery || qs.some(q=> t.n.includes(q) || CATNAME[t.c].includes(q))));
+  const pyq = (curQuery && /^[a-z0-9]+$/i.test(curQuery)) ? curQuery.toLowerCase() : '';
+  const list = TOOLS.filter(t=> (curCat==='all'||t.c===curCat) && (!curQuery || qs.some(q=> t.n.includes(q) || CATNAME[t.c].includes(q)) || (pyq && (PYCACHE[t.id]||'').indexOf(pyq)>=0)));
   if(!list.length){
     const qlc=curQuery.toLowerCase();
     const near = TOOLS.filter(t=>[...qlc].some(ch=>t.n.toLowerCase().includes(ch))).slice(0,6).map(t=>'<button class="rchip" data-rid="'+t.id+'">'+t.n+'</button>').join('');
@@ -1487,7 +1521,7 @@ function renderList(){
   const total = sorted.length;
   const show = curQuery ? sorted : sorted.slice(0, pageLimit);
   const more = sorted.length - show.length;
-  $('#list').innerHTML = bigTipHTML() + `<div class="cardgrid" style="margin-top:14px">${cards(show)}</div>`
+  $('#list').innerHTML = sugHTML() + bigTipHTML() + `<div class="cardgrid" style="margin-top:14px">${cards(show)}</div>`
     + (more>0 ? `<button class="morebtn" id="morebtn">显示更多（还有 ${more} 个）</button>` : '');
 }
 function hlName(name){
@@ -1513,7 +1547,7 @@ document.addEventListener('click', e=>{
   if(bt){ window.__bigQ=bt.dataset.q||''; openTool('big'+bt.dataset.bi); return; }
   const rl=e.target.closest('.relchip');
   if(rl){ openTool(rl.dataset.rid); return; }
-  const chip=e.target.closest('#chips .chip'); if(chip && chip.dataset.cat){ curCat=chip.dataset.cat; pageLimit=120; renderChips(); renderFav(); renderRecent(); renderList(); return; }
+  const chip=e.target.closest('#chips .chip'); if(chip && chip.dataset.cat){ curCat=chip.dataset.cat; pageLimit=120; renderChips(); renderFav(); renderRank(); renderRecent(); renderList(); return; }
   const fb=e.target.closest('.toolcard .fav'); if(fb){ e.stopPropagation(); toggleFav(fb.dataset.fav); return; }
   const rc=e.target.closest('#recent .rchip'); if(rc){ openTool(rc.dataset.rid); return; }
   const fv=e.target.closest('#favbar .rchip'); if(fv){ openTool(fv.dataset.fav2); return; }
@@ -1555,7 +1589,7 @@ function openTool(id){
   $('#sheetTitle').textContent = t.n + (t.knife?' · 瑞士刀':'');
   const sheet = $('#sheet'); sheet.classList.add('open'); sheet.setAttribute('aria-hidden','false');
   body.scrollTop = 0;
-  pushRecent(id); renderRecent();
+  pushRecent(id); renderRecent(); pushRank(id);
   const fn = window['t_'+id];
   if(typeof fn==='function'){ activeCleanup = fn(body) || null; }
   else body.innerHTML = `<div class="box"><p class="hint" style="margin:0">该工具正在完善中。</p></div>`;
@@ -2266,16 +2300,19 @@ function bigRender(root, bd){
    +'<button class="btn ghost" id="bigHistBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">历史</button>'
    +'<button class="btn ghost" id="bigCsvBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">导出 CSV</button>'
    +'<button class="btn ghost" id="bigFormulaBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">公式</button>'
+   +'<button class="btn ghost" id="bigPresetBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">预设</button>'
+   +'<button class="btn ghost" id="bigCmpBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">对比</button>'
    +'</div></div>'
    +'<div class="box" id="bigOut"></div>'
    +'<div class="box" id="bigBatch" style="display:none"><div class="lbl">批量计算（每行一个数，套用第一个参数）</div>'
    +'<textarea id="bigBatchIn" rows="5" placeholder="每行一个数，例如&#10;250&#10;300&#10;400"></textarea>'
-   +'<button class="btn block" id="bigBatchRun" style="margin-top:8px">开始批量</button></div>'
+   +'<div style="display:flex;gap:8px;margin-top:8px"><button class="btn" id="bigBatchRun" style="flex:1">开始批量</button><button class="btn ghost" id="bigCsvIn" style="flex:0 0 auto;padding:0 12px">导入 CSV</button><input type="file" id="bigCsvFile" accept=".csv,.txt,text/csv" hidden></div></div>'
+   +'<div class="box" id="bigPreset" style="display:none"></div>'
    +'<div class="box" id="bigForm" style="display:none"></div>'
    +'<div class="box" id="bigHist" style="display:none"></div>';
   const Q=root.querySelector('#bigQ'), C=root.querySelector('#bigChips'), S=root.querySelector('#bigSel'),
         F=root.querySelector('#bigF'), O=root.querySelector('#bigOut'), BOX=root.querySelector('#bigBatch'),
-        H=root.querySelector('#bigHist'), FB=root.querySelector('#bigFavBtn'), FM=root.querySelector('#bigForm');
+        H=root.querySelector('#bigHist'), FB=root.querySelector('#bigFavBtn'), FM=root.querySelector('#bigForm'), PB=root.querySelector('#bigPreset');
   const profs=bd.groups.map(function(g,i){return {g:g.g, i:i, n:g.m.length};}).sort(function(a,b){return b.n-a.n;});
   let curP=-1, cur=-1, list=[], histTimer=null, lastRows=[], lastM=null, lastBad=[], lastBatch=null;
   let chipAll=false;
@@ -2357,6 +2394,7 @@ function bigRender(root, bd){
         +(r[2]?'<button class="usebtn" data-use="'+r[2]+'" title="填入第一个参数">→</button>':'')+'</div>';
     }).join('') + (m.u && !isU ? '<p class="hint">'+m.u+'</p>' : '')
       + (badD.length? '<p class="hint" style="color:#D9534F">参数未填或非法：'+badD.join('、')+'</p>' : '')
+      + ([].some.call(F.querySelectorAll('.umul'),function(s){return s.value!=='1';})? '<p class="hint">已按所选倍数换算，注意各参数单位一致</p>' : '')
       + '<p class="hint">'+m.n+'　'+bd.n+'共 '+all.length+' 个口径，可选专业或直接搜索</p>';
     favBtnState();
     clearTimeout(histTimer);
@@ -2376,7 +2414,7 @@ function bigRender(root, bd){
     const hs=lsGet(BIGHIST,[]);
     H.innerHTML='<div class="lbl">最近计算</div>'+(hs.length? hs.map(function(h){
       const d=new Date(h.t); const t=(d.getMonth()+1)+'/'+d.getDate()+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
-      return '<div class="kv"><span>'+t+'　'+h.n+'</span><b>'+h.r+'</b></div>';
+      return '<div class="kv" data-hk="'+h.k+'" data-hn="'+encodeURIComponent(h.n)+'" data-hv="'+encodeURIComponent(JSON.stringify(h.v||[]))+'" style="cursor:pointer"><span>'+t+'　'+h.n+'</span><b>'+h.r+'</b></div>';
     }).join('') : '<p class="hint">还没有计算记录。</p>');
   }
   function shareCard(){
@@ -2475,6 +2513,52 @@ function bigRender(root, bd){
       + out.map(function(x){return '<div class="kv"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>';}).join('');
     lastBatch=out; lastM=m;
   }
+  function onPresetSave(){
+    const e=list[cur]; if(!e){ toast('先选一个口径'); return; }
+    const m=e.m;
+    const vals=m.f.map(function(x){ const el=F.querySelector('#bigf_'+x[0]); return el?(parseFloat(el.value)||0):0; });
+    const ps=lsGet('xy_bigpresets',[]);
+    const at=ps.findIndex(function(p){return p.n===m.n && p.k===bd.k;});
+    if(at>=0) ps.splice(at,1);
+    ps.unshift({k:bd.k, n:m.n, g:e.g, v:vals, t:Date.now()});
+    lsSet('xy_bigpresets', ps.slice(0,20));
+    toast('已存预设：'+m.n);
+    renderPresets();
+  }
+  function renderPresets(){
+    const ps=lsGet('xy_bigpresets',[]);
+    PB.innerHTML='<div class="lbl">我的预设</div>'
+      + '<button class="btn" id="bigPreSave" style="width:auto;padding:0 14px;height:34px;font-size:13px;margin-bottom:8px">存当前参数为预设</button>'
+      + (ps.length? ps.map(function(p,i){
+          return '<div class="kv"><span>'+p.n+'（'+p.g+'）</span><button class="relchip" data-pre="'+i+'" style="margin:0;height:28px;font-size:12px">恢复</button></div>';
+        }).join('') : '<p class="hint">还没有预设，把常用参数存下来，下次一键恢复。</p>');
+    const sv=PB.querySelector('#bigPreSave');
+    if(sv) sv.addEventListener('click', onPresetSave);
+    [].forEach.call(PB.querySelectorAll('[data-pre]'), function(btn){
+      btn.addEventListener('click', function(){
+        const ps2=lsGet('xy_bigpresets',[]), p=ps2[+btn.dataset.pre]; if(!p) return;
+        Q.value=p.n; filt();
+        if(list[cur] && list[cur].m.n===p.n){
+          list[cur].m.f.forEach(function(x,i){ const el=F.querySelector('#bigf_'+x[0]); if(el && p.v[i]!=undefined) el.value=p.v[i]; });
+          run(); toast('已恢复：'+p.n);
+        } else toast('未找到该口径');
+      });
+    });
+  }
+  function onPreset(){ const on=PB.style.display==='none'; PB.style.display=on?'':'none'; if(on) renderPresets(); }
+  function onCompare(){
+    const e=list[cur]; if(!e){ toast('先选一个口径'); return; }
+    const grp=bd.groups.filter(function(g){return g.g===e.g;})[0] || bd.groups[0];
+    const items=grp.m.slice(0,3);
+    const rows=items.map(function(mm){
+      const keys=mm.f.map(function(x){return x[0];});
+      let r='—';
+      try{ r=(new Function(keys.join(','), GX_PRE+'return ('+(mm.e[0]||'0')+');')).apply(null, mm.f.map(function(x){return x[2]||0;})); }catch(err){}
+      return [mm.n, typeof r==='number'?fmtOut(r):String(r), mm.o[0]];
+    });
+    O.innerHTML='<div class="lbl">同级对比 · '+grp.g+'（按各口径默认参数）</div>'
+      + rows.map(function(r){ return '<div class="kv"><span>'+r[0]+'<span class="hint" style="display:inline;margin:0 0 0 6px">'+r[2]+'</span></span><b>'+r[1]+'</b></div>'; }).join('');
+  }
   function onCsv(){
     if(!lastBatch){ toast('先跑一次批量计算'); return; }
     const head=lastM.f.map(function(x){return x[1];}).join(',')+','+lastM.o[0];
@@ -2506,6 +2590,24 @@ function bigRender(root, bd){
   root.querySelector('#bigBatchBtn').addEventListener('click',onBatchToggle);
   root.querySelector('#bigBatchRun').addEventListener('click',onBatchRun);
   root.querySelector('#bigHistBtn').addEventListener('click',onHist);
+  H.addEventListener('click',function(e){
+    const kv=e.target.closest('[data-hk]'); if(!kv) return;
+    let nm='', vals=[]; try{ nm=decodeURIComponent(kv.dataset.hn||''); vals=JSON.parse(decodeURIComponent(kv.dataset.hv||'[]')); }catch(x){}
+    window.__bigHist={k:kv.dataset.hk, n:nm.split(' · ')[1]||nm, v:vals};
+    openTool('big'+(BIGKIDX[kv.dataset.hk]!==undefined?BIGKIDX[kv.dataset.hk]:0));
+  });
+  root.querySelector('#bigPresetBtn').addEventListener('click',onPreset);
+  root.querySelector('#bigCmpBtn').addEventListener('click',onCompare);
+  const cIn=root.querySelector('#bigCsvIn'), cF=root.querySelector('#bigCsvFile');
+  if(cIn&&cF){
+    cIn.addEventListener('click',function(){ cF.click(); });
+    cF.addEventListener('change',function(){
+      const f=cF.files&&cF.files[0]; if(!f) return;
+      const rd=new FileReader();
+      rd.onload=function(){ root.querySelector('#bigBatchIn').value=String(rd.result).replace(/\r/g,''); toast('已导入，点开始批量'); };
+      rd.readAsText(f); cF.value='';
+    });
+  }
   root.querySelector('#bigCsvBtn').addEventListener('click',onCsv);
   root.querySelector('#bigFormulaBtn').addEventListener('click',onFormula);
   F.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); run(); } });
@@ -2520,6 +2622,14 @@ function bigRender(root, bd){
   if(CM){ CM.checked=bigComma(); CM.addEventListener('change',function(){ try{ localStorage.setItem('xy_bigcomma', CM.checked?'1':'0'); }catch(e){} run(); }); }
   if(window.__bigQ){ Q.value=window.__bigQ; window.__bigQ=null; }
   chips(); filt();
+  if(window.__bigHist){
+    const hh=window.__bigHist; window.__bigHist=null;
+    Q.value=hh.n; filt();
+    if(list[cur] && list[cur].m.n===hh.n && Array.isArray(hh.v)){
+      list[cur].m.f.forEach(function(x,i){ const el=F.querySelector('#bigf_'+x[0]); if(el && hh.v[i]!=undefined) el.value=hh.v[i]; });
+      run();
+    }
+  }
   return function(){
     O.removeEventListener('click',onOut); F.removeEventListener('input',onIn); F.removeEventListener('change',onIn);
     S.removeEventListener('change',onSel); Q.removeEventListener('input',onQ); C.removeEventListener('click',onChip);
@@ -17694,15 +17804,32 @@ function t_fortune_cookie(root){
 })();
 
 /* PWA：可安装 + 离线兜底 */
+function showUpdateBar(){
+  if(document.getElementById('updbar')) return;
+  const b=document.createElement('div'); b.id='updbar';
+  b.textContent='有新版本，点击刷新';
+  b.style.cssText='position:fixed;left:12px;right:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 76px);padding:11px;border-radius:12px;background:#2C63F0;color:#fff;font-size:14px;text-align:center;z-index:60;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.22)';
+  b.addEventListener('click',function(){ location.reload(); });
+  document.body.appendChild(b);
+}
 if('serviceWorker' in navigator && location.protocol.indexOf('http')===0){
-  window.addEventListener('load',function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('sw.js').then(function(reg){
+      reg.addEventListener('updatefound',function(){
+        const w=reg.installing; if(!w) return;
+        w.addEventListener('statechange',function(){
+          if(w.state==='installed' && navigator.serviceWorker.controller) showUpdateBar();
+        });
+      });
+    }).catch(function(){});
+  });
 }
 
 /* 收藏导入导出 */
 (function(){
   const expB=$('#expBtn'), impB=$('#impBtn'), impF=$('#impFile');
   if(!expB) return;
-  const KEYS=['xy_fav','xy_recent','xy_bigfav','xy_biguse','xy_bighist','xy_theme','xy_bigprec','xy_bigcomma'];
+  const KEYS=['xy_fav','xy_recent','xy_toolrank','xy_bigfav','xy_biguse','xy_bighist','xy_bigpresets','xy_theme','xy_bigprec','xy_bigcomma'];
   expB.addEventListener('click',function(){
     const data={};
     KEYS.forEach(function(k){ try{ const v=localStorage.getItem(k); if(v) data[k]=v; }catch(e){} });
