@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="4.3">
+<meta name="xyver" content="4.4">
 <title>小羽工具箱 · 本地工具集合</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%232C63F0'/%3E%3Cpath d='M7 8h10M7 12h10M7 16h6' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
@@ -125,6 +125,9 @@ html[data-theme="dark"] .toolcard .ico{background:color-mix(in srgb,var(--ic,#2C
   background:var(--warn);opacity:.9;
 }
 .empty{color:var(--sub);font-size:14px;text-align:center;padding:48px 0}
+.totop{position:fixed;right:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);box-shadow:var(--shadow);display:grid;place-items:center;opacity:0;pointer-events:none;transform:translateY(8px);transition:.18s;z-index:30}
+.totop.on{opacity:1;pointer-events:auto;transform:none}
+.totop svg{width:18px;height:18px;stroke:var(--ink)}
 .morebtn{display:block;width:100%;margin:14px 0 4px;min-height:46px;border:1px dashed var(--line);border-radius:12px;background:var(--card);color:var(--sub);font-size:13.5px}
 
 /* ===== 工具面板 ===== */
@@ -247,6 +250,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
 </header>
 
 <main id="list"></main>
+<button class="totop" id="totop" aria-label="回到顶部"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button>
 <footer class="foot">
   <span>小羽工具箱 · 作者 fornow</span>
   <span>交流群 728403008</span>
@@ -399,9 +403,9 @@ const TOOLS = [
   {id:'qrscan', n:'扫码识别', c:'qry', col:'#E2543B', ic:'scan'},
   {id:'imgcrop', n:'裁剪旋转', c:'img', col:'#5B7CFA', ic:'frame'},
   {id:'imgbw', n:'图片滤镜', c:'img', col:'#8A94A6', ic:'sun'},
-  {id:'uuid', n:'UUID 生成', c:'kit', col:'#2C63F0', ic:'hash'},
-  {id:'jsonfmt', n:'JSON 格式化', c:'kit', col:'#0E9AA7', ic:'code'},
-  {id:'diff', n:'文本对比', c:'kit', col:'#17A673', ic:'dots'},
+  {id:'uuid', n:'UUID 生成', c:'txt', col:'#2C63F0', ic:'hash'},
+  {id:'jsonfmt', n:'JSON 格式化', c:'txt', col:'#0E9AA7', ic:'code'},
+  {id:'diff', n:'文本对比', c:'txt', col:'#17A673', ic:'dots'},
   {id:'colorconv', n:'颜色转换', c:'txt', col:'#D9822B', ic:'palette'},
   {id:'deviceinfo', n:'设备信息', c:'kit', col:'#7A5AF8', ic:'compass'},
   {id:'screentest', n:'屏幕检测', c:'kit', col:'#15181D', ic:'grid'},
@@ -456,12 +460,12 @@ const TOOLS = [
   {id:'sizeconv', n:'尺码换算', c:'qry', col:'#17A673', ic:'ruler'},
   {id:'birthdays', n:'出生天数', c:'qry', col:'#E2543B', ic:'calendar'},
   {id:'weeknum', n:'第几周', c:'qry', col:'#2C63F0', ic:'calendar'},
-  {id:'jwt', n:'JWT 解析', c:'kit', col:'#2C63F0', ic:'code'},
-  {id:'regex', n:'正则测试', c:'kit', col:'#0E9AA7', ic:'code'},
-  {id:'mdpreview', n:'Markdown 预览', c:'kit', col:'#17A673', ic:'text'},
+  {id:'jwt', n:'JWT 解析', c:'txt', col:'#2C63F0', ic:'code'},
+  {id:'regex', n:'正则测试', c:'txt', col:'#0E9AA7', ic:'code'},
+  {id:'mdpreview', n:'Markdown 预览', c:'txt', col:'#17A673', ic:'text'},
   {id:'pwstrength', n:'密码强度', c:'kit', col:'#E2543B', ic:'hash'},
-  {id:'urlparse', n:'URL 解析', c:'kit', col:'#D9822B', ic:'link'},
-  {id:'cron', n:'Cron 解析', c:'kit', col:'#7A5AF8', ic:'clock'},
+  {id:'urlparse', n:'URL 解析', c:'txt', col:'#D9822B', ic:'link'},
+  {id:'cron', n:'Cron 解析', c:'txt', col:'#7A5AF8', ic:'clock'},
   {id:'imgbatch', n:'批量压缩', c:'img', col:'#2C63F0', ic:'batch'},
   {id:'imgascii', n:'转字符画', c:'img', col:'#17A673', ic:'ascii'},
   {id:'img2pdf', n:'转 PDF', c:'img', col:'#E2543B', ic:'pdf'},
@@ -498,9 +502,9 @@ const TOOLS = [
   {id:'solar', n:'二十四节气', c:'qry', col:'#17A673', ic:'calendar'},
   {id:'periodic', n:'元素周期表', c:'qry', col:'#2C63F0', ic:'grid'},
   {id:'hotkeys', n:'快捷键速查', c:'qry', col:'#8A94A6', ic:'code'},
-  {id:'json2csv', n:'JSON 转CSV', c:'kit', col:'#D9822B', ic:'grid'},
-  {id:'csv2json', n:'CSV 转JSON', c:'kit', col:'#0E9AA7', ic:'code'},
-  {id:'urlparams', n:'URL 参数', c:'kit', col:'#2C63F0', ic:'link'},
+  {id:'json2csv', n:'JSON 转CSV', c:'txt', col:'#D9822B', ic:'grid'},
+  {id:'csv2json', n:'CSV 转JSON', c:'txt', col:'#0E9AA7', ic:'code'},
+  {id:'urlparams', n:'URL 参数', c:'txt', col:'#2C63F0', ic:'link'},
   {id:'miclevel', n:'麦克风电平', c:'eng', col:'#17A673', ic:'wave'},
   {id:'battery', n:'电池状态', c:'dev', col:'#D9822B', ic:'pulse'},
   {id:'netinfo', n:'网络信息', c:'dev', col:'#2C63F0', ic:'link'},
@@ -586,24 +590,24 @@ const TOOLS = [
   {id:'port', n:'常用端口', c:'qry', col:'#E2543B', ic:'link'},
   {id:'stdcode', n:'标准代号', c:'qry', col:'#7A5AF8', ic:'stamp'},
   {id:'pipesize', n:'管径对照', c:'qry', col:'#2C63F0', ic:'rod'},
-  {id:'json2ts', n:'JSON转TS', c:'kit', col:'#2C63F0', ic:'code'},
-  {id:'json2sql', n:'JSON转SQL', c:'kit', col:'#17A673', ic:'grid'},
-  {id:'jsonpath', n:'JSON取值', c:'kit', col:'#D9822B', ic:'code'},
-  {id:'jsonmin', n:'JSON压缩', c:'kit', col:'#8A94A6', ic:'code'},
-  {id:'htmlfmt', n:'HTML格式化', c:'kit', col:'#0E9AA7', ic:'code'},
-  {id:'cssmin', n:'CSS压缩', c:'kit', col:'#7A5AF8', ic:'drop'},
+  {id:'json2ts', n:'JSON转TS', c:'txt', col:'#2C63F0', ic:'code'},
+  {id:'json2sql', n:'JSON转SQL', c:'txt', col:'#17A673', ic:'grid'},
+  {id:'jsonpath', n:'JSON取值', c:'txt', col:'#D9822B', ic:'code'},
+  {id:'jsonmin', n:'JSON压缩', c:'txt', col:'#8A94A6', ic:'code'},
+  {id:'htmlfmt', n:'HTML格式化', c:'txt', col:'#0E9AA7', ic:'code'},
+  {id:'cssmin', n:'CSS压缩', c:'txt', col:'#7A5AF8', ic:'drop'},
   {id:'contrast', n:'颜色对比度', c:'txt', col:'#E2543B', ic:'palette'},
   {id:'palette', n:'配色生成', c:'img', col:'#2C63F0', ic:'palette'},
-  {id:'unicode', n:'Unicode码点', c:'kit', col:'#D9822B', ic:'hash'},
-  {id:'entities', n:'实体对照', c:'kit', col:'#8A94A6', ic:'code'},
-  {id:'mime', n:'MIME类型', c:'kit', col:'#17A673', ic:'link'},
-  {id:'regexlib', n:'正则速查', c:'kit', col:'#0E9AA7', ic:'code'},
-  {id:'gitcmds', n:'Git速查', c:'kit', col:'#7A5AF8', ic:'code'},
-  {id:'dockercmds', n:'Docker速查', c:'kit', col:'#2C63F0', ic:'batch'},
-  {id:'asciitable', n:'ASCII表', c:'kit', col:'#8A94A6', ic:'text'},
-  {id:'sqlfmt', n:'SQL美化', c:'kit', col:'#2C63F0', ic:'code'},
-  {id:'uuidbatch', n:'批量UUID', c:'kit', col:'#17A673', ic:'hash'},
-  {id:'tsbatch', n:'时间戳批量', c:'kit', col:'#D9822B', ic:'clock'},
+  {id:'unicode', n:'Unicode码点', c:'txt', col:'#D9822B', ic:'hash'},
+  {id:'entities', n:'实体对照', c:'txt', col:'#8A94A6', ic:'code'},
+  {id:'mime', n:'MIME类型', c:'txt', col:'#17A673', ic:'link'},
+  {id:'regexlib', n:'正则速查', c:'txt', col:'#0E9AA7', ic:'code'},
+  {id:'gitcmds', n:'Git速查', c:'txt', col:'#7A5AF8', ic:'code'},
+  {id:'dockercmds', n:'Docker速查', c:'txt', col:'#2C63F0', ic:'batch'},
+  {id:'asciitable', n:'ASCII表', c:'txt', col:'#8A94A6', ic:'text'},
+  {id:'sqlfmt', n:'SQL美化', c:'txt', col:'#2C63F0', ic:'code'},
+  {id:'uuidbatch', n:'批量UUID', c:'txt', col:'#17A673', ic:'hash'},
+  {id:'tsbatch', n:'时间戳批量', c:'txt', col:'#D9822B', ic:'clock'},
   {id:'gyro', n:'陀螺仪', c:'eng', col:'#2C63F0', ic:'compass'},
   {id:'proximity', n:'距离传感器', c:'eng', col:'#17A673', ic:'distance'},
   {id:'spectrum', n:'音频频谱', c:'eng', col:'#F0A22B', ic:'wave'},
@@ -763,39 +767,39 @@ const TOOLS = [
   {id:'usbtype', n:'USB 接口', c:'qry', col:'#7A5AF8', ic:'link'},
   {id:'appliance', n:'家电功率', c:'qry', col:'#0E9AA7', ic:'flash'},
   {id:'unitsym', n:'单位符号', c:'qry', col:'#5B7CFA', ic:'ruler'},
-  {id:'json2yaml', n:'JSON 转 YAML', c:'kit', col:'#5B7CFA', ic:'code'},
-  {id:'yaml2json', n:'YAML 转 JSON', c:'kit', col:'#D9822B', ic:'code'},
-  {id:'xml2json', n:'XML 转 JSON', c:'kit', col:'#3B8A67', ic:'code'},
-  {id:'json2xml', n:'JSON 转 XML', c:'kit', col:'#8A6D3B', ic:'code'},
-  {id:'csv2sql', n:'CSV 转 SQL', c:'kit', col:'#2C63F0', ic:'code'},
-  {id:'jsonflat', n:'JSON 扁平化', c:'kit', col:'#17A673', ic:'code'},
-  {id:'jsondiff', n:'JSON 对比', c:'kit', col:'#F0A22B', ic:'code'},
-  {id:'jsonschema', n:'生成 Schema', c:'kit', col:'#E2543B', ic:'code'},
-  {id:'hex2text', n:'HEX 转文本', c:'kit', col:'#7A5AF8', ic:'ascii'},
-  {id:'text2hex', n:'文本转 HEX', c:'kit', col:'#0E9AA7', ic:'ascii'},
-  {id:'bin2text', n:'二进制转文本', c:'kit', col:'#5B7CFA', ic:'ascii'},
-  {id:'text2bin', n:'文本转二进制', c:'kit', col:'#D9822B', ic:'ascii'},
-  {id:'base32', n:'Base32', c:'kit', col:'#3B8A67', ic:'shield'},
-  {id:'base58', n:'Base58', c:'kit', col:'#8A6D3B', ic:'shield'},
-  {id:'urlmerge', n:'URL 参数整理', c:'kit', col:'#2C63F0', ic:'link'},
-  {id:'randstr', n:'随机字符串', c:'kit', col:'#17A673', ic:'dice'},
-  {id:'passphrase', n:'随机口令', c:'kit', col:'#F0A22B', ic:'shield'},
-  {id:'cronbuild', n:'Cron 生成', c:'kit', col:'#E2543B', ic:'clock'},
-  {id:'tsdiff', n:'时间戳差值', c:'kit', col:'#7A5AF8', ic:'clock'},
-  {id:'subnet', n:'子网计算', c:'kit', col:'#0E9AA7', ic:'grid'},
-  {id:'cidr', n:'CIDR 换算', c:'kit', col:'#5B7CFA', ic:'grid'},
-  {id:'macvendor', n:'MAC 解析', c:'kit', col:'#D9822B', ic:'link'},
-  {id:'uaparse', n:'UA 解析', c:'kit', col:'#3B8A67', ic:'person'},
-  {id:'httphdr', n:'请求头解析', c:'kit', col:'#8A6D3B', ic:'code'},
-  {id:'cookie', n:'Cookie 解析', c:'kit', col:'#2C63F0', ic:'shield'},
-  {id:'envparse', n:'.env 解析', c:'kit', col:'#17A673', ic:'code'},
-  {id:'cssvar', n:'CSS 变量提取', c:'kit', col:'#F0A22B', ic:'palette'},
-  {id:'mdtable', n:'Markdown 表格', c:'kit', col:'#E2543B', ic:'grid'},
-  {id:'json2env', n:'JSON 转 .env', c:'kit', col:'#7A5AF8', ic:'code'},
+  {id:'json2yaml', n:'JSON 转 YAML', c:'txt', col:'#5B7CFA', ic:'code'},
+  {id:'yaml2json', n:'YAML 转 JSON', c:'txt', col:'#D9822B', ic:'code'},
+  {id:'xml2json', n:'XML 转 JSON', c:'txt', col:'#3B8A67', ic:'code'},
+  {id:'json2xml', n:'JSON 转 XML', c:'txt', col:'#8A6D3B', ic:'code'},
+  {id:'csv2sql', n:'CSV 转 SQL', c:'txt', col:'#2C63F0', ic:'code'},
+  {id:'jsonflat', n:'JSON 扁平化', c:'txt', col:'#17A673', ic:'code'},
+  {id:'jsondiff', n:'JSON 对比', c:'txt', col:'#F0A22B', ic:'code'},
+  {id:'jsonschema', n:'生成 Schema', c:'txt', col:'#E2543B', ic:'code'},
+  {id:'hex2text', n:'HEX 转文本', c:'txt', col:'#7A5AF8', ic:'ascii'},
+  {id:'text2hex', n:'文本转 HEX', c:'txt', col:'#0E9AA7', ic:'ascii'},
+  {id:'bin2text', n:'二进制转文本', c:'txt', col:'#5B7CFA', ic:'ascii'},
+  {id:'text2bin', n:'文本转二进制', c:'txt', col:'#D9822B', ic:'ascii'},
+  {id:'base32', n:'Base32', c:'txt', col:'#3B8A67', ic:'shield'},
+  {id:'base58', n:'Base58', c:'txt', col:'#8A6D3B', ic:'shield'},
+  {id:'urlmerge', n:'URL 参数整理', c:'txt', col:'#2C63F0', ic:'link'},
+  {id:'randstr', n:'随机字符串', c:'txt', col:'#17A673', ic:'dice'},
+  {id:'passphrase', n:'随机口令', c:'txt', col:'#F0A22B', ic:'shield'},
+  {id:'cronbuild', n:'Cron 生成', c:'txt', col:'#E2543B', ic:'clock'},
+  {id:'tsdiff', n:'时间戳差值', c:'txt', col:'#7A5AF8', ic:'clock'},
+  {id:'subnet', n:'子网计算', c:'txt', col:'#0E9AA7', ic:'grid'},
+  {id:'cidr', n:'CIDR 换算', c:'txt', col:'#5B7CFA', ic:'grid'},
+  {id:'macvendor', n:'MAC 解析', c:'txt', col:'#D9822B', ic:'link'},
+  {id:'uaparse', n:'UA 解析', c:'txt', col:'#3B8A67', ic:'person'},
+  {id:'httphdr', n:'请求头解析', c:'txt', col:'#8A6D3B', ic:'code'},
+  {id:'cookie', n:'Cookie 解析', c:'txt', col:'#2C63F0', ic:'shield'},
+  {id:'envparse', n:'.env 解析', c:'txt', col:'#17A673', ic:'code'},
+  {id:'cssvar', n:'CSS 变量提取', c:'txt', col:'#F0A22B', ic:'palette'},
+  {id:'mdtable', n:'Markdown 表格', c:'txt', col:'#E2543B', ic:'grid'},
+  {id:'json2env', n:'JSON 转 .env', c:'txt', col:'#7A5AF8', ic:'code'},
   {id:'codecount', n:'代码行数', c:'txt', col:'#0E9AA7', ic:'tally'},
-  {id:'filesize', n:'文件大小换算', c:'kit', col:'#5B7CFA', ic:'calc'},
+  {id:'filesize', n:'文件大小换算', c:'txt', col:'#5B7CFA', ic:'calc'},
   {id:'rgb2cmyk', n:'RGB 转 CMYK', c:'img', col:'#D9822B', ic:'palette'},
-  {id:'strftime', n:'日期格式化', c:'kit', col:'#3B8A67', ic:'calendar'},
+  {id:'strftime', n:'日期格式化', c:'txt', col:'#3B8A67', ic:'calendar'},
   {id:'rm1', n:'1RM 估算', c:'life', col:'#17A673', ic:'pulse'},
   {id:'cardio_burn', n:'有氧消耗', c:'life', col:'#2C63F0', ic:'truck'},
   {id:'steps_cal', n:'步数热量', c:'life', col:'#D9822B', ic:'person'},
@@ -1272,8 +1276,8 @@ const TOOLS = [
   {id:'random_penalty', n:'随机惩罚', c:'fun', col:'#0E9AA7', ic:'palette'},
   {id:'wolf_role', n:'狼人杀角色', c:'fun', col:'#F0A22B', ic:'coin'},
   {id:'typing_speed', n:'打字速度', c:'fun', col:'#6C5CE7', ic:'wave'},
-  {id:'mirror_text', n:'文字倒序', c:'fun', col:'#E2543B', ic:'gift'},
-  {id:'acrostic', n:'藏头诗', c:'fun', col:'#0E9AA7', ic:'palette'},
+  {id:'mirror_text', n:'文字倒序', c:'txt', col:'#E2543B', ic:'gift'},
+  {id:'acrostic', n:'藏头诗', c:'txt', col:'#0E9AA7', ic:'palette'},
   {id:'fortune_cookie', n:'随机签语', c:'fun', col:'#F0A22B', ic:'coin'},
 
 ];
@@ -1432,7 +1436,12 @@ let pageLimit = 120;
 function renderList(){
   const qs = expandQ(curQuery);
   const list = TOOLS.filter(t=> (curCat==='all'||t.c===curCat) && (!curQuery || qs.some(q=> t.n.includes(q) || CATNAME[t.c].includes(q))));
-  if(!list.length){ $('#list').innerHTML = '<div class="empty">没有找到相关工具</div>'; return; }
+  if(!list.length){
+    const qlc=curQuery.toLowerCase();
+    const near = TOOLS.filter(t=>[...qlc].some(ch=>t.n.toLowerCase().includes(ch))).slice(0,6).map(t=>'<button class="rchip" data-rid="'+t.id+'">'+t.n+'</button>').join('');
+    $('#list').innerHTML = '<div class="empty">没有找到相关工具'+(near?'<div class="recent" style="justify-content:center;margin-top:10px;flex-wrap:wrap"><span class="rlbl">试试</span>'+near+'</div>':'')+'</div>';
+    return;
+  }
   const order = CATS.map(c=>c.k);
   const sorted = curCat==='all' && !curQuery
     ? list.slice().sort((a,b)=>hotRank(b.n)-hotRank(a.n) || order.indexOf(a.c)-order.indexOf(b.c))
@@ -2176,12 +2185,13 @@ function bigRender(root, bd){
     const m=e.m, keys=m.f.map(function(x){return x[0];}), v={};
     m.f.forEach(function(x){ const el=F.querySelector('#bigf_'+x[0]); v[x[0]]=el?(parseFloat(el.value)||0):0; });
     const rows=m.o.map(function(lb,i){
-      let r='—';
+      let r='—', raw=null;
       try{ r=(new Function(keys.join(','), GX_PRE+'return ('+(m.e[i]||'0')+');')).apply(null, keys.map(function(k){return v[k];})); }catch(err){ r='—'; }
-      return [lb, typeof r==='number'?extNum(r):String(r)];
+      if(typeof r==='number'&&isFinite(r)) raw=String(+r.toPrecision(12));
+      return [lb, typeof r==='number'?extNum(r):String(r), raw];
     });
     var isU=m.u && m.u.length<=7 && !/[\u4e00-\u9fa5]/.test(m.u);
-    O.innerHTML=rows.map(function(r){return '<div class="kv"><span>'+r[0]+'</span><b>'+r[1]+(isU?' '+m.u:'')+'</b></div>';}).join('')
+    O.innerHTML=rows.map(function(r){return '<div class="kv"><span>'+r[0]+'</span><b'+(r[2]?' class="tapraw" data-fmt="'+r[1]+'" data-raw="'+r[2]+'" data-unit="'+(isU?' '+m.u:'')+'" title="点一下切换原值"':'')+'>'+r[1]+(isU?' '+m.u:'')+'</b></div>';}).join('')
       + (m.u && !isU ? '<p class="hint">'+m.u+'</p>' : '')
       +'<p class="hint">'+m.n+'　'+bd.n+'共 '+all.length+' 个口径，可选专业或直接搜索</p>';
   }
@@ -2192,10 +2202,16 @@ function bigRender(root, bd){
   function onQ(){ filt(); }
   function onSel(){ cur=+S.value; fields(); run(); }
   function onIn(){ run(); }
+  function onOut(ev){
+    const b=ev.target.closest('.kv b.tapraw'); if(!b) return;
+    if(!b.dataset.s || b.dataset.s==='fmt'){ b.dataset.s='raw'; b.textContent=b.dataset.raw+(b.dataset.unit||'')+'（原值）'; }
+    else { b.dataset.s='fmt'; b.textContent=b.dataset.fmt+(b.dataset.unit||''); }
+  }
+  O.addEventListener('click',onOut);
   C.addEventListener('click',onChip); Q.addEventListener('input',onQ); S.addEventListener('change',onSel);
   F.addEventListener('input',onIn); F.addEventListener('change',onIn);
   chips(); filt();
-  return function(){ C.removeEventListener('click',onChip); Q.removeEventListener('input',onQ); S.removeEventListener('change',onSel); F.removeEventListener('input',onIn); F.removeEventListener('change',onIn); };
+  return function(){ O.removeEventListener('click',onOut); C.removeEventListener('click',onChip); Q.removeEventListener('input',onQ); S.removeEventListener('change',onSel); F.removeEventListener('input',onIn); F.removeEventListener('change',onIn); };
 }
 
 /* ===== 速算总汇（一步式公式合并） ===== */
@@ -17348,6 +17364,17 @@ function t_acrostic(root){
 function t_fortune_cookie(root){
   randPickTool(root,{items:'你比自己以为的更有耐心。\n今天适合把一个拖很久的事做完。\n别急着证明自己。\n该拒绝的时候就拒绝。\n先照顾好睡眠。\n慢慢来，比较快。',note:'随机签语（娱乐）。'});
 }
+
+/* 回到顶部 */
+(function(){
+  const b=$('#totop');
+  if(!b) return;
+  b.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+  function upd(){ if((window.scrollY||document.documentElement.scrollTop||0)>400) b.classList.add('on'); else b.classList.remove('on'); }
+  window.addEventListener('scroll',upd,{passive:true});
+  document.addEventListener('scroll',upd,{passive:true, capture:true});
+  upd();
+})();
 
 </script>
 </body>
