@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="4.6">
+<meta name="xyver" content="4.7">
 <title>小羽工具箱 · 本地工具集合</title>
 <meta name="theme-color" content="#2C63F0">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -138,6 +138,9 @@ html[data-theme="dark"] .toolcard .ico{background:color-mix(in srgb,var(--ic,#2C
 .relchip:active{background:var(--soft)}
 .bigtip{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
 .bigtip button{color:var(--ink)}
+mark{background:#FFE9A8;color:inherit;border-radius:3px;padding:0 1px}
+.io{height:28px;padding:0 10px;border:1px solid var(--line);border-radius:14px;background:var(--card);color:var(--sub);font-size:12px;cursor:pointer}
+input.bad{border-color:#D9534F !important;box-shadow:0 0 0 2px rgba(217,83,79,.12)}
 .morebtn{display:block;width:100%;margin:14px 0 4px;min-height:46px;border:1px dashed var(--line);border-radius:12px;background:var(--card);color:var(--sub);font-size:13.5px}
 
 /* ===== 工具面板 ===== */
@@ -257,6 +260,11 @@ canvas{max-width:100%;display:block;border-radius:10px}
   <div class="recent" id="favbar" hidden></div>
   <div class="recent" id="recent" hidden></div>
   <div class="chips" id="chips"></div>
+  <div id="ioRow" style="display:flex;gap:8px;align-items:center;margin:2px 0 0;font-size:12px;color:var(--sub)">
+    <button class="io" id="expBtn">导出收藏</button>
+    <button class="io" id="impBtn">导入收藏</button>
+    <input type="file" id="impFile" accept=".json,application/json" hidden>
+  </div>
 </header>
 
 <main id="list"></main>
@@ -1482,13 +1490,20 @@ function renderList(){
   $('#list').innerHTML = bigTipHTML() + `<div class="cardgrid" style="margin-top:14px">${cards(show)}</div>`
     + (more>0 ? `<button class="morebtn" id="morebtn">显示更多（还有 ${more} 个）</button>` : '');
 }
+function hlName(name){
+  if(!curQuery) return name;
+  const qs=expandQ(curQuery).filter(k=>k.length>=2);
+  let out=name;
+  qs.forEach(k=>{ if(out.indexOf(k)>=0) out=out.split(k).join('\u0001'+k+'\u0002'); });
+  return out.split('\u0001').join('<mark>').split('\u0002').join('</mark>');
+}
 function cards(list){
   const favs=getFav();
   return list.map(t=>`
     <div class="toolcard${t.knife?' knife':''}" data-id="${t.id}">
       <button class="fav${favs.has(t.id)?' on':''}" data-fav="${t.id}" aria-label="${favs.has(t.id)?'取消收藏':'收藏'}"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.2 5.9-.8z"/></svg></button>
       <div class="ico" style="--ic:${t.col}">${icon(t.ic,t.col)}</div>
-      <b>${t.n}</b>
+      <b>${hlName(t.n)}</b>
     </div>`).join('');
 }
 document.addEventListener('click', e=>{
@@ -1516,6 +1531,20 @@ function relatedHTML(t){
   return '<div class="box" style="border-top:1px dashed var(--line)"><span class="rlbl">相关工具</span>'
     + rel.map(x=>'<button class="relchip" data-rid="'+x[1].id+'">'+x[1].n+'</button>').join('')+'</div>';
 }
+function toolFilter(body){
+  const groups=[].slice.call(body.querySelectorAll('.box')).filter(function(b){ return b.querySelectorAll('.kv,.item,.row').length>8; });
+  if(!groups.length || body.querySelector('#toolFind')) return;
+  const bar=document.createElement('div'); bar.className='box';
+  bar.innerHTML='<input id="toolFind" type="search" placeholder="在本工具内筛选…" style="width:100%;padding:9px 12px;font-size:15px;border:1px solid var(--line);border-radius:10px;background:var(--field);color:var(--ink)">';
+  body.insertBefore(bar, body.firstChild);
+  const inp=bar.querySelector('#toolFind');
+  inp.addEventListener('input',function(){
+    const k=inp.value.trim();
+    groups.forEach(function(g){
+      [].forEach.call(g.querySelectorAll('.kv,.item,.row'), function(el){ el.style.display = (!k || el.textContent.indexOf(k)>=0) ? '' : 'none'; });
+    });
+  });
+}
 function openTool(id){
   const t = TOOLS.find(x=>x.id===id); if(!t) return;
   let body = $('#sheetBody');
@@ -1531,6 +1560,7 @@ function openTool(id){
   if(typeof fn==='function'){ activeCleanup = fn(body) || null; }
   else body.innerHTML = `<div class="box"><p class="hint" style="margin:0">该工具正在完善中。</p></div>`;
   body.insertAdjacentHTML('beforeend', relatedHTML(t));
+  toolFilter(body);
 }
 function copyResult(){
   const b=$('#sheetBody'); if(!b) return;
@@ -2203,13 +2233,19 @@ const GX=[];
 
 const BIGFAV='xy_bigfav', BIGUSE='xy_biguse', BIGHIST='xy_bighist', BIGPREC='xy_bigprec';
 function bigPrec(){ try{ return localStorage.getItem(BIGPREC)||'auto'; }catch(e){ return 'auto'; } }
+function bigComma(){ try{ return localStorage.getItem('xy_bigcomma')==='1'; }catch(e){ return false; } }
+function commaNum(str){
+  if(!bigComma() || /[eE]/.test(str)) return str;
+  const m=str.match(/^(-?)(\d+)(\.\d+)?$/); if(!m) return str;
+  return m[1]+m[2].replace(/\B(?=(\d{3})+(?!\d))/g, ',')+(m[3]||'');
+}
 function fmtOut(r){
   const p=bigPrec();
-  if(p==='2') return r.toFixed(2);
-  if(p==='3') return r.toFixed(3);
-  if(p==='sig') return String(+r.toPrecision(3));
-  if(p==='raw') return String(+r.toPrecision(12));
-  return extNum(r);
+  if(p==='2') return commaNum(r.toFixed(2));
+  if(p==='3') return commaNum(r.toFixed(3));
+  if(p==='sig') return commaNum(String(+r.toPrecision(3)));
+  if(p==='raw') return commaNum(String(+r.toPrecision(12)));
+  return commaNum(extNum(r));
 }
 function lsGet(k,d){ try{ const v=JSON.parse(localStorage.getItem(k)||'null'); return v==null?d:v; }catch(e){ return d; } }
 function lsSet(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
@@ -2222,23 +2258,26 @@ function bigRender(root, bd){
    +'<div id="bigChips" style="display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;-webkit-overflow-scrolling:touch"></div>'
    +'<select id="bigSel"></select>'
    +'<div id="bigF" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px"></div>'
-   +'<div style="display:flex;align-items:center;gap:8px;margin-top:10px"><span class="lbl" style="margin:0">精度</span><select id="bigPrec" style="width:118px"><option value="auto">自动</option><option value="2">2 位小数</option><option value="3">3 位小数</option><option value="sig">3 位有效</option><option value="raw">原值</option></select></div>'
+   +'<div style="display:flex;align-items:center;gap:8px;margin-top:10px"><span class="lbl" style="margin:0">精度</span><select id="bigPrec" style="width:118px"><option value="auto">自动</option><option value="2">2 位小数</option><option value="3">3 位小数</option><option value="sig">3 位有效</option><option value="raw">原值</option></select><label style="display:flex;align-items:center;gap:4px;font-size:13px;color:var(--sub)"><input type="checkbox" id="bigComma" style="width:16px;height:16px">千分位</label></div>'
    +'<div id="bigBtns" style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">'
    +'<button class="btn ghost" id="bigFavBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">☆ 收藏口径</button>'
    +'<button class="btn ghost" id="bigShareBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">分享结果</button>'
    +'<button class="btn ghost" id="bigBatchBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">批量计算</button>'
    +'<button class="btn ghost" id="bigHistBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">历史</button>'
+   +'<button class="btn ghost" id="bigCsvBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">导出 CSV</button>'
+   +'<button class="btn ghost" id="bigFormulaBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">公式</button>'
    +'</div></div>'
    +'<div class="box" id="bigOut"></div>'
    +'<div class="box" id="bigBatch" style="display:none"><div class="lbl">批量计算（每行一个数，套用第一个参数）</div>'
    +'<textarea id="bigBatchIn" rows="5" placeholder="每行一个数，例如&#10;250&#10;300&#10;400"></textarea>'
    +'<button class="btn block" id="bigBatchRun" style="margin-top:8px">开始批量</button></div>'
+   +'<div class="box" id="bigForm" style="display:none"></div>'
    +'<div class="box" id="bigHist" style="display:none"></div>';
   const Q=root.querySelector('#bigQ'), C=root.querySelector('#bigChips'), S=root.querySelector('#bigSel'),
         F=root.querySelector('#bigF'), O=root.querySelector('#bigOut'), BOX=root.querySelector('#bigBatch'),
-        H=root.querySelector('#bigHist'), FB=root.querySelector('#bigFavBtn');
+        H=root.querySelector('#bigHist'), FB=root.querySelector('#bigFavBtn'), FM=root.querySelector('#bigForm');
   const profs=bd.groups.map(function(g,i){return {g:g.g, i:i, n:g.m.length};}).sort(function(a,b){return b.n-a.n;});
-  let curP=-1, cur=-1, list=[], histTimer=null;
+  let curP=-1, cur=-1, list=[], histTimer=null, lastRows=[], lastM=null, lastBad=[], lastBatch=null;
   let chipAll=false;
   function chips(){
     const show=chipAll? profs : profs.slice(0,8);
@@ -2293,12 +2332,17 @@ function bigRender(root, bd){
     if(!e){ if(O) O.innerHTML='<p class="hint">没有匹配的口径，换个关键词试试。</p>'; if(FB) FB.style.display='none'; return; }
     if(FB) FB.style.display='';
     const m=e.m, keys=m.f.map(function(x){return x[0];}), v={};
+    const badD=[];
     m.f.forEach(function(x){
       const el=F.querySelector('#bigf_'+x[0]);
       const se=F.querySelector('.umul[data-for="'+x[0]+'"]');
-      const rawv=el?(parseFloat(el.value)||0):0;
+      const txt=el?String(el.value).trim():'';
+      const num=parseFloat(txt);
+      const bad=(txt==='' || !isFinite(num));
+      if(el) el.classList.toggle('bad', bad);
+      if(bad) badD.push(x[1]);
       const mult=se?(parseFloat(se.value)||1):1;
-      v[x[0]]=rawv*mult;
+      v[x[0]]= (isFinite(num)?num:0)*mult;
     });
     const rows=m.o.map(function(lb,i){
       let r='—', raw=null;
@@ -2307,10 +2351,12 @@ function bigRender(root, bd){
       return [lb, typeof r==='number'?fmtOut(r):String(r), raw];
     });
     const isU=m.u && m.u.length<=7 && !/[\u4e00-\u9fa5]/.test(m.u);
+    lastRows=rows; lastM=m; lastBad=badD;
     O.innerHTML=rows.map(function(r){
       return '<div class="kv"><span>'+r[0]+'</span><b'+(r[2]?' class="tapraw" data-fmt="'+r[1]+'" data-raw="'+r[2]+'" data-unit="'+(isU?' '+m.u:'')+'" title="点一下切换原值"':'')+'>'+r[1]+(isU?' '+m.u:'')+'</b>'
         +(r[2]?'<button class="usebtn" data-use="'+r[2]+'" title="填入第一个参数">→</button>':'')+'</div>';
     }).join('') + (m.u && !isU ? '<p class="hint">'+m.u+'</p>' : '')
+      + (badD.length? '<p class="hint" style="color:#D9534F">参数未填或非法：'+badD.join('、')+'</p>' : '')
       + '<p class="hint">'+m.n+'　'+bd.n+'共 '+all.length+' 个口径，可选专业或直接搜索</p>';
     favBtnState();
     clearTimeout(histTimer);
@@ -2427,6 +2473,26 @@ function bigRender(root, bd){
     });
     O.innerHTML='<div class="lbl">批量结果（'+m.o[0]+'）</div><p class="hint">列依次对应：'+m.f.map(function(x){return x[1];}).join(' / ')+'（缺列按 1）</p>'
       + out.map(function(x){return '<div class="kv"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>';}).join('');
+    lastBatch=out; lastM=m;
+  }
+  function onCsv(){
+    if(!lastBatch){ toast('先跑一次批量计算'); return; }
+    const head=lastM.f.map(function(x){return x[1];}).join(',')+','+lastM.o[0];
+    const lines=[head].concat(lastBatch.map(function(x){ return x[0].split(' / ').join(',')+','+x[1]; }));
+    const blob=new Blob(['\ufeff'+lines.join('\n')], {type:'text/csv;charset=utf-8'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob); a.download=(lastM.n||'计算结果')+'.csv'; a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 3000);
+    toast('已导出 CSV');
+  }
+  function onFormula(){
+    if(!lastM || !lastRows.length){ toast('先选一个口径'); return; }
+    const on=FM.style.display==='none'; FM.style.display=on?'':'none';
+    if(!on) return;
+    const kv=lastM.f.map(function(x){return x[0]+'='+x[1];}).join('， ');
+    FM.innerHTML='<div class="lbl">计算式</div>'
+      + lastM.o.map(function(lb,i){ return '<div class="kv"><span>'+lb+'</span><b style="font-weight:500;font-size:13px;font-family:ui-monospace,Menlo,monospace">'+(lastM.e[i]||'—')+'</b></div>'; }).join('')
+      + '<p class="hint">变量：'+kv+'</p>'+(lastM.u?'<p class="hint">'+lastM.u+'</p>':'');
   }
   function onHist(){ const on=H.style.display==='none'; H.style.display=on?'':'none'; if(on) renderHist(); }
   function onKey(e){ if((e.key==='/'||e.key==='／') && !/input|textarea|select/i.test(document.activeElement.tagName)){ e.preventDefault(); Q.focus(); } }
@@ -2440,10 +2506,18 @@ function bigRender(root, bd){
   root.querySelector('#bigBatchBtn').addEventListener('click',onBatchToggle);
   root.querySelector('#bigBatchRun').addEventListener('click',onBatchRun);
   root.querySelector('#bigHistBtn').addEventListener('click',onHist);
+  root.querySelector('#bigCsvBtn').addEventListener('click',onCsv);
+  root.querySelector('#bigFormulaBtn').addEventListener('click',onFormula);
+  F.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); run(); } });
+  F.addEventListener('focusin',function(e){
+    if(e.target.tagName==='INPUT'){ setTimeout(function(){ try{ e.target.scrollIntoView({block:'center',behavior:'smooth'}); }catch(x){} }, 260); }
+  });
   document.addEventListener('keydown',onKey);
   if(document.getElementById('bigBatchIn')) root.querySelector('#bigBatchIn').addEventListener('keydown',function(e){ if(e.key==='/'||e.key==='／') e.stopPropagation(); });
   const PC=root.querySelector('#bigPrec');
   if(PC){ PC.value=bigPrec(); PC.addEventListener('change',function(){ try{ localStorage.setItem(BIGPREC, PC.value); }catch(e){} run(); }); }
+  const CM=root.querySelector('#bigComma');
+  if(CM){ CM.checked=bigComma(); CM.addEventListener('change',function(){ try{ localStorage.setItem('xy_bigcomma', CM.checked?'1':'0'); }catch(e){} run(); }); }
   if(window.__bigQ){ Q.value=window.__bigQ; window.__bigQ=null; }
   chips(); filt();
   return function(){
@@ -17623,6 +17697,61 @@ function t_fortune_cookie(root){
 if('serviceWorker' in navigator && location.protocol.indexOf('http')===0){
   window.addEventListener('load',function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
 }
+
+/* 收藏导入导出 */
+(function(){
+  const expB=$('#expBtn'), impB=$('#impBtn'), impF=$('#impFile');
+  if(!expB) return;
+  const KEYS=['xy_fav','xy_recent','xy_bigfav','xy_biguse','xy_bighist','xy_theme','xy_bigprec','xy_bigcomma'];
+  expB.addEventListener('click',function(){
+    const data={};
+    KEYS.forEach(function(k){ try{ const v=localStorage.getItem(k); if(v) data[k]=v; }catch(e){} });
+    const blob=new Blob([JSON.stringify({app:'xiaoyutool',v:1,data:data},null,2)],{type:'application/json'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob); a.download='小羽工具箱-收藏.json'; a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); },3000);
+    toast('已导出设置');
+  });
+  impB.addEventListener('click',function(){ impF.click(); });
+  impF.addEventListener('change',function(){
+    const f=impF.files&&impF.files[0]; if(!f) return;
+    const r=new FileReader();
+    r.onload=function(){
+      try{
+        const o=JSON.parse(r.result);
+        const d=o.data||o;
+        Object.keys(d).forEach(function(k){ if(KEYS.indexOf(k)>=0) localStorage.setItem(k, d[k]); });
+        toast('已导入，正在刷新');
+        setTimeout(function(){ location.reload(); }, 800);
+      }catch(e){ toast('文件格式不对'); }
+    };
+    r.readAsText(f);
+    impF.value='';
+  });
+})();
+
+/* Ctrl+K 聚焦搜索 */
+document.addEventListener('keydown', function(e){
+  if((e.ctrlKey||e.metaKey) && (e.key==='k'||e.key==='K')){
+    e.preventDefault();
+    const q=$('#q'); if(q && !$('#sheet').classList.contains('open')){ q.focus(); q.select(); }
+  }
+});
+
+/* 滚动到底自动加载更多 */
+(function(){
+  let obs=null;
+  function watch(){
+    if(obs) obs.disconnect();
+    const mb=$('#morebtn'); if(!mb || !('IntersectionObserver' in window)) return;
+    obs=new IntersectionObserver(function(es){
+      es.forEach(function(en){ if(en.isIntersecting){ obs.disconnect(); pageLimit+=150; renderList(); } });
+    }, {rootMargin:'200px'});
+    obs.observe(mb);
+  }
+  const _rl=window.renderList;
+  window.renderList=function(){ _rl(); watch(); };
+})();
 
 </script>
 </body>
