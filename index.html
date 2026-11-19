@@ -3,8 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="5.4">
+<meta name="xyver" content="5.5">
 <title>小羽工具箱 · 本地工具集合</title>
+<meta name="description" content="小羽工具箱：984 个本地实用工具，工程、财务、文本、生活四大类，全部离线可用。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="小羽工具箱 · 984 个本地小工具">
+<meta property="og:description" content="工程、财务、文本、生活四大类 984 个工具，含 2526 个计算口径，离线可用。">
+<meta name="twitter:card" content="summary">
 <meta name="theme-color" content="var(--accent)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -50,7 +55,7 @@ html[data-theme="dark"]{
 }
 html[data-theme="dark"] .chip.on{background:var(--accent);border-color:var(--accent)}
 html[data-theme="dark"] .btn.danger{background:rgba(226,84,59,.14);border-color:rgba(226,84,59,.34);color:#FF9A86}
-html[data-theme="dark"] .toolcard .fav{color:#6C7683}
+html[data-theme="dark"] 
 @media (prefers-color-scheme: dark){
   html:not([data-theme="light"]) .chip.on{background:var(--accent);border-color:var(--accent)}
   html:not([data-theme="light"]) .btn.danger{background:rgba(226,84,59,.14);border-color:rgba(226,84,59,.34);color:#FF9A86}
@@ -103,7 +108,7 @@ main{padding:0 16px calc(env(safe-area-inset-bottom,0px) + 28px)}
 .sec-t h2{font-size:13px;font-weight:600;color:var(--sub);letter-spacing:.6px;margin:0}
 .sec-t i{font-size:12px;color:#A9AFB8;font-style:normal}
 .cardgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.toolcard .fav{position:absolute;top:2px;right:2px;width:30px;height:30px;display:grid;place-items:center;background:none;border:0;padding:0;color:#B4BCCB;opacity:.55}
+.toolcard .fav{position:absolute;top:-6px;right:-6px;width:44px;height:44px;display:grid;place-items:center;background:none;border:0;padding:0;color:#B4BCCB;opacity:.55}
 .toolcard .fav.on{color:#F0A22B;opacity:1}
 .toolcard .fav svg{width:14px;height:14px}
 .toolcard .fav.on svg{fill:#F0A22B}
@@ -323,6 +328,11 @@ canvas{max-width:100%;display:block;border-radius:10px}
 <footer class="foot">
   <span>小羽工具箱 · 作者 fornow</span>
   <span>交流群 728403008</span>
+  <a href="https://github.com/fornow330/xiaoyutool" target="_blank" rel="noopener" style="color:var(--sub);font-size:12px">GitHub</a>
+  <button id="expFav" style="border:0;background:none;color:var(--sub);font-size:12px;text-decoration:underline;padding:4px;cursor:pointer">导出收藏</button>
+  <button id="impFav" style="border:0;background:none;color:var(--sub);font-size:12px;text-decoration:underline;padding:4px;cursor:pointer">导入收藏</button>
+  <input type="file" id="impFavFile" accept="application/json,.json" hidden>
+  <button id="wipeBtn" style="border:0;background:none;color:var(--sub);font-size:12px;text-decoration:underline;padding:4px;cursor:pointer">清空本机数据</button>
 </footer>
 <div class="sheet" id="sheet" aria-hidden="true">
   <div class="sheet-head">
@@ -1535,6 +1545,7 @@ box.innerHTML='<span class="rlbl">'+L('收藏 ','Favorites ')+sorted.length+'</s
 function renderChips(){
 const cnt={}; TOOLS.forEach(t=>{ cnt[t.c]=(cnt[t.c]||0)+1; });
 $('#chips').innerHTML = CATS.map(c=>`<button class="chip${c.k===curCat?' on':''}" data-cat="${c.k}">${LANG==='en'?(ENCAT[c.k]||c.n):c.n}<i style="font-style:normal;opacity:.55;margin-left:5px;font-size:12px">${c.k==='all'?TOOLS.length:(cnt[c.k]||0)}</i></button>`).join('')
++ `<button class="chip" id="randTool" title="${L('随机打开一个工具','Open a random tool')}" style="flex:0 0 auto">${L('随机','Random')}</button>`
 + (curCat==='all'? `<button class="chip" id="groupToggle" title="按分类分区浏览" style="flex:0 0 auto;${groupMode?'background:var(--accent);color:#fff;border-color:var(--accent)':''}">${groupMode?L('分区中','Grouped'):L('分区','Group')}</button>` : '');
 }
 const HOTEXACT=['二维码生成','单位换算','图片压缩','文字统计','Base64 编解码','Base64','取色器','九宫格切图','图片拼长图','文字水印','摩斯电码','进制转换','哈希校验','URL 编解码','格式转换','日期计算','随机数生成','房贷计算','汇率换算','BMI 计算'];
@@ -1628,9 +1639,30 @@ $('#list').innerHTML = bigTipHTML() + '<div class="empty">'+L('没有找到相�
 return;
 }
 const order = CATS.map(c=>c.k);
-const sorted = curCat==='all' && !curQuery
+const relScore=function(t){
+  if(!curQuery) return 0;
+  const nm=tname(t).toLowerCase(), q=curQuery.toLowerCase();
+  if(nm===q) return 100;
+  if(nm.indexOf(q)===0) return 60;
+  if(nm.indexOf(q)>0) return 40;
+  return 10;
+};
+const baseSort = curQuery ? null : (curCat==='all'
 ? list.slice().sort((a,b)=>hotRank(b.n)-hotRank(a.n) || order.indexOf(a.c)-order.indexOf(b.c))
-: (curCat==='all' && curQuery ? list.slice().sort((a,b)=>hotRank(b.n)-hotRank(a.n)) : list);
+: list.slice());
+let sorted = curQuery ? list.slice().sort((a,b)=> relScore(b)-relScore(a) || hotRank(b.n)-hotRank(a.n)) : baseSort;
+if(!curQuery && curCat==='all'){
+  // 按热度分层，每层内按分类轮转，避免首页扎堆同一类
+  const tiers=[[],[],[]];
+  baseSort.forEach(function(t){ const r=hotRank(t.n); const idx=r>=7?0:(r>=4?1:2); tiers[idx].push(t); });
+  const buckets={}; order.forEach(function(k){ buckets[k]=[]; });
+  tiers.forEach(function(tier){
+    tier.forEach(function(t){ (buckets[t.c]=buckets[t.c]||[]).push(t); });
+  });
+  const out=[]; const maxLen=Math.max.apply(null, order.map(function(k){return (buckets[k]||[]).length;}));
+  for(let i=0;i<maxLen;i++){ order.forEach(function(k){ const arr=buckets[k]||[]; if(arr[i]) out.push(arr[i]); }); }
+  sorted=out.length===baseSort.length? out : baseSort;
+}
 const total = sorted.length;
 const show = curQuery ? sorted
   : ((groupMode && curCat==='all') ? CATS.filter(function(c){return c.k!=='all';}).flatMap(function(c){
@@ -1650,7 +1682,9 @@ return;
 }
 lastKey=rk; lastCount=show.length;
 const grouped = (curQuery && curCat==='all') || (groupMode && curCat==='all' && !curQuery);
-$('#list').innerHTML = sugHTML() + bigTipHTML() + profbar() + (grouped
+$('#list').innerHTML = sugHTML() + bigTipHTML() + profbar()
++ (curQuery? '<div class="grp" style="opacity:.75">'+L('命中 ','Matched ')+total+L(' 个',' tools')+'</div>' : '')
++ (grouped
 ? ['eng','fin','txt','life'].map(function(k){
     const part=show.filter(function(t){return t.c===k;});
     return part.length? '<div class="grp">'+cname(k)+'<span>'+part.length+'</span></div><div class="cardgrid">'+cards(part)+'</div>' : '';
@@ -1662,7 +1696,11 @@ function hlName(name){
 if(!curQuery) return name;
 const qs=expandQ(curQuery).filter(k=>k.length>=2);
 let out=name;
-qs.forEach(k=>{ if(out.indexOf(k)>=0) out=out.split(k).join('\u0001'+k+'\u0002'); });
+qs.forEach(function(k){
+  if(!k) return;
+  if(LANG==='en'){ try{ out=out.replace(new RegExp('('+k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig'),'\u0001$1\u0002'); }catch(e){} return; }
+  if(out.indexOf(k)>=0) out=out.split(k).join('\u0001'+k+'\u0002');
+});
 return out.split('\u0001').join('<mark>').split('\u0002').join('</mark>');
 }
 const ICM={};
@@ -1673,7 +1711,7 @@ return list.map(t=>`
 <div class="toolcard${t.knife?' knife':''}" data-id="${t.id}" tabindex="0" role="button" aria-label="${tname(t)}">
 <button class="fav${favs.has(t.id)?' on':''}" data-fav="${t.id}" aria-label="${favs.has(t.id)?'取消收藏':'收藏'}"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.2 5.9-.8z"/></svg></button>
 <div class="ico" style="--ic:${t.col}">${icSvg(t.ic,t.col)}</div>
-<b>${hlName(tname(t))}</b>${t.d&&LANG!=='en'?`<i>${t.d}</i>`:''}
+<b>${hlName(tname(t))}</b>${t.d&&LANG!=='en'?`<i title="${t.d}">${t.d}</i>`:''}
 </div>`).join('');
 }
 document.addEventListener('keydown', function(e){
@@ -1700,6 +1738,7 @@ if(fm){ const box=$('#favbar'); const ts=[...getFav()].map(i=>TOOLS.find(t=>t.id
   box.innerHTML='<span class="rlbl">收藏 '+sorted.length+'</span>'+sorted.map(t=>`<button class="rchip on" data-fav2="${t.id}" title="${CATNAME[t.c]||''}">${t.n}</button>`).join('')+'<button class="rchip" id="favLess">'+L('收起','Less')+'</button>';
   return; }
 if(e.target.closest('#favLess')){ renderFav(); return; }
+if(e.target.closest('#clearRQ')){ lsSet('xy_recentq',[]); const b=document.getElementById('recentQ'); if(b) b.remove(); return; }
 const rq=e.target.closest('[data-rq]');
 if(rq){ const v=decodeURIComponent(rq.dataset.rq); $('#q').value=v; curQuery=v; const b=document.getElementById('recentQ'); if(b) b.remove(); renderList(); return; }
 const pf=e.target.closest('[data-prof]');
@@ -1707,10 +1746,13 @@ if(pf){ const raw=pf.dataset.prof.split('|'); const bi=+raw[0]; const g=decodeUR
   const data=getBig(); lsSet('xy_biglast',{k:data[bi].k, g:g}); openTool('big'+bi); return; }
 const rl=e.target.closest('.relchip');
 if(rl){ openTool(rl.dataset.rid); return; }
+const rnd=e.target.closest('#randTool');
+if(rnd){ const pool=TOOLS.filter(function(t){return !/^big\d/.test(t.id);}); const t=pool[Math.floor(Math.random()*pool.length)]; openTool(t.id); return; }
 const gt=e.target.closest('#groupToggle');
 if(gt){ groupMode=!groupMode; lsSet('xy_group', groupMode); renderChips(); renderList(); return; }
 const chip=e.target.closest('#chips .chip'); if(chip && chip.dataset.cat){ curCat=chip.dataset.cat; pageLimit=colCount()*40; renderChips(); renderFav(); renderRank(); renderRecent(); renderList(); return; }
 const fb=e.target.closest('.toolcard .fav'); if(fb){ e.stopPropagation(); toggleFav(fb.dataset.fav); return; }
+const c=e.target.closest('.toolcard'); if(c){ try{ navigator.vibrate && navigator.vibrate(8); }catch(_){} }
 const rc=e.target.closest('#recent .rchip'); if(rc){ openTool(rc.dataset.rid); return; }
 const fv=e.target.closest('#favbar .rchip'); if(fv){ openTool(fv.dataset.fav2); return; }
 const card=e.target.closest('.toolcard'); if(card){ openTool(card.dataset.id); }
@@ -1729,7 +1771,7 @@ $('#q').addEventListener('focus', function(){
   const rs=recentQs(); if(!rs.length) return;
   const old=document.getElementById('recentQ'); if(old) return;
   const bar=document.createElement('div'); bar.id='recentQ'; bar.className='profbar';
-  bar.innerHTML='<span class="rlbl">'+L('最近搜','Recent')+'</span>'+rs.map(function(x){return '<button class="rchip" data-rq="'+encodeURIComponent(x)+'">'+x+'</button>';}).join('');
+  bar.innerHTML='<span class="rlbl">'+L('最近搜','Recent')+'</span><button class="rchip" id="clearRQ" style="opacity:.7">'+L('清空','Clear')+'</button>'+rs.map(function(x){return '<button class="rchip" data-rq="'+encodeURIComponent(x)+'">'+x+'</button>';}).join('');
   const main=$('#list'); main.parentNode.insertBefore(bar, main);
 });
 document.addEventListener('click', function(e){ const mb=e.target.closest('#morebtn'); if(mb){ pageLimit+=colCount()*50; renderList(); } });
@@ -1767,6 +1809,7 @@ $('#sheetTitle').textContent = tname(t) + (t.knife?L(' · 瑞士刀',' · Swiss 
 const sheet = $('#sheet'); sheet.classList.add('open'); sheet.setAttribute('aria-hidden','false');
 body.scrollTop = 0;
 pushRecent(id); renderRecent(); pushRank(id);
+try{ history.replaceState(null,'','#tool='+encodeURIComponent(id)); }catch(e){}
 const fn = window['t_'+id];
 if(typeof fn==='function'){ activeCleanup = fn(body) || null; }
 else body.innerHTML = `<div class="box"><p class="hint" style="margin:0">'+L('该工具正在完善中。','This tool is coming soon.')+'</p></div>`;
@@ -1799,11 +1842,22 @@ copyText(txt);
 }
 function closeSheet(){
 const sheet=$('#sheet'); sheet.classList.remove('open'); sheet.setAttribute('aria-hidden','true');
+try{ if(location.hash.indexOf('tool=')>=0) history.replaceState(null,'',location.pathname+location.search); }catch(e){}
 if(activeCleanup){ try{activeCleanup();}catch(e){} activeCleanup=null; }
 const b=$('#sheetBody'); if(b){ const f=b.cloneNode(false); b.replaceWith(f); }
 }
 $('#backbtn').addEventListener('click', closeSheet);
 $('#copytool').addEventListener('click', copyResult);
+document.addEventListener('click', function(ev){
+  const t=ev.target.closest('#bigShare'); if(!t) return;
+  const lines=[]; [].forEach.call(document.querySelectorAll('#sheetBody .kv'),function(kv){
+    const a=kv.querySelector('span'), b=kv.querySelector('b');
+    if(a&&b) lines.push(a.textContent.trim()+'  '+b.textContent.trim());
+  });
+  const txt=lines.length? L('来自小羽工具箱：','From Xiaoyu Toolbox: ')+'\n'+lines.join('\n') : L('小羽工具箱 · 984 个本地工具','Xiaoyu Toolbox');
+  if(navigator.share){ navigator.share({title:L('小羽工具箱','Xiaoyu Toolbox'), text:txt}).catch(function(){}); }
+  else { copyText(txt); toast(L('已复制，可粘贴分享','Copied')); }
+});
 document.addEventListener('keydown', e=>{
 if(e.key==='Escape') closeSheet();
 if((e.key==='/'||e.key==='／') && !/input|textarea|select/i.test(document.activeElement.tagName) && !$('#sheet').classList.contains('open')){
@@ -2256,6 +2310,7 @@ root.innerHTML='<div class="box">'
 +'<button class="btn ghost" id="bigCmpBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto"">'+L('对比','Compare')+'</button>'
 +'<button class="btn ghost" id="bigResetBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto"">'+L('重置','Reset')+'</button>'
 +'<button class="btn ghost" id="bigCopyAll" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto"">'+L('复制全部','Copy all')+'</button>'
++'<button class="btn ghost" id="bigShare" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">'+L('分享','Share')+'</button>'
 +'</div></div>'
 +'<div class="box" id="bigOut"></div>'
 +'<div class="box" id="bigBatch" style="display:none"><div class="lbl">批量计算（每行一个数，套用第一个参数）</div>'
@@ -2337,9 +2392,12 @@ function isFav(k){ return !!lsGet(BIGFAV,{})[k]; }
 function favBtnState(){ if(FB) FB.textContent = isFav(curKey()) ? '★ 已收藏' : '☆ 收藏口径'; }
 function run(){
 const e=list[cur];
+const keepTop=(F&&F.parentNode)? (function(){ try{ return document.querySelector('#sheetBody').scrollTop; }catch(_){return 0;} })() : 0;
 if(!e){ if(O) O.innerHTML='<p class="hint">没有匹配的口径，换个关键词试试。</p>'; if(FB) FB.style.display='none'; return; }
 if(FB) FB.style.display='';
 const m=e.m, keys=m.f.map(function(x){return x[0];}), v={};
+const restoreScroll=function(){ try{ const b=document.querySelector('#sheetBody'); if(b && b.scrollTop<keepTop) b.scrollTop=keepTop; }catch(_){} };
+if(keepTop>40) requestAnimationFrame(restoreScroll);
 const badD=[];
 m.f.forEach(function(x){
 const el=F.querySelector('#bigf_'+x[0]);
@@ -2605,6 +2663,16 @@ if(btpl) btpl.addEventListener('click',function(){
 root.querySelector('#bigHistBtn').addEventListener('click',onHist);
 H.addEventListener('click',function(e){
 if(e.target.closest('#bigHistClear')){ lsSet(BIGHIST,[]); renderHist(); toast('已清空'); return; }
+const hk=e.target.closest('.kv[data-hk]');
+if(hk && !e.target.closest('[data-hd]')){
+  const k=hk.dataset.hk, nm=decodeURIComponent(hk.dataset.hn||''), vs=JSON.parse(decodeURIComponent(hk.dataset.hv||'[]'));
+  list.forEach(function(x,i){ if(x && x.m && (x.key===k || (x.m.n===nm && x.g===bd.g))) cur=i; });
+  if(list[cur] && list[cur].m.n===nm){
+    list[cur].m.f.forEach(function(x,i2){ const el=F.querySelector('#bigf_'+x[0]); if(el && vs[i2]!=undefined) el.value=vs[i2]; });
+    run(); toast('已按历史参数重算');
+  } else { toast('该口径已不存在'); }
+  return;
+}
 const hd=e.target.closest('[data-hd]'); if(hd){
   e.stopPropagation();
   const t0=+hd.dataset.hd;
@@ -2793,16 +2861,30 @@ window['t_txtlh']=function(root){ gxRender(root,sp); };
 })();
 TOOLS.forEach(function(t){ var n=t.c, k=0; while(CATMAP[n] && CATMAP[n]!==n && k<5){ n=CATMAP[n]; k++; } t.c=n; });
 (function(){ var keep=TOOLS.filter(function(t){return DROPMAP.ids.indexOf(t.id)<0;}); TOOLS.length=0; keep.forEach(function(t){TOOLS.push(t);}); })();
+let themeMode='auto';
 (function(){
 let t=null; try{ t=localStorage.getItem('xy_theme'); }catch(e){}
-if(t==='dark'||t==='light') document.documentElement.dataset.theme=t;
+themeMode = (t==='dark'||t==='light') ? t : 'auto';
+function applyTheme(){
+  const sysDark=matchMedia('(prefers-color-scheme: dark)').matches;
+  const real = themeMode==='auto' ? (sysDark?'dark':'light') : themeMode;
+  document.documentElement.dataset.theme = real;
+  let mc=document.querySelector('meta[name="theme-color"]');
+  if(!mc){ mc=document.createElement('meta'); mc.name='theme-color'; document.head.appendChild(mc); }
+  mc.setAttribute('content', real==='dark' ? '#101216' : '#F1F3F5');
+}
+applyTheme();
+try{
+  const mq=matchMedia('(prefers-color-scheme: dark)');
+  if(mq.addEventListener) mq.addEventListener('change',function(){ if(themeMode==='auto') applyTheme(); });
+}catch(e){}
 const b=$('#themebtn');
 if(b) b.addEventListener('click',function(){
-const cur=document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
-const next=cur==='dark'?'light':'dark';
-document.documentElement.dataset.theme=next;
-try{ localStorage.setItem('xy_theme',next); }catch(e){}
-toast(next==='dark'?'已切换到深色':'已切换到浅色');
+const next = themeMode==='auto' ? 'light' : (themeMode==='light' ? 'dark' : 'auto');
+themeMode=next;
+try{ if(next==='auto') localStorage.removeItem('xy_theme'); else localStorage.setItem('xy_theme',next); }catch(e){}
+applyTheme();
+toast(next==='auto'?L('跟随系统','Auto (system)'):(next==='dark'?L('已切换到深色','Dark mode'):L('已切换到浅色','Light mode')));
 });
 })();
 (function(){
@@ -2836,6 +2918,106 @@ TOOLS.forEach(function(t){
     : t.c==='dev' ? '本机能力检测' : '工程参数速算';
 });
 renderChips(); renderFav(); renderRecent(); renderList();
+(function(){
+  try{
+    const m=/tool=([^&]+)/.exec(location.hash||'');
+    if(m){ const id=decodeURIComponent(m[1]); if(TOOLS.some(function(t){return t.id===id;})) setTimeout(function(){ openTool(id); },60); }
+  }catch(e){}
+})();
+document.addEventListener('DOMContentLoaded',function(){
+  const ef=document.getElementById('expFav');
+  if(ef) ef.addEventListener('click',function(){
+    const data={v:1, fav:[...getFav()], bigfav:lsGet('xy_bigfav',{}), q:lsGet('xy_recentq',[])};
+    const blob=new Blob([JSON.stringify(data,null,1)],{type:'application/json'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='xiaoyu-favorites.json'; a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); },1200);
+    toast(L('已导出收藏','Favorites exported'));
+  });
+  const imp=document.getElementById('impFav'), impf=document.getElementById('impFavFile');
+  if(imp&&impf){
+    imp.addEventListener('click',function(){ impf.click(); });
+    impf.addEventListener('change',function(){
+      const f=impf.files&&impf.files[0]; if(!f) return;
+      const r=new FileReader();
+      r.onload=function(){
+        try{
+          const d=JSON.parse(r.result);
+          if(d.fav&&d.fav.length){ lsSet('xy_fav', d.fav); }
+          if(d.bigfav) lsSet('xy_bigfav', d.bigfav);
+          if(d.q) lsSet('xy_recentq', d.q);
+          renderFav(); toast(L('已导入收藏','Favorites imported'));
+        }catch(e){ toast(L('文件格式不对','Bad file')); }
+      };
+      r.readAsText(f); impf.value='';
+    });
+  }
+  const wb=document.getElementById('wipeBtn');
+  if(wb) wb.addEventListener('click',function(){
+    if(!confirm(L('将清除收藏、计算记录与设置，确定吗？','Clear favorites, history and settings?'))) return;
+    try{ Object.keys(localStorage).filter(function(k){return k.indexOf('xy_')===0;}).forEach(function(k){ localStorage.removeItem(k); }); }catch(e){}
+    toast(L('已清空，正在重载','Cleared, reloading')); setTimeout(function(){ location.reload(); },700);
+  });
+});
+document.addEventListener('keydown',function(ev){
+  if(ev.key!=='Enter') return;
+  const t=ev.target;
+  if(!t || t.tagName!=='INPUT' || t.type==='search' || t.type==='file' || t.type==='checkbox') return;
+  const inputs=[].slice.call(document.querySelectorAll('#sheetBody input:not([type=hidden]):not([type=file])'));
+  const i=inputs.indexOf(t);
+  if(i<0) return;
+  ev.preventDefault();
+  if(inputs[i+1]){ inputs[i+1].focus(); inputs[i+1].select&&inputs[i+1].select(); }
+  else { const r=document.querySelector('#bigRunBtn'); if(r) r.click(); }
+}, true);
+document.addEventListener('focusin',function(ev){
+  const t=ev.target;
+  if(!t || !/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
+  setTimeout(function(){ try{ t.scrollIntoView({block:'center',behavior:'smooth'}); }catch(e){ try{t.scrollIntoView();}catch(e2){} } }, 220);
+});
+document.addEventListener('paste',function(ev){
+  const cd=ev.clipboardData; if(!cd||!cd.files||!cd.files.length) return;
+  const inp=document.querySelector('#sheetBody input[type=file][accept*="image"], #sheetBody input[type=file]:not([accept])');
+  if(!inp) return;
+  const f=[].slice.call(cd.files).filter(function(x){return /^image\//.test(x.type);})[0];
+  if(!f) return;
+  try{
+    const dt=new DataTransfer(); dt.items.add(f); inp.files=dt.files;
+    inp.dispatchEvent(new Event('change',{bubbles:true}));
+    toast(L('已粘贴图片','Image pasted'));
+  }catch(e){ toast(L('粘贴失败，请用选择文件','Paste failed')); }
+});
+(function(){
+  let lp=null, moved=false;
+  document.addEventListener('pointerdown',function(ev){
+    const c=ev.target.closest && ev.target.closest('.toolcard');
+    if(!c || ev.target.closest('.fav')) return;
+    moved=false;
+    lp=setTimeout(function(){
+      const t=TOOLS.find(function(x){return x.id===c.dataset.id;});
+      if(t){ toast(L('【'+t.n+'】'+(t.d||''), tname(t)+' — '+(t.d?kwname(t.d):''))); try{ navigator.vibrate&&navigator.vibrate(15); }catch(_){} }
+    }, 520);
+  }, {passive:true});
+  ['pointerup','pointercancel','pointermove','scroll'].forEach(function(ev){
+    document.addEventListener(ev, function(){ if(lp){ clearTimeout(lp); lp=null; } }, {passive:true});
+  });
+})();
+window.addEventListener('offline',function(){ toast(L('网络已断开，工具仍可离线使用','Offline — tools still work')); });
+let pwaEv=null;
+window.addEventListener('beforeinstallprompt',function(e){
+  e.preventDefault(); pwaEv=e;
+  if(sessionStorage.getItem('xy_pwa_tip')) return;
+  try{ sessionStorage.setItem('xy_pwa_tip','1'); }catch(_){}
+  toast(L('可「添加到主屏幕」，之后离线也能用','Add to home screen for offline use'));
+});
+
+(function(){
+  try{
+    const cur=document.querySelector('meta[name="xyver"]').content;
+    const last=localStorage.getItem('xy_seen_ver');
+    if(last && last!==cur){ toast(L('已更新到 v'+cur,'Updated to v'+cur)); }
+    localStorage.setItem('xy_seen_ver',cur);
+  }catch(e){}
+})();
 (function(){ const b=$('#boot'); if(b){ requestAnimationFrame(function(){ b.classList.add('hide'); setTimeout(function(){ b.remove(); }, 320); }); } })();
 (function(){
   try{
