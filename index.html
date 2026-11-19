@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="5.1">
+<meta name="xyver" content="5.2">
 <title>小羽工具箱 · 本地工具集合</title>
 <meta name="theme-color" content="var(--accent)">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -279,7 +279,11 @@ canvas{max-width:100%;display:block;border-radius:10px}
 #guideBar{max-width:1180px;margin:12px auto 0;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--card);font-size:13px;color:var(--sub);line-height:1.7;display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap}
 #guideBar b{color:var(--ink)}
 #guideBar button{margin-left:auto;height:30px;padding:0 12px;border:1px solid var(--line);border-radius:15px;background:var(--field);color:var(--ink);font-size:12px;cursor:pointer}
-#list .toolcard i{font-style:normal;font-size:10.5px;line-height:1.35;color:var(--sub);margin-top:3px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+#list .toolcard i{font-style:normal;font-size:11.5px;line-height:1.4;color:var(--sub);margin-top:3px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
+@media (min-width:768px){#list .toolcard i{font-size:11px;-webkit-line-clamp:2}}
+.profbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0 2px}
+.profbar .rchip{height:28px;padding:0 12px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:12.5px;cursor:pointer}
+.carry{outline:2px solid var(--accent);outline-offset:1px}
 </style>
 </head>
 <body>
@@ -407,7 +411,7 @@ stamp:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5h3.5"/>'
 };
 const PYCACHE={"flash":"sdt","compass":"znz","level":"spy","plumb":"qcx","hang":"ghzs","magnify":"fdj","ruler":"pmzc","rangefinder":"yjlcj","inclinometer":"qjy","imgcompress":"tpys","imgconvert":"gszh","imggrid":"jggqt","imgwater":"tpsy","colorpicker":"qsq","imgstitch":"tppzt","imgbase64":"tpzbase64","textstat":"wztj","textcase":"mmzh","texttool":"wbcl","morse":"msdm","b64":"base64","urlcode":"urlbjm","radix":"jzzh","hash":"hxjy","unit":"dwhs","currency":"hlhs","loan":"fdjs","tax":"gsjs","bmi":"bmijs","datecalc":"rqjs","percent":"bfbjs","random":"sjcq","timestamp":"sjczh","pomodoro":"fqz","stopwatch":"mb","noise":"bzy","marquee":"scdm","clock":"qpsz","filllight":"bgd","counter":"jsq","kinship":"qqgx","trashclass":"ljfl","qrgen":"ewmsc","qrscan":"smsb","imgcrop":"cjxz","imgbw":"tplj","uuid":"uuidsc","jsonfmt":"jsongsh","diff":"wbdb","colorconv":"yszh","deviceinfo":"sbxx","screentest":"pmjc","speech":"wzzyy","timer":"djs","todo":"dbqd","wifiqr":"wifiewm","vcardqr":"mpewm","dbmeter":"fbj","metronome":"jpq","touchtest":"cmcs","refreshtest":"sxlcs","vibrate":"zdcs","recorder":"lyj","imgresize":"xgcc","imgpixel":"tpxsh","imgblur":"tpmh","imground":"yjtp","imgflip":"jxfz","imgadjust":"tpts","imgpalette":"zstq","imgframe":"tpbk","imgvintage":"lzp","textclean":"wbqx","cipher":"wzjm","textreverse":"wzdz","wordfreq":"zptj","rmb":"rmbdx","cnnum":"zwsz","htmlesc":"htmlzy","csv2md":"bgzmarkdown","dedup":"zxqz","calc":"kxjsq","compound":"fljs","deposit":"cklx","discount":"zkjs","split":"aafz","bmr":"jcdx","bodyfat":"tzl","geodist":"ldjl","tzconv":"sqhs","note":"bq","wheel":"cjzp","names":"sjdm","pwdgen":"mmsc","worldclock":"sjsz","ledger":"jzb","typing":"dzcs","zodiac":"sxxz","roman":"lmsz","httpcode":"httpztm","sizeconv":"cmhs","birthdays":"csts","weeknum":"djz","jwt":"jwtjx","regex":"zzcs","mdpreview":"markdownyl","pwstrength":"mmqd","urlparse":"urljx","cron":"cronjx","imgbatch":"plys","imgascii":"zzfh","img2pdf":"zpdf","braille":"mwzh","fullhalf":"qjbj","wordcloud":"wzy","hfund":"gjjdk","bonustax":"nzjgs","unitall":"dwhszh","healthall":"tzzh","calcall":"tyjszh","coefall":"jyxssc","socialsec":"wxyj","rebar":"gjzl","slope":"pdhs","concrete":"hntpb","barcode":"txm","qrstyle":"ewmmh","express":"kddh","tone":"ypfsq","speaker":"ysqcc","motion":"jsdqx","invert":"tpfs","text2img":"wzztp","towebp":"tpzwebp","txtsort":"wbpx","extract":"tqljyx","mdhtml":"markdownzhtml","netpay":"shgz","fuel":"yhjs","calorie":"kllxh","breathe":"hxxl","wake":"pmcl","solar":"essjq","periodic":"yszqb","hotkeys":"kjjsc","json2csv":"jsonzcsv","csv2json":"csvzjson","urlparams":"urlcs","miclevel":"mkfdp","battery":"dczt","netinfo":"wlxx","multitouch":"ddck","light":"hjg","keytest":"ajjc","gamepad":"sbjc","gpsinfo":"dwxx","camtest":"sxtyl","clipboard":"jtb","fullscreen":"qpcs","channel":"sdcs","dpr":"pmcs","vibpattern":"zdjz","feats":"nljc","ico":"tbsc","shadow":"yykp","sharpen":"rhlj","targetsize":"ydzdkb","collage":"zppt","rotatefree":"ryxz","overlay":"hzh","gradient":"jbzz","tiledwater":"ppsy","polaroid":"pld","halftone":"bdyd","splitlong":"ztqd","ratio":"blcj","scaleup":"gqfd","circleavatar":"yxtx","upperlower":"dxx","replace":"czth","punct":"bdzh","blanklines":"kxql","lineaffix":"xsxw","numbering":"zdbh","wrap":"dzhh","quotes":"yhzh","slug":"urldm","aligncols":"ldq","template":"mbtc","mdtable2csv":"mdbzcsv","striphtml":"qhtmlbq","list2md":"lbzmd","dedupws":"kbql","prepay":"tqhk","hourly":"sxhs","paint":"rjql","screeninch":"pmcc","pregnancy":"ycq","pace":"psjs","steps":"bsjl","sleep":"smgh","deficit":"jzzq","alcohol":"jjdx","roi":"tzhb","equalprincipal":"debj","laptimer":"ddjs","speechtimer":"fyjs","hiit":"hiitjs","shopping":"mcqd","anniv":"jnr","rotation":"lzpb","decide":"jcq","review":"mrfp","weekly":"zbsc","lunch":"wcxz","timeblock":"sjk","formgen":"dkb","progress":"mbjd","plate":"cpjc","idcard":"sfzjx","phone":"sjhd","bankcard":"yhkjy","colorname":"ysmc","foodkcal":"swrl","purine":"plb","gi":"gizb","batterytype":"dcxh","screw":"lsgg","awg":"xgawg","paper":"zzcc","port":"cydk","stdcode":"bzdh","pipesize":"gjdz","json2ts":"jsonzts","json2sql":"jsonzsql","jsonpath":"jsonqz","jsonmin":"jsonys","htmlfmt":"htmlgsh","cssmin":"cssys","contrast":"ysdbd","palette":"pssc","unicode":"unicodemd","entities":"stdz","mime":"mimelx","regexlib":"zzsc","gitcmds":"gitsc","dockercmds":"dockersc","asciitable":"asciib","sqlfmt":"sqlmh","uuidbatch":"pluuid","tsbatch":"sjcpl","gyro":"tly","proximity":"jlcgq","spectrum":"yppp","camres":"sxtfbl","micplay":"lyhf","colorbars":"ctcs","clipwrite":"jtbxr","fileinfo":"wjxx","perms":"qxzt","orient":"fxyb","swipe":"hdfx","tapspeed":"ldcs","pointerpressure":"ckyl","storage":"ccgs","netlatency":"wlyc","savefile":"lcwj","longpress":"zacs","pointertrack":"zzgj","zoomtest":"sfjc","sensors":"cgqzc","orientlock":"pmfxs","vignette":"aj","grain":"zd","warmth":"lnsd","oil":"yh","cartoon":"kth","film":"jp","double":"scbg","mirror":"jxpt","bgblur":"bjxh","label":"wzbq","gridlines":"gtx","compare":"qhdb","dot":"dzh","levels":"sj","lomo":"lomo","tilt":"yz","sat":"bhd","hue":"sx","denoise":"jz","pencil":"cq","poster":"hbs","threshold":"hbyz","glow":"rg","diag":"sy","tiling":"pptt","infocard":"xxkp","widecrop":"kfcj","gallery":"pjzt","txtnum":"tqsz","txten":"tqyw","txtzh":"tqzw","txttrim":"qlkg","txtcomma":"xwjfh","txtquote":"pljyh","txtjsonarr":"qdzjson","txtsqlin":"qdzsql","txtcenter":"wbdq","txtv":"spwz","txttian":"tzg","txtbox":"wzjk","txtgroup":"fzcf","txtrevlines":"xdx","txtshuffle":"sjxx","txtnumlines":"plbh","txtcsvcol":"zcsvl","txtmd":"zmarkdown","txtcodeblock":"zdmk","txtmask":"xxdm","txtwidth":"zfkd","txtwords":"zstj","txtrepeat":"cfwb","txtbetween":"qjtq","txtsplit":"fjqf","txtjoin":"hbdl","txtrename":"plgm","txttable":"wbzbg","txtfreq":"cptj","creditinstallment":"fqhk","vat":"zzs","overtime":"jbf","areaconv":"mjhs","curtain":"clyl","wiregauge":"dxxj","waterbill":"sf","gasbill":"rqf","tiresize":"ltcc","brakepath":"scjl","childheight":"etsg","bsa":"tbmj","fishtank":"ygsl","mortar":"sjyl","brickcount":"qzyl","cableamp":"dlzl","pipeflow":"gdll","caffeine":"kfydx","sipreturn":"dtsy","minpayment":"zdhk","breakeven":"ykph","grossmargin":"mll","inflation":"tzhs","rentyield":"fzhb","rpm":"cszs","annualreturn":"nhsy","ceilingframe":"ddlg","countdown_to":"dsr","reminder_loop":"xhtx","focus_timer":"zzjs","stand_reminder":"jztx","eye_care":"hytx","stretch_timer":"lsjs","reading_log":"ydjl","scoreboard":"jfb","vote_box":"tpq","flashcard":"dck","mathquiz":"kslx","random_order":"sjsx","seatmap":"zwb","budget_list":"ysqd","recipe_log":"cpjl","workout_plan":"jsjh","book_list":"dsqd","movie_list":"gyqd","wish_list":"xyqd","daily_plan":"mrjh","weekly_plan":"zjh","month_review":"ydfp","year_goals":"ndmb","habit_grid":"xgdk","pomodoro_log":"fqtj","festival":"jrsc","province":"sfjc","areacode":"ctqh","traincode":"cczm","trafficsign":"jtbz","fireequip":"xfqc","weathericon":"tqfh","typhoon":"tfdj","windscale":"fldj","rainlevel":"jydj","uvindex":"zwxzs","aqi":"kqzlzs","intlcode":"gjqh","langcode":"yydm","airport":"jcszm","airline":"hsdm","bloodtype":"xxyc","ganzhi":"tgdz","sanfu":"sfsj","holiday":"fdjr","screenres":"pmfbl","videores":"spfbl","audiofmt":"ypgs","imgfmt":"tpgs","extname":"wjkzm","chargeproto":"cdxy","usbtype":"usbjk","appliance":"jdgl","unitsym":"dwfh","json2yaml":"jsonzyaml","yaml2json":"yamlzjson","xml2json":"xmlzjson","json2xml":"jsonzxml","csv2sql":"csvzsql","jsonflat":"jsonbph","jsondiff":"jsondb","jsonschema":"scschema","hex2text":"hexzwb","text2hex":"wbzhex","bin2text":"ejzzwb","text2bin":"wbzejz","base32":"base32","base58":"base58","urlmerge":"urlcszl","randstr":"sjzfc","passphrase":"sjkl","cronbuild":"cronsc","tsdiff":"sjccz","subnet":"zwjs","cidr":"cidrhs","macvendor":"macjx","uaparse":"uajx","httphdr":"qqtjx","cookie":"cookiejx","envparse":"envjx","cssvar":"cssbltq","mdtable":"markdownbg","json2env":"jsonzenv","codecount":"dmxs","filesize":"wjdxhs","rgb2cmyk":"rgbzcmyk","strftime":"rqgsh","rm1":"1rmgs","cardio_burn":"yyxh","steps_cal":"bsrl","swim_pace":"yyps","run_predict":"pbcjyc","marathon_pace":"mlsps","whr":"ytb","waterintake":"mrysl","protein":"dbzxq","carb":"tsxq","sleep_cycle":"smzq","stretch_dur":"lssc","exercise_table":"dzsc","food_protein":"swdb","stretch_moves":"lsdz","home_workout":"jjxl","gym_equip":"qxsc","yoga":"yjts","bmi_table":"bmidz","exercise_order":"xlsx","supplement":"bjcs","injury_prevent":"ssyf","heart_zone":"xlqj","recovery":"hfjy","posture":"ttzj","metric_body":"scsj","water_checkin":"hsdk","workout_checkin":"xldk","weight_log":"tzjl","stain_remove":"wzqc","storage_tips":"snjq","kitchen_conv":"cfhs","temp_conv":"wdhs","oven_temp":"kxwd","airfryer":"qzghs","rice_ratio":"msbl","tea_ratio":"csbl","food_storage":"scbc","food_swap":"scth","laundry_symbol":"xbfh","clothes_care":"mlhl","appliance_care":"jdby","odor_remove":"cwff","cleaning_tools":"qjgj","moving_list":"bjqd","home_emergency":"jtyjb","life_hacks":"shqm","bulb_type":"dpdt","screw_type":"lslx","glue_type":"jsxz","tool_kit":"jygj","leak_fix":"lscl","drain_clear":"gdst","pest_control":"ccff","pet_age":"cwnl","pet_feed":"cwwsl","cat_age":"mlhs","dog_age":"glhs","plant_water":"zwjs","flower_lang":"hy","flower_season":"hq","medbox":"jtyx","med_note":"yycs","body_temp":"twck","bp_ref":"xyck","sleep_need":"smsc","overnight_food":"gyc","fridge_zone":"bxfq","microwave_no":"wbjj","knife_guide":"djyt","tea_type":"cyzl","disinfect_ratio":"xdpb","laundry_dose":"xyyyl","moving_boxes":"bjzx","light_watt":"dggl","kettle_scale":"sgqc","electric_bill":"dfgs","standby_power":"djnh","socket_count":"czsl","washer_capacity":"xyjrl","fridge_capacity":"bxrj","wardrobe_capacity":"ygrl","storage_box":"snxsl","dehumidify":"csl","humidify":"jsl","purifier_area":"jhqmj","filter_life":"lxsm","powerbank":"cdbzs","volume_weight":"tjz","storage_conv":"cchs","netspeed":"wshs","study_plan":"xxjh","review_interval":"fxjg","mistake_book":"ctb","word_book":"dcb","ebbinghaus":"jyqx","multiplication":"cfkj","square_table":"pfb","cube_table":"lfb","prime_table":"zsb","trig_table":"sjhsz","geo_formula":"jhgs","physics_formula":"wlgs","chem_formula":"hxgs","unit_prefix":"dwqz","fraction_conv":"fsxs","sci_notation":"kxjs","pi_digits":"yzl","english_tense":"yyst","irregular_verb":"bgzdc","root_affix":"cgcz","preposition":"jcyf","linking":"ldgz","essay_pattern":"yyjx","idiom_misuse":"cywy","synonym":"jyc","antonym":"fyc","measure_word":"lcdp","punctuation":"bdyf","rhetoric":"xcsf","poem_line":"mjcc","literature":"wxcs","dynasty":"cdnb","geo_extreme":"zgdlzz","world_extreme":"sjzz","chem_phenomenon":"syxx","bio_fact":"swcs","physics_symbol":"wllfh","math_symbol":"sxfh","circle_calc":"yysx","triangle_calc":"sjxjs","combination":"plzh","stats_basic":"tjl","gpa":"jdhs","exam_score":"dfhs","reading_speed":"ydsd","note_method":"bjff","memory_method":"jyff","time_mgmt":"sjgl","paper_format":"lwgs","sqrt_calc":"ghjs","gcd_lcm":"gygb","quadratic":"ecfc","sequence":"slqh","angle_conv":"jdhd","log_calc":"dsjs","power_calc":"cfjs","rank_percentile":"cjbfw","study_time":"xxdk","video_bitrate":"spml","file_size_est":"wjtj","aspect_ratio":"hmbl","duration_conv":"schs","fps_conv":"zlhs","frame_grab":"czjs","speed_duration":"bssc","audio_sample":"cytj","audio_bitrate":"ypml","record_time":"klsc","db_sum":"fbdj","freq_table":"plym","interval_table":"ycb","chord_table":"hxgc","guitar_tune":"jtdx","piano_keys":"gqjw","bpm_delay":"bpmyc","time_signature":"ph","video_codec":"spbm","color_space":"sckj","color_depth":"scws","ratio_table":"hfbl","lens_equiv":"dxjj","nd_calc":"ndjg","shutter_angle":"kmjd","ev_comp":"bgbc","dof":"jsgs","safe_shutter":"aqkm","subtitle_fmt":"zmgs","srt_shift":"zmpy","cover_size":"fmcc","mix_level":"hydp","music_key":"yydx","video_concat":"sppj","transcode_param":"zmcs","sync_offset":"yhtb","audio_denoise_step":"lyjz","audio_vis":"ypksh","video_storyboard":"fjys","color_grade":"tsfg","frame_size":"hmcc","audio_channel":"sdpz","video_letter":"spcl","loudness":"xdhs","audio_fade":"drdc","fire_escape":"hzts","extinguisher_type":"mhqlx","extinguisher_use":"mhqyf","earthquake":"dzbx","flood":"hsyd","lightning":"ldfh","elevator_trap":"dtkr","drowning":"nsjy","electric_shock":"cdjj","heatstroke":"zscl","hypothermia":"swcl","burn":"tscl","cut_wound":"gszx","nosebleed":"bcx","fracture":"gzgd","sprain":"nscl","faint":"yjjj","seizure":"dxfz","choking":"qdyw","cpr":"xffs","aed":"aedsy","poisoning":"zdjj","gas_leak":"rqxl","gas_alarm":"bjqaz","co_poison":"yyhtzd","emergency_bag":"yjbqd","emergency_contact":"yjlxr","extinguisher_count":"mhqpz","evacuation_time":"sssj","shelter":"bncs","sos_signal":"qjxh","wild_lost":"ywml","snake_bite":"sycl","bee_sting":"fzcl","dog_bite":"gycl","food_poison":"swzd","weather_warn":"yjdj","quake_level":"zjck","hotline":"jjdh","escape_route":"tslx","first_aid_kit":"jjbpz","water_safety":"syaq","heat_index":"tgwd","meeting_note":"hyjy","weekly_report":"zbmb","mail_tmpl":"yjmb","resume_tmpl":"jlmb","resign_letter":"czx","leave_note":"qjt","invitation":"yqh","thanks_letter":"gxx","apology":"dqx","recommend_letter":"tjx","memo":"bwl","meeting_notice":"hytz","retro":"xmfp","prd_outline":"xqwdys","request_note":"qsmb","report_struct":"hbjg","interview_q":"mswt","interview_feedback":"msfk","self_review":"jxzp","priority_matrix":"sxx","task_breakdown":"rwcj","estimation":"gsgs","salary_calc":"nxcs","annual_leave":"njjs","reimburse":"bxqd","business_trip":"ccqd","gantt":"pqyd","risk_log":"fxqd","ppt_struct":"pptjg","data_report":"sjhb","email_etiquette":"yjly","phone_script":"dhhs","negotiation":"tpjq","manage_up":"xsgl","feedback_model":"fkmx","conflict":"ctcl","team_role":"tdjs","okr":"okrmb","kpi":"kpics","standup":"zhmb","meeting_minutes_short":"hyyd","delegation":"rwjb","onboarding":"xrqd","handover":"jjqd","customer_complaint":"tscl","sales_pitch":"xshs","work_habit":"gzxg","office_manner":"bgsly","ppt_page":"ysgs","meeting_cost":"hycb","daily_report":"rbmb","debrief":"szyd","agenda":"hyyc","client_visit":"khbf","review_prd":"xqps","code_review":"dmps","launch_check":"sxjc","shift_handover":"zbjj","training_plan":"pxsj","kid_math":"ksct","kid_oral":"ksyq","kid_pattern":"zgl","kid_shape":"txrz","kid_color":"yszy","kid_song":"eg","kid_riddle":"my","kid_brain":"njjzw","kid_idiom":"cyqm","kid_animal":"dwrz","kid_dino":"klrz","kid_space":"tyx","kid_body":"stbw","kid_safety":"aqcs","kid_manner":"lmly","kid_chore":"xrwdk","kid_schedule":"zxb","kid_screen":"pmsj","kid_height":"sgck","kid_vaccine":"ymsj","kid_book":"hbtj","kid_game":"qzyx","kid_craft":"sghd","kid_origami":"zzbz","kid_draw":"jbh","kid_english":"yyqmc","kid_phonics":"zrpd","kid_alphabet":"zmdc","kid_count":"szzy","kid_time":"sjrz","kid_money":"qbrz","kid_focus":"zzlyx","kid_logic":"ljt","kid_story":"gsmb","kid_emotion":"qxrz","kid_praise":"byfs","kid_punish":"gjyz","kid_reading":"ydl","kid_homework":"zydk","kid_birthday":"srhzb","kid_question":"ltwt","kid_phone":"sbgz","pack_list":"dbqd","travel_doc":"zjhd","pack_calc":"ywsl","time_zone":"schs","flight_time":"dsc","mileage":"yfgs","toll":"txf","trip_budget":"lxys","split_cost":"fyjf","itinerary":"xcmb","visa_doc":"qzcl","abroad_tips":"cjyd","plug_type":"czlx","hotel_pick":"xjd","bnb_check":"rzjc","weather_gear":"tqzb","altitude":"gyzy","car_sick":"ycyd","jetlag":"sctz","language_phrase":"lxyy","travel_safety":"dzaq","travel_insurance":"lxbx","tax_refund":"jwts","liquid_rule":"ytgd","luggage_weight":"xlzl","sun_time":"rcrl","hike_time":"tbys","cycle_speed":"qxps","distance_conv":"jlhs","speed_conv":"sdhs","travel_medicine":"lxyp","photo_spot":"pzgx","local_food":"zcdff","emergency_abroad":"jwyj","camping_list":"lyzb","hotel_tips":"zdjq","budget_split":"ysfp","weekend_trip":"zmqn","travel_journal":"lxrj","train_seat":"gtxz","airport_flow":"cjlc","passport":"hzbl","car_check":"zjjc","pack_trick":"dbjq","reno_budget":"zxys","tile_count":"czsl","cement_mix":"sjpb","wire_gauge":"dxgg","pipe_size":"sggj","socket_height":"czgd","light_count":"djgl","curtain_size":"clcc","furniture_size":"jjcc","mattress":"cdxz","kitchen_counter":"tmgd","waterproof":"fsjc","formaldehyde":"jqzl","reno_order":"sgsx","reno_duration":"gqgs","reno_check":"ysqd","hydro_check":"sdjd","tile_lay":"czpt","skirting":"tjx","door_size":"mdcc","window_size":"chcc","stair_size":"ltcc","balcony_load":"ytcz","ac_power":"ktps","fresh_air":"xffl","floor_heat":"dngl","water_heater":"rsqrl","purifier_size":"jsqtl","smart_home":"znjj","style_pick":"zxfg","color_scheme":"psyz","lighting_plan":"dgfc","soft_decor":"rzys","floor_area":"mjjs","wall_area":"qmmj","cabinet_need":"cgcd","vent_need":"pfl","home_reno_tip":"zxjy","kitchen_layout":"cfbj","bath_size":"wsjcc","balcony_decor":"ytgz","coin":"pyb","dice":"ztz","random_number":"sjsz","random_color":"sjsz","eat_what":"jtcsm","weekend_what":"zmzsm","movie_pick":"dytj","book_pick":"sdtj","board_game":"zytj","music_mood":"yytj","game_type":"yxlx","joke":"lxh","trivia":"lzs","tongue":"rkl","birthday_flower":"srh","constellation":"xzrq","rps":"cqdz","24game":"24d","guess_number":"csz","timer_challenge":"60mtz","decision":"jck","wheel_pick":"wzzp","group_split":"sjfz","lottery_num":"sjcj","speak_order":"fysx","bucket_100":"100jxs","movie_line":"jdtc","slogan":"yjhmd","copywriting":"wamb","video_title":"spbt","story_start":"gskt","plot_twist":"qjzz","riddle_fun":"qwmt","card_draw":"cpkp","fortune":"mryj","emoji_text":"pyqwa","mood_log":"xqdk","gratitude":"gejl","one_line_diary":"yxrj","time_capsule":"sjjn","date_idea":"yhdz","gift_idea":"sljy","party_theme":"pdzt","word_game":"wzyx","riddle_math":"qwsx","truth_dare":"zxhdmx","who_spy":"sswdck","poker_rank":"pxsc","mahjong_term":"mjsy","dice_prob":"tzgl","random_penalty":"sjcf","wolf_role":"lrsjs","typing_speed":"dzsd","mirror_text":"wzdx","acrostic":"cts","fortune_cookie":"sjqy"};
 const TOOLS = [
-{id:'flash', n:'手电筒', d:'工程参数速算', c:'eng', col:'#F0A22B', ic:'flash'},
+{id:'flash', n:'手电筒', d:'屏幕常亮当灯用', c:'eng', col:'#F0A22B', ic:'flash'},
 {id:'compass', n:'指南针', d:'读取设备方向角度', c:'eng', col:'var(--accent)', ic:'compass'},
 {id:'level', n:'水平仪', d:'读取倾角判断是否水平', c:'eng', col:'#17A673', ic:'level'},
 {id:'plumb', n:'铅垂线', d:'读取垂直度偏差', c:'eng', col:'#5B7CFA', ic:'plumb'},
@@ -438,20 +442,20 @@ const TOOLS = [
 {id:'bmi', n:'BMI 计算', d:'身高体重算身体质量指数', c:'num', col:'#0E9AA7', ic:'pulse'},
 {id:'datecalc', n:'日期计算', d:'算相差天数、加天数', c:'num', col:'#7A5AF8', ic:'calendar'},
 {id:'percent', n:'百分比计算', d:'增减比例与占比', c:'num', col:'#5B7CFA', ic:'percent'},
-{id:'random', n:'随机抽签', d:'参数代入直接出结果', c:'num', col:'#17917B', ic:'dice'},
+{id:'random', n:'随机抽签', d:'多人随机抽一位', c:'num', col:'#17917B', ic:'dice'},
 {id:'timestamp', n:'时间戳转换', d:'时间与时间戳互转', c:'num', col:'#8A94A6', ic:'clock'},
-{id:'pomodoro', n:'番茄钟', d:'参数代入直接出结果', c:'eff', col:'#E2543B', ic:'timer'},
+{id:'pomodoro', n:'番茄钟', d:'25 分钟专注计时', c:'eff', col:'#E2543B', ic:'timer'},
 {id:'stopwatch', n:'秒表', d:'查表得参考数值', c:'eff', col:'var(--accent)', ic:'clock'},
-{id:'noise', n:'白噪音', d:'参数代入直接出结果', c:'eff', col:'#17A673', ic:'wave'},
-{id:'marquee', n:'手持弹幕', d:'参数代入直接出结果', c:'eff', col:'#7A5AF8', ic:'marquee'},
-{id:'clock', n:'全屏时钟', d:'参数代入直接出结果', c:'eff', col:'#15181D', ic:'clock'},
-{id:'filllight', n:'补光灯', d:'参数代入直接出结果', c:'eff', col:'#F0A22B', ic:'sun'},
-{id:'counter', n:'计数器', d:'参数代入直接出结果', c:'eff', col:'#0E9AA7', ic:'tally'},
-{id:'kinship', n:'亲戚关系', d:'参数代入直接出结果', c:'qry', col:'var(--accent)', ic:'person'},
-{id:'trashclass', n:'垃圾分类', d:'参数代入直接出结果', c:'qry', col:'#17A673', ic:'trash'},
+{id:'noise', n:'白噪音', d:'雨声风扇声助眠', c:'eff', col:'#17A673', ic:'wave'},
+{id:'marquee', n:'手持弹幕', d:'全屏滚动字牌', c:'eff', col:'#7A5AF8', ic:'marquee'},
+{id:'clock', n:'全屏时钟', d:'大字时钟横竖屏', c:'eff', col:'#15181D', ic:'clock'},
+{id:'filllight', n:'补光灯', d:'屏幕调成柔光灯', c:'eff', col:'#F0A22B', ic:'sun'},
+{id:'counter', n:'计数器', d:'点一下加一，可分组', c:'eff', col:'#0E9AA7', ic:'tally'},
+{id:'kinship', n:'亲戚关系', d:'算出两人是什么关系', c:'qry', col:'var(--accent)', ic:'person'},
+{id:'trashclass', n:'垃圾分类', d:'按名称查投放类别', c:'qry', col:'#17A673', ic:'trash'},
 {id:'qrgen', n:'二维码生成', d:'文本转二维码，可下载保存', c:'qry', col:'#15181D', ic:'qr'},
-{id:'qrscan', n:'扫码识别', d:'参数代入直接出结果', c:'qry', col:'#E2543B', ic:'scan'},
-{id:'imgcrop', n:'裁剪旋转', d:'参数代入直接出结果', c:'img', col:'#5B7CFA', ic:'frame'},
+{id:'qrscan', n:'扫码识别', d:'扫二维码读出内容', c:'qry', col:'#E2543B', ic:'scan'},
+{id:'imgcrop', n:'裁剪旋转', d:'按比例裁切并转正', c:'img', col:'#5B7CFA', ic:'frame'},
 {id:'imgbw', n:'图片滤镜', d:'调色、复古、灰度', c:'img', col:'#8A94A6', ic:'sun'},
 {id:'uuid', n:'UUID 生成', d:'生成唯一标识符', c:'txt', col:'var(--accent)', ic:'hash'},
 {id:'jsonfmt', n:'JSON 格式化', d:'压缩与美化 JSON', c:'txt', col:'#0E9AA7', ic:'code'},
@@ -460,7 +464,7 @@ const TOOLS = [
 {id:'deviceinfo', n:'设备信息', d:'查看型号与系统版本', c:'kit', col:'#7A5AF8', ic:'compass'},
 {id:'screentest', n:'屏幕检测', d:'检查本机对应能力', c:'kit', col:'#15181D', ic:'grid'},
 {id:'speech', n:'文字转语音', d:'文本与内容处理工具', c:'txt', col:'#D9822B', ic:'wave'},
-{id:'timer', n:'倒计时', d:'参数代入直接出结果', c:'eff', col:'#E2543B', ic:'timer'},
+{id:'timer', n:'倒计时', d:'设定时长到点提醒', c:'eff', col:'#E2543B', ic:'timer'},
 {id:'todo', n:'待办清单', d:'查表得参考数值', c:'eff', col:'#17A673', ic:'dots'},
 {id:'wifiqr', n:'WiFi 二维码', d:'扫码即连，免输密码', c:'qry', col:'#0E9AA7', ic:'qr'},
 {id:'vcardqr', n:'名片二维码', d:'把联系方式做成二维码', c:'qry', col:'var(--accent)', ic:'person'},
@@ -471,14 +475,14 @@ const TOOLS = [
 {id:'vibrate', n:'震动测试', d:'检测马达与强度', c:'life', col:'#7A5AF8', ic:'pulse'},
 {id:'recorder', n:'录音机', d:'检查本机对应硬件能力', c:'dev', col:'#D9822B', ic:'wave'},
 {id:'imgresize', n:'修改尺寸', d:'按条件定尺寸规格', c:'img', col:'var(--accent)', ic:'frame'},
-{id:'imgpixel', n:'图片像素化', d:'参数代入直接出结果', c:'img', col:'#0E9AA7', ic:'grid'},
+{id:'imgpixel', n:'图片像素化', d:'打成马赛克方块', c:'img', col:'#0E9AA7', ic:'grid'},
 {id:'imgblur', n:'图片模糊', d:'局部或整体虚化', c:'img', col:'#7A5AF8', ic:'drop'},
 {id:'imground', n:'圆角图片', d:'一键切圆角', c:'img', col:'#E2543B', ic:'frame'},
-{id:'imgflip', n:'镜像翻转', d:'参数代入直接出结果', c:'img', col:'#17A673', ic:'arrows'},
-{id:'imgadjust', n:'图片调色', d:'参数代入直接出结果', c:'img', col:'#D9822B', ic:'sun'},
-{id:'imgpalette', n:'主色提取', d:'参数代入直接出结果', c:'img', col:'#5B7CFA', ic:'palette'},
-{id:'imgframe', n:'图片边框', d:'参数代入直接出结果', c:'img', col:'#17917B', ic:'frame'},
-{id:'imgvintage', n:'老照片', d:'参数代入直接出结果', c:'img', col:'#8A94A6', ic:'stamp'},
+{id:'imgflip', n:'镜像翻转', d:'水平垂直翻转图片', c:'img', col:'#17A673', ic:'arrows'},
+{id:'imgadjust', n:'图片调色', d:'亮度对比度饱和度', c:'img', col:'#D9822B', ic:'sun'},
+{id:'imgpalette', n:'主色提取', d:'取图中主要配色', c:'img', col:'#5B7CFA', ic:'palette'},
+{id:'imgframe', n:'图片边框', d:'加白边或彩边', c:'img', col:'#17917B', ic:'frame'},
+{id:'imgvintage', n:'老照片', d:'泛黄做旧质感', c:'img', col:'#8A94A6', ic:'stamp'},
 {id:'textclean', n:'文本清洗', d:'文本与内容处理工具', c:'txt', col:'var(--accent)', ic:'dots'},
 {id:'cipher', n:'文字加密', d:'文本与内容处理工具', c:'txt', col:'#0E9AA7', ic:'hash'},
 {id:'textreverse', n:'文字倒置', d:'文本与内容处理工具', c:'txt', col:'#17A673', ic:'arrows'},
@@ -488,28 +492,28 @@ const TOOLS = [
 {id:'htmlesc', n:'HTML 转义', d:'文本与内容处理工具', c:'txt', col:'#5B7CFA', ic:'code'},
 {id:'csv2md', n:'表格转Markdown', d:'查表得参考数值', c:'txt', col:'#17917B', ic:'grid'},
 {id:'dedup', n:'逐行去重', d:'文本与内容处理工具', c:'txt', col:'#8A94A6', ic:'dots'},
-{id:'calc', n:'科学计算器', d:'参数代入直接出结果', c:'num', col:'var(--accent)', ic:'calc'},
+{id:'calc', n:'科学计算器', d:'三角函数与括号运算', c:'num', col:'var(--accent)', ic:'calc'},
 {id:'compound', n:'复利计算', d:'按利率算本息和', c:'num', col:'#178673', ic:'coin'},
 {id:'deposit', n:'存款利息', d:'按期限算利息', c:'num', col:'#D9822B', ic:'stamp'},
 {id:'discount', n:'折扣计算', d:'折后价与省了多少', c:'num', col:'#E2543B', ic:'percent'},
-{id:'split', n:'AA 分账', d:'参数代入直接出结果', c:'num', col:'#7A5AF8', ic:'person'},
+{id:'split', n:'AA 分账', d:'按人数均摊各付多少', c:'num', col:'#7A5AF8', ic:'person'},
 {id:'bmr', n:'基础代谢', d:'按体重年龄估代谢', c:'num', col:'#0E9AA7', ic:'pulse'},
 {id:'bodyfat', n:'体脂率', d:'按围度估算体脂', c:'num', col:'#5B7CFA', ic:'pulse'},
-{id:'geodist', n:'两点距离', d:'参数代入直接出结果', c:'num', col:'#17917B', ic:'distance'},
+{id:'geodist', n:'两点距离', d:'经纬度算直线距离', c:'num', col:'#17917B', ic:'distance'},
 {id:'tzconv', n:'时区换算', d:'常用单位数值互换', c:'num', col:'#8A94A6', ic:'clock'},
-{id:'note', n:'便签', d:'参数代入直接出结果', c:'eff', col:'var(--accent)', ic:'text'},
-{id:'wheel', n:'抽奖转盘', d:'参数代入直接出结果', c:'eff', col:'#E2543B', ic:'dice'},
-{id:'names', n:'随机点名', d:'参数代入直接出结果', c:'eff', col:'#17A673', ic:'person'},
+{id:'note', n:'便签', d:'随手记文字待办', c:'eff', col:'var(--accent)', ic:'text'},
+{id:'wheel', n:'抽奖转盘', d:'转盘随机抽奖', c:'eff', col:'#E2543B', ic:'dice'},
+{id:'names', n:'随机点名', d:'名单里随机抽名字', c:'eff', col:'#17A673', ic:'person'},
 {id:'pwdgen', n:'密码生成', d:'按参数生成对应内容', c:'eff', col:'#7A5AF8', ic:'hash'},
-{id:'worldclock', n:'世界时钟', d:'参数代入直接出结果', c:'eff', col:'#0E9AA7', ic:'clock'},
-{id:'ledger', n:'记账本', d:'参数代入直接出结果', c:'eff', col:'#17917B', ic:'tally'},
-{id:'typing', n:'打字测速', d:'参数代入直接出结果', c:'eff', col:'#8A94A6', ic:'text'},
-{id:'zodiac', n:'生肖星座', d:'参数代入直接出结果', c:'qry', col:'#7A5AF8', ic:'calendar'},
-{id:'roman', n:'罗马数字', d:'参数代入直接出结果', c:'qry', col:'#D9822B', ic:'hash'},
+{id:'worldclock', n:'世界时钟', d:'多城市当前时间', c:'eff', col:'#0E9AA7', ic:'clock'},
+{id:'ledger', n:'记账本', d:'收支分类记流水', c:'eff', col:'#17917B', ic:'tally'},
+{id:'typing', n:'打字测速', d:'测每分钟字数与正确率', c:'eff', col:'#8A94A6', ic:'text'},
+{id:'zodiac', n:'生肖星座', d:'按生日查生肖星座', c:'qry', col:'#7A5AF8', ic:'calendar'},
+{id:'roman', n:'罗马数字', d:'阿拉伯数字与罗马数字互转', c:'qry', col:'#D9822B', ic:'hash'},
 {id:'httpcode', n:'HTTP 状态码', d:'按码查含义', c:'qry', col:'#0E9AA7', ic:'code'},
 {id:'sizeconv', n:'尺码换算', d:'常用单位数值互换', c:'qry', col:'#17A673', ic:'ruler'},
-{id:'birthdays', n:'出生天数', d:'参数代入直接出结果', c:'qry', col:'#E2543B', ic:'calendar'},
-{id:'weeknum', n:'第几周', d:'参数代入直接出结果', c:'qry', col:'var(--accent)', ic:'calendar'},
+{id:'birthdays', n:'出生天数', d:'从生日算到今天多少天', c:'qry', col:'#E2543B', ic:'calendar'},
+{id:'weeknum', n:'第几周', d:'查某天是年内第几周', c:'qry', col:'var(--accent)', ic:'calendar'},
 {id:'jwt', n:'JWT 解析', d:'文本与内容处理工具', c:'txt', col:'var(--accent)', ic:'code'},
 {id:'regex', n:'正则测试', d:'按表达式查匹配结果', c:'txt', col:'#0E9AA7', ic:'code'},
 {id:'mdpreview', n:'Markdown 预览', d:'文本与内容处理工具', c:'txt', col:'#17A673', ic:'text'},
@@ -517,39 +521,39 @@ const TOOLS = [
 {id:'urlparse', n:'URL 解析', d:'拆解链接参数', c:'txt', col:'#D9822B', ic:'link'},
 {id:'cron', n:'Cron 解析', d:'文本与内容处理工具', c:'txt', col:'#7A5AF8', ic:'clock'},
 {id:'imgbatch', n:'批量压缩', d:'一次处理多张图片', c:'img', col:'var(--accent)', ic:'batch'},
-{id:'imgascii', n:'转字符画', d:'参数代入直接出结果', c:'img', col:'#17A673', ic:'ascii'},
-{id:'img2pdf', n:'转 PDF', d:'参数代入直接出结果', c:'img', col:'#E2543B', ic:'pdf'},
+{id:'imgascii', n:'转字符画', d:'图片转成字符拼图', c:'img', col:'#17A673', ic:'ascii'},
+{id:'img2pdf', n:'转 PDF', d:'图片合并成 PDF', c:'img', col:'#E2543B', ic:'pdf'},
 {id:'braille', n:'盲文转换', d:'两种格式互转', c:'txt', col:'#7A5AF8', ic:'braille'},
 {id:'fullhalf', n:'全角半角', d:'文本与内容处理工具', c:'txt', col:'#0E9AA7', ic:'fullhalf'},
 {id:'wordcloud', n:'文字云', d:'文本与内容处理工具', c:'txt', col:'#D9822B', ic:'cloud'},
 {id:'hfund', n:'公积金贷款', d:'可贷额度与月供', c:'num', col:'#17A673', ic:'house'},
-{id:'bonustax', n:'年终奖个税', d:'参数代入直接出结果', c:'num', col:'#E2543B', ic:'gift'},
+{id:'bonustax', n:'年终奖个税', d:'单独与合并计税对比', c:'num', col:'#E2543B', ic:'gift'},
 {id:'unitall', n:'单位换算总汇', d:'长度重量面积等单位互转', c:'eng', col:'#2E7D6F', ic:'level'},
 {id:'healthall', n:'体征总汇', d:'日常生活实用计算', c:'life', col:'#C0555A', ic:'house'},
-{id:'calcall', n:'通用计算总汇', d:'参数代入直接出结果', c:'fin', col:'#B07C2E', ic:'calc'},
+{id:'calcall', n:'通用计算总汇', d:'常用公式集中入口', c:'fin', col:'#B07C2E', ic:'calc'},
 {id:'coefall', n:'经验系数速查', d:'按关键词查对应数值', c:'eng', col:'#4A6E8A', ic:'level'},
-{id:'socialsec', n:'五险一金', d:'参数代入直接出结果', c:'num', col:'var(--accent)', ic:'shield'},
+{id:'socialsec', n:'五险一金', d:'按基数算个人与单位缴', c:'num', col:'var(--accent)', ic:'shield'},
 {id:'rebar', n:'钢筋重量', d:'按直径与长度算吨位', c:'num', col:'#8A94A6', ic:'rod'},
 {id:'slope', n:'坡度换算', d:'百分比与角度互转', c:'num', col:'#0E9AA7', ic:'angle'},
-{id:'concrete', n:'混凝土配比', d:'参数代入直接出结果', c:'num', col:'#D9822B', ic:'mix'},
-{id:'barcode', n:'条形码', d:'参数代入直接出结果', c:'qry', col:'#15181D', ic:'barcode'},
+{id:'concrete', n:'混凝土配比', d:'按强度等级算材料比', c:'num', col:'#D9822B', ic:'mix'},
+{id:'barcode', n:'条形码', d:'生成 EAN/Code128 条码', c:'qry', col:'#15181D', ic:'barcode'},
 {id:'qrstyle', n:'二维码美化', d:'给二维码换色加圆点', c:'qry', col:'var(--accent)', ic:'qr'},
-{id:'express', n:'快递单号', d:'参数代入直接出结果', c:'qry', col:'#E2543B', ic:'truck'},
+{id:'express', n:'快递单号', d:'按号段识别快递公司', c:'qry', col:'#E2543B', ic:'truck'},
 {id:'tone', n:'音频发生器', d:'日常生活实用计算', c:'life', col:'var(--accent)', ic:'wave'},
 {id:'speaker', n:'扬声器除尘', d:'日常生活实用计算', c:'life', col:'#17A673', ic:'sun'},
 {id:'motion', n:'加速度曲线', d:'读取运动加速度', c:'dev', col:'#7A5AF8', ic:'pulse'},
-{id:'invert', n:'图片反色', d:'参数代入直接出结果', c:'img', col:'#E2543B', ic:'palette'},
-{id:'text2img', n:'文字转图片', d:'参数代入直接出结果', c:'img', col:'#0E9AA7', ic:'text'},
-{id:'towebp', n:'图片转WebP', d:'参数代入直接出结果', c:'img', col:'#8A94A6', ic:'image'},
+{id:'invert', n:'图片反色', d:'颜色取反成负片', c:'img', col:'#E2543B', ic:'palette'},
+{id:'text2img', n:'文字转图片', d:'长文排成图片', c:'img', col:'#0E9AA7', ic:'text'},
+{id:'towebp', n:'图片转WebP', d:'压成 WebP 更省流量', c:'img', col:'#8A94A6', ic:'image'},
 {id:'txtsort', n:'文本排序', d:'文本与内容处理工具', c:'txt', col:'var(--accent)', ic:'arrows'},
 {id:'extract', n:'提取链接邮箱', d:'文本与内容处理工具', c:'txt', col:'#D9822B', ic:'link'},
 {id:'mdhtml', n:'Markdown 转HTML', d:'文本与内容处理工具', c:'txt', col:'#17A673', ic:'code'},
-{id:'netpay', n:'税后工资', d:'参数代入直接出结果', c:'num', col:'#17A673', ic:'coin'},
+{id:'netpay', n:'税后工资', d:'按税前算到手金额', c:'num', col:'#17A673', ic:'coin'},
 {id:'fuel', n:'油耗计算', d:'按里程算百公里油耗', c:'num', col:'#E2543B', ic:'truck'},
 {id:'calorie', n:'卡路里消耗', d:'按运动时长与体重估消耗', c:'num', col:'var(--accent)', ic:'pulse'},
-{id:'breathe', n:'呼吸训练', d:'参数代入直接出结果', c:'eff', col:'#0E9AA7', ic:'wave'},
+{id:'breathe', n:'呼吸训练', d:'按节奏引导深呼吸', c:'eff', col:'#0E9AA7', ic:'wave'},
 {id:'wake', n:'屏幕常亮', d:'日常生活实用计算', c:'life', col:'#D9822B', ic:'sun'},
-{id:'solar', n:'二十四节气', d:'参数代入直接出结果', c:'qry', col:'#17A673', ic:'calendar'},
+{id:'solar', n:'二十四节气', d:'按日期查节气', c:'qry', col:'#17A673', ic:'calendar'},
 {id:'periodic', n:'元素周期表', d:'查表得参考数值', c:'qry', col:'var(--accent)', ic:'grid'},
 {id:'hotkeys', n:'快捷键速查', d:'按关键词查对应数值', c:'qry', col:'#8A94A6', ic:'code'},
 {id:'json2csv', n:'JSON 转CSV', d:'文本与内容处理工具', c:'txt', col:'#D9822B', ic:'grid'},
@@ -564,27 +568,27 @@ const TOOLS = [
 {id:'gamepad', n:'手柄检测', d:'检查本机对应能力', c:'life', col:'#E2543B', ic:'dice'},
 {id:'gpsinfo', n:'定位信息', d:'日常生活实用计算', c:'life', col:'#17A673', ic:'distance'},
 {id:'camtest', n:'摄像头预览', d:'日常生活实用计算', c:'life', col:'var(--accent)', ic:'image'},
-{id:'clipboard', n:'剪贴板', d:'工程参数速算', c:'eng', col:'#0E9AA7', ic:'text'},
+{id:'clipboard', n:'剪贴板', d:'保存最近复制内容', c:'eng', col:'#0E9AA7', ic:'text'},
 {id:'fullscreen', n:'全屏测试', d:'检查本机对应能力', c:'eng', col:'#7A5AF8', ic:'frame'},
 {id:'channel', n:'声道测试', d:'检查本机对应能力', c:'life', col:'#E2543B', ic:'wave'},
-{id:'dpr', n:'屏幕参数', d:'工程参数速算', c:'eng', col:'#8A94A6', ic:'grid'},
+{id:'dpr', n:'屏幕参数', d:'读分辨率与像素密度', c:'eng', col:'#8A94A6', ic:'grid'},
 {id:'vibpattern', n:'震动节奏', d:'日常生活实用计算', c:'life', col:'#D9822B', ic:'pulse'},
 {id:'feats', n:'能力检测', d:'检查本机对应能力', c:'life', col:'#17A673', ic:'shield'},
 {id:'ico', n:'图标生成', d:'按参数生成对应内容', c:'img', col:'var(--accent)', ic:'image'},
-{id:'shadow', n:'阴影卡片', d:'参数代入直接出结果', c:'img', col:'#8A94A6', ic:'frame'},
-{id:'sharpen', n:'锐化滤镜', d:'参数代入直接出结果', c:'img', col:'#0E9AA7', ic:'sun'},
-{id:'targetsize', n:'压到指定KB', d:'参数代入直接出结果', c:'img', col:'#E2543B', ic:'batch'},
-{id:'collage', n:'照片拼图', d:'参数代入直接出结果', c:'img', col:'#D9822B', ic:'grid'},
-{id:'rotatefree', n:'任意旋转', d:'参数代入直接出结果', c:'img', col:'#7A5AF8', ic:'arrows'},
-{id:'overlay', n:'画中画', d:'参数代入直接出结果', c:'img', col:'#17A673', ic:'image'},
-{id:'gradient', n:'渐变遮罩', d:'参数代入直接出结果', c:'img', col:'var(--accent)', ic:'drop'},
-{id:'tiledwater', n:'平铺水印', d:'参数代入直接出结果', c:'img', col:'#8A94A6', ic:'stamp'},
-{id:'polaroid', n:'拍立得', d:'参数代入直接出结果', c:'img', col:'#D9822B', ic:'frame'},
-{id:'halftone', n:'半调圆点', d:'参数代入直接出结果', c:'img', col:'#15181D', ic:'dots'},
-{id:'splitlong', n:'长图切段', d:'参数代入直接出结果', c:'img', col:'#0E9AA7', ic:'grid'},
+{id:'shadow', n:'阴影卡片', d:'给图片加投影卡片', c:'img', col:'#8A94A6', ic:'frame'},
+{id:'sharpen', n:'锐化滤镜', d:'提升边缘清晰度', c:'img', col:'#0E9AA7', ic:'sun'},
+{id:'targetsize', n:'压到指定KB', d:'按目标体积压图', c:'img', col:'#E2543B', ic:'batch'},
+{id:'collage', n:'照片拼图', d:'多张排成一张', c:'img', col:'#D9822B', ic:'grid'},
+{id:'rotatefree', n:'任意旋转', d:'按角度自由旋转', c:'img', col:'#7A5AF8', ic:'arrows'},
+{id:'overlay', n:'画中画', d:'大图里嵌小图', c:'img', col:'#17A673', ic:'image'},
+{id:'gradient', n:'渐变遮罩', d:'底部加渐变过渡', c:'img', col:'var(--accent)', ic:'drop'},
+{id:'tiledwater', n:'平铺水印', d:'全网平铺防搬运', c:'img', col:'#8A94A6', ic:'stamp'},
+{id:'polaroid', n:'拍立得', d:'加白框与日期', c:'img', col:'#D9822B', ic:'frame'},
+{id:'halftone', n:'半调圆点', d:'网点印刷效果', c:'img', col:'#15181D', ic:'dots'},
+{id:'splitlong', n:'长图切段', d:'长图切成多张发圈', c:'img', col:'#0E9AA7', ic:'grid'},
 {id:'ratio', n:'比例裁剪', d:'按参数算比值', c:'img', col:'#E2543B', ic:'frame'},
-{id:'scaleup', n:'高清放大', d:'参数代入直接出结果', c:'img', col:'#17A673', ic:'magnify'},
-{id:'circleavatar', n:'圆形头像', d:'参数代入直接出结果', c:'img', col:'var(--accent)', ic:'person'},
+{id:'scaleup', n:'高清放大', d:'无损放大图片尺寸', c:'img', col:'#17A673', ic:'magnify'},
+{id:'circleavatar', n:'圆形头像', d:'裁成圆形头像', c:'img', col:'var(--accent)', ic:'person'},
 {id:'upperlower', n:'大小写', d:'文本与内容处理工具', c:'txt', col:'var(--accent)', ic:'text'},
 {id:'replace', n:'查找替换', d:'文本与内容处理工具', c:'txt', col:'#17A673', ic:'dots'},
 {id:'punct', n:'标点转换', d:'两种格式互转', c:'txt', col:'#D9822B', ic:'text'},
@@ -606,40 +610,40 @@ const TOOLS = [
 {id:'screeninch', n:'屏幕尺寸', d:'按分辨率算 PPI', c:'eng', col:'#E2543B', ic:'ruler'},
 {id:'pregnancy', n:'预产期', d:'按末次月经推算', c:'num', col:'#17A673', ic:'calendar'},
 {id:'pace', n:'配速计算', d:'按时间与距离算配速', c:'num', col:'var(--accent)', ic:'clock'},
-{id:'steps', n:'步数距离', d:'参数代入直接出结果', c:'num', col:'#D9822B', ic:'pulse'},
-{id:'sleep', n:'睡眠规划', d:'参数代入直接出结果', c:'num', col:'#8A94A6', ic:'clock'},
+{id:'steps', n:'步数距离', d:'按步数换算里程', c:'num', col:'#D9822B', ic:'pulse'},
+{id:'sleep', n:'睡眠规划', d:'按起床时间倒推入睡', c:'num', col:'#8A94A6', ic:'clock'},
 {id:'deficit', n:'减重周期', d:'按条件估时间', c:'num', col:'#E2543B', ic:'percent'},
-{id:'alcohol', n:'酒精代谢', d:'参数代入直接出结果', c:'num', col:'#0E9AA7', ic:'pulse'},
+{id:'alcohol', n:'酒精代谢', d:'按体重与酒量估清醒', c:'num', col:'#0E9AA7', ic:'pulse'},
 {id:'roi', n:'投资回报', d:'按持有期算收益', c:'num', col:'#17A673', ic:'coin'},
-{id:'equalprincipal', n:'等额本金', d:'参数代入直接出结果', c:'num', col:'var(--accent)', ic:'calc'},
-{id:'laptimer', n:'打点计时', d:'参数代入直接出结果', c:'eff', col:'#D9822B', ic:'timer'},
-{id:'speechtimer', n:'发言计时', d:'参数代入直接出结果', c:'eff', col:'#17A673', ic:'timer'},
-{id:'hiit', n:'HIIT计时', d:'参数代入直接出结果', c:'eff', col:'#E2543B', ic:'pulse'},
+{id:'equalprincipal', n:'等额本金', d:'每月递减还款表', c:'num', col:'var(--accent)', ic:'calc'},
+{id:'laptimer', n:'打点计时', d:'多次点击记录间隔', c:'eff', col:'#D9822B', ic:'timer'},
+{id:'speechtimer', n:'发言计时', d:'限时发言倒计时', c:'eff', col:'#17A673', ic:'timer'},
+{id:'hiit', n:'HIIT计时', d:'运动与休息交替计时', c:'eff', col:'#E2543B', ic:'pulse'},
 {id:'shopping', n:'买菜清单', d:'查表得参考数值', c:'eff', col:'#0E9AA7', ic:'tally'},
-{id:'anniv', n:'纪念日', d:'参数代入直接出结果', c:'eff', col:'#D9822B', ic:'calendar'},
-{id:'rotation', n:'轮值排班', d:'参数代入直接出结果', c:'eff', col:'#7A5AF8', ic:'calendar'},
-{id:'decide', n:'决策器', d:'参数代入直接出结果', c:'eff', col:'var(--accent)', ic:'dice'},
-{id:'review', n:'每日复盘', d:'参数代入直接出结果', c:'eff', col:'#17A673', ic:'text'},
+{id:'anniv', n:'纪念日', d:'距离纪念日还有几天', c:'eff', col:'#D9822B', ic:'calendar'},
+{id:'rotation', n:'轮值排班', d:'按周期排值班表', c:'eff', col:'#7A5AF8', ic:'calendar'},
+{id:'decide', n:'决策器', d:'抛硬币或随机给选项', c:'eff', col:'var(--accent)', ic:'dice'},
+{id:'review', n:'每日复盘', d:'记录今天做了什么', c:'eff', col:'#17A673', ic:'text'},
 {id:'weekly', n:'周报生成', d:'按参数生成对应内容', c:'eff', col:'#E2543B', ic:'text'},
 {id:'lunch', n:'午餐选择', d:'日常生活实用计算', c:'life', col:'#D9822B', ic:'dice'},
 {id:'timeblock', n:'时间块', d:'按条件估时间', c:'eff', col:'#0E9AA7', ic:'clock'},
 {id:'formgen', n:'打卡表', d:'查表得参考数值', c:'eff', col:'#8A94A6', ic:'grid'},
-{id:'progress', n:'目标进度', d:'参数代入直接出结果', c:'eff', col:'#7A5AF8', ic:'tally'},
-{id:'plate', n:'车牌简称', d:'参数代入直接出结果', c:'qry', col:'var(--accent)', ic:'truck'},
-{id:'idcard', n:'身份证解析', d:'参数代入直接出结果', c:'qry', col:'#17A673', ic:'person'},
-{id:'phone', n:'手机号段', d:'参数代入直接出结果', c:'qry', col:'#D9822B', ic:'link'},
+{id:'progress', n:'目标进度', d:'按完成量算百分比', c:'eff', col:'#7A5AF8', ic:'tally'},
+{id:'plate', n:'车牌简称', d:'按车牌查省份', c:'qry', col:'var(--accent)', ic:'truck'},
+{id:'idcard', n:'身份证解析', d:'拆出籍贯生日与校验', c:'qry', col:'#17A673', ic:'person'},
+{id:'phone', n:'手机号段', d:'按号段查运营商', c:'qry', col:'#D9822B', ic:'link'},
 {id:'bankcard', n:'银行卡校验', d:'按规则判定是否合格', c:'qry', col:'#8A94A6', ic:'coin'},
 {id:'colorname', n:'颜色名称', d:'按色值查相近名称', c:'eng', col:'#E2543B', ic:'palette'},
 {id:'foodkcal', n:'食物热量', d:'按尺寸估用量', c:'qry', col:'#0E9AA7', ic:'pulse'},
 {id:'purine', n:'嘌呤表', d:'查表得参考数值', c:'qry', col:'#7A5AF8', ic:'pulse'},
 {id:'gi', n:'GI值表', d:'查表得参考数值', c:'qry', col:'var(--accent)', ic:'percent'},
-{id:'batterytype', n:'电池型号', d:'参数代入直接出结果', c:'qry', col:'#D9822B', ic:'pulse'},
+{id:'batterytype', n:'电池型号', d:'按尺寸对照电池型号', c:'qry', col:'#D9822B', ic:'pulse'},
 {id:'screw', n:'螺丝规格', d:'按条件定尺寸规格', c:'qry', col:'#8A94A6', ic:'grid'},
-{id:'awg', n:'线规AWG', d:'参数代入直接出结果', c:'qry', col:'#17A673', ic:'grid'},
+{id:'awg', n:'线规AWG', d:'AWG 与平方毫米对照', c:'qry', col:'#17A673', ic:'grid'},
 {id:'paper', n:'纸张尺寸', d:'按条件定尺寸规格', c:'qry', col:'#0E9AA7', ic:'ruler'},
-{id:'port', n:'常用端口', d:'参数代入直接出结果', c:'qry', col:'#E2543B', ic:'link'},
+{id:'port', n:'常用端口', d:'按端口查服务用途', c:'qry', col:'#E2543B', ic:'link'},
 {id:'stdcode', n:'标准代号', d:'按规范查要求', c:'qry', col:'#7A5AF8', ic:'stamp'},
-{id:'pipesize', n:'管径对照', d:'参数代入直接出结果', c:'qry', col:'var(--accent)', ic:'rod'},
+{id:'pipesize', n:'管径对照', d:'DN 与寸、英寸对照', c:'qry', col:'var(--accent)', ic:'rod'},
 {id:'json2ts', n:'JSON转TS', d:'文本与内容处理工具', c:'txt', col:'var(--accent)', ic:'code'},
 {id:'json2sql', n:'JSON转SQL', d:'文本与内容处理工具', c:'txt', col:'#17A673', ic:'grid'},
 {id:'jsonpath', n:'JSON取值', d:'文本与内容处理工具', c:'txt', col:'#D9822B', ic:'code'},
@@ -665,48 +669,48 @@ const TOOLS = [
 {id:'micplay', n:'录音回放', d:'日常生活实用计算', c:'life', col:'#7A5AF8', ic:'wave'},
 {id:'colorbars', n:'彩条测试', d:'检查本机对应能力', c:'life', col:'#0E9AA7', ic:'palette'},
 {id:'clipwrite', n:'剪贴板写入', d:'日常生活实用计算', c:'life', col:'#5B7CFA', ic:'code'},
-{id:'fileinfo', n:'文件信息', d:'工程参数速算', c:'eng', col:'#D9822B', ic:'text'},
-{id:'perms', n:'权限状态', d:'工程参数速算', c:'eng', col:'#3B8A67', ic:'shield'},
+{id:'fileinfo', n:'文件信息', d:'查看大小与类型', c:'eng', col:'#D9822B', ic:'text'},
+{id:'perms', n:'权限状态', d:'查看应用权限开关', c:'eng', col:'#3B8A67', ic:'shield'},
 {id:'orient', n:'方向仪表', d:'查表得参考数值', c:'life', col:'#8A6D3B', ic:'compass'},
 {id:'swipe', n:'滑动方向', d:'日常生活实用计算', c:'life', col:'var(--accent)', ic:'arrows'},
 {id:'tapspeed', n:'连点测试', d:'检查本机对应能力', c:'life', col:'#17A673', ic:'pulse'},
 {id:'pointerpressure', n:'触控压力', d:'按参数算受力', c:'life', col:'#F0A22B', ic:'pulse'},
-{id:'storage', n:'存储估算', d:'工程参数速算', c:'eng', col:'#E2543B', ic:'cloud'},
-{id:'netlatency', n:'网络延迟', d:'工程参数速算', c:'eng', col:'#7A5AF8', ic:'wave'},
-{id:'savefile', n:'另存文件', d:'工程参数速算', c:'eng', col:'#0E9AA7', ic:'text'},
+{id:'storage', n:'存储估算', d:'按文件量估占用', c:'eng', col:'#E2543B', ic:'cloud'},
+{id:'netlatency', n:'网络延迟', d:'测本机到网络延迟', c:'eng', col:'#7A5AF8', ic:'wave'},
+{id:'savefile', n:'另存文件', d:'生成文件并保存', c:'eng', col:'#0E9AA7', ic:'text'},
 {id:'longpress', n:'长按测试', d:'检查本机对应能力', c:'life', col:'#5B7CFA', ic:'timer'},
 {id:'pointertrack', n:'指针轨迹', d:'日常生活实用计算', c:'life', col:'#D9822B', ic:'link'},
 {id:'zoomtest', n:'缩放检测', d:'检查本机对应能力', c:'life', col:'#3B8A67', ic:'magnify'},
 {id:'sensors', n:'传感器支持', d:'日常生活实用计算', c:'life', col:'#8A6D3B', ic:'grid'},
-{id:'orientlock', n:'屏幕方向锁', d:'工程参数速算', c:'eng', col:'var(--accent)', ic:'frame'},
-{id:'vignette', n:'暗角', d:'参数代入直接出结果', c:'img', col:'#17A673', ic:'image'},
-{id:'grain', n:'噪点', d:'参数代入直接出结果', c:'img', col:'#F0A22B', ic:'dots'},
-{id:'warmth', n:'冷暖色调', d:'参数代入直接出结果', c:'img', col:'#E2543B', ic:'sun'},
-{id:'oil', n:'油画', d:'参数代入直接出结果', c:'img', col:'#7A5AF8', ic:'palette'},
-{id:'cartoon', n:'卡通化', d:'参数代入直接出结果', c:'img', col:'#0E9AA7', ic:'image'},
-{id:'film', n:'胶片', d:'参数代入直接出结果', c:'img', col:'#5B7CFA', ic:'frame'},
-{id:'double', n:'双重曝光', d:'参数代入直接出结果', c:'img', col:'#D9822B', ic:'image'},
-{id:'mirror', n:'镜像拼图', d:'参数代入直接出结果', c:'img', col:'#3B8A67', ic:'image'},
-{id:'bgblur', n:'背景虚化', d:'参数代入直接出结果', c:'img', col:'#8A6D3B', ic:'image'},
-{id:'label', n:'文字标签', d:'参数代入直接出结果', c:'img', col:'var(--accent)', ic:'text'},
-{id:'gridlines', n:'构图线', d:'参数代入直接出结果', c:'img', col:'#17A673', ic:'grid'},
-{id:'compare', n:'前后对比', d:'参数代入直接出结果', c:'img', col:'#F0A22B', ic:'image'},
-{id:'dot', n:'点阵化', d:'参数代入直接出结果', c:'img', col:'#E2543B', ic:'dots'},
-{id:'levels', n:'色阶', d:'参数代入直接出结果', c:'img', col:'#5B7CFA', ic:'palette'},
-{id:'lomo', n:'LOMO', d:'参数代入直接出结果', c:'img', col:'#D9822B', ic:'sun'},
-{id:'tilt', n:'移轴', d:'参数代入直接出结果', c:'img', col:'#3B8A67', ic:'image'},
-{id:'sat', n:'饱和度', d:'参数代入直接出结果', c:'img', col:'#8A6D3B', ic:'drop'},
-{id:'hue', n:'色相', d:'参数代入直接出结果', c:'img', col:'var(--accent)', ic:'palette'},
-{id:'denoise', n:'降噪', d:'参数代入直接出结果', c:'img', col:'#17A673', ic:'image'},
-{id:'pencil', n:'彩铅', d:'参数代入直接出结果', c:'img', col:'#F0A22B', ic:'image'},
-{id:'poster', n:'海报色', d:'参数代入直接出结果', c:'img', col:'#E2543B', ic:'palette'},
-{id:'threshold', n:'黑白阈值', d:'参数代入直接出结果', c:'img', col:'#7A5AF8', ic:'image'},
-{id:'glow', n:'柔光', d:'参数代入直接出结果', c:'img', col:'#0E9AA7', ic:'sun'},
+{id:'orientlock', n:'屏幕方向锁', d:'固定当前横竖屏', c:'eng', col:'var(--accent)', ic:'frame'},
+{id:'vignette', n:'暗角', d:'四周压暗突出主体', c:'img', col:'#17A673', ic:'image'},
+{id:'grain', n:'噪点', d:'添加胶片颗粒', c:'img', col:'#F0A22B', ic:'dots'},
+{id:'warmth', n:'冷暖色调', d:'整体偏暖或偏冷', c:'img', col:'#E2543B', ic:'sun'},
+{id:'oil', n:'油画', d:'笔触质感滤镜', c:'img', col:'#7A5AF8', ic:'palette'},
+{id:'cartoon', n:'卡通化', d:'平滑色块卡通效果', c:'img', col:'#0E9AA7', ic:'image'},
+{id:'film', n:'胶片', d:'复古胶片色调', c:'img', col:'#5B7CFA', ic:'frame'},
+{id:'double', n:'双重曝光', d:'两张图叠加融合', c:'img', col:'#D9822B', ic:'image'},
+{id:'mirror', n:'镜像拼图', d:'左右镜像对拼', c:'img', col:'#3B8A67', ic:'image'},
+{id:'bgblur', n:'背景虚化', d:'突出主体的浅景深', c:'img', col:'#8A6D3B', ic:'image'},
+{id:'label', n:'文字标签', d:'图上压标题文字', c:'img', col:'var(--accent)', ic:'text'},
+{id:'gridlines', n:'构图线', d:'三分线辅助构图', c:'img', col:'#17A673', ic:'grid'},
+{id:'compare', n:'前后对比', d:'左右拼接原图与效果', c:'img', col:'#F0A22B', ic:'image'},
+{id:'dot', n:'点阵化', d:'网点阵列化处理', c:'img', col:'#E2543B', ic:'dots'},
+{id:'levels', n:'色阶', d:'调整黑白场与中间调', c:'img', col:'#5B7CFA', ic:'palette'},
+{id:'lomo', n:'LOMO', d:'高对比暗角风格', c:'img', col:'#D9822B', ic:'sun'},
+{id:'tilt', n:'移轴', d:'局部清晰其余虚化', c:'img', col:'#3B8A67', ic:'image'},
+{id:'sat', n:'饱和度', d:'调整色彩浓淡', c:'img', col:'#8A6D3B', ic:'drop'},
+{id:'hue', n:'色相', d:'整体换色相角度', c:'img', col:'var(--accent)', ic:'palette'},
+{id:'denoise', n:'降噪', d:'抹掉画面噪点', c:'img', col:'#17A673', ic:'image'},
+{id:'pencil', n:'彩铅', d:'铅笔手绘质感', c:'img', col:'#F0A22B', ic:'image'},
+{id:'poster', n:'海报色', d:'提取海报配色方案', c:'img', col:'#E2543B', ic:'palette'},
+{id:'threshold', n:'黑白阈值', d:'二值化黑白剪影', c:'img', col:'#7A5AF8', ic:'image'},
+{id:'glow', n:'柔光', d:'叠加柔光层', c:'img', col:'#0E9AA7', ic:'sun'},
 {id:'diag', n:'水印', d:'批量压字防盗用', c:'img', col:'#5B7CFA', ic:'frame'},
-{id:'tiling', n:'平铺贴图', d:'参数代入直接出结果', c:'img', col:'#D9822B', ic:'grid'},
-{id:'infocard', n:'信息卡片', d:'参数代入直接出结果', c:'img', col:'#3B8A67', ic:'text'},
-{id:'widecrop', n:'宽幅裁剪', d:'参数代入直接出结果', c:'img', col:'#8A6D3B', ic:'frame'},
-{id:'gallery', n:'拼接长图', d:'参数代入直接出结果', c:'img', col:'var(--accent)', ic:'stitch'},
+{id:'tiling', n:'平铺贴图', d:'生成无缝平铺底纹', c:'img', col:'#D9822B', ic:'grid'},
+{id:'infocard', n:'信息卡片', d:'文字排成分享卡片', c:'img', col:'#3B8A67', ic:'text'},
+{id:'widecrop', n:'宽幅裁剪', d:'裁成 16:9 或 21:9', c:'img', col:'#8A6D3B', ic:'frame'},
+{id:'gallery', n:'拼接长图', d:'多图竖向拼接', c:'img', col:'var(--accent)', ic:'stitch'},
 {id:'txtnum', n:'提取数字', d:'文本与内容处理工具', c:'txt', col:'#F0A22B', ic:'ascii'},
 {id:'txten', n:'提取英文', d:'文本与内容处理工具', c:'txt', col:'#E2543B', ic:'ascii'},
 {id:'txtzh', n:'提取中文', d:'文本与内容处理工具', c:'txt', col:'#7A5AF8', ic:'text'},
@@ -736,16 +740,16 @@ const TOOLS = [
 {id:'txtrename', n:'批量改名', d:'按尺寸估用量', c:'txt', col:'#8A6D3B', ic:'batch'},
 {id:'txttable', n:'文本转表格', d:'查表得参考数值', c:'txt', col:'var(--accent)', ic:'grid'},
 {id:'txtfreq', n:'词频统计', d:'文本与内容处理工具', c:'txt', col:'#17A673', ic:'tally'},
-{id:'creditinstallment', n:'分期还款', d:'参数代入直接出结果', c:'num', col:'#E2543B', ic:'percent'},
+{id:'creditinstallment', n:'分期还款', d:'按期数算每期本息', c:'num', col:'#E2543B', ic:'percent'},
 {id:'vat', n:'增值税', d:'税率与税额计算', c:'num', col:'#7A5AF8', ic:'percent'},
-{id:'overtime', n:'加班费', d:'参数代入直接出结果', c:'num', col:'#0E9AA7', ic:'clock'},
+{id:'overtime', n:'加班费', d:'按加班类型算倍数', c:'num', col:'#0E9AA7', ic:'clock'},
 {id:'areaconv', n:'面积换算', d:'平方米与亩、公顷互转', c:'num', col:'#5B7CFA', ic:'grid'},
-{id:'curtain', n:'窗帘用料', d:'参数代入直接出结果', c:'num', col:'#3B8A67', ic:'ruler'},
-{id:'wiregauge', n:'电线线径', d:'参数代入直接出结果', c:'num', col:'var(--accent)', ic:'pulse'},
+{id:'curtain', n:'窗帘用料', d:'按窗宽算布料米数', c:'num', col:'#3B8A67', ic:'ruler'},
+{id:'wiregauge', n:'电线线径', d:'按功率选线径', c:'num', col:'var(--accent)', ic:'pulse'},
 {id:'waterbill', n:'水费', d:'按用量与阶梯价算钱', c:'num', col:'#17A673', ic:'drop'},
 {id:'gasbill', n:'燃气费', d:'按用量算气费', c:'num', col:'#F0A22B', ic:'calc'},
 {id:'tiresize', n:'轮胎尺寸', d:'按条件定尺寸规格', c:'num', col:'#E2543B', ic:'rod'},
-{id:'brakepath', n:'刹车距离', d:'参数代入直接出结果', c:'num', col:'#7A5AF8', ic:'truck'},
+{id:'brakepath', n:'刹车距离', d:'按车速算制动距离', c:'num', col:'#7A5AF8', ic:'truck'},
 {id:'childheight', n:'儿童身高', d:'按父母身高估成年身高', c:'num', col:'#0E9AA7', ic:'person'},
 {id:'bsa', n:'体表面积', d:'查表得参考数值', c:'num', col:'#5B7CFA', ic:'person'},
 {id:'fishtank', n:'鱼缸水量', d:'按尺寸估用量', c:'num', col:'#3B8A67', ic:'drop'},
@@ -753,70 +757,70 @@ const TOOLS = [
 {id:'brickcount', n:'砌砖用量', d:'按尺寸估用量', c:'num', col:'var(--accent)', ic:'grid'},
 {id:'cableamp', n:'电缆载流', d:'按截面与敷设查载流', c:'num', col:'#17A673', ic:'pulse'},
 {id:'pipeflow', n:'管道流量', d:'按管径与流速算流量', c:'num', col:'#F0A22B', ic:'drop'},
-{id:'caffeine', n:'咖啡因代谢', d:'参数代入直接出结果', c:'num', col:'#E2543B', ic:'clock'},
-{id:'sipreturn', n:'定投收益', d:'参数代入直接出结果', c:'num', col:'#7A5AF8', ic:'coin'},
-{id:'minpayment', n:'最低还款', d:'参数代入直接出结果', c:'num', col:'#0E9AA7', ic:'coin'},
-{id:'breakeven', n:'盈亏平衡', d:'参数代入直接出结果', c:'num', col:'#5B7CFA', ic:'percent'},
+{id:'caffeine', n:'咖啡因代谢', d:'按摄入量估代谢完时间', c:'num', col:'#E2543B', ic:'clock'},
+{id:'sipreturn', n:'定投收益', d:'按月投算累计收益', c:'num', col:'#7A5AF8', ic:'coin'},
+{id:'minpayment', n:'最低还款', d:'信用卡最低还款利息', c:'num', col:'#0E9AA7', ic:'coin'},
+{id:'breakeven', n:'盈亏平衡', d:'按成本售价算保本量', c:'num', col:'#5B7CFA', ic:'percent'},
 {id:'grossmargin', n:'毛利率', d:'按参数算比值', c:'num', col:'#D9822B', ic:'percent'},
 {id:'inflation', n:'通胀换算', d:'常用单位数值互换', c:'num', col:'#3B8A67', ic:'calc'},
-{id:'rentyield', n:'房租回报', d:'参数代入直接出结果', c:'num', col:'#8A6D3B', ic:'house'},
-{id:'rpm', n:'车速转速', d:'参数代入直接出结果', c:'num', col:'var(--accent)', ic:'pulse'},
+{id:'rentyield', n:'房租回报', d:'按租金与房价算回报率', c:'num', col:'#8A6D3B', ic:'house'},
+{id:'rpm', n:'车速转速', d:'按轮胎与传动算转速', c:'num', col:'var(--accent)', ic:'pulse'},
 {id:'annualreturn', n:'年化收益', d:'按月收益折算年化', c:'num', col:'#17A673', ic:'coin'},
 {id:'ceilingframe', n:'吊顶龙骨', d:'参数代入直接出结果', c:'num', col:'#F0A22B', ic:'grid'},
-{id:'countdown_to', n:'倒数日', d:'参数代入直接出结果', c:'eff', col:'#7A5AF8', ic:'calendar'},
-{id:'reminder_loop', n:'循环提醒', d:'参数代入直接出结果', c:'eff', col:'#0E9AA7', ic:'clock'},
-{id:'focus_timer', n:'专注计时', d:'参数代入直接出结果', c:'eff', col:'#5B7CFA', ic:'timer'},
-{id:'stand_reminder', n:'久坐提醒', d:'参数代入直接出结果', c:'eff', col:'#D9822B', ic:'clock'},
-{id:'eye_care', n:'护眼提醒', d:'参数代入直接出结果', c:'eff', col:'#3B8A67', ic:'clock'},
-{id:'stretch_timer', n:'拉伸计时', d:'参数代入直接出结果', c:'eff', col:'#8A6D3B', ic:'timer'},
-{id:'reading_log', n:'阅读记录', d:'参数代入直接出结果', c:'eff', col:'var(--accent)', ic:'text'},
-{id:'scoreboard', n:'计分板', d:'参数代入直接出结果', c:'eff', col:'#F0A22B', ic:'tally'},
-{id:'vote_box', n:'投票器', d:'参数代入直接出结果', c:'eff', col:'#E2543B', ic:'tally'},
-{id:'flashcard', n:'单词卡', d:'参数代入直接出结果', c:'eff', col:'#7A5AF8', ic:'text'},
-{id:'mathquiz', n:'口算练习', d:'参数代入直接出结果', c:'eff', col:'#0E9AA7', ic:'calc'},
-{id:'random_order', n:'随机顺序', d:'参数代入直接出结果', c:'eff', col:'#5B7CFA', ic:'dice'},
+{id:'countdown_to', n:'倒数日', d:'距离目标日还有几天', c:'eff', col:'#7A5AF8', ic:'calendar'},
+{id:'reminder_loop', n:'循环提醒', d:'按间隔重复提醒', c:'eff', col:'#0E9AA7', ic:'clock'},
+{id:'focus_timer', n:'专注计时', d:'专注与休息循环', c:'eff', col:'#5B7CFA', ic:'timer'},
+{id:'stand_reminder', n:'久坐提醒', d:'每小时提醒起身', c:'eff', col:'#D9822B', ic:'clock'},
+{id:'eye_care', n:'护眼提醒', d:'定时提醒远眺', c:'eff', col:'#3B8A67', ic:'clock'},
+{id:'stretch_timer', n:'拉伸计时', d:'每个动作计时', c:'eff', col:'#8A6D3B', ic:'timer'},
+{id:'reading_log', n:'阅读记录', d:'记读书进度与时长', c:'eff', col:'var(--accent)', ic:'text'},
+{id:'scoreboard', n:'计分板', d:'双人比分加减', c:'eff', col:'#F0A22B', ic:'tally'},
+{id:'vote_box', n:'投票器', d:'多人投票统计', c:'eff', col:'#E2543B', ic:'tally'},
+{id:'flashcard', n:'单词卡', d:'卡片式背单词', c:'eff', col:'#7A5AF8', ic:'text'},
+{id:'mathquiz', n:'口算练习', d:'生成口算题并判分', c:'eff', col:'#0E9AA7', ic:'calc'},
+{id:'random_order', n:'随机顺序', d:'打乱列表顺序', c:'eff', col:'#5B7CFA', ic:'dice'},
 {id:'seatmap', n:'座位表', d:'查表得参考数值', c:'eff', col:'#D9822B', ic:'grid'},
 {id:'budget_list', n:'预算清单', d:'查表得参考数值', c:'eff', col:'#3B8A67', ic:'coin'},
-{id:'recipe_log', n:'菜谱记录', d:'参数代入直接出结果', c:'eff', col:'#8A6D3B', ic:'text'},
-{id:'workout_plan', n:'健身计划', d:'参数代入直接出结果', c:'eff', col:'var(--accent)', ic:'pulse'},
+{id:'recipe_log', n:'菜谱记录', d:'存常用菜谱步骤', c:'eff', col:'#8A6D3B', ic:'text'},
+{id:'workout_plan', n:'健身计划', d:'按目标排训练日', c:'eff', col:'var(--accent)', ic:'pulse'},
 {id:'book_list', n:'读书清单', d:'查表得参考数值', c:'eff', col:'#F0A22B', ic:'text'},
 {id:'movie_list', n:'观影清单', d:'查表得参考数值', c:'eff', col:'#E2543B', ic:'frame'},
 {id:'wish_list', n:'心愿清单', d:'查表得参考数值', c:'eff', col:'#7A5AF8', ic:'gift'},
-{id:'daily_plan', n:'每日计划', d:'参数代入直接出结果', c:'eff', col:'#0E9AA7', ic:'calendar'},
-{id:'weekly_plan', n:'周计划', d:'参数代入直接出结果', c:'eff', col:'#5B7CFA', ic:'calendar'},
-{id:'month_review', n:'月度复盘', d:'参数代入直接出结果', c:'eff', col:'#D9822B', ic:'calendar'},
-{id:'year_goals', n:'年度目标', d:'参数代入直接出结果', c:'eff', col:'#3B8A67', ic:'calendar'},
-{id:'habit_grid', n:'习惯打卡', d:'参数代入直接出结果', c:'eff', col:'#8A6D3B', ic:'grid'},
-{id:'pomodoro_log', n:'番茄统计', d:'参数代入直接出结果', c:'eff', col:'var(--accent)', ic:'timer'},
+{id:'daily_plan', n:'每日计划', d:'列当天待办', c:'eff', col:'#0E9AA7', ic:'calendar'},
+{id:'weekly_plan', n:'周计划', d:'排一周安排', c:'eff', col:'#5B7CFA', ic:'calendar'},
+{id:'month_review', n:'月度复盘', d:'记录本月得失', c:'eff', col:'#D9822B', ic:'calendar'},
+{id:'year_goals', n:'年度目标', d:'拆解年度目标', c:'eff', col:'#3B8A67', ic:'calendar'},
+{id:'habit_grid', n:'习惯打卡', d:'连续打卡记录', c:'eff', col:'#8A6D3B', ic:'grid'},
+{id:'pomodoro_log', n:'番茄统计', d:'统计专注时长', c:'eff', col:'var(--accent)', ic:'timer'},
 {id:'festival', n:'节日速查', d:'按关键词查对应数值', c:'qry', col:'#0E9AA7', ic:'calendar'},
-{id:'province', n:'省份简称', d:'参数代入直接出结果', c:'qry', col:'#5B7CFA', ic:'grid'},
-{id:'areacode', n:'长途区号', d:'参数代入直接出结果', c:'qry', col:'#D9822B', ic:'link'},
-{id:'traincode', n:'车次字母', d:'参数代入直接出结果', c:'qry', col:'#3B8A67', ic:'truck'},
-{id:'trafficsign', n:'交通标志', d:'参数代入直接出结果', c:'qry', col:'#8A6D3B', ic:'shield'},
-{id:'fireequip', n:'消防器材', d:'参数代入直接出结果', c:'qry', col:'var(--accent)', ic:'shield'},
-{id:'weathericon', n:'天气符号', d:'参数代入直接出结果', c:'qry', col:'#17A673', ic:'sun'},
+{id:'province', n:'省份简称', d:'按简称查省份', c:'qry', col:'#5B7CFA', ic:'grid'},
+{id:'areacode', n:'长途区号', d:'按区号查城市', c:'qry', col:'#D9822B', ic:'link'},
+{id:'traincode', n:'车次字母', d:'G/D/Z 车次含义', c:'qry', col:'#3B8A67', ic:'truck'},
+{id:'trafficsign', n:'交通标志', d:'按形状颜色查含义', c:'qry', col:'#8A6D3B', ic:'shield'},
+{id:'fireequip', n:'消防器材', d:'按场所配灭火器', c:'qry', col:'var(--accent)', ic:'shield'},
+{id:'weathericon', n:'天气符号', d:'按符号查天气含义', c:'qry', col:'#17A673', ic:'sun'},
 {id:'typhoon', n:'台风等级', d:'按条件定等级', c:'qry', col:'#F0A22B', ic:'wave'},
 {id:'windscale', n:'风力等级', d:'按条件定等级', c:'qry', col:'#E2543B', ic:'wave'},
 {id:'rainlevel', n:'降雨等级', d:'按条件定等级', c:'qry', col:'#7A5AF8', ic:'drop'},
-{id:'uvindex', n:'紫外线指数', d:'参数代入直接出结果', c:'qry', col:'#0E9AA7', ic:'sun'},
+{id:'uvindex', n:'紫外线指数', d:'按 UVI 给防晒建议', c:'qry', col:'#0E9AA7', ic:'sun'},
 {id:'aqi', n:'空气质量指数', d:'按尺寸估用量', c:'qry', col:'#5B7CFA', ic:'cloud'},
-{id:'intlcode', n:'国际区号', d:'参数代入直接出结果', c:'qry', col:'#8A6D3B', ic:'link'},
-{id:'langcode', n:'语言代码', d:'参数代入直接出结果', c:'qry', col:'var(--accent)', ic:'text'},
-{id:'airport', n:'机场三字码', d:'参数代入直接出结果', c:'qry', col:'#17A673', ic:'truck'},
-{id:'airline', n:'航司代码', d:'参数代入直接出结果', c:'qry', col:'#F0A22B', ic:'truck'},
-{id:'bloodtype', n:'血型遗传', d:'参数代入直接出结果', c:'qry', col:'#7A5AF8', ic:'drop'},
-{id:'ganzhi', n:'天干地支', d:'参数代入直接出结果', c:'qry', col:'#0E9AA7', ic:'calendar'},
-{id:'sanfu', n:'三伏数九', d:'参数代入直接出结果', c:'qry', col:'#5B7CFA', ic:'sun'},
-{id:'holiday', n:'法定假日', d:'参数代入直接出结果', c:'qry', col:'#D9822B', ic:'calendar'},
+{id:'intlcode', n:'国际区号', d:'按国家查电话区号', c:'qry', col:'#8A6D3B', ic:'link'},
+{id:'langcode', n:'语言代码', d:'ISO 语言代码对照', c:'qry', col:'var(--accent)', ic:'text'},
+{id:'airport', n:'机场三字码', d:'按代码查机场', c:'qry', col:'#17A673', ic:'truck'},
+{id:'airline', n:'航司代码', d:'按代码查航空公司', c:'qry', col:'#F0A22B', ic:'truck'},
+{id:'bloodtype', n:'血型遗传', d:'按父母血型推子女', c:'qry', col:'#7A5AF8', ic:'drop'},
+{id:'ganzhi', n:'天干地支', d:'年份换算干支', c:'qry', col:'#0E9AA7', ic:'calendar'},
+{id:'sanfu', n:'三伏数九', d:'查三伏与数九日期', c:'qry', col:'#5B7CFA', ic:'sun'},
+{id:'holiday', n:'法定假日', d:'查当年法定假期', c:'qry', col:'#D9822B', ic:'calendar'},
 {id:'screenres', n:'屏幕分辨率', d:'按参数算比值', c:'qry', col:'#3B8A67', ic:'grid'},
 {id:'videores', n:'视频分辨率', d:'按参数算比值', c:'qry', col:'#8A6D3B', ic:'frame'},
-{id:'audiofmt', n:'音频格式', d:'参数代入直接出结果', c:'qry', col:'var(--accent)', ic:'wave'},
-{id:'imgfmt', n:'图片格式', d:'工程参数速算', c:'eng', col:'#17A673', ic:'image'},
-{id:'extname', n:'文件扩展名', d:'参数代入直接出结果', c:'qry', col:'#F0A22B', ic:'text'},
-{id:'chargeproto', n:'充电协议', d:'参数代入直接出结果', c:'qry', col:'#E2543B', ic:'flash'},
-{id:'usbtype', n:'USB 接口', d:'参数代入直接出结果', c:'qry', col:'#7A5AF8', ic:'link'},
+{id:'audiofmt', n:'音频格式', d:'常见格式与用途对照', c:'qry', col:'var(--accent)', ic:'wave'},
+{id:'imgfmt', n:'图片格式', d:'各格式优缺点对照', c:'eng', col:'#17A673', ic:'image'},
+{id:'extname', n:'文件扩展名', d:'按后缀查文件类型', c:'qry', col:'#F0A22B', ic:'text'},
+{id:'chargeproto', n:'充电协议', d:'PD/QC 协议对照', c:'qry', col:'#E2543B', ic:'flash'},
+{id:'usbtype', n:'USB 接口', d:'接口类型与速率', c:'qry', col:'#7A5AF8', ic:'link'},
 {id:'appliance', n:'家电功率', d:'按参数算比值', c:'qry', col:'#0E9AA7', ic:'flash'},
-{id:'unitsym', n:'单位符号', d:'参数代入直接出结果', c:'qry', col:'#5B7CFA', ic:'ruler'},
+{id:'unitsym', n:'单位符号', d:'物理量符号与单位', c:'qry', col:'#5B7CFA', ic:'ruler'},
 {id:'json2yaml', n:'JSON 转 YAML', d:'文本与内容处理工具', c:'txt', col:'#5B7CFA', ic:'code'},
 {id:'yaml2json', n:'YAML 转 JSON', d:'文本与内容处理工具', c:'txt', col:'#D9822B', ic:'code'},
 {id:'xml2json', n:'XML 转 JSON', d:'文本与内容处理工具', c:'txt', col:'#3B8A67', ic:'code'},
@@ -836,7 +840,7 @@ const TOOLS = [
 {id:'passphrase', n:'随机口令', d:'文本与内容处理工具', c:'txt', col:'#F0A22B', ic:'shield'},
 {id:'cronbuild', n:'Cron 生成', d:'按参数生成对应内容', c:'txt', col:'#E2543B', ic:'clock'},
 {id:'tsdiff', n:'时间戳差值', d:'时间与时间戳互转', c:'txt', col:'#7A5AF8', ic:'clock'},
-{id:'subnet', n:'子网计算', d:'参数代入直接出结果', c:'txt', col:'#0E9AA7', ic:'grid'},
+{id:'subnet', n:'子网计算', d:'按 IP 与掩码算网段', c:'txt', col:'#0E9AA7', ic:'grid'},
 {id:'cidr', n:'CIDR 换算', d:'常用单位数值互换', c:'txt', col:'#5B7CFA', ic:'grid'},
 {id:'macvendor', n:'MAC 解析', d:'文本与内容处理工具', c:'txt', col:'#D9822B', ic:'link'},
 {id:'uaparse', n:'UA 解析', d:'文本与内容处理工具', c:'txt', col:'#3B8A67', ic:'person'},
@@ -848,7 +852,7 @@ const TOOLS = [
 {id:'json2env', n:'JSON 转 .env', d:'文本与内容处理工具', c:'txt', col:'#7A5AF8', ic:'code'},
 {id:'codecount', n:'代码行数', d:'文本与内容处理工具', c:'txt', col:'#0E9AA7', ic:'tally'},
 {id:'filesize', n:'文件大小换算', d:'常用单位数值互换', c:'txt', col:'#5B7CFA', ic:'calc'},
-{id:'rgb2cmyk', n:'RGB 转 CMYK', d:'参数代入直接出结果', c:'img', col:'#D9822B', ic:'palette'},
+{id:'rgb2cmyk', n:'RGB 转 CMYK', d:'屏幕色转印刷色', c:'img', col:'#D9822B', ic:'palette'},
 {id:'strftime', n:'日期格式化', d:'文本与内容处理工具', c:'txt', col:'#3B8A67', ic:'calendar'},
 {id:'rm1', n:'1RM 估算', d:'日常生活实用计算', c:'life', col:'#17A673', ic:'pulse'},
 {id:'cardio_burn', n:'有氧消耗', d:'日常生活实用计算', c:'life', col:'var(--accent)', ic:'truck'},
@@ -859,26 +863,26 @@ const TOOLS = [
 {id:'whr', n:'腰臀比', d:'日常生活实用计算', c:'life', col:'#8A6D3B', ic:'wave'},
 {id:'waterintake', n:'每日饮水量', d:'按体重算每日饮水', c:'life', col:'#17A673', ic:'drop'},
 {id:'protein', n:'蛋白质需求', d:'按体重算每日蛋白', c:'life', col:'var(--accent)', ic:'timer'},
-{id:'carb', n:'碳水需求', d:'参数代入直接出结果', c:'hl', col:'#D9822B', ic:'truck'},
+{id:'carb', n:'碳水需求', d:'按体重与运动算碳水', c:'hl', col:'#D9822B', ic:'truck'},
 {id:'sleep_cycle', n:'睡眠周期', d:'按条件估时间', c:'hl', col:'#8A6D3B', ic:'clock'},
 {id:'stretch_dur', n:'拉伸时长', d:'按条件估时间', c:'hl', col:'#17A673', ic:'pulse'},
 {id:'exercise_table', n:'动作速查', d:'按关键词查对应数值', c:'hl', col:'var(--accent)', ic:'tally'},
-{id:'food_protein', n:'食物蛋白', d:'参数代入直接出结果', c:'hl', col:'#D9822B', ic:'person'},
-{id:'stretch_moves', n:'拉伸动作', d:'参数代入直接出结果', c:'hl', col:'#8A6D3B', ic:'wave'},
-{id:'home_workout', n:'居家训练', d:'参数代入直接出结果', c:'hl', col:'#17A673', ic:'pulse'},
+{id:'food_protein', n:'食物蛋白', d:'常见食物蛋白含量', c:'hl', col:'#D9822B', ic:'person'},
+{id:'stretch_moves', n:'拉伸动作', d:'按部位给拉伸动作', c:'hl', col:'#8A6D3B', ic:'wave'},
+{id:'home_workout', n:'居家训练', d:'无器械训练动作', c:'hl', col:'#17A673', ic:'pulse'},
 {id:'gym_equip', n:'器械速查', d:'按关键词查对应数值', c:'hl', col:'var(--accent)', ic:'timer'},
-{id:'yoga', n:'瑜伽体式', d:'参数代入直接出结果', c:'hl', col:'#D9822B', ic:'person'},
+{id:'yoga', n:'瑜伽体式', d:'按目标选体式', c:'hl', col:'#D9822B', ic:'person'},
 {id:'bmi_table', n:'BMI 对照', d:'身高体重算身体质量指数', c:'hl', col:'#8A6D3B', ic:'tally'},
-{id:'exercise_order', n:'训练顺序', d:'参数代入直接出结果', c:'hl', col:'#17A673', ic:'pulse'},
-{id:'supplement', n:'补剂常识', d:'参数代入直接出结果', c:'hl', col:'var(--accent)', ic:'timer'},
-{id:'injury_prevent', n:'损伤预防', d:'参数代入直接出结果', c:'hl', col:'#D9822B', ic:'person'},
+{id:'exercise_order', n:'训练顺序', d:'力量训练安排顺序', c:'hl', col:'#17A673', ic:'pulse'},
+{id:'supplement', n:'补剂常识', d:'常见补剂用法用量', c:'hl', col:'var(--accent)', ic:'timer'},
+{id:'injury_prevent', n:'损伤预防', d:'训练防伤要点', c:'hl', col:'#D9822B', ic:'person'},
 {id:'heart_zone', n:'心率区间', d:'按年龄算有氧区间', c:'hl', col:'#8A6D3B', ic:'clock'},
-{id:'recovery', n:'恢复建议', d:'参数代入直接出结果', c:'hl', col:'#17A673', ic:'image'},
-{id:'posture', n:'体态自检', d:'参数代入直接出结果', c:'hl', col:'var(--accent)', ic:'timer'},
-{id:'metric_body', n:'身材数据', d:'参数代入直接出结果', c:'hl', col:'#D9822B', ic:'person'},
-{id:'water_checkin', n:'喝水打卡', d:'参数代入直接出结果', c:'hl', col:'#8A6D3B', ic:'drop'},
-{id:'workout_checkin', n:'训练打卡', d:'参数代入直接出结果', c:'hl', col:'#17A673', ic:'pulse'},
-{id:'weight_log', n:'体重记录', d:'参数代入直接出结果', c:'hl', col:'var(--accent)', ic:'timer'},
+{id:'recovery', n:'恢复建议', d:'按强度给恢复方案', c:'hl', col:'#17A673', ic:'image'},
+{id:'posture', n:'体态自检', d:'按症状查体态问题', c:'hl', col:'var(--accent)', ic:'timer'},
+{id:'metric_body', n:'身材数据', d:'三围与比例记录', c:'hl', col:'#D9822B', ic:'person'},
+{id:'water_checkin', n:'喝水打卡', d:'按体重定饮水量', c:'hl', col:'#8A6D3B', ic:'drop'},
+{id:'workout_checkin', n:'训练打卡', d:'记录训练完成', c:'hl', col:'#17A673', ic:'pulse'},
+{id:'weight_log', n:'体重记录', d:'记录体重变化', c:'hl', col:'var(--accent)', ic:'timer'},
 {id:'stain_remove', n:'污渍去除', d:'日常生活实用计算', c:'life', col:'#D9822B', ic:'house'},
 {id:'storage_tips', n:'收纳技巧', d:'日常生活实用计算', c:'life', col:'#17A673', ic:'drop'},
 {id:'kitchen_conv', n:'厨房换算', d:'常用单位数值互换', c:'life', col:'#5B7CFA', ic:'mix'},
@@ -941,30 +945,30 @@ const TOOLS = [
 {id:'volume_weight', n:'体积重', d:'按长宽高算体积重', c:'life', col:'#5B7CFA', ic:'calc'},
 {id:'storage_conv', n:'存储换算', d:'常用单位数值互换', c:'life', col:'#E2543B', ic:'mix'},
 {id:'netspeed', n:'网速换算', d:'常用单位数值互换', c:'life', col:'#D9822B', ic:'wave'},
-{id:'study_plan', n:'学习计划', d:'参数代入直接出结果', c:'study', col:'var(--accent)', ic:'text'},
-{id:'review_interval', n:'复习间隔', d:'参数代入直接出结果', c:'study', col:'#7A5AF8', ic:'calc'},
-{id:'mistake_book', n:'错题本', d:'参数代入直接出结果', c:'study', col:'#0E9AA7', ic:'text'},
-{id:'word_book', n:'单词本', d:'参数代入直接出结果', c:'study', col:'#17A673', ic:'text'},
-{id:'ebbinghaus', n:'记忆曲线', d:'参数代入直接出结果', c:'study', col:'var(--accent)', ic:'text'},
-{id:'multiplication', n:'乘法口诀', d:'参数代入直接出结果', c:'study', col:'#7A5AF8', ic:'calc'},
+{id:'study_plan', n:'学习计划', d:'按目标排学习进度', c:'study', col:'var(--accent)', ic:'text'},
+{id:'review_interval', n:'复习间隔', d:'按记忆曲线排复习', c:'study', col:'#7A5AF8', ic:'calc'},
+{id:'mistake_book', n:'错题本', d:'记录错题与原因', c:'study', col:'#0E9AA7', ic:'text'},
+{id:'word_book', n:'单词本', d:'存生词与释义', c:'study', col:'#17A673', ic:'text'},
+{id:'ebbinghaus', n:'记忆曲线', d:'按曲线排复习点', c:'study', col:'var(--accent)', ic:'text'},
+{id:'multiplication', n:'乘法口诀', d:'九九乘法表练习', c:'study', col:'#7A5AF8', ic:'calc'},
 {id:'square_table', n:'平方表', d:'查表得参考数值', c:'study', col:'#0E9AA7', ic:'tally'},
 {id:'cube_table', n:'立方表', d:'查表得参考数值', c:'study', col:'#17A673', ic:'tally'},
 {id:'prime_table', n:'质数表', d:'查表得参考数值', c:'study', col:'var(--accent)', ic:'tally'},
 {id:'trig_table', n:'三角函数值', d:'正弦余弦与角度值', c:'study', col:'#7A5AF8', ic:'tally'},
-{id:'geo_formula', n:'几何公式', d:'参数代入直接出结果', c:'study', col:'#0E9AA7', ic:'timer'},
-{id:'physics_formula', n:'物理公式', d:'参数代入直接出结果', c:'study', col:'#17A673', ic:'grid'},
-{id:'chem_formula', n:'化学公式', d:'参数代入直接出结果', c:'study', col:'var(--accent)', ic:'text'},
-{id:'unit_prefix', n:'单位前缀', d:'参数代入直接出结果', c:'study', col:'#7A5AF8', ic:'calc'},
-{id:'fraction_conv', n:'分数小数', d:'参数代入直接出结果', c:'study', col:'#0E9AA7', ic:'mix'},
-{id:'sci_notation', n:'科学计数', d:'参数代入直接出结果', c:'study', col:'#17A673', ic:'grid'},
+{id:'geo_formula', n:'几何公式', d:'周长面积体积公式', c:'study', col:'#0E9AA7', ic:'timer'},
+{id:'physics_formula', n:'物理公式', d:'常用物理公式速查', c:'study', col:'#17A673', ic:'grid'},
+{id:'chem_formula', n:'化学公式', d:'常见化学方程式', c:'study', col:'var(--accent)', ic:'text'},
+{id:'unit_prefix', n:'单位前缀', d:'千兆毫微前缀换算', c:'study', col:'#7A5AF8', ic:'calc'},
+{id:'fraction_conv', n:'分数小数', d:'分数与小数互转', c:'study', col:'#0E9AA7', ic:'mix'},
+{id:'sci_notation', n:'科学计数', d:'科学计数法互转', c:'study', col:'#17A673', ic:'grid'},
 {id:'pi_digits', n:'圆周率', d:'按参数算比值', c:'study', col:'var(--accent)', ic:'text'},
-{id:'english_tense', n:'英语时态', d:'参数代入直接出结果', c:'study', col:'#7A5AF8', ic:'calc'},
-{id:'irregular_verb', n:'不规则动词', d:'参数代入直接出结果', c:'study', col:'#0E9AA7', ic:'timer'},
-{id:'root_affix', n:'词根词缀', d:'参数代入直接出结果', c:'study', col:'#17A673', ic:'grid'},
-{id:'preposition', n:'介词用法', d:'参数代入直接出结果', c:'study', col:'var(--accent)', ic:'text'},
-{id:'linking', n:'连读规则', d:'参数代入直接出结果', c:'study', col:'#7A5AF8', ic:'calc'},
-{id:'essay_pattern', n:'英语句型', d:'参数代入直接出结果', c:'study', col:'#0E9AA7', ic:'timer'},
-{id:'idiom_misuse', n:'成语误用', d:'参数代入直接出结果', c:'study', col:'#17A673', ic:'grid'},
+{id:'english_tense', n:'英语时态', d:'十六时态对照', c:'study', col:'#7A5AF8', ic:'calc'},
+{id:'irregular_verb', n:'不规则动词', d:'常见不规则动词表', c:'study', col:'#0E9AA7', ic:'timer'},
+{id:'root_affix', n:'词根词缀', d:'按词根猜词义', c:'study', col:'#17A673', ic:'grid'},
+{id:'preposition', n:'介词用法', d:'常见介词搭配', c:'study', col:'var(--accent)', ic:'text'},
+{id:'linking', n:'连读规则', d:'英语连读弱读规则', c:'study', col:'#7A5AF8', ic:'calc'},
+{id:'essay_pattern', n:'英语句型', d:'常用句型结构', c:'study', col:'#0E9AA7', ic:'timer'},
+{id:'idiom_misuse', n:'成语误用', d:'易错成语辨析', c:'study', col:'#17A673', ic:'grid'},
 {id:'synonym', n:'近义词', d:'参数代入直接出结果', c:'study', col:'var(--accent)', ic:'text'},
 {id:'antonym', n:'反义词', d:'参数代入直接出结果', c:'study', col:'#7A5AF8', ic:'calc'},
 {id:'measure_word', n:'量词搭配', d:'按尺寸估用量', c:'study', col:'#0E9AA7', ic:'text'},
@@ -1498,6 +1502,16 @@ return [...new Set(out)];
 }
 let pageLimit = 0;
 const BIGKIDX={eng:0, fin:1, life:2, txt:3};
+function profbar(){
+if(curCat==='all') return '';
+let data=null; try{ data=getBig(); }catch(e){ return ''; }
+const bi=data.findIndex(function(b){return b.k===curCat;});
+if(bi<0) return '';
+const gs=data[bi].groups;
+return '<div class="profbar"><span class="rlbl">专业</span>'+gs.map(function(g){
+return '<button class="rchip" data-prof="'+bi+'|'+encodeURIComponent(g.g)+'">'+g.g+'</button>';
+}).join('')+'</div>';
+}
 function bigTipHTML(){
 if(!curQuery) return '';
 let data=null;
@@ -1534,7 +1548,15 @@ const pyq = (curQuery && /^[a-z0-9]+$/i.test(curQuery)) ? curQuery.toLowerCase()
 const list = TOOLS.filter(t=> (curCat==='all'||t.c===curCat) && (!curQuery || qs.some(q=> t.n.includes(q) || CATNAME[t.c].includes(q)) || (pyq && (PYCACHE[t.id]||'').indexOf(pyq)>=0)));
 if(!list.length){
 const qlc=curQuery.toLowerCase();
-const near = TOOLS.filter(t=>[...qlc].some(ch=>t.n.toLowerCase().includes(ch))).slice(0,6).map(t=>'<button class="rchip" data-rid="'+t.id+'">'+t.n+'</button>').join('');
+const sc=function(t){ let c=0; const nm=t.n.toLowerCase();
+  for(const ch of qlc){ if(nm.includes(ch)) c++; }
+  if(pyq && (PYCACHE[t.id]||'').indexOf(pyq)>=0) c+=3;
+  if(nm.indexOf(qlc)>=0) c+=2;
+  return c/Math.max(qlc.length,2);
+};
+const near = TOOLS.map(function(t){return [sc(t),t];}).filter(function(x){return x[0]>=0.3;})
+.sort(function(a,b){return b[0]-a[0];}).slice(0,5)
+.map(function(x){return '<button class="rchip" data-rid="'+x[1].id+'">'+x[1].n+'</button>';}).join('');
 $('#list').innerHTML = bigTipHTML() + '<div class="empty">没有找到相关工具'+(near?'<div class="recent" style="justify-content:center;margin-top:10px;flex-wrap:wrap"><span class="rlbl">试试</span>'+near+'</div>':'')+'</div>';
 return;
 }
@@ -1558,7 +1580,7 @@ return;
 }
 lastKey=rk; lastCount=show.length;
 const grouped = (curQuery && curCat==='all');
-$('#list').innerHTML = sugHTML() + bigTipHTML() + (grouped
+$('#list').innerHTML = sugHTML() + bigTipHTML() + profbar() + (grouped
 ? ['eng','fin','txt','life'].map(function(k){
     const part=show.filter(function(t){return t.c===k;});
     return part.length? '<div class="grp">'+CATNAME[k]+'<span>'+part.length+'</span></div><div class="cardgrid">'+cards(part)+'</div>' : '';
@@ -1601,6 +1623,9 @@ const bh=e.target.closest('[data-bigk]');
 if(bh){ let nm=''; try{ nm=decodeURIComponent(bh.dataset.bign||''); }catch(x){} window.__bigQ=nm.split(' · ')[1]||''; openTool('big'+(BIGKIDX[bh.dataset.bigk]||0)); return; }
 const bt=e.target.closest('[data-bi]');
 if(bt){ window.__bigQ=bt.dataset.q||''; openTool('big'+bt.dataset.bi); return; }
+const pf=e.target.closest('[data-prof]');
+if(pf){ const raw=pf.dataset.prof.split('|'); const bi=+raw[0]; const g=decodeURIComponent(raw[1]);
+  const data=getBig(); lsSet('xy_biglast',{k:data[bi].k, g:g}); openTool('big'+bi); return; }
 const rl=e.target.closest('.relchip');
 if(rl){ openTool(rl.dataset.rid); return; }
 const chip=e.target.closest('#chips .chip'); if(chip && chip.dataset.cat){ curCat=chip.dataset.cat; pageLimit=colCount()*40; renderChips(); renderFav(); renderRank(); renderRecent(); renderList(); return; }
@@ -2126,7 +2151,7 @@ root.innerHTML='<div class="box">'
 +'<div class="box" id="bigOut"></div>'
 +'<div class="box" id="bigBatch" style="display:none"><div class="lbl">批量计算（每行一个数，套用第一个参数）</div>'
 +'<textarea id="bigBatchIn" rows="5" placeholder="每行一个数，例如&#10;250&#10;300&#10;400"></textarea>'
-+'<div style="display:flex;gap:8px;margin-top:8px"><button class="btn" id="bigBatchRun" style="flex:1">开始批量</button><button class="btn ghost" id="bigCsvIn" style="flex:0 0 auto;padding:0 12px">导入 CSV</button><input type="file" id="bigCsvFile" accept=".csv,.txt,text/csv" hidden></div></div>'
++'<div style="display:flex;gap:8px;margin-top:8px"><button class="btn" id="bigBatchRun" style="flex:1">开始批量</button><button class="btn ghost" id="bigBatchTpl" style="flex:0 0 auto;padding:0 12px">下载模板</button><button class="btn ghost" id="bigCsvIn" style="flex:0 0 auto;padding:0 12px">导入 CSV</button><input type="file" id="bigCsvFile" accept=".csv,.txt,text/csv" hidden></div></div>'
 +'<div class="box" id="bigPreset" style="display:none"></div>'
 +'<div class="box" id="bigForm" style="display:none"></div>'
 +'<div class="box" id="bigHist" style="display:none"></div>';
@@ -2134,7 +2159,8 @@ const Q=root.querySelector('#bigQ'), C=root.querySelector('#bigChips'), S=root.q
 F=root.querySelector('#bigF'), O=root.querySelector('#bigOut'), BOX=root.querySelector('#bigBatch'),
 H=root.querySelector('#bigHist'), FB=root.querySelector('#bigFavBtn'), FM=root.querySelector('#bigForm'), PB=root.querySelector('#bigPreset');
 const profs=bd.groups.map(function(g,i){return {g:g.g, i:i, n:g.m.length};}).sort(function(a,b){return b.n-a.n;});
-let curP=-1, cur=-1, list=[], histTimer=null, lastRows=[], lastM=null, lastBad=[], lastBatch=null;
+const lastPos=(function(){try{const l=lsGet('xy_biglast',{}); if(l.k===bd.k && l.g){const pi=profs.findIndex(function(p){return p.g===l.g;}); if(pi>=0) return pi;} }catch(e){} return -1;})();
+let curP=lastPos, cur=-1, list=[], histTimer=null, lastRows=[], lastM=null, lastBad=[], lastBatch=null;
 let chipAll=false;
 function chips(){
 const show=chipAll? profs : profs.slice(0,8);
@@ -2188,6 +2214,14 @@ return '<div><div class="lbl">'+x[1]+stepTxt+'</div><div style="display:flex;gap
 +'<option value="1">×1</option><option value="0.000001">×10⁻⁶</option><option value="0.0001">×10⁻⁴</option><option value="0.001">×10⁻³</option><option value="0.01">×10⁻²</option><option value="0.1">×10⁻¹</option><option value="10">×10</option><option value="100">×10²</option><option value="1000">×10³</option><option value="1000000">×10⁶</option></select>'
 +'</div></div>';
 }).join('');
+const cr=window.__carry;
+if(cr && cr.val){
+  const core=function(t){ return String(t).replace(/（[^）]*）|\([^)]*\)/g,'').replace(/[^\u4e00-\u9fa5A-Za-z]/g,''); };
+  const src=core(cr.lb);
+  const hit=m.f.find(function(x){ const c=core(x[1]); return c && (c===src || c.indexOf(src)>0 || src.indexOf(c)>0); });
+  const el2=hit? F.querySelector('#bigf_'+hit[0]) : null;
+  if(el2){ el2.value=cr.val; el2.classList.add('carry'); setTimeout(function(){el2.classList.remove('carry');},1200); toast('已从上一口径带入 '+cr.lb); window.__carry=null; run(); }
+}
 }
 function curKey(){ return list[cur]? list[cur].key : ''; }
 function isFav(k){ return !!lsGet(BIGFAV,{})[k]; }
@@ -2231,6 +2265,21 @@ return '<div class="kv"><span>'+r[0]+'</span><b'+(r[2]?' class="tapraw" data-fmt
 +(r[2]?'<button class="usebtn" data-use="'+r[2]+'" title="填入第一个参数">→</button>':'')+'</div>';
 }).join('') + (m.u && !isU ? '<p class="hint">'+m.u+'</p>' : '')
 + (badD.length? '<p class="hint" style="color:#D9534F">参数未填或非法：'+badD.join('、')+'</p>' : '')
++ (function(){
+   const ceils=rows.filter(function(r){ return typeof r[2]==='number' && /根|块|袋|个|张|片|套|件|人|台|棵|桶|卷|支|樘|扇/.test(r[0]) && Math.abs(r[2]-Math.round(r[2]))>0.05; });
+   return ceils.length? '<p class="hint">采购建议取整：'+ceils.map(function(r){return r[0]+' '+r[1]+' → '+Math.ceil(r[2]);}).join('；')+'</p>' : '';
+ })()
++ (function(){
+   const msgs=[];
+   m.f.forEach(function(x){
+     const el=F.querySelector('#bigf_'+x[0]); if(!el) return;
+     const n=parseFloat(el.value); if(!isFinite(n)||n<=0) return;
+     const lb=String(x[1]);
+     if(/mm|毫米/.test(lb) && n<5) msgs.push(lb+' 填的是 '+n+'，若单位是米请换算成毫米');
+     else if(/（m）|\(m\)|m2|m\)/.test(lb) && n>50) msgs.push(lb+' 填的是 '+n+'，若单位是毫米请换算成米');
+   });
+   return msgs.length? '<p class="hint" style="color:#C77A1B">疑似单位不一致：'+msgs.join('；')+'</p>' : '';
+ })()
 + ([].some.call(F.querySelectorAll('.umul'),function(s){return s.value!=='1';})? '<p class="hint">已按所选倍数换算，注意各参数单位一致</p>' : '')
 + '<p class="hint">'+m.n+'　'+bd.n+'共 '+all.length+' 个口径，可选专业或直接搜索</p>'
 + '<p class="hint" style="margin-top:6px">依据：'+(BASES[e.g]||BASES[m.g]||'行业经验值，仅供估算')+'</p>';
@@ -2250,9 +2299,9 @@ us[k]=(us[k]||0)+1; lsSet(BIGUSE, us);
 }
 function renderHist(){
 const hs=lsGet(BIGHIST,[]);
-H.innerHTML='<div class="lbl">最近计算</div>'+(hs.length? hs.map(function(h){
+H.innerHTML='<div class="lbl" style="display:flex;align-items:center;gap:8px">最近计算'+(hs.length?'<button class="btn ghost" id="bigHistClear" style="height:26px;font-size:12px;padding:0 10px;margin-left:auto">清空</button>':'')+'</div>'+(hs.length? hs.map(function(h){
 const d=new Date(h.t); const t=(d.getMonth()+1)+'/'+d.getDate()+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
-return '<div class="kv" data-hk="'+h.k+'" data-hn="'+encodeURIComponent(h.n)+'" data-hv="'+encodeURIComponent(JSON.stringify(h.v||[]))+'" style="cursor:pointer"><span>'+t+'　'+h.n+'</span><b>'+h.r+'</b></div>';
+return '<div class="kv" data-hk="'+h.k+'" data-hn="'+encodeURIComponent(h.n)+'" data-hv="'+encodeURIComponent(JSON.stringify(h.v||[]))+'" style="cursor:pointer"><span>'+t+'　'+h.n+'</span><b>'+h.r+'</b><button class="hd" data-hd="'+h.t+'" aria-label="删除" style="border:0;background:none;color:var(--sub);font-size:16px;padding:0 4px;cursor:pointer">×</button></div>';
 }).join('') : '<p class="hint">还没有计算记录。</p>');
 }
 function shareCard(){
@@ -2305,7 +2354,10 @@ function onOut(ev){
 const ub=ev.target.closest('.usebtn');
 if(ub){
 const first=F.querySelector('input[type=number]');
-if(first){ first.value=ub.dataset.use; first.dispatchEvent(new Event('input',{bubbles:true})); toast('已填入第一个参数'); }
+if(first){ first.value=ub.dataset.use; first.dispatchEvent(new Event('input',{bubbles:true})); }
+const kvRow=ub.closest('.kv');
+if(kvRow){ const sp=kvRow.querySelector('span'); if(sp) window.__carry={lb:sp.textContent.trim(), val:ub.dataset.use}; }
+toast('已填入第一个参数，切换到同单位口径会自动带入');
 return;
 }
 const b=ev.target.closest('.kv b.tapraw'); if(!b) return;
@@ -2314,7 +2366,9 @@ else { b.dataset.s='fmt'; b.textContent=b.dataset.fmt+(b.dataset.unit||''); }
 }
 function onChip(ev){
 if(ev.target.closest('[data-more]')){ chipAll=!chipAll; chips(); return; }
-const el=ev.target.closest('[data-p]'); if(!el) return; curP=+el.dataset.p; chips(); Q.value=''; filt();
+const el=ev.target.closest('[data-p]'); if(!el) return; curP=+el.dataset.p;
+if(curP>=0){ try{ lsSet('xy_biglast',{k:bd.k, g:profs[curP].g}); }catch(e){} }
+chips(); Q.value=''; filt();
 }
 function onQ(){ filt(); }
 function onSel(){ cur=+S.value; bump(); fields(); run(); }
@@ -2427,8 +2481,26 @@ FB.addEventListener('click',onFav);
 root.querySelector('#bigShareBtn').addEventListener('click',shareCard);
 root.querySelector('#bigBatchBtn').addEventListener('click',onBatchToggle);
 root.querySelector('#bigBatchRun').addEventListener('click',onBatchRun);
+const btpl=root.querySelector('#bigBatchTpl');
+if(btpl) btpl.addEventListener('click',function(){
+  const mm=list[cur]; if(!mm){ toast('先选一个口径'); return; }
+  const head=mm.f.map(function(x){return x[1].replace(/,/g,'');}).join(',');
+  const row=mm.f.map(function(x){return x[2];}).join(',');
+  const csv='\uFEFF'+head+'\n'+row+'\n';
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download=(mm.n+'-批量模板.csv').replace(/[\\/:*?"<>|]/g,'_'); a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href);},1000);
+});
 root.querySelector('#bigHistBtn').addEventListener('click',onHist);
 H.addEventListener('click',function(e){
+if(e.target.closest('#bigHistClear')){ lsSet(BIGHIST,[]); renderHist(); toast('已清空'); return; }
+const hd=e.target.closest('[data-hd]'); if(hd){
+  e.stopPropagation();
+  const t0=+hd.dataset.hd;
+  lsSet(BIGHIST, lsGet(BIGHIST,[]).filter(function(h){return h.t!==t0;}));
+  renderHist(); return;
+}
 const kv=e.target.closest('[data-hk]'); if(!kv) return;
 let nm='', vals=[]; try{ nm=decodeURIComponent(kv.dataset.hn||''); vals=JSON.parse(decodeURIComponent(kv.dataset.hv||'[]')); }catch(x){}
 window.__bigHist={k:kv.dataset.hk, n:nm.split(' · ')[1]||nm, v:vals};
