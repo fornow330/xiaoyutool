@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="5.5">
+<meta name="xyver" content="5.6">
 <title>小羽工具箱 · 本地工具集合</title>
 <meta name="description" content="小羽工具箱：984 个本地实用工具，工程、财务、文本、生活四大类，全部离线可用。">
 <meta property="og:type" content="website">
@@ -18,6 +18,11 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%232C63F0'/%3E%3Cpath d='M7 8h10M7 12h10M7 16h6' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
+html[data-density="compact"] .toolcard .ico{transform:scale(.82)}
+html[data-density="compact"] .toolcard b{--fsn:12px}
+html[data-density="compact"] #list .toolcard i{display:none}
+html[data-density="compact"] .toolcard{padding:8px 6px 10px}
+html[data-offline="1"] .topbar{box-shadow:inset 0 -2px 0 #E2A03B}
 :root{--fsn:13px;--fsd:11.5px;--fsb:14px}
 html[data-fs="s"]{--fsn:11.5px;--fsd:10.5px;--fsb:13px}
 html[data-fs="l"]{--fsn:14.5px;--fsd:13px;--fsb:16px}
@@ -108,6 +113,8 @@ main{padding:0 16px calc(env(safe-area-inset-bottom,0px) + 28px)}
 .sec-t h2{font-size:13px;font-weight:600;color:var(--sub);letter-spacing:.6px;margin:0}
 .sec-t i{font-size:12px;color:#A9AFB8;font-style:normal}
 .cardgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.toolcard{position:relative}
+.toolcard s{position:absolute;top:9px;left:9px;width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.45;text-decoration:none}
 .toolcard .fav{position:absolute;top:-6px;right:-6px;width:44px;height:44px;display:grid;place-items:center;background:none;border:0;padding:0;color:#B4BCCB;opacity:.55}
 .toolcard .fav.on{color:#F0A22B;opacity:1}
 .toolcard .fav svg{width:14px;height:14px}
@@ -271,7 +278,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
 /* 横屏矮屏：压缩头部与面板留白 */
 @media (max-height:520px){
   .sheet-body{padding-top:10px}
-  .sheet-head{padding-top:8px}
+  .sheet-head{padding-top:8px;position:sticky;top:0;z-index:12;background:var(--card);border-bottom:1px solid var(--line)}
 }
 /* 大字模式 / 系统放大字号时不让卡片挤成一行一列 */
 @media (min-width:380px){
@@ -305,7 +312,8 @@ canvas{max-width:100%;display:block;border-radius:10px}
   <div class="brand">
     <h1>小羽工具箱</h1>
     <span id="toolCount">0 个工具</span>
-    <button class="themebtn" id="langbtn" aria-label="Switch language" style="margin-left:6px;font-size:12px;font-weight:600">EN</button>
+    <button class="themebtn" id="denbtn" aria-label="Toggle density" style="margin-left:6px;font-size:12px;font-weight:600">⊞</button>
+<button class="themebtn" id="langbtn" aria-label="Switch language" style="margin-left:6px;font-size:12px;font-weight:600">EN</button>
 <button class="themebtn" id="fsbtn" aria-label="调整字号" style="margin-left:6px;font-size:13px;font-weight:600">Aa</button>
 <button class="themebtn" id="themebtn" aria-label="切换深浅色"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><circle cx="12" cy="12" r="4.2"/><path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8L5.6 18.4"/></svg></button>
   </div>
@@ -326,9 +334,10 @@ canvas{max-width:100%;display:block;border-radius:10px}
 <main id="list"></main>
 <button class="totop" id="totop" aria-label="回到顶部"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button>
 <footer class="foot">
-  <span>小羽工具箱 · 作者 fornow</span>
+  <span>小羽工具箱 v<span id="vnum">5.6</span> · 作者 fornow</span>
   <span>交流群 728403008</span>
   <a href="https://github.com/fornow330/xiaoyutool" target="_blank" rel="noopener" style="color:var(--sub);font-size:12px">GitHub</a>
+  <button id="chkUpd" style="border:0;background:none;color:var(--sub);font-size:12px;text-decoration:underline;padding:4px;cursor:pointer">检查更新</button>
   <button id="expFav" style="border:0;background:none;color:var(--sub);font-size:12px;text-decoration:underline;padding:4px;cursor:pointer">导出收藏</button>
   <button id="impFav" style="border:0;background:none;color:var(--sub);font-size:12px;text-decoration:underline;padding:4px;cursor:pointer">导入收藏</button>
   <input type="file" id="impFavFile" accept="application/json,.json" hidden>
@@ -467,6 +476,7 @@ function kwname(n){
   o=o.replace(/\b(\w+)\s+\1\b/gi,'$1');
   return o.length>1? o : '';
 }
+function ENDESC(c){ return ({eng:'Engineering & chemical calc',fin:'Finance, cost & office',txt:'Text, media & design',life:'Life, health & measure'})[c]||'Handy tool'; }
 function tname(t){
   if(LANG!=='en') return t.n;
   if(ENN[t.id]) return ENN[t.id];
@@ -1492,6 +1502,8 @@ const img=new Image(); img.crossOrigin='anonymous'; img.onload=()=>res(img); img
 let curCat='all', curQuery='';
 const RCKEY='xy_recent';
 function getRecent(){ try{ return JSON.parse(localStorage.getItem(RCKEY)||'[]'); }catch(e){ return []; } }
+let currentToolId='';
+function getRecent(){ try{ return JSON.parse(localStorage.getItem(RCKEY)||'[]'); }catch(e){ return []; } }
 function pushRecent(id){ try{ const a=getRecent().filter(x=>x!==id); a.unshift(id); localStorage.setItem(RCKEY, JSON.stringify(a.slice(0,8))); }catch(e){} }
 const RANKKEY='xy_toolrank';
 function pushRank(id){
@@ -1635,11 +1647,13 @@ const sc=function(t){ let c=0; const nm=t.n.toLowerCase();
 const near = TOOLS.map(function(t){return [sc(t),t];}).filter(function(x){return x[0]>=0.3;})
 .sort(function(a,b){return b[0]-a[0];}).slice(0,5)
 .map(function(x){return '<button class="rchip" data-rid="'+x[1].id+'">'+x[1].n+'</button>';}).join('');
-$('#list').innerHTML = bigTipHTML() + '<div class="empty">'+L('没有找到相关工具','No tools found')+(near?'<div class="recent" style="justify-content:center;margin-top:10px;flex-wrap:wrap"><span class="rlbl">'+L('试试','Try')+'</span>'+near+'</div>':'')+'</div>';
+$('#list').innerHTML = bigTipHTML() + '<div class="empty">'+L('没有找到相关工具','No tools found')+'<div class="recent" style="justify-content:center;margin-top:8px;gap:6px">'+CATS.filter(function(c){return c.k!=='all';}).map(function(c){return '<button class="rchip" data-cat2="'+c.k+'">'+cname(c.k)+'</button>';}).join('')+'</div>'+(near?'<div class="recent" style="justify-content:center;margin-top:10px;flex-wrap:wrap"><span class="rlbl">'+L('试试','Try')+'</span>'+near+'</div>':'')+'</div>';
 return;
 }
 const order = CATS.map(c=>c.k);
+const favSet=getFav();
 const relScore=function(t){
+  if(favSet.has(t.id)) return 200;
   if(!curQuery) return 0;
   const nm=tname(t).toLowerCase(), q=curQuery.toLowerCase();
   if(nm===q) return 100;
@@ -1648,7 +1662,11 @@ const relScore=function(t){
   return 10;
 };
 const baseSort = curQuery ? null : (curCat==='all'
-? list.slice().sort((a,b)=>hotRank(b.n)-hotRank(a.n) || order.indexOf(a.c)-order.indexOf(b.c))
+? list.slice().sort(function(a,b){
+    const ua=(lsGet(BIGUSE,{})[a.id]||0), ub=(lsGet(BIGUSE,{})[b.id]||0);
+    if(ua!==ub) return ub-ua;
+    return (hotRank(b.n)-hotRank(a.n)) || (order.indexOf(a.c)-order.indexOf(b.c));
+  })
 : list.slice());
 let sorted = curQuery ? list.slice().sort((a,b)=> relScore(b)-relScore(a) || hotRank(b.n)-hotRank(a.n)) : baseSort;
 if(!curQuery && curCat==='all'){
@@ -1705,13 +1723,15 @@ return out.split('\u0001').join('<mark>').split('\u0002').join('</mark>');
 }
 const ICM={};
 function icSvg(ic,col){ const k=ic+'|'+col; return ICM[k]||(ICM[k]=icon(ic,col)); }
+let RECENT_IDS=new Set();
+try{ RECENT_IDS=new Set(getRecent()); }catch(e){}
 function cards(list){
 const favs=getFav();
 return list.map(t=>`
 <div class="toolcard${t.knife?' knife':''}" data-id="${t.id}" tabindex="0" role="button" aria-label="${tname(t)}">
 <button class="fav${favs.has(t.id)?' on':''}" data-fav="${t.id}" aria-label="${favs.has(t.id)?'取消收藏':'收藏'}"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.2 5.9-.8z"/></svg></button>
 <div class="ico" style="--ic:${t.col}">${icSvg(t.ic,t.col)}</div>
-<b>${hlName(tname(t))}</b>${t.d&&LANG!=='en'?`<i title="${t.d}">${t.d}</i>`:''}
+<b title="${tname(t)}">${hlName(tname(t))}</b>${(LANG==='en'? ENDESC(t.c) : t.d)?`<i title="${LANG==='en'?ENDESC(t.c):t.d}">${LANG==='en'?ENDESC(t.c):t.d}</i>`:''}${RECENT_IDS.has(t.id)?'<s aria-hidden="true"></s>':''}
 </div>`).join('');
 }
 document.addEventListener('keydown', function(e){
@@ -1746,6 +1766,8 @@ if(pf){ const raw=pf.dataset.prof.split('|'); const bi=+raw[0]; const g=decodeUR
   const data=getBig(); lsSet('xy_biglast',{k:data[bi].k, g:g}); openTool('big'+bi); return; }
 const rl=e.target.closest('.relchip');
 if(rl){ openTool(rl.dataset.rid); return; }
+const c2=e.target.closest('[data-cat2]');
+if(c2){ curCat=c2.dataset.cat2; curQuery=''; $('#q').value=''; renderChips(); renderList(); return; }
 const rnd=e.target.closest('#randTool');
 if(rnd){ const pool=TOOLS.filter(function(t){return !/^big\d/.test(t.id);}); const t=pool[Math.floor(Math.random()*pool.length)]; openTool(t.id); return; }
 const gt=e.target.closest('#groupToggle');
@@ -1800,6 +1822,7 @@ groups.forEach(function(g){
 }
 function openTool(id){
 const t = TOOLS.find(x=>x.id===id); if(!t) return;
+try{ window.__listScroll=window.scrollY; currentToolId=id; }catch(e){}
 let body = $('#sheetBody');
 if(activeCleanup){ try{activeCleanup();}catch(e){} activeCleanup=null; }
 const fresh = body.cloneNode(false);
@@ -1845,6 +1868,7 @@ const sheet=$('#sheet'); sheet.classList.remove('open'); sheet.setAttribute('ari
 try{ if(location.hash.indexOf('tool=')>=0) history.replaceState(null,'',location.pathname+location.search); }catch(e){}
 if(activeCleanup){ try{activeCleanup();}catch(e){} activeCleanup=null; }
 const b=$('#sheetBody'); if(b){ const f=b.cloneNode(false); b.replaceWith(f); }
+try{ if(window.__listScroll!=null) window.scrollTo(0, window.__listScroll); }catch(e){}
 }
 $('#backbtn').addEventListener('click', closeSheet);
 $('#copytool').addEventListener('click', copyResult);
@@ -1859,6 +1883,11 @@ document.addEventListener('click', function(ev){
   else { copyText(txt); toast(L('已复制，可粘贴分享','Copied')); }
 });
 document.addEventListener('keydown', e=>{
+if(e.key==='?' && !/input|textarea|select/i.test(document.activeElement.tagName)){
+e.preventDefault();
+toast(L('/ 搜索　Esc 关闭　Enter 下一格　? 帮助','/ search　Esc close　Enter next　? help'));
+return;
+}
 if(e.key==='Escape') closeSheet();
 if((e.key==='/'||e.key==='／') && !/input|textarea|select/i.test(document.activeElement.tagName) && !$('#sheet').classList.contains('open')){
 e.preventDefault(); const q=$('#q'); if(q) q.focus();
@@ -2310,12 +2339,16 @@ root.innerHTML='<div class="box">'
 +'<button class="btn ghost" id="bigCmpBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto"">'+L('对比','Compare')+'</button>'
 +'<button class="btn ghost" id="bigResetBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto"">'+L('重置','Reset')+'</button>'
 +'<button class="btn ghost" id="bigCopyAll" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto"">'+L('复制全部','Copy all')+'</button>'
++'<button class="btn ghost" id="bigExport" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">'+L('导出','Export')+'</button>'
++'<button class="btn ghost" id="bigBack" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">'+L('上一个','Prev')+'</button>'
++'<button class="btn ghost" id="bigLink" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">'+L('链接','Link')+'</button>'
++'<button class="btn ghost" id="bigClear" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">'+L('清空','Clear')+'</button>'
 +'<button class="btn ghost" id="bigShare" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">'+L('分享','Share')+'</button>'
 +'</div></div>'
 +'<div class="box" id="bigOut"></div>'
 +'<div class="box" id="bigBatch" style="display:none"><div class="lbl">批量计算（每行一个数，套用第一个参数）</div>'
 +'<textarea id="bigBatchIn" rows="5" placeholder="每行一个数，例如&#10;250&#10;300&#10;400"></textarea>'
-+'<div style="display:flex;gap:8px;margin-top:8px"><button class="btn" id="bigBatchRun" style="flex:1">开始批量</button><button class="btn ghost" id="bigBatchTpl" style="flex:0 0 auto;padding:0 12px">下载模板</button><button class="btn ghost" id="bigCsvIn" style="flex:0 0 auto;padding:0 12px">导入 CSV</button><input type="file" id="bigCsvFile" accept=".csv,.txt,text/csv" hidden></div></div>'
++'<div style="display:flex;gap:8px;margin-top:8px"><button class="btn" id="bigBatchRun" style="flex:1">开始批量</button><button class="btn ghost" id="bigBatchTpl" style="flex:0 0 auto;padding:0 12px">下载模板</button><button class="btn ghost" id="bigBatchExp" style="flex:0 0 auto;padding:0 12px">导出结果</button><button class="btn ghost" id="bigCsvIn" style="flex:0 0 auto;padding:0 12px">导入 CSV</button><input type="file" id="bigCsvFile" accept=".csv,.txt,text/csv" hidden></div></div>'
 +'<div class="box" id="bigPreset" style="display:none"></div>'
 +'<div class="box" id="bigForm" style="display:none"></div>'
 +'<div class="box" id="bigHist" style="display:none"></div>';
@@ -2539,8 +2572,16 @@ if(curP>=0){ try{ lsSet('xy_biglast',{k:bd.k, g:profs[curP].g}); }catch(e){} }
 chips(); Q.value=''; filt();
 }
 function onQ(){ filt(); }
-function onSel(){ cur=+S.value; bump(); fields(); run(); }
+let prevCur=-1;
+function onSel(){ prevCur=cur; cur=+S.value; bump(); fields(); run(); }
+
 function onIn(){ run(); }
+if(O && !O.__copyBound){ O.__copyBound=1; O.addEventListener('click',function(ev){
+  const kv=ev.target.closest('.kv');
+  if(!kv || ev.target.closest('b') || ev.target.closest('button')) return;
+  const a=kv.querySelector('span'), b=kv.querySelector('b');
+  if(a&&b){ copyText(a.textContent.trim()+'  '+b.textContent.trim()); toast(L('已复制这一行','Line copied')); }
+}); }
 function onFav(){
 const k=curKey(); if(!k) return;
 const fv=lsGet(BIGFAV,{});
@@ -2704,6 +2745,28 @@ root.addEventListener('click', function(ev){
   copyText(body); toast('已复制口径与结果，去 GitHub 提 issue');
   window.open('https://github.com/fornow330/xiaoyutool/issues/new?title='+encodeURIComponent('[计算] '+mm.n)+'&body='+encodeURIComponent(body),'_blank');
 });
+const bex=root.querySelector('#bigExport');
+if(bex) bex.addEventListener('click',function(){
+  const rows=[]; [].forEach.call(O.querySelectorAll('.kv'),function(kv){
+    const a=kv.querySelector('span'), b=kv.querySelector('b');
+    if(a&&b) rows.push([a.textContent.trim(), b.textContent.trim()]);
+  });
+  if(!rows.length){ toast(L('没有可导出的结果','Nothing to export')); return; }
+  const csv='\ufeff'+rows.map(function(r){ return r.map(function(c){ return '"'+c.replace(/"/g,'""')+'"'; }).join(','); }).join('\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='result.csv'; a.click(); setTimeout(function(){URL.revokeObjectURL(a.href);},1000);
+  toast(L('已导出 CSV','CSV exported'));
+});
+const bbk=root.querySelector('#bigBack');
+if(bbk) bbk.addEventListener('click',function(){ if(prevCur>=0 && prevCur<list.length){ const tmp=cur; cur=prevCur; prevCur=tmp; if(S) S.value=String(cur); fields(); run(); } else toast(L('没有上一个口径','No previous item')); });
+const blk=root.querySelector('#bigLink');
+if(blk) blk.addEventListener('click',function(){
+  const url=location.origin+location.pathname+'#tool='+encodeURIComponent(currentToolId||'');
+  copyText(url); toast(L('已复制直达链接','Link copied'));
+});
+const bclr=root.querySelector('#bigClear');
+if(bclr) bclr.addEventListener('click',function(){ O.innerHTML='<p class="hint">'+L('已清空结果','Results cleared')+'</p>'; });
 const bca=root.querySelector('#bigCopyAll');
 if(bca) bca.addEventListener('click',function(){
   const ls2=[]; [].forEach.call(O.querySelectorAll('.kv'),function(kv){
@@ -2713,13 +2776,34 @@ if(bca) bca.addEventListener('click',function(){
   if(!ls2.length){ toast('没有可复制的结果'); return; }
   copyText(ls2.join('\n')); toast('已复制 '+ls2.length+' 项');
 });
+const bx=root.querySelector('#bigBatchExp');
+if(bx) bx.addEventListener('click',function(){
+  if(!lastBatch||!lastBatch.length){ toast(L('先跑一次批量','Run batch first')); return; }
+  const head=lastM.f.map(function(x){return x[1];}).join(',')+','+lastM.o[0];
+  const csv='\ufeff'+[head].concat(lastBatch.map(function(r){return r[0].split(' / ').join(',')+','+r[1];})).join('\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='batch-result.csv'; a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href);},1000);
+  toast(L('已导出批量结果','Batch exported'));
+});
 const cIn=root.querySelector('#bigCsvIn'), cF=root.querySelector('#bigCsvFile');
 if(cIn&&cF){
 cIn.addEventListener('click',function(){ cF.click(); });
 cF.addEventListener('change',function(){
 const f=cF.files&&cF.files[0]; if(!f) return;
 const rd=new FileReader();
-rd.onload=function(){ root.querySelector('#bigBatchIn').value=String(rd.result).replace(/\r/g,''); toast('已导入，点开始批量'); };
+rd.onload=function(){
+  const txt=String(rd.result).replace(/\r/g,'');
+  const first=(txt.split('\n')[0]||'').replace(/^\ufeff/,'');
+  const e2=list[cur];
+  if(e2&&e2.m){
+    const need=e2.m.f.map(function(x){return x[1];});
+    const got=first.split(/,|\t/).map(function(x){return x.trim().replace(/"/g,'');});
+    const miss=need.filter(function(n2,i){ return got[i] && got[i].indexOf(String(n2).slice(0,2))<0; });
+    if(miss.length && got.length>1){ toast(L('表头与当前口径不一致：'+miss.join('、'),'Header mismatch: '+miss.join(', '))); return; }
+  }
+  root.querySelector('#bigBatchIn').value=txt; toast(L('已导入，点开始批量','Imported'));
+};
 rd.readAsText(f); cF.value='';
 });
 }
@@ -2888,6 +2972,17 @@ toast(next==='auto'?L('跟随系统','Auto (system)'):(next==='dark'?L('已切�
 });
 })();
 (function(){
+  const dn=$('#denbtn');
+  let dens=''; try{ dens=localStorage.getItem('xy_density')||''; }catch(e){}
+  if(dens==='compact') document.documentElement.dataset.density='compact';
+  if(dn) dn.addEventListener('click',function(){
+    const on=document.documentElement.dataset.density==='compact';
+    if(on){ delete document.documentElement.dataset.density; } else { document.documentElement.dataset.density='compact'; }
+    try{ localStorage.setItem('xy_density', on?'':'compact'); }catch(e){}
+    toast(on?L('标准密度','Standard density'):L('紧凑密度','Compact density'));
+  });
+})();
+(function(){
   const lb=$('#langbtn');
   if(lb){
     lb.textContent = LANG==='en' ? '中' : 'EN';
@@ -2925,6 +3020,18 @@ renderChips(); renderFav(); renderRecent(); renderList();
   }catch(e){}
 })();
 document.addEventListener('DOMContentLoaded',function(){
+  const cu=document.getElementById('chkUpd');
+  if(cu) cu.addEventListener('click',function(){
+    toast(L('正在检查…','Checking…'));
+    fetch('index.html',{cache:'no-store'}).then(function(r){return r.text();}).then(function(txt){
+      const m=/xyver" content="([^"]+)"/.exec(txt);
+      const cur=(document.querySelector('meta[name=xyver]')||{}).content||'';
+      if(m && m[1]!==cur){
+        if(caches){ caches.keys().then(function(ks){ return Promise.all(ks.map(function(k){return caches.delete(k);})); }).then(function(){ toast(L('发现 v'+m[1]+'，正在刷新','Found v'+m[1]+'，reloading')); setTimeout(function(){ location.reload(true); },600); }); }
+        else { toast(L('发现新版本 v'+m[1]+'，请刷新','New v'+m[1])); }
+      } else { toast(L('已是最新版本','Up to date')); }
+    }).catch(function(){ toast(L('检查失败，请联网后重试','Check failed')); });
+  });
   const ef=document.getElementById('expFav');
   if(ef) ef.addEventListener('click',function(){
     const data={v:1, fav:[...getFav()], bigfav:lsGet('xy_bigfav',{}), q:lsGet('xy_recentq',[])};
@@ -2969,7 +3076,13 @@ document.addEventListener('keydown',function(ev){
   if(inputs[i+1]){ inputs[i+1].focus(); inputs[i+1].select&&inputs[i+1].select(); }
   else { const r=document.querySelector('#bigRunBtn'); if(r) r.click(); }
 }, true);
+function applyInputMode(root){
+  [].forEach.call((root||document).querySelectorAll('input[type=number]'),function(i){
+    if(!i.getAttribute('inputmode')) i.setAttribute('inputmode','decimal');
+  });
+}
 document.addEventListener('focusin',function(ev){
+  applyInputMode(document.querySelector('#sheetBody')||document);
   const t=ev.target;
   if(!t || !/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
   setTimeout(function(){ try{ t.scrollIntoView({block:'center',behavior:'smooth'}); }catch(e){ try{t.scrollIntoView();}catch(e2){} } }, 220);
@@ -3001,7 +3114,10 @@ document.addEventListener('paste',function(ev){
     document.addEventListener(ev, function(){ if(lp){ clearTimeout(lp); lp=null; } }, {passive:true});
   });
 })();
-window.addEventListener('offline',function(){ toast(L('网络已断开，工具仍可离线使用','Offline — tools still work')); });
+function setOffline(on){ if(on) document.documentElement.dataset.offline='1'; else delete document.documentElement.dataset.offline; }
+setOffline(!navigator.onLine);
+window.addEventListener('offline',function(){ setOffline(true); toast(L('网络已断开，工具仍可离线使用','Offline — tools still work')); });
+window.addEventListener('online',function(){ setOffline(false); toast(L('网络已恢复','Back online')); });
 let pwaEv=null;
 window.addEventListener('beforeinstallprompt',function(e){
   e.preventDefault(); pwaEv=e;
