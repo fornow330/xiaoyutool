@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="5.11">
+<meta name="xyver" content="5.12">
 <title>小羽工具箱 · 本地工具集合</title>
 <meta name="description" content="小羽工具箱：984 个本地实用工具，工程、财务、文本、生活四大类，全部离线可用。">
 <meta property="og:type" content="website">
@@ -335,7 +335,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
 <main id="list"></main>
 <button class="totop" id="totop" aria-label="回到顶部"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button>
 <footer class="foot">
-  <span>小羽工具箱 v<span id="vnum">5.11</span> · 作者 fornow</span>
+  <span>小羽工具箱 v<span id="vnum">5.12</span> · 作者 fornow</span>
   <span>交流群 728403008</span>
   <a href="https://github.com/fornow330/xiaoyutool" target="_blank" rel="noopener" style="color:var(--sub);font-size:12px">GitHub</a>
   <button id="chkUpd" style="border:0;background:none;color:var(--sub);font-size:12px;text-decoration:underline;padding:4px;cursor:pointer">检查更新</button>
@@ -485,7 +485,7 @@ function lcName(t){ if(NAMELANG!==LANG||!NAMEC){ NAMEC={}; NAMELANG=LANG; } retu
 let SIDXC=null, SIDXLANG='';
 function sidx(t){
   if(SIDXLANG!==LANG||!SIDXC){ SIDXC={}; SIDXLANG=LANG; }
-  return SIDXC[t.id] || (SIDXC[t.id]=(t.n+' '+lcName(t)+' '+CATNAME[t.c]+' '+cname(t.c)).toLowerCase());
+  return SIDXC[t.id] || (SIDXC[t.id]=(t.n+' '+enBase(t)+' '+lcName(t)+' '+CATNAME[t.c]+' '+cname(t.c)).toLowerCase());
 }
 function refreshNames(){ NAMEC=null; NAMELANG=''; SIDXC=null; SIDXLANG=''; }
 let ENMAP=null;
@@ -1725,7 +1725,8 @@ const show = (curQuery && curCat!=='all') ? sorted.slice(0, pageLimit)
     }) : sorted.slice(0, pageLimit)));
 const more = sorted.length - show.length;
 const rk=curCat+'|'+curQuery+'|'+(groupMode?1:0);
-if(rk===lastKey && show.length>lastCount){
+const grpNow=(curQuery&&curCat==='all')||(groupMode&&curCat==='all'&&!curQuery);
+if(!grpNow && rk===lastKey && show.length>lastCount){
 const grid=$('#list').querySelector('.cardgrid');
 if(grid){
 grid.insertAdjacentHTML('beforeend', cards(show.slice(lastCount)));
@@ -1736,7 +1737,7 @@ return;
 }
 }
 lastKey=rk; lastCount=show.length;
-const grouped = (curQuery && curCat==='all') || (groupMode && curCat==='all' && !curQuery);
+const grouped = grpNow;
 $('#list').innerHTML = sugHTML() + bigTipHTML() + profbar()
 + (curQuery? '<div class="grp" style="opacity:.75">'+L('命中 ','Matched ')+total+L(' 个',' tools')+'</div>' : '')
 + (grouped
