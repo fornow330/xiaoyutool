@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="5.12">
+<meta name="xyver" content="5.13">
 <title>小羽工具箱 · 本地工具集合</title>
 <meta name="description" content="小羽工具箱：984 个本地实用工具，工程、财务、文本、生活四大类，全部离线可用。">
 <meta property="og:type" content="website">
@@ -335,7 +335,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
 <main id="list"></main>
 <button class="totop" id="totop" aria-label="回到顶部"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button>
 <footer class="foot">
-  <span>小羽工具箱 v<span id="vnum">5.12</span> · 作者 fornow</span>
+  <span>小羽工具箱 v<span id="vnum">5.13</span> · 作者 fornow</span>
   <span>交流群 728403008</span>
   <a href="https://github.com/fornow330/xiaoyutool" target="_blank" rel="noopener" style="color:var(--sub);font-size:12px">GitHub</a>
   <button id="chkUpd" style="border:0;background:none;color:var(--sub);font-size:12px;text-decoration:underline;padding:4px;cursor:pointer">检查更新</button>
@@ -2517,7 +2517,7 @@ return '<div class="kv"><span>'+r[0]+'</span><b'+(r[2]?' class="tapraw" data-fmt
      const n=parseFloat(el.value); if(!isFinite(n)||n<=0) return;
      const lb=String(x[1]);
      if(/mm|毫米/.test(lb) && n<5) msgs.push(lb+' 填的是 '+n+'，若单位是米请换算成毫米');
-     else if(/（m）|\(m\)|m2|m\)/.test(lb) && n>50) msgs.push(lb+' 填的是 '+n+'，若单位是毫米请换算成米');
+     else if((/(（|\()m(）|\))(?!m)/.test(lb) || /㎡|m²|（m²）|\(m²\)/.test(lb)) && n>50) msgs.push(lb+' 填的是 '+n+'，若单位是毫米请换算成米');
    });
    return msgs.length? '<p class="hint" style="color:#C77A1B">疑似单位不一致：'+msgs.join('；')+'</p>' : '';
  })()
