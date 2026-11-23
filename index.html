@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="5.6">
+<meta name="xyver" content="5.7">
 <title>小羽工具箱 · 本地工具集合</title>
 <meta name="description" content="小羽工具箱：984 个本地实用工具，工程、财务、文本、生活四大类，全部离线可用。">
 <meta property="og:type" content="website">
@@ -334,7 +334,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
 <main id="list"></main>
 <button class="totop" id="totop" aria-label="回到顶部"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button>
 <footer class="foot">
-  <span>小羽工具箱 v<span id="vnum">5.6</span> · 作者 fornow</span>
+  <span>小羽工具箱 v<span id="vnum">5.7</span> · 作者 fornow</span>
   <span>交流群 728403008</span>
   <a href="https://github.com/fornow330/xiaoyutool" target="_blank" rel="noopener" style="color:var(--sub);font-size:12px">GitHub</a>
   <button id="chkUpd" style="border:0;background:none;color:var(--sub);font-size:12px;text-decoration:underline;padding:4px;cursor:pointer">检查更新</button>
@@ -477,11 +477,24 @@ function kwname(n){
   return o.length>1? o : '';
 }
 function ENDESC(c){ return ({eng:'Engineering & chemical calc',fin:'Finance, cost & office',txt:'Text, media & design',life:'Life, health & measure'})[c]||'Handy tool'; }
+let NAMEC=null, NAMELANG='';
+function lcName(t){ if(NAMELANG!==LANG||!NAMEC){ NAMEC={}; NAMELANG=LANG; } return NAMEC[t.id]||(NAMEC[t.id]=tname(t).toLowerCase()); }
+let SIDXC=null, SIDXLANG='';
+function sidx(t){
+  if(SIDXLANG!==LANG||!SIDXC){ SIDXC={}; SIDXLANG=LANG; }
+  return SIDXC[t.id] || (SIDXC[t.id]=(t.n+' '+lcName(t)+' '+CATNAME[t.c]+' '+cname(t.c)).toLowerCase());
+}
+function refreshNames(){ NAMEC=null; NAMELANG=''; SIDXC=null; SIDXLANG=''; }
+let ENMAP=null;
+function enBase(t){ if(ENN[t.id]) return ENN[t.id]; const k=kwname(t.n); return k||t.n; }
 function tname(t){
   if(LANG!=='en') return t.n;
-  if(ENN[t.id]) return ENN[t.id];
-  const k=kwname(t.n);
-  return k || t.n;
+  if(!ENMAP){
+    ENMAP={}; const cnt={};
+    TOOLS.forEach(function(x){ const b=enBase(x); cnt[b]=(cnt[b]||0)+1; });
+    TOOLS.forEach(function(x){ const b=enBase(x); ENMAP[x.id]= cnt[b]>1 ? b+' · '+x.n : b; });
+  }
+  return ENMAP[t.id];
 }
 const ENCAT={all:'All',eng:'Engineering & Chemical',fin:'Finance & Office',txt:'Text & Design',life:'Life & Health'};
 function cname(k){ return LANG==='en' ? (ENCAT[k]||k) : (CATNAME[k]||k); }
@@ -1504,11 +1517,13 @@ const RCKEY='xy_recent';
 function getRecent(){ try{ return JSON.parse(localStorage.getItem(RCKEY)||'[]'); }catch(e){ return []; } }
 let currentToolId='';
 function getRecent(){ try{ return JSON.parse(localStorage.getItem(RCKEY)||'[]'); }catch(e){ return []; } }
-function pushRecent(id){ try{ const a=getRecent().filter(x=>x!==id); a.unshift(id); localStorage.setItem(RCKEY, JSON.stringify(a.slice(0,8))); }catch(e){} }
+function pushRecent(id){ try{ const a=getRecent().filter(x=>x!==id); a.unshift(id); localStorage.setItem(RCKEY, JSON.stringify(a.slice(0,8))); RECENT_IDS=new Set(a.slice(0,8)); }catch(e){} }
 const RANKKEY='xy_toolrank';
+let RANKC=null;
+function getRank(){ if(RANKC) return RANKC; try{ RANKC=JSON.parse(localStorage.getItem(RANKKEY)||'{}'); }catch(e){ RANKC={}; } return RANKC; }
 function pushRank(id){
 try{
-const r=JSON.parse(localStorage.getItem(RANKKEY)||'{}');
+const r=getRank();
 r[id]=(r[id]||0)+1;
 localStorage.setItem(RANKKEY, JSON.stringify(r));
 renderRank();
@@ -1535,8 +1550,9 @@ const mh=hs.map(h=>`<button class="rchip" data-bigk="${h.k}" data-bign="${encode
 box.innerHTML='<span class="rlbl">最近</span>'+mt+mh;
 }
 const FVKEY='xy_fav';
-function getFav(){ try{ return new Set(JSON.parse(localStorage.getItem(FVKEY)||'[]')); }catch(e){ return new Set(); } }
-function setFav(set){ try{ localStorage.setItem(FVKEY, JSON.stringify([...set])); }catch(e){} }
+let FAVC=null;
+function getFav(){ if(FAVC) return FAVC; try{ FAVC=new Set(JSON.parse(localStorage.getItem(FVKEY)||'[]')); }catch(e){ FAVC=new Set(); } return FAVC; }
+function setFav(set){ FAVC=set; try{ localStorage.setItem(FVKEY, JSON.stringify([...set])); }catch(e){} }
 function toggleFav(id){
 const f=getFav();
 if(f.has(id)){ f.delete(id); toast('已取消收藏'); } else { f.add(id); toast('已收藏，首页置顶'); }
@@ -1633,9 +1649,10 @@ let lastKey='', lastCount=0;
 function colCount(){ const w=window.innerWidth; return w>=768?6:(w>=520?4:3); }
 pageLimit = colCount()*40;
 function renderList(){
-const qs = expandQ(curQuery);
+const qs = expandQ(curQuery); _HLQ=qs;
 const pyq = (curQuery && /^[a-z0-9]+$/i.test(curQuery)) ? curQuery.toLowerCase() : '';
-const list = TOOLS.filter(t=> (curCat==='all'||t.c===curCat) && (!curQuery || qs.some(q=> t.n.includes(q) || tname(t).toLowerCase().includes(q.toLowerCase()) || CATNAME[t.c].includes(q) || cname(t.c).toLowerCase().includes(q.toLowerCase())) || (pyq && (PYCACHE[t.id]||'').indexOf(pyq)>=0)));
+const ql = curQuery ? qs.map(function(q){return q.toLowerCase();}) : null;
+const list = TOOLS.filter(t=> (curCat==='all'||t.c===curCat) && (!curQuery || ql.some(function(q){return sidx(t).indexOf(q)>=0;}) || (pyq && (PYCACHE[t.id]||'').indexOf(pyq)>=0)));
 if(!list.length){
 const qlc=curQuery.toLowerCase();
 const sc=function(t){ let c=0; const nm=t.n.toLowerCase();
@@ -1655,7 +1672,7 @@ const favSet=getFav();
 const relScore=function(t){
   if(favSet.has(t.id)) return 200;
   if(!curQuery) return 0;
-  const nm=tname(t).toLowerCase(), q=curQuery.toLowerCase();
+  const nm=lcName(t), q=curQuery.toLowerCase();
   if(nm===q) return 100;
   if(nm.indexOf(q)===0) return 60;
   if(nm.indexOf(q)>0) return 40;
@@ -1663,7 +1680,7 @@ const relScore=function(t){
 };
 const baseSort = curQuery ? null : (curCat==='all'
 ? list.slice().sort(function(a,b){
-    const ua=(lsGet(BIGUSE,{})[a.id]||0), ub=(lsGet(BIGUSE,{})[b.id]||0);
+    const ua=(getRank()[a.id]||0), ub=(getRank()[b.id]||0);
     if(ua!==ub) return ub-ua;
     return (hotRank(b.n)-hotRank(a.n)) || (order.indexOf(a.c)-order.indexOf(b.c));
   })
@@ -1672,14 +1689,16 @@ let sorted = curQuery ? list.slice().sort((a,b)=> relScore(b)-relScore(a) || hot
 if(!curQuery && curCat==='all'){
   // 按热度分层，每层内按分类轮转，避免首页扎堆同一类
   const tiers=[[],[],[]];
-  baseSort.forEach(function(t){ const r=hotRank(t.n); const idx=r>=7?0:(r>=4?1:2); tiers[idx].push(t); });
+  const rankc=getRank(), pinned=[];
+  baseSort.forEach(function(t){ if(rankc[t.id]>0){ pinned.push(t); return; } const r=hotRank(t.n); const idx=r>=7?0:(r>=4?1:2); tiers[idx].push(t); });
+  pinned.sort(function(a,b){ return (rankc[b.id]||0)-(rankc[a.id]||0); });
   const buckets={}; order.forEach(function(k){ buckets[k]=[]; });
   tiers.forEach(function(tier){
     tier.forEach(function(t){ (buckets[t.c]=buckets[t.c]||[]).push(t); });
   });
-  const out=[]; const maxLen=Math.max.apply(null, order.map(function(k){return (buckets[k]||[]).length;}));
+  const out=pinned.slice(0,12); const maxLen=Math.max.apply(null, order.map(function(k){return (buckets[k]||[]).length;}));
   for(let i=0;i<maxLen;i++){ order.forEach(function(k){ const arr=buckets[k]||[]; if(arr[i]) out.push(arr[i]); }); }
-  sorted=out.length===baseSort.length? out : baseSort;
+  sorted=(out.length && out.length>=Math.min(baseSort.length,12))? out.concat(out.length>baseSort.length?[]:[]) : baseSort;
 }
 const total = sorted.length;
 const show = curQuery ? sorted
@@ -1710,9 +1729,10 @@ $('#list').innerHTML = sugHTML() + bigTipHTML() + profbar()
 : `<div class="cardgrid" style="margin-top:14px">${cards(show)}</div>`)
 + (more>0 ? `<button class="morebtn" id="morebtn">显示更多（还有 ${more} 个）</button>` : '');
 }
+let _HLQ=null;
 function hlName(name){
 if(!curQuery) return name;
-const qs=expandQ(curQuery).filter(k=>k.length>=2);
+const qs=(_HLQ || (_HLQ=expandQ(curQuery))).filter(k=>k.length>=2);
 let out=name;
 qs.forEach(function(k){
   if(!k) return;
@@ -1822,7 +1842,7 @@ groups.forEach(function(g){
 }
 function openTool(id){
 const t = TOOLS.find(x=>x.id===id); if(!t) return;
-try{ window.__listScroll=window.scrollY; currentToolId=id; }catch(e){}
+try{ window.__listScroll=window.scrollY; currentToolId=id; prevCur=-1; }catch(e){}
 let body = $('#sheetBody');
 if(activeCleanup){ try{activeCleanup();}catch(e){} activeCleanup=null; }
 const fresh = body.cloneNode(false);
@@ -2336,9 +2356,9 @@ root.innerHTML='<div class="box">'
 +'<button class="btn ghost" id="bigCsvBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">导出 CSV</button>'
 +'<button class="btn ghost" id="bigFormulaBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">公式</button>'
 +'<button class="btn ghost" id="bigPresetBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">预设</button>'
-+'<button class="btn ghost" id="bigCmpBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto"">'+L('对比','Compare')+'</button>'
-+'<button class="btn ghost" id="bigResetBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto"">'+L('重置','Reset')+'</button>'
-+'<button class="btn ghost" id="bigCopyAll" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto"">'+L('复制全部','Copy all')+'</button>'
++'<button class="btn ghost" id="bigCmpBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">'+L('对比','Compare')+'</button>'
++'<button class="btn ghost" id="bigResetBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">'+L('重置','Reset')+'</button>'
++'<button class="btn ghost" id="bigCopyAll" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">'+L('复制全部','Copy all')+'</button>'
 +'<button class="btn ghost" id="bigExport" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">'+L('导出','Export')+'</button>'
 +'<button class="btn ghost" id="bigBack" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">'+L('上一个','Prev')+'</button>'
 +'<button class="btn ghost" id="bigLink" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">'+L('链接','Link')+'</button>'
@@ -17003,7 +17023,8 @@ randPickTool(root,{items:'你比自己以为的更有耐心。\n今天适合把�
 const b=$('#totop');
 if(!b) return;
 b.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
-function upd(){ if((window.scrollY||document.documentElement.scrollTop||0)>400) b.classList.add('on'); else b.classList.remove('on'); }
+let _ut=0;
+function upd(){ if(_ut) return; _ut=requestAnimationFrame(function(){ _ut=0; if((window.scrollY||document.documentElement.scrollTop||0)>400) b.classList.add('on'); else b.classList.remove('on'); }); }
 window.addEventListener('scroll',upd,{passive:true});
 document.addEventListener('scroll',upd,{passive:true, capture:true});
 upd();
