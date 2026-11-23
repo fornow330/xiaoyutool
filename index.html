@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="5.8">
+<meta name="xyver" content="5.9">
 <title>小羽工具箱 · 本地工具集合</title>
 <meta name="description" content="小羽工具箱：984 个本地实用工具，工程、财务、文本、生活四大类，全部离线可用。">
 <meta property="og:type" content="website">
@@ -114,6 +114,7 @@ main{padding:0 16px calc(env(safe-area-inset-bottom,0px) + 28px)}
 .sec-t i{font-size:12px;color:#A9AFB8;font-style:normal}
 .cardgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .toolcard{position:relative}
+.toolcard.needs::after{content:'需手机';position:absolute;top:8px;right:8px;font-size:10px;color:#9AA3AF;background:rgba(0,0,0,.04);padding:1px 5px;border-radius:6px;letter-spacing:.2px}
 .toolcard s{position:absolute;top:9px;left:9px;width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.45;text-decoration:none}
 .toolcard .fav{position:absolute;top:-6px;right:-6px;width:44px;height:44px;display:grid;place-items:center;background:none;border:0;padding:0;color:#B4BCCB;opacity:.55}
 .toolcard .fav.on{color:#F0A22B;opacity:1}
@@ -334,7 +335,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
 <main id="list"></main>
 <button class="totop" id="totop" aria-label="回到顶部"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button>
 <footer class="foot">
-  <span>小羽工具箱 v<span id="vnum">5.8</span> · 作者 fornow</span>
+  <span>小羽工具箱 v<span id="vnum">5.9</span> · 作者 fornow</span>
   <span>交流群 728403008</span>
   <a href="https://github.com/fornow330/xiaoyutool" target="_blank" rel="noopener" style="color:var(--sub);font-size:12px">GitHub</a>
   <button id="chkUpd" style="border:0;background:none;color:var(--sub);font-size:12px;text-decoration:underline;padding:4px;cursor:pointer">检查更新</button>
@@ -1654,7 +1655,7 @@ return '<div class="bigtip"><span class="hint" style="margin:0 4px 0 0">猜你�
 }
 let lastKey='', lastCount=0;
 function colCount(){ const w=window.innerWidth; return w>=768?6:(w>=520?4:3); }
-pageLimit = colCount()*40;
+pageLimit = colCount()*20;
 function renderList(){
 const qs = expandQ(curQuery); _HLQ=qs;
 const pyq = (curQuery && /^[a-z0-9]+$/i.test(curQuery)) ? curQuery.toLowerCase() : '';
@@ -1707,6 +1708,11 @@ if(!curQuery && curCat==='all'){
   for(let i=0;i<maxLen;i++){ order.forEach(function(k){ const arr=buckets[k]||[]; if(arr[i]) out.push(arr[i]); }); }
   sorted=(out.length && out.length>=Math.min(baseSort.length,12))? out.concat(out.length>baseSort.length?[]:[]) : baseSort;
 }
+if(!MOB && !curQuery){
+  const can=sorted.filter(function(t){return !SENS.has(t.id);});
+  const cant=sorted.filter(function(t){return SENS.has(t.id);});
+  if(cant.length) sorted=can.concat(cant);
+}
 const total = sorted.length;
 const show = curQuery ? sorted
   : ((groupMode && curCat==='all') ? CATS.filter(function(c){return c.k!=='all';}).flatMap(function(c){
@@ -1750,12 +1756,14 @@ return out.split('\u0001').join('<mark>').split('\u0002').join('</mark>');
 }
 const ICM={};
 function icSvg(ic,col){ const k=ic+'|'+col; return ICM[k]||(ICM[k]=icon(ic,col)); }
+const MOB=(function(){ try{ return (window.matchMedia && matchMedia('(pointer:coarse)').matches) || /Mobi|Android|iPhone|iPad|HarmonyOS/.test(navigator.userAgent); }catch(e){ return true; } })();
+const SENS=new Set(['flash','compass','level','plumb','hang','magnify','rangefinder','inclinometer','filllight','dbmeter','gyro','orient','motion','miclevel','noise']);
 let RECENT_IDS=new Set();
 try{ RECENT_IDS=new Set(getRecent()); }catch(e){}
 function cards(list){
 const favs=getFav();
 return list.map(t=>`
-<div class="toolcard${t.knife?' knife':''}" data-id="${t.id}" tabindex="0" role="button" aria-label="${tname(t)}">
+<div class="toolcard${t.knife?' knife':''}${(!MOB && SENS.has(t.id))?' needs':''}" data-id="${t.id}" tabindex="0" role="button" aria-label="${tname(t)}">
 <button class="fav${favs.has(t.id)?' on':''}" data-fav="${t.id}" aria-label="${favs.has(t.id)?'取消收藏':'收藏'}"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.2 5.9-.8z"/></svg></button>
 <div class="ico" style="--ic:${t.col}">${icSvg(t.ic,t.col)}</div>
 <b title="${tname(t)}">${hlName(tname(t))}</b>${(LANG==='en'? ENDESC(t.c) : t.d)?`<i title="${LANG==='en'?ENDESC(t.c):t.d}">${LANG==='en'?ENDESC(t.c):t.d}</i>`:''}${RECENT_IDS.has(t.id)?'<s aria-hidden="true"></s>':''}
