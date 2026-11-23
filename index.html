@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="5.14">
+<meta name="xyver" content="5.15">
 <title>小羽工具箱 · 本地工具集合</title>
 <meta name="description" content="小羽工具箱：984 个本地实用工具，工程、财务、文本、生活四大类，全部离线可用。">
 <meta property="og:type" content="website">
@@ -302,32 +302,6 @@ canvas{max-width:100%;display:block;border-radius:10px}
 .profbar .rchip{height:28px;padding:0 12px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:12.5px;cursor:pointer}
 .carry{outline:2px solid var(--accent);outline-offset:1px}
 
-.gm{padding:2px 0 6px}
-.gm-lv{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px}
-.gm-badge{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#ffcf6b,#ff9d4d);color:#4a2a00;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;line-height:1.1;flex:0 0 auto}
-.gm-badge b{font-size:20px}
-.gm-lvm{flex:1;min-width:0}
-.gm-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:13px}
-.gm-row span{color:var(--sub);font-size:11.5px}
-.gm-bar{height:8px;border-radius:6px;background:var(--line);margin:7px 0 6px;overflow:hidden}
-.gm-bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#ffb84d,#ff8a3d)}
-.gm-row2{display:flex;justify-content:space-between;color:var(--sub);font-size:11.5px}
-.gm-sec{margin-top:12px}
-.gm-h{display:flex;justify-content:space-between;align-items:baseline;margin:0 2px 6px;font-size:13px;color:var(--sub)}
-.gm-h b{color:var(--ink);font-size:14px}
-.gm-chal{display:flex;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px 12px}
-.gm-chal.done{opacity:.75}
-.gm-ic{font-size:22px;flex:0 0 auto}
-.gm-txt{flex:1;min-width:0}
-.gm-txt b{font-size:14px;display:block}
-.gm-txt p{margin:2px 0 0;font-size:11.5px;color:var(--sub)}
-.gm-chal .btn{flex:0 0 auto}
-.gm-ach{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.gm-a{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:9px 8px;text-align:center;opacity:.45}
-.gm-a.on{opacity:1;border-color:#ffc04d}
-.gm-a s{font-size:20px;text-decoration:none;display:block;line-height:1.2}
-.gm-a b{font-size:12px;display:block;margin-top:2px}
-.gm-a p{margin:2px 0 0;font-size:10px;color:var(--sub);line-height:1.35}
 .useTip{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--sub);line-height:1.5}
 </style>
 </head>
@@ -342,7 +316,6 @@ canvas{max-width:100%;display:block;border-radius:10px}
     <button class="themebtn" id="denbtn" aria-label="Toggle density" style="margin-left:6px;font-size:12px;font-weight:600">⊞</button>
 <button class="themebtn" id="langbtn" aria-label="Switch language" style="margin-left:6px;font-size:12px;font-weight:600">EN</button>
 <button class="themebtn" id="fsbtn" aria-label="调整字号" style="margin-left:6px;font-size:13px;font-weight:600">Aa</button>
-<button class="themebtn" id="gamebtn" aria-label="玩法中心" style="margin-left:6px;font-size:13px">🎮</button>
 <button class="themebtn" id="themebtn" aria-label="切换深浅色"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><circle cx="12" cy="12" r="4.2"/><path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8L5.6 18.4"/></svg></button>
   </div>
   <div class="search">
@@ -362,7 +335,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
 <main id="list"></main>
 <button class="totop" id="totop" aria-label="回到顶部"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button>
 <footer class="foot">
-  <span>小羽工具箱 v<span id="vnum">5.14</span> · 作者 fornow</span>
+  <span>小羽工具箱 v<span id="vnum">5.15</span> · 作者 fornow</span>
   <span>交流群 728403008</span>
   <a href="https://github.com/fornow330/xiaoyutool" target="_blank" rel="noopener" style="color:var(--sub);font-size:12px">GitHub</a>
   <button id="chkUpd" style="border:0;background:none;color:var(--sub);font-size:12px;text-decoration:underline;padding:4px;cursor:pointer">检查更新</button>
@@ -1484,7 +1457,6 @@ function icon(key, color){
 return `<svg viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICONS[key]||ICONS.dots}</svg>`;
 }
 function copyText(txt){
-try{ if(window.__gm) window.__gm.copy(); }catch(e){}
 const done = ()=>{ toast('已复制'); };
 if(navigator.clipboard && window.isSecureContext){
 navigator.clipboard.writeText(txt).then(done).catch(()=>{fallback();});
@@ -1891,7 +1863,6 @@ groups.forEach(function(g){
 }
 function openTool(id){
 const t = TOOLS.find(x=>x.id===id); if(!t) return;
-try{ if(window.__gm) window.__gm.onOpen(id); }catch(e){}
 try{ window.__listScroll=window.scrollY; currentToolId=id; prevCur=-1; }catch(e){}
 let body = $('#sheetBody');
 if(activeCleanup){ try{activeCleanup();}catch(e){} activeCleanup=null; }
@@ -17153,111 +17124,6 @@ const _rl=window.renderList;
 window.renderList=function(){ _rl(); watch(); };
 try{ watch(); }catch(e){}
 })();
-/* ===== 玩法中心：经验/等级/连续天数/每日挑战/成就 ===== */
-(function(){
-var K_XP='xy_xp', K_TOP='xy_top', K_GD='xy_gd', K_GO='xy_go', K_CH='xy_ch', K_STK='xy_stk', K_STKD='xy_stkd', K_ACH='xy_ach', K_CAT='xy_cats', K_CALC='xy_calc';
-function dk(off){ var d=new Date(); if(off) d.setDate(d.getDate()-off); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
-var ACH=[
- {k:'first',z:'初次探索',e:'First Steps',d:'打开第一个工具',z2:'打开第一个工具',e2:'Open your first tool',ic:'🌱'},
- {k:'ten',z:'十项全能',e:'Daily Ten',d:'单日打开 10 个工具',e2:'Open 10 tools in one day',ic:'🔟'},
- {k:'cat4',z:'四类通吃',e:'All Four',d:'四个分类都用过',e2:'Use all four categories',ic:'🧭'},
- {k:'fav10',z:'收藏家',e:'Collector',d:'收藏 10 个工具',e2:'Star 10 tools',ic:'⭐'},
- {k:'calc5',z:'计算达人',e:'Calc Pro',d:'打开计算器 5 次',e2:'Open calculators 5 times',ic:'🧮'},
- {k:'streak7',z:'七日不断',e:'7-Day Streak',d:'连续使用 7 天',e2:'Use 7 days in a row',ic:'🔥'},
- {k:'night',z:'夜猫子',e:'Night Owl',d:'23 点后使用',e2:'Use after 11 pm',ic:'🌙'},
- {k:'early',z:'早起鸟',e:'Early Bird',d:'6-9 点使用',e2:'Use between 6-9 am',ic:'🌅'},
- {k:'chal5',z:'挑战王',e:'Challenge King',d:'完成 5 个每日挑战',e2:'Finish 5 daily challenges',ic:'🏆'},
- {k:'open100',z:'常客',e:'Regular',d:'累计打开 100 次',e2:'Open 100 tools total',ic:'💯'},
- {k:'en',z:'双语玩家',e:'Bilingual',d:'英文模式下使用',e2:'Use in English mode',ic:'🌍'},
- {k:'share1',z:'分享达人',e:'Sharer',d:'复制或分享一次结果',e2:'Copy or share a result',ic:'📤'}
-];
-function achName(k){ var a=ACH.find(function(x){return x.k===k;}); return a? (LANG==='en'?a.e:a.z):k; }
-function todayChal(){ var d=dk(0), h=0; for(var i=0;i<d.length;i++) h=(h*31+d.charCodeAt(i))%9973; return TOOLS[h%TOOLS.length].id; }
-function syncDay(){
- var d=dk(0);
- if(lsGet(K_GD,'')!==d){ lsSet(K_GD,d); lsSet(K_GO,[]); }
- var last=lsGet(K_STKD,'');
- if(last!==d){ lsSet(K_STK, last===dk(1)? (lsGet(K_STK,0)+1) : 1); lsSet(K_STKD,d); }
-}
-function xp(){ return lsGet(K_XP,0); }
-function lvl(){ return Math.floor(xp()/60)+1; }
-function addXp(n){
- var v=xp()+n, l0=Math.floor(xp()/60)+1; lsSet(K_XP,v);
- if(Math.floor(v/60)+1>l0) toast(L('升级！Lv','Level up! Lv')+(Math.floor(v/60)+1));
-}
-function unlock(k){
- var got=lsGet(K_ACH,{});
- if(got[k]) return false;
- got[k]=1; lsSet(K_ACH,got);
- setTimeout(function(){ toast(L('成就解锁：','Achievement: ')+achName(k)); },700);
- return true;
-}
-function checkAch(t){
- if(lsGet(K_TOP,0)>=1) unlock('first');
- if((lsGet(K_GO,[])||[]).length>=10) unlock('ten');
- if((lsGet(K_CAT,[])||[]).length>=4) unlock('cat4');
- try{ if(getFav().size>=10) unlock('fav10'); }catch(e){}
- if(lsGet(K_CALC,0)>=5) unlock('calc5');
- if(lsGet(K_STK,0)>=7) unlock('streak7');
- var hh=new Date().getHours();
- if(hh>=23) unlock('night');
- if(hh>=6&&hh<9) unlock('early');
- if((lsGet(K_CH,[])||[]).length>=5) unlock('chal5');
- if(lsGet(K_TOP,0)>=100) unlock('open100');
- if(LANG==='en') unlock('en');
-}
-function onOpen(id){
- var t=TOOLS.find(function(x){return x.id===id;}); if(!t) return;
- syncDay();
- var go=lsGet(K_GO,[]); if(go.indexOf(id)<0){ if(go.length<40) addXp(1); go.push(id); lsSet(K_GO,go); }
- lsSet(K_TOP, lsGet(K_TOP,0)+1);
- var cats=lsGet(K_CAT,[]); if(cats.indexOf(t.c)<0){ cats.push(t.c); lsSet(K_CAT,cats); }
- if(/^big[0-3]$/.test(id)) lsSet(K_CALC, lsGet(K_CALC,0)+1);
- var ch=todayChal();
- if(id===ch){
-   var done=lsGet(K_CH,[]);
-   if(done.indexOf(ch)<0){ done.push(ch); lsSet(K_CH,done); addXp(20); toast(L('每日挑战完成 +20 XP','Daily challenge +20 XP')); }
- }
- checkAch(t);
-}
-function gmHTML(){
- var x=xp(), l=(Math.floor(x/60)+1), rem=60-(x%60), pct=Math.round((x%60)/60*100);
- if(pct<1) pct=1;
- var stk=lsGet(K_STK,0), done=lsGet(K_CH,[]), ch=todayChal(), chDone=done.indexOf(ch)>=0;
- var ct=TOOLS.find(function(t){return t.id===ch;});
- var got=lsGet(K_ACH,{}), n=ACH.filter(function(a){return got[a.k];}).length;
- return '<div class="gm">'
- +'<div class="gm-lv"><div class="gm-badge">Lv<br><b>'+l+'</b></div><div class="gm-lvm"><div class="gm-row"><b>'+x+' XP</b><span>'+L('距离下一级还差 '+rem+' XP',''+rem+' XP to next level')+'</span></div><div class="gm-bar"><i style="width:'+pct+'%"></i></div><div class="gm-row2"><span>'+L('今日已开 ','Opened today ')+Math.min((lsGet(K_GO,[])||[]).length,40)+L('/40 个','/40')+'</span><span>'+L('连续 ','Streak ')+stk+L(' 天',' days')+'</span></div></div></div>'
- +'<div class="gm-sec"><div class="gm-h"><b>'+L('今日挑战','Daily challenge')+'</b></div>'
- +'<div class="gm-chal'+(chDone?' done':'')+'"><div class="gm-ic">'+(chDone?'✅':'🎯')+'</div><div class="gm-txt"><b>'+tname(ct)+'</b><p>'+(chDone?L('今天已完成 +20 XP','Completed today +20 XP'):L('今天用它做一件事，得 +20 XP','Try it today, earn +20 XP'))+'</p></div><button class="btn ghost" id="gmChalBtn" '+(chDone?'disabled':'')+'>'+(chDone?L('已完成','Done'):L('去挑战','Go'))+'</button></div></div>'
- +'<div class="gm-sec"><div class="gm-h"><b>'+L('成就','Achievements')+' '+n+'/'+ACH.length+'</b></div><div class="gm-ach">'
- + ACH.map(function(a){ var on=!!got[a.k]; return '<div class="gm-a'+(on?' on':'')+'"><s>'+a.ic+'</s><b>'+L(a.z,a.e)+'</b><p>'+L(a.d,a.e2)+'</p></div>'; }).join('')
- +'</div></div>'
- +'<div class="gm-sec"><button class="btn" id="gmRand" style="width:100%">'+L('🎲 随机开一个工具','🎲 Open a random tool')+'</button></div>'
- +'<p class="hint" style="text-align:center;margin:10px 0 0">'+L('每天打开工具攒经验，连续使用有加成','Earn XP by opening tools; keep the streak alive')+'</p>'
- +'</div>';
-}
-function openPanel(){
- try{ if(window.__listScroll==null) window.__listScroll=window.scrollY; }catch(e){}
- var body=$('#sheetBody'); var fresh=body.cloneNode(false); body.replaceWith(fresh); body=fresh;
- $('#sheetTitle').textContent = L('玩法中心','Playground');
- var sh=$('#sheet'); if(sh){ sh.classList.add('open'); sh.setAttribute('aria-hidden','false'); }
- body.scrollTop=0; body.innerHTML=gmHTML();
- var cb=body.querySelector('#gmChalBtn');
- if(cb) cb.addEventListener('click', function(){ openTool(todayChal()); });
- var rb=body.querySelector('#gmRand');
- if(rb) rb.addEventListener('click', function(){
-   var t=TOOLS[Math.floor(Math.random()*TOOLS.length)];
-   openTool(t.id); toast(L('随机打开了：','Random tool: ')+tname(t));
- });
-}
-window.__gm={onOpen:onOpen, open:openPanel, copy:function(){ unlock('share1'); }};
-(function(){
- var hb=document.getElementById('gamebtn');
- if(hb) hb.addEventListener('click', openPanel);
-})();
-})();
-
 </script>
 </body>
 </html>
