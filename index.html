@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="5.20">
+<meta name="xyver" content="5.21">
 <title>小羽工具箱 · 本地工具集合</title>
 <meta name="description" content="小羽工具箱：984 个本地实用工具，工程、财务、文本、生活四大类，全部离线可用。">
 <meta property="og:type" content="website">
@@ -335,7 +335,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
 <main id="list"></main>
 <button class="totop" id="totop" aria-label="回到顶部"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button>
 <footer class="foot">
-  <span>小羽工具箱 v<span id="vnum">5.20</span> · 作者 fornow</span>
+  <span>小羽工具箱 v<span id="vnum">5.21</span> · 作者 fornow</span>
   <span>交流群 728403008</span>
   <a href="https://github.com/fornow330/xiaoyutool" target="_blank" rel="noopener" style="color:var(--sub);font-size:12px">GitHub</a>
   <button id="chkUpd" style="border:0;background:none;color:var(--sub);font-size:12px;text-decoration:underline;padding:4px;cursor:pointer">检查更新</button>
@@ -2480,7 +2480,7 @@ return [lb, typeof r==='number'?fmtOut(r):String(r), raw];
 const isU=m.u && m.u.length<=7 && !/[\u4e00-\u9fa5]/.test(m.u);
 lastRows=rows; lastM=m; lastBad=badD;
 O.innerHTML=rows.map(function(r){
-return '<div class="kv"><span>'+r[0]+'</span><b'+(r[2]?' class="tapraw" data-fmt="'+r[1]+'" data-raw="'+r[2]+'" data-unit="'+(isU?' '+m.u:'')+'" title="点一下切换原值"':'')+'>'+r[1]+(isU?' '+m.u:'')+'</b>'
+return '<div class="kv"><span>'+r[0]+'</span><b'+(r[2]?' class="tapraw" data-fmt="'+r[1]+'" data-raw="'+r[2]+'" data-unit="'+(isU?' '+m.u:'')+'" title="原值 '+r[2]+'（点一下切换）"':'')+'>'+r[1]+(isU?' '+m.u:'')+'</b>'
 +(r[2]?'<button class="usebtn" data-use="'+r[2]+'" title="填入第一个参数">→</button>':'')+'</div>';
 }).join('') + (m.u && !isU ? '<p class="hint">'+m.u+'</p>' : '')
 + (badD.length? '<p class="hint" style="color:#D9534F">参数未填或非法：'+badD.join('、')+'</p>' : '')
@@ -13987,9 +13987,9 @@ $('#cbOut',root).textContent=p.join(' ');
 }
 function t_tsdiff(root){
 convTool(root,{def:'1700000000\n1735689600',outLabel:'结果',modes:[{label:'时间戳差（秒）',
-fn:s=>{const a=s.trim().split(/\s+/).map(Number);if(a.length<2)throw new Error('两行各一个时间戳');const d=Math.abs(a[0]-a[1]);return `${d} 秒 = ${(d/60).toFixed(1)} 分钟 = ${(d/3600).toFixed(2)} 小时 = ${(d/86400).toFixed(2)} 天`;}},
-{label:'两个日期差',fn:s=>{const a=s.trim().split('\n');if(a.length<2)throw new Error('两行各一个日期');const d=Math.abs(new Date(a[0])-new Date(a[1]));return `${Math.round(d/86400000)} 天`;}},
-{label:'时间戳转日期',fn:s=>s.trim().split(/\s+/).filter(Boolean).map(x=>new Date(+x*1000).toLocaleString('zh-CN')).join('\n')}
+fn:s=>{const a=s.trim().split(/\s+/).map(Number);if(a.length<2)throw new Error('两行各一个时间戳');if(!a.slice(0,2).every(x=>isFinite(x)))throw new Error('这里是时间戳（秒），要比日期请点「两个日期差」');const d=Math.abs(a[0]-a[1]);return `${d} 秒 = ${(d/60).toFixed(1)} 分钟 = ${(d/3600).toFixed(2)} 小时 = ${(d/86400).toFixed(2)} 天`;}},
+{label:'两个日期差',fn:s=>{const a=s.trim().split('\n');if(a.length<2)throw new Error('两行各一个日期');const t0=new Date(a[0].trim()),t1=new Date(a[1].trim());if(isNaN(t0)||isNaN(t1))throw new Error('日期看不懂，例：2026-01-05 或 2026-01-05 08:00');const d=Math.abs(t0-t1);return `${Math.round(d/86400000)} 天`;}},
+{label:'时间戳转日期',fn:s=>s.trim().split(/\s+/).filter(Boolean).map(x=>{const t=new Date(+x*1000);return isNaN(t)?`${x} 不是时间戳`:t.toLocaleString('zh-CN');}).join('\n')}
 ]});
 }
 function t_subnet(root){
