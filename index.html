@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="5.19">
+<meta name="xyver" content="5.20">
 <title>小羽工具箱 · 本地工具集合</title>
 <meta name="description" content="小羽工具箱：984 个本地实用工具，工程、财务、文本、生活四大类，全部离线可用。">
 <meta property="og:type" content="website">
@@ -335,7 +335,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
 <main id="list"></main>
 <button class="totop" id="totop" aria-label="回到顶部"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button>
 <footer class="foot">
-  <span>小羽工具箱 v<span id="vnum">5.19</span> · 作者 fornow</span>
+  <span>小羽工具箱 v<span id="vnum">5.20</span> · 作者 fornow</span>
   <span>交流群 728403008</span>
   <a href="https://github.com/fornow330/xiaoyutool" target="_blank" rel="noopener" style="color:var(--sub);font-size:12px">GitHub</a>
   <button id="chkUpd" style="border:0;background:none;color:var(--sub);font-size:12px;text-decoration:underline;padding:4px;cursor:pointer">检查更新</button>
@@ -7082,7 +7082,7 @@ else if(t.split('\n')[0].split(',').length>1) d=',';
 else if(t.split('\n')[0].split(';').length>1) d=';';
 else d=',';
 }
-return t.split('\n').map(l=>l.split(d).map(c=>c.trim()));
+return csvRows(t,d);
 }
 $('#sgo',root).onclick=()=>{
 const r=rows(); if(!r.length){ $('#sout',root).textContent='—'; return; }
@@ -9794,8 +9794,8 @@ const b=e.target.closest('[data-cm]'); if(!b) return;
 const m=opt.modes[+b.dataset.cm];
 try{
 const r=m.fn($('#cvIn',root).value);
-$('#cvOut',root).textContent=(r==null||r==='')?'—':r;
-}catch(err){ toast('转换失败：'+(err.message||'输入格式有误')); }
+{const empty=(r==null||r===''); if(empty) toast('没解析出内容，检查一下输入格式'); $('#cvOut',root).textContent=empty?'—':r;}
+}catch(err){ console.warn('[convTool]',err); const msg=String(err&&err.message||''); toast(/Cannot|undefined|null|not a function|is not|SyntaxError|JSON/i.test(msg)?'没解析出来，检查一下输入格式':'转换失败：'+msg); }
 });
 }
 function t_miclevel(root){
@@ -10744,8 +10744,10 @@ $('#tpOut',root).textContent=out;
 }
 function t_mdtable2csv(root){
 convTool(root,{def:'| 姓名 | 部门 | 金额 |\n| --- | --- | --- |\n| 张三 | 技术部 | 1200 |',outLabel:'CSV',modes:[
-{label:'转 CSV',fn:s=>s.split('\n').filter(l=>l.trim()).filter(l=>!/^[\s|:-]+$/.test(l))
-.map(l=>l.replace(/^\||\|$/g,'').split('|').map(c=>c.trim()).join(',')).join('\n')}
+{label:'转 CSV',fn:s=>{
+if(!/\|/.test(s)){const rr=csvRows(s); if(!rr.length||rr[0].length<2) throw new Error('没找到表格，把 Markdown 表格或 CSV 粘进来再试');return rr.map(x=>x.map(c=>/[\",\n]/.test(c)?'\"'+c.replace(/\"/g,'\"\"')+'\"':c).join(',')).join('\n');}
+return s.split('\n').filter(l=>l.trim()).filter(l=>!/^[\s|:-]+$/.test(l))
+.map(l=>l.replace(/^\||\|$/g,'').split('|').map(c=>c.trim()).map(c=>/[",\n]/.test(c)?'"'+c.replace(/"/g,'""')+'"':c).join(',')).join('\n');}}
 ],note:'把 Markdown 表格粘进来，转成可导入 Excel 的逗号分隔文本。'});
 }
 function t_striphtml(root){
@@ -13834,7 +13836,7 @@ return pad+'<'+k+'>'+String(v)+'</'+k+'>';
 }
 return Object.entries(o).map(([k,v])=>build(v,k,0)).join('\n');}}]});
 }
-function csvRows(t){const rows=[];let row=[],cur='',q=false;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c==='"'){if(t[i+1]==='"'){cur+='"';i++;}else q=false;}else cur+=c;}else if(c==='"'){q=true;}else if(c===','){row.push(cur.trim());cur='';}else if(c==='\n'||c==='\r'){if(c==='\r'&&t[i+1]==='\n')i++;row.push(cur.trim());cur='';if(row.some(x=>x!==''))rows.push(row);row=[];}else cur+=c;}row.push(cur.trim());if(row.some(x=>x!==''))rows.push(row);return rows;}
+function csvRows(t,d){d=d||',';const rows=[];let row=[],cur='',q=false;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c==='"'){if(t[i+1]==='"'){cur+='"';i++;}else q=false;}else cur+=c;}else if(c==='"'){q=true;}else if(c===d){row.push(cur.trim());cur='';}else if(c==='\n'||c==='\r'){if(c==='\r'&&t[i+1]==='\n')i++;row.push(cur.trim());cur='';if(row.some(x=>x!==''))rows.push(row);row=[];}else cur+=c;}row.push(cur.trim());if(row.some(x=>x!==''))rows.push(row);return rows;}
 function t_csv2sql(root){
 convTool(root,{def:'id,name,age\n1,张三,28\n2,李四,32',outLabel:'SQL',modes:[{label:'CSV → INSERT',
 fn:s=>{
