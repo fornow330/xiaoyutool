@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="5.15">
+<meta name="xyver" content="5.16">
 <title>小羽工具箱 · 本地工具集合</title>
 <meta name="description" content="小羽工具箱：984 个本地实用工具，工程、财务、文本、生活四大类，全部离线可用。">
 <meta property="og:type" content="website">
@@ -335,7 +335,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
 <main id="list"></main>
 <button class="totop" id="totop" aria-label="回到顶部"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button>
 <footer class="foot">
-  <span>小羽工具箱 v<span id="vnum">5.15</span> · 作者 fornow</span>
+  <span>小羽工具箱 v<span id="vnum">5.16</span> · 作者 fornow</span>
   <span>交流群 728403008</span>
   <a href="https://github.com/fornow330/xiaoyutool" target="_blank" rel="noopener" style="color:var(--sub);font-size:12px">GitHub</a>
   <button id="chkUpd" style="border:0;background:none;color:var(--sub);font-size:12px;text-decoration:underline;padding:4px;cursor:pointer">检查更新</button>
@@ -2631,6 +2631,7 @@ lsSet(BIGFAV, fv); favBtnState(); toast(fv[k]?'已收藏，会排在前面':'已
 filt();
 }
 function onBatchToggle(){
+if(BOX.style.display==='none' && !(list[cur]&&list[cur].m)){ toast('先选一个口径'); return; }
 BOX.style.display = BOX.style.display==='none' ? '' : 'none';
 if(BOX.style.display===''){ BOX.querySelector('#bigBatchIn').focus(); }
 }
@@ -17116,7 +17117,7 @@ function watch(){
 if(obs) obs.disconnect();
 const mb=$('#morebtn'); if(!mb || !('IntersectionObserver' in window)) return;
 obs=new IntersectionObserver(function(es){
-es.forEach(function(en){ if(en.isIntersecting){ obs.disconnect(); pageLimit+=colCount()*50; renderList(); } });
+es.forEach(function(en){ if(en.isIntersecting){ obs.disconnect(); pageLimit+=colCount()*20; renderList(); } });
 }, {rootMargin:'200px'});
 obs.observe(mb);
 }
