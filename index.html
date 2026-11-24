@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="5.16">
+<meta name="xyver" content="5.17">
 <title>小羽工具箱 · 本地工具集合</title>
 <meta name="description" content="小羽工具箱：984 个本地实用工具，工程、财务、文本、生活四大类，全部离线可用。">
 <meta property="og:type" content="website">
@@ -335,7 +335,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
 <main id="list"></main>
 <button class="totop" id="totop" aria-label="回到顶部"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button>
 <footer class="foot">
-  <span>小羽工具箱 v<span id="vnum">5.16</span> · 作者 fornow</span>
+  <span>小羽工具箱 v<span id="vnum">5.17</span> · 作者 fornow</span>
   <span>交流群 728403008</span>
   <a href="https://github.com/fornow330/xiaoyutool" target="_blank" rel="noopener" style="color:var(--sub);font-size:12px">GitHub</a>
   <button id="chkUpd" style="border:0;background:none;color:var(--sub);font-size:12px;text-decoration:underline;padding:4px;cursor:pointer">检查更新</button>
@@ -1972,12 +1972,12 @@ ICONS.check='<path d="M4.5 12.5l4.5 4.5 10-11"/>';
 function extNum(r){
 if(typeof r!=='number'||!isFinite(r)) return '—';
 const a=Math.abs(r);
-if(a>=1e10) return r.toExponential(2);
+if(a>=1e12) return r.toExponential(2);
 if(a>=100000000) return (r/100000000).toFixed(2)+' 亿';
-if(a>=10000) return (r/10000).toFixed(2)+' 万';
-if(a>=1000) return r.toFixed(0);
-if(a>=1) return r.toFixed(2);
-return r.toPrecision(3);
+if(a>=1000000) return (r/10000).toFixed(2)+' 万';
+if(a>=1000) return commaNum(r.toFixed(2).replace(/\.00$/,''));
+if(a>=1) return r.toFixed(2).replace(/\.00$/,'');
+return String(+r.toPrecision(3));
 }
 function extRender(root, sp){
 if(sp.t==='table') return listTool(root,{ph:sp.ph||('搜索'+sp.n),rows:sp.rows,note:sp.note});
