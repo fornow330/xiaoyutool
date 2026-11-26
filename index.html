@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="5.22">
+<meta name="xyver" content="5.23">
 <title>小羽工具箱 · 本地工具集合</title>
 <meta name="description" content="小羽工具箱：984 个本地实用工具，工程、财务、文本、生活四大类，全部离线可用。">
 <meta property="og:type" content="website">
@@ -303,6 +303,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
 .carry{outline:2px solid var(--accent);outline-offset:1px}
 
 .useTip{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--sub);line-height:1.5}
+.mt10{margin-top:10px}.mt12{margin-top:12px}.mt8{margin-top:8px}.mt14{margin-top:14px}.m0{margin:0}.tac{text-align:center}
 </style>
 </head>
 <body>
@@ -335,7 +336,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
 <main id="list"></main>
 <button class="totop" id="totop" aria-label="回到顶部"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button>
 <footer class="foot">
-  <span>小羽工具箱 v<span id="vnum">5.22</span> · 作者 fornow</span>
+  <span>小羽工具箱 v<span id="vnum">5.23</span> · 作者 fornow</span>
   <span>交流群 728403008</span>
   <a href="https://github.com/fornow330/xiaoyutool" target="_blank" rel="noopener" style="color:var(--sub);font-size:12px">GitHub</a>
   <button id="chkUpd" style="border:0;background:none;color:var(--sub);font-size:12px;text-decoration:underline;padding:4px;cursor:pointer">检查更新</button>
@@ -1875,7 +1876,7 @@ pushRecent(id); renderRecent(); pushRank(id);
 try{ history.replaceState(null,'','#tool='+encodeURIComponent(id)); }catch(e){}
 const fn = window['t_'+id];
 if(typeof fn==='function'){ activeCleanup = fn(body) || null; }
-else body.innerHTML = `<div class="box"><p class="hint" style="margin:0">'+L('该工具正在完善中。','This tool is coming soon.')+'</p></div>`;
+else body.innerHTML = `<div class="box"><p class="hint m0">'+L('该工具正在完善中。','This tool is coming soon.')+'</p></div>`;
 try{
   const seen=lsGet('xy_seen',{});
   if(!seen[id]){
@@ -2346,7 +2347,7 @@ root.innerHTML='<div class="box">'
 +'<div id="bigChips" style="display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;-webkit-overflow-scrolling:touch"></div>'
 +'<select id="bigSel"></select>'
 +'<div id="bigF" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px"></div>'
-+'<div style="display:flex;align-items:center;gap:8px;margin-top:10px"><span class="lbl" style="margin:0">精度</span><select id="bigPrec" style="width:118px"><option value="auto">自动</option><option value="2">2 位小数</option><option value="3">3 位小数</option><option value="sig">3 位有效</option><option value="raw">原值</option></select><label style="display:flex;align-items:center;gap:4px;font-size:13px;color:var(--sub)"><input type="checkbox" id="bigComma" style="width:16px;height:16px">千分位</label></div>'
++'<div style="display:flex;align-items:center;gap:8px;margin-top:10px"><span class="lbl m0">精度</span><select id="bigPrec" style="width:118px"><option value="auto">自动</option><option value="2">2 位小数</option><option value="3">3 位小数</option><option value="sig">3 位有效</option><option value="raw">原值</option></select><label style="display:flex;align-items:center;gap:4px;font-size:13px;color:var(--sub)"><input type="checkbox" id="bigComma" style="width:16px;height:16px">千分位</label></div>'
 +'<div id="bigBtns" style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">'
 +'<button class="btn ghost" id="bigFavBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">☆ 收藏口径</button>'
 +'<button class="btn ghost" id="bigShareBtn" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">分享结果</button>'
@@ -3206,7 +3207,7 @@ background:#FFF7E8;border:1px solid #F6E1BC;cursor:pointer;transition:.18s">
 <div class="box">
 <p class="lbl">照明色温</p>
 <input type="range" id="temp" min="0" max="100" value="70">
-<p class="hint" style="margin:0">左端暖光（偏黄，适合照明看书），右端冷白（更亮更刺眼）。</p>
+<p class="hint m0">左端暖光（偏黄，适合照明看书），右端冷白（更亮更刺眼）。</p>
 </div>`;
 const btn=$('#flBtn',root), state=$('#flState',root);
 function paint(){
@@ -3278,7 +3279,7 @@ root.innerHTML=`
 <div class="box">
 <div class="kv"><span>磁方位角</span><b id="degv">--</b></div>
 <div class="kv"><span>数据源</span><b id="srcv">--</b></div>
-<p class="hint" style="margin:0">读数来自手机磁力传感器，靠近铁门、音箱、磁吸支架会偏移；校准方法：手持手机在空中缓慢画 8 字三次。iPhone 需允许「运动与方向」权限。</p>
+<p class="hint m0">读数来自手机磁力传感器，靠近铁门、音箱、磁吸支架会偏移；校准方法：手持手机在空中缓慢画 8 字三次。iPhone 需允许「运动与方向」权限。</p>
 </div>`;
 const dial=$('#dialG',root), hdg=$('#hdg',root), dir=$('#dir',root), dv=$('#degv',root), sv=$('#srcv',root);
 const names=['北','东北偏北','东北','东北偏东','东','东南偏东','东南','东南偏南','南','西南偏南','西南','西南偏西','西','西北偏西','西北','西北偏北'];
@@ -3309,8 +3310,8 @@ background:radial-gradient(circle at 50% 50%,#fff 0 34%,#F6F8FB 35% 100%);border
 background:radial-gradient(circle at 35% 30%,#9AE0C6,#17A673);box-shadow:0 3px 10px rgba(23,166,115,.32);transition:transform .06s linear"></div>
 </div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px">
-<div style="text-align:center"><div class="lbl" style="margin:0">左右</div><div id="v1" style="font-size:24px;font-weight:700;font-variant-numeric:tabular-nums">--</div></div>
-<div style="text-align:center"><div class="lbl" style="margin:0">前后</div><div id="v2" style="font-size:24px;font-weight:700;font-variant-numeric:tabular-nums">--</div></div>
+<div class="tac"><div class="lbl m0">左右</div><div id="v1" style="font-size:24px;font-weight:700;font-variant-numeric:tabular-nums">--</div></div>
+<div class="tac"><div class="lbl m0">前后</div><div id="v2" style="font-size:24px;font-weight:700;font-variant-numeric:tabular-nums">--</div></div>
 </div>
 </div>
 <div class="row">
@@ -3345,7 +3346,7 @@ border-left:9px solid transparent;border-right:9px solid transparent;border-top:
 </div>
 </div>
 <div style="text-align:center;margin-top:16px">
-<div class="lbl" style="margin:0">偏离垂直</div>
+<div class="lbl m0">偏离垂直</div>
 <div id="pv" style="font-size:26px;font-weight:700;font-variant-numeric:tabular-nums">--</div>
 <div id="ps" style="font-size:13px;color:var(--sub);margin-top:2px">--</div>
 </div>
@@ -3374,7 +3375,7 @@ border:9px solid #C08A5A;border-radius:3px;background:#fff;transform-origin:50% 
 <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:#C6D0DE;opacity:.75"></div>
 </div>
 <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:14px">
-<div><div class="lbl" style="margin:0">左右倾斜</div><div id="hv" style="font-size:22px;font-weight:700;font-variant-numeric:tabular-nums">--</div></div>
+<div><div class="lbl m0">左右倾斜</div><div id="hv" style="font-size:22px;font-weight:700;font-variant-numeric:tabular-nums">--</div></div>
 <div style="text-align:right"><div id="hs" style="font-size:14px;font-weight:600">--</div><div style="font-size:12px;color:var(--sub)">目标 0.0°</div></div>
 </div>
 </div>
@@ -3382,7 +3383,7 @@ border:9px solid #C08A5A;border-radius:3px;background:#fff;transform-origin:50% 
 <button class="btn ghost" id="cal">以墙为基准校准</button>
 <button class="btn ghost" id="reset">重置</button>
 </div>
-<div class="box" style="margin-top:12px">
+<div class="box mt12">
 <div class="kv"><span>挂画高度</span><b>画心中心离地 145–155cm</b></div>
 <div class="kv"><span>两钉间距</span><b>画框宽度的 60%–70%</b></div>
 <div class="kv"><span>操作顺序</span><b>先校准墙，再贴框微调</b></div>
@@ -3469,7 +3470,7 @@ root.innerHTML=`
 <input type="range" id="cal" min="1.6" max="7" step="0.01" value="3.78">
 <div class="kv"><span>当前读数</span><b id="rd">0.0 cm</b></div>
 <div class="kv"><span>换算</span><b id="pxmm">--</b></div>
-<div class="row" style="margin-top:8px">
+<div class="row mt8">
 <button class="btn ghost" id="reset">游标归零</button>
 </div>
 </div>`;
@@ -3546,7 +3547,7 @@ root.innerHTML=`
 </div>
 <div class="box">
 <div class="kv"><span>实时俯仰角</span><b id="live">--</b></div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <div>
 <p class="lbl">基准角（对准目标底部）</p>
 <input type="number" id="a0v" placeholder="如 0" step="0.1">
@@ -3559,8 +3560,8 @@ root.innerHTML=`
 </div>
 </div>
 </div>
-<div class="box" style="text-align:center">
-<div class="lbl" style="margin:0">估算距离</div>
+<div class="box tac">
+<div class="lbl m0">估算距离</div>
 <div id="res" style="font-size:36px;font-weight:700;letter-spacing:-1px;font-variant-numeric:tabular-nums;line-height:1.25">--</div>
 <div id="resSub" style="font-size:12.5px;color:var(--sub);margin-top:4px">取点后自动计算</div>
 </div>
@@ -3592,11 +3593,11 @@ root.innerHTML=`
 <div class="box" style="padding:20px 14px">
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
 <div style="background:#F7F9FC;border:1px solid var(--line);border-radius:12px;padding:14px 12px;text-align:center">
-<div class="lbl" style="margin:0">俯仰（前后）</div>
+<div class="lbl m0">俯仰（前后）</div>
 <div id="pitch" style="font-size:26px;font-weight:700;font-variant-numeric:tabular-nums">--</div>
 </div>
 <div style="background:#F7F9FC;border:1px solid var(--line);border-radius:12px;padding:14px 12px;text-align:center">
-<div class="lbl" style="margin:0">侧倾（左右）</div>
+<div class="lbl m0">侧倾（左右）</div>
 <div id="roll" style="font-size:26px;font-weight:700;font-variant-numeric:tabular-nums">--</div>
 </div>
 </div>
@@ -3695,7 +3696,7 @@ $('#outs',root).innerHTML = styles.map(s=>{
 const val = w.length? s.f(w) : '';
 return `<div class="box" style="padding:12px 14px;margin-bottom:10px">
 <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px">
-<span class="lbl" style="margin:0">${s.k}</span>
+<span class="lbl m0">${s.k}</span>
 <button class="btn ghost" data-copy="${val.replace(/"/g,'&quot;')}" style="height:30px;padding:0 12px;font-size:12.5px">复制</button>
 </div>
 <div class="out" style="min-height:auto;padding:8px 10px;font-size:13px">${val||'—'}</div>
@@ -3782,7 +3783,7 @@ root.innerHTML=`
 <div class="box">
 <p class="lbl">结果</p>
 <div class="out" id="mo">—</div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn ghost" id="cp">复制</button>
 <button class="btn ghost" id="beep">声音播放</button>
 </div>
@@ -3834,10 +3835,10 @@ root.innerHTML=`
 <textarea id="bi" placeholder="输入内容" style="border:0;border-radius:14px;min-height:130px;background:#fff;padding:14px"></textarea>
 </div>
 <button class="btn block" id="run">转换</button>
-<div class="box" style="margin-top:12px">
+<div class="box mt12">
 <p class="lbl">结果</p>
 <div class="out" id="bo">—</div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn ghost" id="cp">复制</button>
 <button class="btn ghost" id="swap">结果回填</button>
 </div>
@@ -3881,7 +3882,7 @@ root.innerHTML=`
 <div class="box">
 <p class="lbl">结果</p>
 <div class="out" id="uo">—</div>
-<div class="row" style="margin-top:10px"><button class="btn ghost" id="cp">复制</button></div>
+<div class="row mt10"><button class="btn ghost" id="cp">复制</button></div>
 </div>`;
 const ta=$('#ui',root), out=$('#uo',root);
 root.addEventListener('click', e=>{
@@ -3919,7 +3920,7 @@ root.innerHTML=`
 <div class="kv"><span>10 进制</span><b id="r10" style="font-family:ui-monospace,monospace">--</b></div>
 <div class="kv"><span>16 进制</span><b id="r16" style="font-family:ui-monospace,monospace">--</b></div>
 <div class="kv"><span>36 进制</span><b id="r36" style="font-family:ui-monospace,monospace">--</b></div>
-<div class="row" style="margin-top:10px"><button class="btn ghost" id="cp">复制十进制</button></div>
+<div class="row mt10"><button class="btn ghost" id="cp">复制十进制</button></div>
 </div>`;
 const inp=$('#rv',root), sel=$('#rb',root);
 function run(){
@@ -3946,10 +3947,10 @@ root.innerHTML=`
 <textarea id="hv" placeholder="输入要计算哈希的文本" style="border:0;border-radius:14px;min-height:110px;background:#fff;padding:14px"></textarea>
 </div>
 <button class="btn block" id="ht">计算文本哈希</button>
-<div class="box" style="margin-top:12px">
+<div class="box mt12">
 <p class="lbl">文本结果</p>
 <div class="out" id="ho" style="font-size:12.5px">—</div>
-<div class="row" style="margin-top:10px"><button class="btn ghost" id="hc">复制</button></div>
+<div class="row mt10"><button class="btn ghost" id="hc">复制</button></div>
 </div>
 <div class="box">
 <p class="lbl">文件哈希</p>
@@ -3998,7 +3999,7 @@ root.innerHTML=`
 </div>
 <div class="box" id="panel" style="display:none">
 <img class="preview" id="prev">
-<div class="kv" style="margin-top:10px"><span>原始尺寸</span><b id="d1">--</b></div>
+<div class="kv mt10"><span>原始尺寸</span><b id="d1">--</b></div>
 <div class="kv"><span>原始体积</span><b id="d2">--</b></div>
 <div class="kv"><span>压缩后</span><b id="d3">--</b></div>
 <div class="kv"><span>体积变化</span><b id="d4">--</b></div>
@@ -4011,7 +4012,7 @@ root.innerHTML=`
 </div>
 <div class="lbl" style="display:flex;justify-content:space-between;margin-bottom:2px"><span>画质</span><b id="qv" style="color:var(--ink)">0.82</b></div>
 <input type="range" id="q" min="0.3" max="0.95" step="0.01" value="0.82">
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn" id="save">保存压缩图</button>
 <button class="btn ghost" id="again">换一张</button>
 </div>
@@ -4068,7 +4069,7 @@ root.innerHTML=`
 </div>
 <div class="box" style="display:none" id="p2">
 <img class="preview" id="pv2">
-<div class="kv" style="margin-top:10px"><span>原格式</span><b id="o1">--</b></div>
+<div class="kv mt10"><span>原格式</span><b id="o1">--</b></div>
 <div class="kv"><span>输出</span><b id="o2">--</b></div>
 <button class="btn block" id="save" style="margin-top:12px">保存转换结果</button>
 </div>`;
@@ -4116,7 +4117,7 @@ root.innerHTML=`
 </div>
 <div class="box" style="display:none" id="gwrap">
 <div class="grid9" id="grid9"></div>
-<div class="row" style="margin-top:12px">
+<div class="row mt12">
 <button class="btn" id="all">下载全部（9 张）</button>
 <button class="btn ghost" id="one">下载单张</button>
 </div>
@@ -4159,7 +4160,7 @@ root.innerHTML=`
 <button class="btn block" id="choose">选择图片</button>
 <p class="lbl" style="margin-top:14px">水印文字</p>
 <input type="text" id="wt" value="仅供本人使用">
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <div>
 <p class="lbl">位置</p>
 <select id="wp">
@@ -4320,10 +4321,10 @@ root.innerHTML=`
 <select id="bgc"><option value="#FFFFFF">白色</option><option value="#F1F3F5">浅灰</option><option value="#000000">黑色</option></select>
 </div>
 </div>
-<div class="kv" style="margin-top:10px"><span>张数</span><b id="cnt">0</b></div>
+<div class="kv mt10"><span>张数</span><b id="cnt">0</b></div>
 <div class="kv"><span>输出尺寸</span><b id="osize">--</b></div>
-<canvas id="sc" style="margin-top:12px"></canvas>
-<div class="row" style="margin-top:12px">
+<canvas id="sc" class="mt12"></canvas>
+<div class="row mt12">
 <button class="btn" id="save">保存长图</button>
 <button class="btn ghost" id="again">重新选择</button>
 </div>
@@ -4399,10 +4400,10 @@ root.innerHTML=`
 </div>
 <div class="box" style="display:none" id="res2">
 <img class="preview" id="bpv">
-<div class="kv" style="margin-top:10px"><span>字符长度</span><b id="blen">--</b></div>
+<div class="kv mt10"><span>字符长度</span><b id="blen">--</b></div>
 <div class="kv"><span>类型</span><b id="btype">--</b></div>
 <div class="out" id="bout" style="margin-top:10px;max-height:150px;overflow:auto;min-height:auto">—</div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn" id="bcp">复制</button>
 <button class="btn ghost" id="bdl">下载图片</button>
 </div>
@@ -4487,7 +4488,7 @@ ${keys.map((k,i)=>`<button class="chip${i===0?' on':''}" data-k="${k}">${k}</but
 <div><p class="lbl">摄氏度</p><input type="number" id="c1" value="0"></div>
 <div><p class="lbl">华氏度</p><input type="number" id="c2" value="32"></div>
 </div>
-<div class="kv" style="margin-top:10px"><span>开尔文</span><b id="c3">273.15</b></div>
+<div class="kv mt10"><span>开尔文</span><b id="c3">273.15</b></div>
 <p class="hint">三者联动，改任意一个即换算其余两个。</p>
 </div>`;
 let cat=keys[0];
@@ -4580,7 +4581,7 @@ root.innerHTML=`
 <div><p class="lbl">贷款总额（万元）</p><input type="number" id="pv" value="100"></div>
 <div><p class="lbl">年利率（%）</p><input type="number" id="rate" value="3.6" step="0.01"></div>
 </div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <div><p class="lbl">年限（年）</p><input type="number" id="years" value="30"></div>
 <div>
 <p class="lbl">还款方式</p>
@@ -4637,7 +4638,7 @@ root.innerHTML=`
 <div><p class="lbl">月工资（税前，元）</p><input type="number" id="sal" value="15000"></div>
 <div><p class="lbl">五险一金（元/月）</p><input type="number" id="ins" value="1800"></div>
 </div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <div><p class="lbl">专项附加扣除（元/月）</p><input type="number" id="sp" value="0" placeholder="子女教育、房贷、赡养老人等"></div>
 </div>
 </div>
@@ -4719,7 +4720,7 @@ root.innerHTML=`
 <input type="date" id="d1" value="${iso(today)}">
 <input type="date" id="d2" value="${iso(new Date(today.getTime()+30*864e5))}">
 </div>
-<div class="kv" style="margin-top:12px"><span>相差</span><b id="gap">--</b></div>
+<div class="kv mt12"><span>相差</span><b id="gap">--</b></div>
 <div class="kv"><span>明细</span><b id="gap2" style="font-size:12.5px">--</b></div>
 </div>
 <div class="box">
@@ -4728,8 +4729,8 @@ root.innerHTML=`
 <input type="date" id="base" value="${iso(today)}">
 <input type="number" id="n" value="100">
 </div>
-<select id="unit" style="margin-top:10px"><option value="d">天后</option><option value="w">周后</option><option value="m">月后</option><option value="y">年后</option></select>
-<div class="kv" style="margin-top:12px"><span>结果日期</span><b id="after">--</b></div>
+<select id="unit" class="mt10"><option value="d">天后</option><option value="w">周后</option><option value="m">月后</option><option value="y">年后</option></select>
+<div class="kv mt12"><span>结果日期</span><b id="after">--</b></div>
 <div class="kv"><span>星期</span><b id="week">--</b></div>
 </div>
 <div class="box">
@@ -4738,7 +4739,7 @@ root.innerHTML=`
 <input type="date" id="birth" value="1995-06-01">
 <div style="flex:0 0 90px"><p class="lbl">&nbsp;</p><button class="btn ghost block" id="bt">算</button></div>
 </div>
-<div class="kv" style="margin-top:10px"><span>周岁</span><b id="age">--</b></div>
+<div class="kv mt10"><span>周岁</span><b id="age">--</b></div>
 <div class="kv"><span>虚岁</span><b id="age2">--</b></div>
 <div class="kv"><span>已度过天数</span><b id="age3">--</b></div>
 </div>`;
@@ -4789,7 +4790,7 @@ root.innerHTML=`
 <input type="number" id="a1" value="30" placeholder="A">
 <input type="number" id="b1" value="200" placeholder="B">
 </div>
-<div class="kv" style="margin-top:10px"><span>结果</span><b id="r1">--</b></div>
+<div class="kv mt10"><span>结果</span><b id="r1">--</b></div>
 </div>
 <div class="box">
 <p class="lbl">② 涨跌：从 A 到 B 的变化率</p>
@@ -4797,7 +4798,7 @@ root.innerHTML=`
 <input type="number" id="a2" value="100" placeholder="原值">
 <input type="number" id="b2" value="120" placeholder="现值">
 </div>
-<div class="kv" style="margin-top:10px"><span>变化</span><b id="r2">--</b></div>
+<div class="kv mt10"><span>变化</span><b id="r2">--</b></div>
 </div>
 <div class="box">
 <p class="lbl">③ 打折：原价与折扣</p>
@@ -4805,7 +4806,7 @@ root.innerHTML=`
 <input type="number" id="a3" value="299" placeholder="原价">
 <input type="number" id="b3" value="75" placeholder="折扣（如 75 = 7.5 折）">
 </div>
-<div class="kv" style="margin-top:10px"><span>到手价</span><b id="r3">--</b></div>
+<div class="kv mt10"><span>到手价</span><b id="r3">--</b></div>
 <div class="kv"><span>省下</span><b id="r3b">--</b></div>
 </div>
 <div class="box">
@@ -4814,7 +4815,7 @@ root.innerHTML=`
 <input type="number" id="a4" value="5000" placeholder="数值">
 <input type="number" id="b4" value="10" placeholder="百分比">
 </div>
-<div class="kv" style="margin-top:10px"><span>上浮后</span><b id="r4">--</b></div>
+<div class="kv mt10"><span>上浮后</span><b id="r4">--</b></div>
 <div class="kv"><span>下调后</span><b id="r4b">--</b></div>
 </div>`;
 function calc(){
@@ -4848,8 +4849,8 @@ background:#F7F9FC;border:1px dashed #D7DDE6;font-size:22px;font-weight:700;min-
 <div><p class="lbl">随机整数下限</p><input type="number" id="lo" value="1"></div>
 <div><p class="lbl">上限</p><input type="number" id="hi" value="100"></div>
 </div>
-<div class="kv" style="margin-top:10px"><span>结果</span><b id="rn">--</b></div>
-<div class="row" style="margin-top:10px">
+<div class="kv mt10"><span>结果</span><b id="rn">--</b></div>
+<div class="row mt10">
 <button class="btn ghost" id="rgo">生成随机整数</button>
 <button class="btn ghost" id="dice">掷骰子</button>
 </div>
@@ -4890,13 +4891,13 @@ root.innerHTML=`
 <input type="text" id="ts" placeholder="如 1735689600" inputmode="numeric">
 <select id="unit2" style="flex:0 0 110px"><option value="s">秒</option><option value="ms">毫秒</option></select>
 </div>
-<div class="kv" style="margin-top:10px"><span>本地时间</span><b id="o1">--</b></div>
+<div class="kv mt10"><span>本地时间</span><b id="o1">--</b></div>
 <div class="kv"><span>ISO / UTC</span><b id="o2" style="font-size:12px">--</b></div>
 </div>
 <div class="box">
 <p class="lbl">日期时间 → 时间戳</p>
 <input type="datetime-local" id="dt">
-<div class="kv" style="margin-top:10px"><span>秒级</span><b id="o3" style="font-family:ui-monospace,monospace">--</b></div>
+<div class="kv mt10"><span>秒级</span><b id="o3" style="font-family:ui-monospace,monospace">--</b></div>
 <div class="kv"><span>毫秒级</span><b id="o4" style="font-family:ui-monospace,monospace;font-size:12.5px">--</b></div>
 </div>`;
 const pad=n=>String(n).padStart(2,'0');
@@ -4955,9 +4956,9 @@ stroke-linecap="round" stroke-dasharray="540.4" stroke-dashoffset="0" transform=
 <button class="btn" id="pstart">开始</button>
 <button class="btn ghost" id="preset">重置</button>
 </div>
-<div class="box" style="margin-top:12px">
+<div class="box mt12">
 <div class="kv"><span>今日完成</span><b id="pcount">0 个番茄</b></div>
-<p class="hint" style="margin:0">结束时会有提示音与震动。请保持页面在前台，切后台后计时仍按真实时间校准。</p>
+<p class="hint m0">结束时会有提示音与震动。请保持页面在前台，切后台后计时仍按真实时间校准。</p>
 </div>`;
 let total=25*60, left=total, timer=null, running=false, done=+localStorage.getItem('pb_done')||0, endAt=0;
 const arc=$('#arc',root), tEl=$('#ptime',root), sEl=$('#pstate',root);
@@ -5072,8 +5073,8 @@ root.innerHTML=`
 <div class="box">
 <div class="lbl" style="display:flex;justify-content:space-between;margin-bottom:2px"><span>音量</span><b id="nvv" style="color:var(--ink)">55%</b></div>
 <input type="range" id="nv" min="0" max="100" value="55">
-<div class="kv" style="margin-top:10px"><span>定时停止</span><b id="ntimer">未设置</b></div>
-<div class="row" style="margin-top:10px">
+<div class="kv mt10"><span>定时停止</span><b id="ntimer">未设置</b></div>
+<div class="row mt10">
 <button class="btn ghost" data-min="15">15 分钟</button>
 <button class="btn ghost" data-min="30">30 分钟</button>
 <button class="btn ghost" data-min="60">60 分钟</button>
@@ -5147,7 +5148,7 @@ root.innerHTML=`
 <div class="box">
 <p class="lbl">弹幕内容</p>
 <input type="text" id="mtext" value="接机 · 生日快乐 · 加油！">
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <div><p class="lbl">文字颜色</p><select id="mcolor"><option value="#FFFFFF">白色</option><option value="#FFD166">金黄</option><option value="#FF5A5F">红色</option><option value="#6FFFB0">荧光绿</option></select></div>
 <div><p class="lbl">背景</p><select id="mbg"><option value="#000000">黑色</option><option value="#1B2029">深灰</option><option value="var(--accent)">蓝色</option></select></div>
 </div>
@@ -5246,7 +5247,7 @@ root.innerHTML=`
 <div class="box" style="text-align:center;padding:22px 14px">
 <div id="flSw" style="width:100%;height:96px;border-radius:12px;background:#FFF6E3;border:1px solid var(--line)"></div>
 <button class="btn block" id="flGo" style="margin-top:16px">全屏补光</button>
-<p class="hint" style="margin-top:10px">自拍、拍照、找东西时的柔光板：整屏均匀发光，色温可调，比相机闪光灯更柔和。</p>
+<p class="hint mt10">自拍、拍照、找东西时的柔光板：整屏均匀发光，色温可调，比相机闪光灯更柔和。</p>
 </div>
 <div class="box">
 <div class="lbl" style="display:flex;justify-content:space-between;margin-bottom:2px"><span>色温</span><b id="flT" style="color:var(--ink)">暖</b></div>
@@ -5302,7 +5303,7 @@ root.innerHTML=`
 <button class="btn ghost" id="minus" style="height:56px;font-size:20px">−</button>
 <button class="btn" id="plus" style="height:56px;font-size:16px">+<span id="sv">1</span></button>
 </div>
-<div class="box" style="margin-top:12px">
+<div class="box mt12">
 <p class="lbl">每次增减</p>
 <div class="seg" id="stepseg">
 <button class="on" data-s="1">1</button>
@@ -5314,7 +5315,7 @@ root.innerHTML=`
 <input type="number" id="target" placeholder="目标值，如 108">
 <button class="btn ghost" id="reset">清零</button>
 </div>
-<div class="kv" style="margin-top:10px"><span>距离目标</span><b id="gap">--</b></div>
+<div class="kv mt10"><span>距离目标</span><b id="gap">--</b></div>
 <p class="hint">数值自动保存，下次打开还在。适合念珠计数、跳绳计数、库存点数。</p>
 </div>`;
 const el=$('#cv',root);
@@ -5375,13 +5376,13 @@ root.innerHTML=`
 <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px">
 ${STEPS.map(s=>`<button class="btn ghost" data-k="${s.k}" style="height:40px;padding:0;font-size:13px">${s.n}</button>`).join('')}
 </div>
-<div class="row" style="margin-top:12px">
+<div class="row mt12">
 <button class="btn ghost" id="undo">撤销一步</button>
 <button class="btn ghost" id="clear">重来</button>
 </div>
 </div>
 <div class="box" style="text-align:center;padding:22px 14px">
-<div class="lbl" style="margin:0">对方是你的</div>
+<div class="lbl m0">对方是你的</div>
 <div id="kres" style="font-size:30px;font-weight:700;margin-top:6px">--</div>
 <div id="ksub" style="font-size:12.5px;color:var(--sub);margin-top:6px">从「我」开始，一级一级点选</div>
 </div>
@@ -5436,7 +5437,7 @@ root.innerHTML=`
 </div>`;
 function show(list, kw){
 if(!list.length){
-$('#tres',root).innerHTML=`<p class="hint" style="margin:0">没收录「${kw}」。判断口诀：能卖钱→可回收；有毒有害→有害；会腐烂→厨余；其余→其他。</p>`;
+$('#tres',root).innerHTML=`<p class="hint m0">没收录「${kw}」。判断口诀：能卖钱→可回收；有毒有害→有害；会腐烂→厨余；其余→其他。</p>`;
 return;
 }
 $('#tres',root).innerHTML=list.slice(0,12).map(x=>{
@@ -5446,10 +5447,10 @@ return `<div class="kv"><span>${x.n}</span><b style="color:${color}">${x.k}</b><
 }
 $('#tq',root).addEventListener('input',e=>{
 const kw=e.target.value.trim();
-if(!kw) return $('#tres',root).innerHTML='<p class="hint" style="margin:0">输入物品名开始查询</p>';
+if(!kw) return $('#tres',root).innerHTML='<p class="hint m0">输入物品名开始查询</p>';
 show(ALL.filter(x=>x.n.includes(kw)||kw.includes(x.n.replace(/（.*）/,''))), kw);
 });
-$('#tres',root).innerHTML='<p class="hint" style="margin:0">输入物品名开始查询</p>';
+$('#tres',root).innerHTML='<p class="hint m0">输入物品名开始查询</p>';
 }
 function loadScript(src){
 return new Promise((res,rej)=>{
@@ -5487,7 +5488,7 @@ root.innerHTML=`
 <div class="box">
 <p class="lbl">内容（网址、文本、Wi-Fi、名片）</p>
 <textarea id="qt" style="min-height:90px">https://www.fornow.cc</textarea>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <div><p class="lbl">尺寸</p>
 <select id="qs"><option value="240">240</option><option value="360" selected>360</option><option value="480">480</option><option value="720">720</option></select>
 </div>
@@ -5538,7 +5539,7 @@ root.innerHTML=`
 <div class="box">
 <p class="lbl">识别结果</p>
 <div class="out" id="qout" style="min-height:52px">等待扫描…</div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn ghost" id="qcopy">复制</button>
 <button class="btn ghost" id="qopen">打开链接</button>
 </div>
@@ -5615,7 +5616,7 @@ root.innerHTML=`
 <div class="box">
 <p class="lbl">结果</p>
 <div class="out" id="uout" style="min-height:80px">—</div>
-<div class="row" style="margin-top:10px"><button class="btn ghost" id="ucopy">复制全部</button></div>
+<div class="row mt10"><button class="btn ghost" id="ucopy">复制全部</button></div>
 <p class="hint">UUID v4 由浏览器 crypto 随机生成，碰撞概率可忽略，适合做主键、设备标识、幂等键。</p>
 </div>`;
 function gen(){
@@ -5649,7 +5650,7 @@ root.innerHTML=`
 <div class="box">
 <p class="lbl">结果</p>
 <div class="out" id="jout" style="max-height:320px;overflow:auto;min-height:60px">—</div>
-<div class="row" style="margin-top:10px"><button class="btn ghost" id="jcopy">复制</button></div>
+<div class="row mt10"><button class="btn ghost" id="jcopy">复制</button></div>
 <p class="hint">缩进 2 空格；错误会提示出错位置附近的片段，方便定位少写的逗号或引号。</p>
 </div>`;
 const ta=$('#jin',root), out=$('#jout',root);
@@ -5684,7 +5685,7 @@ root.innerHTML=`
 第二行
 第三行</textarea></div>
 </div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <div style="flex:1 1 100%"><p class="lbl">新文本</p><textarea id="dt2" style="min-height:110px">第一行
 第二行改过了
 第三行
@@ -5695,7 +5696,7 @@ root.innerHTML=`
 <div class="box">
 <p class="lbl">差异（- 删除 / + 新增）</p>
 <div class="out" id="dout" style="max-height:340px;overflow:auto">—</div>
-<div class="kv" style="margin-top:10px"><span>统计</span><b id="dsum">--</b></div>
+<div class="kv mt10"><span>统计</span><b id="dsum">--</b></div>
 </div>`;
 function lcsDiff(a,b){
 const n=a.length, m=b.length;
@@ -5740,7 +5741,7 @@ root.innerHTML=`
 <div class="kv"><span>RGB</span><b id="c2" style="font-family:ui-monospace,monospace">--</b></div>
 <div class="kv"><span>HSL</span><b id="c3" style="font-family:ui-monospace,monospace">--</b></div>
 <div class="kv"><span>亮度 / 是否适合白字</b><b id="c4">--</b></div>
-<div class="row" style="margin-top:10px"><button class="btn ghost" id="ccopy">复制 HEX</button></div>
+<div class="row mt10"><button class="btn ghost" id="ccopy">复制 HEX</button></div>
 </div>
 <div class="box">
 <p class="lbl">同色系（自动派生）</p>
@@ -5954,7 +5955,7 @@ $('#batt',root).textContent=Math.round(b.level*100)+'% · '+(b.charging?'充电�
 function t_screentest(root){
 root.innerHTML=`
 <div class="box">
-<p class="hint" style="margin:0">全屏循环显示纯色，用来检查坏点、漏光、屏幕均匀度与烧屏痕迹。逐色看一眼，发现固定亮点或暗点即坏点。</p>
+<p class="hint m0">全屏循环显示纯色，用来检查坏点、漏光、屏幕均匀度与烧屏痕迹。逐色看一眼，发现固定亮点或暗点即坏点。</p>
 <button class="btn block" id="sgo" style="margin-top:14px">开始检测</button>
 </div>
 <div class="box">
@@ -6032,7 +6033,7 @@ root.innerHTML=`
 <div><p class="lbl">分钟</p><input type="number" id="tm" value="5" min="0" max="600"></div>
 <div><p class="lbl">秒</p><input type="number" id="ts" value="0" min="0" max="59"></div>
 </div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn ghost" data-min="1">1 分钟</button>
 <button class="btn ghost" data-min="3">3 分钟</button>
 <button class="btn ghost" data-min="10">10 分钟</button>
@@ -6103,7 +6104,7 @@ root.innerHTML=`
 <div class="box" id="tlist"></div>
 <div class="box">
 <div class="kv"><span>剩余未完成</span><b id="tcount">0 项</b></div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn ghost" id="tclear">清除已完成</button>
 <button class="btn danger" id="tall">全部清空</button>
 </div>
@@ -6117,7 +6118,7 @@ $('#tlist',root).innerHTML = items.length ? items.map((it,i)=>`
 background:${it.done?'#17A673':'#fff'};color:#fff;font-size:14px;cursor:pointer;flex:none;display:grid;place-items:center">${it.done?'✓':''}</button>
 <span style="flex:1;min-width:0;font-size:14.5px;${it.done?'color:#A9AFB8;text-decoration:line-through':''}">${it.t.replace(/</g,'&lt;')}</span>
 <button data-i="${i}" data-act="del" style="border:0;background:transparent;color:#B7BEC8;font-size:16px;cursor:pointer">×</button>
-</div>`).join('') : '<p class="hint" style="margin:0">还没有待办，先加一条。</p>';
+</div>`).join('') : '<p class="hint m0">还没有待办，先加一条。</p>';
 $('#tcount',root).textContent=items.filter(x=>!x.done).length+' 项';
 }
 function add(){
@@ -6144,9 +6145,9 @@ root.innerHTML=`
 <div class="box">
 <p class="lbl">WiFi 名称（SSID）</p>
 <input type="text" id="wssid" placeholder="例如 Home_5G">
-<p class="lbl" style="margin-top:12px">密码</p>
+<p class="lbl mt12">密码</p>
 <input type="text" id="wpass" placeholder="无密码可留空">
-<div class="row" style="margin-top:12px">
+<div class="row mt12">
 <div><p class="lbl">加密方式</p>
 <select id="wtype"><option value="WPA">WPA/WPA2/WPA3</option><option value="WEP">WEP</option><option value="nopass">不加密</option></select>
 </div>
@@ -6161,7 +6162,7 @@ root.innerHTML=`
 <canvas id="wcv"></canvas>
 </div>
 <div class="out" id="wstr" style="margin-top:12px;font-size:12px;min-height:auto;padding:10px">—</div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn ghost" id="wdl">保存图片</button>
 <button class="btn ghost" id="wcp">复制内容</button>
 </div>
@@ -6190,10 +6191,10 @@ root.innerHTML=`
 <div><p class="lbl">姓名</p><input type="text" id="vn" placeholder="张三"></div>
 <div><p class="lbl">电话</p><input type="text" id="vt" placeholder="13800000000" inputmode="tel"></div>
 </div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <div><p class="lbl">公司 / 职位</p><input type="text" id="vo" placeholder="某某科技有限公司 产品经理"></div>
 </div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <div><p class="lbl">邮箱</p><input type="text" id="ve" placeholder="name@example.com" inputmode="email"></div>
 <div><p class="lbl">网址</p><input type="text" id="vu" placeholder="https://"></div>
 </div>
@@ -6282,13 +6283,13 @@ root.innerHTML=`
 </div>
 <div class="box">
 <input type="range" id="mtsl" min="30" max="240" value="90">
-<div class="row" style="margin-top:8px">
+<div class="row mt8">
 <button class="btn ghost" data-bpm="60">60</button>
 <button class="btn ghost" data-bpm="90">90</button>
 <button class="btn ghost" data-bpm="120">120</button>
 <button class="btn ghost" data-bpm="160">160</button>
 </div>
-<div class="lbl" style="margin-top:12px">每小节拍数</div>
+<div class="lbl mt12">每小节拍数</div>
 <div class="seg" id="mtmeter"><button class="on" data-n="4">4/4</button><button data-n="3">3/4</button><button data-n="2">2/4</button><button data-n="6">6/8</button></div>
 </div>
 <div class="row">
@@ -6338,7 +6339,7 @@ root.innerHTML=`
 <div class="kv"><span>当前触点</span><b id="ttn">0</b></div>
 <div class="kv"><span>最多同时触点</span><b id="ttmax">0</b></div>
 <div class="kv"><span>已检测触点</span><b id="tttotal">0</b></div>
-<div class="row" style="margin-top:10px"><button class="btn ghost block" id="ttreset">清空</button></div>
+<div class="row mt10"><button class="btn ghost block" id="ttreset">清空</button></div>
 <p class="hint">用手指同时按住屏幕任意位置，能看到几个点就是屏幕支持的几点触控；也用来检查边缘和四角有没有触摸死区。</p>
 </div>`;
 const cv=$('#ttc',root); let cur=0, max=0, total=0;
@@ -6386,7 +6387,7 @@ root.innerHTML=`
 <div id="rdot" style="position:absolute;top:50%;left:0;width:18px;height:18px;margin-top:-9px;border-radius:9px;background:var(--accent)"></div>
 </div>
 </div>
-<div class="row" style="margin-top:12px"><button class="btn block" id="rrun">重新测量</button></div>
+<div class="row mt12"><button class="btn block" id="rrun">重新测量</button></div>
 <p class="hint">数值接近 60 / 90 / 120 说明屏幕在当前设置下的刷新率。部分浏览器会把上限锁在 60，测出来偏低不一定是屏幕的问题。</p>`;
 let raf=null, dir=1, x=0, times=[], last=0;
 const dot=$('#rdot',root), box=$('#rbox',root), out=$('#rfps',root);
@@ -6415,11 +6416,11 @@ root.innerHTML=`
 <button class="btn ghost" data-p="200">短震 200ms</button>
 <button class="btn ghost" data-p="1000">长震 1s</button>
 </div>
-<div class="row" style="margin-top:8px">
+<div class="row mt8">
 <button class="btn ghost" data-p="100,80,100,80,100">摩斯 SOS</button>
 <button class="btn ghost" data-p="300,150,300,150,600">来电节奏</button>
 </div>
-<div class="row" style="margin-top:8px">
+<div class="row mt8">
 <button class="btn ghost" data-p="150,100">双击</button>
 <button class="btn ghost" data-p="500,200,500">心跳</button>
 </div>
@@ -6467,7 +6468,7 @@ root.innerHTML=`
 <div class="box" id="rcbox" style="display:none">
 <p class="lbl">最近一条</p>
 <audio id="rca" controls style="width:100%"></audio>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn ghost" id="rcdl">下载录音</button>
 <button class="btn ghost" id="rcdel">删除</button>
 </div>
@@ -6548,12 +6549,12 @@ cb(b.dataset.v, b);
 }
 function t_imgresize(root){
 const api=imgTool(root,`
-<div class="row" style="margin-top:12px">
+<div class="row mt12">
 <div><p class="lbl">宽 px</p><input type="number" id="rw" min="1" max="5000" placeholder="原图宽"></div>
 <div><p class="lbl">高 px</p><input type="number" id="rh" min="1" max="5000" placeholder="原图高"></div>
 </div>
 <div class="seg" id="rlock" style="margin-top:10px"><button class="on" data-v="1">锁定比例</button><button data-v="0">自由尺寸</button></div>
-<div class="row" style="margin-top:8px">
+<div class="row mt8">
 <button class="btn ghost" data-scale="0.5">50%</button>
 <button class="btn ghost" data-scale="0.25">25%</button>
 <button class="btn ghost" data-scale="2">2 倍</button>
@@ -6696,12 +6697,12 @@ $(sl,root).addEventListener('input',e=>{ set(+e.target.value); $(lb,root).textCo
 onPick(api,draw);
 }
 function t_imgpalette(root){
-const api=imgTool(root,`<p class="hint" style="margin-top:10px">选图后自动提取 8 个主色，点色块即可复制色值，配色、做 PPT 取色都好用。</p>`,'主色');
+const api=imgTool(root,`<p class="hint mt10">选图后自动提取 8 个主色，点色块即可复制色值，配色、做 PPT 取色都好用。</p>`,'主色');
 const save=root.querySelector('[data-iw-save]'); if(save) save.style.display='none';
 const box=document.createElement('div'); box.className='box';
 box.innerHTML=`<p class="lbl">主色板</p>
 <div id="palsw" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px"></div>
-<div class="kv" style="margin-top:12px"><span>平均色</span><b id="paavg">—</b></div>
+<div class="kv mt12"><span>平均色</span><b id="paavg">—</b></div>
 <p class="hint">HEX 色值，点一下自动复制。</p>`;
 api.wrap.appendChild(box);
 function analyze(){
@@ -6733,7 +6734,7 @@ onPick(api,analyze);
 }
 function t_imgframe(root){
 const api=imgTool(root,`
-<div class="lbl" style="margin-top:12px">边框颜色</div>
+<div class="lbl mt12">边框颜色</div>
 <div class="seg" id="frcl"><button class="on" data-v="#FFFFFF">白</button><button data-v="#111418">黑</button><button data-v="#E8ECF2">浅灰</button><button data-v="var(--accent)">蓝</button></div>
 <div class="lbl" style="display:flex;justify-content:space-between;margin-top:10px"><span>边框宽度</span><b id="frwv" style="color:var(--ink)">6%</b></div>
 <input type="range" id="frw" min="1" max="20" value="6">`,'加边框');
@@ -6785,7 +6786,7 @@ onPick(api,draw);
 function txtOut(label, id){
 return `<div class="box">
 <div style="display:flex;justify-content:space-between;align-items:center">
-<p class="lbl" style="margin:0">${label}</p>
+<p class="lbl m0">${label}</p>
 <button class="btn ghost" data-copyfor="${id}" style="height:30px;padding:0 12px;font-size:12.5px">复制</button>
 </div>
 <div class="out" id="${id}" style="min-height:60px">—</div>
@@ -6830,7 +6831,7 @@ root.innerHTML=`
 <div class="seg" id="cmode"><button class="on" data-v="caesar">凯撒位移</button><button data-v="rot13">ROT13</button><button data-v="atbash">反字母表</button></div>
 <div class="lbl" style="display:flex;justify-content:space-between;margin-top:10px"><span>位移位数</span><b id="shv" style="color:var(--ink)">3</b></div>
 <input type="range" id="sh" min="1" max="25" value="3">
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn" id="cenc">加密</button>
 <button class="btn ghost" id="cdec">解密</button>
 </div>
@@ -6889,7 +6890,7 @@ root.innerHTML=`
 <div class="box" id="wres">
 <div class="kv"><span>总长度</span><b id="wlen">0</b></div>
 <div class="kv"><span>不同字/词</span><b id="wuni">0</b></div>
-<p class="lbl" style="margin-top:12px">出现最多的 20 个</p>
+<p class="lbl mt12">出现最多的 20 个</p>
 <div id="wlist" style="margin-top:6px">—</div>
 </div>`;
 let mode='char';
@@ -6924,7 +6925,7 @@ root.innerHTML=`
 <div class="box">
 <p class="lbl">金额（元）</p>
 <input type="number" id="ra" value="1286.5" step="0.01" inputmode="decimal">
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn ghost" data-rmb="100">100</button>
 <button class="btn ghost" data-rmb="8888.88">8888.88</button>
 <button class="btn ghost" data-rmb="100000">10万</button>
@@ -7039,7 +7040,7 @@ function t_htmlesc(root){
 root.innerHTML=`
 <div class="box">
 <textarea id="hin" placeholder="粘贴 HTML 片段或带实体的文本" style="min-height:120px"></textarea>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn" id="hesc">转义</button>
 <button class="btn ghost" id="hunesc">反转义</button>
 </div>
@@ -7064,7 +7065,7 @@ root.innerHTML=`
 张三,技术部,1200
 李四,市场部,980</textarea>
 <div class="seg" id="ssep"><button class="on" data-v="auto">自动识别</button><button data-v=",">逗号</button><button data-v="\t">制表符</button><button data-v=";">分号</button></div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn" id="sgo">生成表格</button>
 <button class="btn ghost" id="scsv">导出 CSV</button>
 </div>
@@ -7105,7 +7106,7 @@ root.innerHTML=`
 <div class="box">
 <textarea id="din" placeholder="每行一条，例如名单、链接、编号" style="min-height:140px"></textarea>
 <div class="seg" id="dopt"><button class="on" data-v="uniq">保留唯一行</button><button data-v="dup">只留重复行</button></div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn" id="dgo">处理</button>
 <button class="btn ghost" id="dsort">去重并排序</button>
 </div>
@@ -7156,7 +7157,7 @@ ${k==='='?'background:var(--accent);':''}">${k}</button>`).join('')}
 <button class="btn ghost" data-fn="tan">tan</button>
 <button class="btn ghost" data-fn="sqrt">√</button>
 </div>
-<div class="row" style="margin-top:8px">
+<div class="row mt8">
 <button class="btn ghost" data-fn="log">log</button>
 <button class="btn ghost" data-fn="ln">ln</button>
 <button class="btn ghost" data-fn="abs">abs</button>
@@ -7221,7 +7222,7 @@ root.innerHTML=`
 <div><p class="lbl">本金（元）</p><input type="number" id="cp" value="10000" inputmode="decimal"></div>
 <div><p class="lbl">年利率 %</p><input type="number" id="cr" value="3.5" step="0.1" inputmode="decimal"></div>
 </div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <div><p class="lbl">年数</p><input type="number" id="cn" value="10" min="1" max="80"></div>
 <div><p class="lbl">每年计息次数</p>
 <select id="cm"><option value="1">1 次（年）</option><option value="4">4 次（季）</option><option value="12" selected>12 次（月）</option><option value="365">365 次（日）</option></select>
@@ -7253,7 +7254,7 @@ root.innerHTML=`
 <div><p class="lbl">本金（元）</p><input type="number" id="dp" value="50000" inputmode="decimal"></div>
 <div><p class="lbl">年利率 %</p><input type="number" id="dr" value="1.8" step="0.05" inputmode="decimal"></div>
 </div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <div><p class="lbl">存期</p><input type="number" id="dn" value="12" min="1"></div>
 <div><p class="lbl">单位</p><select id="du"><option value="1">个月</option><option value="12">年</option><option value="1/12">天</option></select></div>
 </div>
@@ -7285,7 +7286,7 @@ root.innerHTML=`
 <div><p class="lbl">原价（元）</p><input type="number" id="dpo" value="299" inputmode="decimal"></div>
 <div><p class="lbl">折扣（几折）</p><input type="number" id="ddi" value="7.5" step="0.1" inputmode="decimal"></div>
 </div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <div><p class="lbl">优惠券 / 满减（元）</p><input type="number" id="dco" value="0" inputmode="decimal"></div>
 </div>
 </div>
@@ -7312,7 +7313,7 @@ root.innerHTML=`
 <div><p class="lbl">总金额（元）</p><input type="number" id="spa" value="386" inputmode="decimal"></div>
 <div><p class="lbl">人数</p><input type="number" id="spn" value="4" min="1"></div>
 </div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <div><p class="lbl">小费 / 服务费 %</p><input type="number" id="spt" value="0" inputmode="decimal"></div>
 <div><p class="lbl">抹零方式</p><select id="spz"><option value="none">不抹零</option><option value="down">每人向下取整</option><option value="up">每人向上取整</option></select></div>
 </div>
@@ -7342,7 +7343,7 @@ root.innerHTML=`
 <div><p class="lbl">性别</p><select id="bsx"><option value="m">男</option><option value="f">女</option></select></div>
 <div><p class="lbl">年龄</p><input type="number" id="bage" value="30" min="10" max="100"></div>
 </div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <div><p class="lbl">身高 cm</p><input type="number" id="bh" value="175" inputmode="decimal"></div>
 <div><p class="lbl">体重 kg</p><input type="number" id="bw" value="70" step="0.1" inputmode="decimal"></div>
 </div>
@@ -7354,7 +7355,7 @@ const bmr = 10*w + 6.25*h - 5*age + (sx==='m'?5:-161);
 const acts=[['久坐少动',1.2],['轻度活动（每周 1–3 次）',1.375],['中度活动（每周 3–5 次）',1.55],['高强度（每周 6–7 次）',1.725],['极高强度 / 体力劳动',1.9]];
 $('#bres2',root).innerHTML=`
 <div class="kv"><span>基础代谢 BMR</span><b style="color:#0E9AA7;font-size:18px">${Math.round(bmr)} kcal/天</b></div>
-<p class="lbl" style="margin-top:12px">不同活动量下的每日消耗</p>
+<p class="lbl mt12">不同活动量下的每日消耗</p>
 ${acts.map(([n,k])=>`<div class="kv"><span>${n}</span><b>${Math.round(bmr*k)} kcal</b></div>`).join('')}
 <p class="hint">Mifflin-St Jeor 公式。减脂建议每天比消耗少 300–500 kcal，增肌多 200–300 kcal。</p>`;
 }
@@ -7368,11 +7369,11 @@ root.innerHTML=`
 <div><p class="lbl">性别</p><select id="fsx"><option value="m">男</option><option value="f">女</option></select></div>
 <div><p class="lbl">年龄</p><input type="number" id="fage" value="30" min="10" max="100"></div>
 </div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <div><p class="lbl">身高 cm</p><input type="number" id="fh" value="175" inputmode="decimal"></div>
 <div><p class="lbl">体重 kg</p><input type="number" id="fw" value="70" step="0.1" inputmode="decimal"></div>
 </div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <div><p class="lbl">腰围 cm（可选，更准）</p><input type="number" id="fl" value="0" inputmode="decimal"></div>
 </div>
 </div>
@@ -7414,12 +7415,12 @@ root.innerHTML=`
 <input type="number" id="glat1" placeholder="纬度 如 30.7" step="0.000001" inputmode="decimal">
 <input type="number" id="glon1" placeholder="经度 如 111.3" step="0.000001" inputmode="decimal">
 </div>
-<p class="lbl" style="margin-top:10px">终点</p>
+<p class="lbl mt10">终点</p>
 <div class="row">
 <input type="number" id="glat2" placeholder="纬度" step="0.000001" inputmode="decimal">
 <input type="number" id="glon2" placeholder="经度" step="0.000001" inputmode="decimal">
 </div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn ghost" id="gmy">用当前位置</button>
 <button class="btn" id="ggo">计算</button>
 </div>
@@ -7459,7 +7460,7 @@ root.innerHTML=`
 <div class="box">
 <p class="lbl">基准时间（本机时区）</p>
 <input type="text" id="tdt" placeholder="2026-11-12 20:30">
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn ghost" id="tnow">用当前时间</button>
 <button class="btn" id="tgo">换算</button>
 </div>
@@ -7522,7 +7523,7 @@ root.innerHTML=`
 </div>
 <div class="box">
 <textarea id="witems" style="min-height:88px">火锅\n烧烤\n日料\n炒菜\n外卖</textarea>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn" id="wspin">开始转</button>
 <button class="btn ghost" id="wapply">应用选项</button>
 </div>
@@ -7619,7 +7620,7 @@ function t_names(root){
 root.innerHTML=`
 <div class="box">
 <textarea id="nml" style="min-height:96px">张三\n李四\n王五\n赵六</textarea>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn" id="npick">抽一个</button>
 <button class="btn ghost" id="nreset">重置名单</button>
 </div>
@@ -7651,14 +7652,14 @@ root.innerHTML=`
 <div class="box">
 <div class="lbl" style="display:flex;justify-content:space-between"><span>长度</span><b id="plv" style="color:var(--ink)">16</b></div>
 <input type="range" id="plen" min="6" max="48" value="16">
-<div id="popt" style="margin-top:8px">
+<div id="popt" class="mt8">
 <label style="display:flex;gap:10px;align-items:center;padding:7px 0"><input type="checkbox" data-c="lower" checked style="width:19px;height:19px"> 小写字母</label>
 <label style="display:flex;gap:10px;align-items:center;padding:7px 0"><input type="checkbox" data-c="upper" checked style="width:19px;height:19px"> 大写字母</label>
 <label style="display:flex;gap:10px;align-items:center;padding:7px 0"><input type="checkbox" data-c="digit" checked style="width:19px;height:19px"> 数字</label>
 <label style="display:flex;gap:10px;align-items:center;padding:7px 0"><input type="checkbox" data-c="sym" checked style="width:19px;height:19px"> 符号 !@#$%^&*</label>
 <label style="display:flex;gap:10px;align-items:center;padding:7px 0"><input type="checkbox" data-c="safe" style="width:19px;height:19px"> 排除易混淆字符 0O1lI</label>
 </div>
-<div class="row" style="margin-top:10px"><button class="btn block" id="pgen">生成 5 个</button></div>
+<div class="row mt10"><button class="btn block" id="pgen">生成 5 个</button></div>
 </div>
 <div class="box" id="pout"></div>
 <p class="hint">在本机用 crypto 随机数生成，不上传任何服务器。浏览器收藏密码、记事本里存一份都算方便，重要账号建议用密码管理器。</p>`;
@@ -7725,7 +7726,7 @@ root.innerHTML=`
 <div style="flex:0 0 92px"><p class="lbl">类型</p><select id="ltype"><option value="out">支出</option><option value="in">收入</option></select></div>
 <div><p class="lbl">金额</p><input type="number" id="lamt" placeholder="0.00" inputmode="decimal"></div>
 </div>
-<div class="row" style="margin-top:8px">
+<div class="row mt8">
 <div><p class="lbl">备注</p><input type="text" id="lnote" placeholder="午饭 / 打车 / 工资"></div>
 <button class="btn" id="ladd" style="flex:0 0 76px">记一笔</button>
 </div>
@@ -7748,7 +7749,7 @@ $('#llist',root).innerHTML=items.length? items.slice(0,60).map((x,i)=>`
 <span style="flex:1;min-width:0;font-size:14px">${(x.n||'未备注').replace(/</g,'&lt;')}</span>
 <b style="font-size:14px;color:${x.t==='in'?'#17A673':'#E2543B'}">${x.t==='in'?'+':'-'}${money(x.a).slice(1)}</b>
 <button data-i="${i}" data-del style="border:0;background:transparent;color:#B7BEC8;font-size:16px;cursor:pointer">×</button>
-</div>`).join(''):'<p class="hint" style="margin:0">还没有记录</p>';
+</div>`).join(''):'<p class="hint m0">还没有记录</p>';
 }
 $('#ladd',root).onclick=()=>{
 const a=parseFloat($('#lamt',root).value);
@@ -7790,7 +7791,7 @@ return n;
 }
 function render(){
 const hs=Object.keys(data);
-if(!hs.length){ $('#hlist',root).innerHTML='<p class="hint" style="margin:0">先添加一个习惯</p>'; return; }
+if(!hs.length){ $('#hlist',root).innerHTML='<p class="hint m0">先添加一个习惯</p>'; return; }
 const days=[]; for(let i=6;i>=0;i--){ const d=new Date(); d.setDate(d.getDate()-i); days.push(d); }
 $('#hlist',root).innerHTML=hs.map(h=>`
 <div style="padding:10px 0;border-bottom:1px dashed var(--line)">
@@ -7832,7 +7833,7 @@ root.innerHTML=`
 <div class="box">
 <div id="tsrc" style="font-size:15.5px;line-height:1.9;color:var(--sub)"></div>
 <textarea id="tty" placeholder="在这里照着打上面的句子" style="min-height:86px;margin-top:12px"></textarea>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn" id="tstart">开始</button>
 <button class="btn ghost" id="tnext">换一句</button>
 </div>
@@ -7910,7 +7911,7 @@ function t_roman(root){
 root.innerHTML=`
 <div class="box">
 <input type="text" id="rin2" value="2026" placeholder="阿拉伯数字或罗马数字，如 MMXXVI">
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn" id="r2r">数字→罗马</button>
 <button class="btn ghost" id="r2n">罗马→数字</button>
 </div>
@@ -7966,7 +7967,7 @@ const col=String(c)[0]==='2'?'#17A673':String(c)[0]==='3'?'var(--accent)':String
 return `<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line)">
 <b style="color:${col};min-width:42px;font-variant-numeric:tabular-nums">${c}</b>
 <span style="font-size:13.5px;line-height:1.5">${t}</span></div>`;
-}).join(''):'<p class="hint" style="margin:0">没有匹配的状态码</p>';
+}).join(''):'<p class="hint m0">没有匹配的状态码</p>';
 }
 $('#hq',root).addEventListener('input',render);
 render();
@@ -7979,7 +7980,7 @@ root.innerHTML=`
 <div><p class="lbl">性别</p><select id="zsx"><option value="m">男鞋</option><option value="f">女鞋</option></select></div>
 <div><p class="lbl">中国码 / mm</p><input type="number" id="zcn" value="255" step="5"></div>
 </div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <div><p class="lbl">欧码 EU</p><input type="number" id="zeu" value="41" step="1"></div>
 <div><p class="lbl">美码 US</p><input type="number" id="zus" value="8" step="0.5"></div>
 </div>
@@ -8085,7 +8086,7 @@ function t_jwt(root){
 root.innerHTML=`
 <div class="box">
 <textarea id="jin" placeholder="粘贴 JWT（eyJhbGci... 三段）" style="min-height:92px;font-size:12.5px"></textarea>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn" id="jgo">解析</button>
 <button class="btn ghost" id="jclr">清空</button>
 </div>
@@ -8145,7 +8146,7 @@ hl+=txt.slice(last).replace(/</g,'&lt;');
 $('#gres2',root).innerHTML=`
 <p class="lbl">匹配结果（${ms.length} 处）</p>
 <div style="font-size:13.5px;line-height:1.9;white-space:pre-wrap;break-word:break-word">${hl}</div>
-<p class="lbl" style="margin-top:12px">明细</p>
+<p class="lbl mt12">明细</p>
 ${ms.slice(0,10).map((m,i)=>`<div class="kv"><span>#${i+1} @${m.index}</span><b style="font-family:ui-monospace,monospace;font-size:13px">${String(m[0]).replace(/</g,'&lt;')}</b></div>`).join('')}
 ${ms[0].length>1?`<p class="hint">分组：${ms.slice(0,6).map(m=>m.slice(1).join(' | ')).join('  ·  ')}</p>`:''}`;
 };
@@ -8214,7 +8215,7 @@ root.innerHTML=`
 <div style="height:8px;border-radius:8px;background:#EEF1F5;margin-top:12px;overflow:hidden">
 <div id="pwbar" style="height:100%;width:0;background:#E2543B;transition:width .2s,background .2s"></div>
 </div>
-<div class="kv" style="margin-top:8px"><span>强度</span><b id="pwlv">—</b></div>
+<div class="kv mt8"><span>强度</span><b id="pwlv">—</b></div>
 <div class="kv"><span>估算熵值</span><b id="pwbits">—</b></div>
 <div class="kv"><span>离线破解估计</span><b id="pwcrack">—</b></div>
 </div>
@@ -8256,7 +8257,7 @@ if(!/[0-9]/.test(p)) tips.push('加入数字');
 if(!/[^a-zA-Z0-9]/.test(p)) tips.push('加入符号');
 if(/(123|abc|qwe|password|admin|888)/i.test(p)) tips.push('含有常见弱口令片段');
 if(/(.)\1{2,}/.test(p)) tips.push('避免连续重复字符');
-$('#pwtips',root).innerHTML=(tips.length?tips.map(t=>`<div style="display:flex;gap:8px;padding:6px 0;font-size:13.5px"><span style="color:#E2543B">·</span><span>${t}</span></div>`).join(''):'<p class="hint" style="margin:0">这个密码的构成没有问题</p>');
+$('#pwtips',root).innerHTML=(tips.length?tips.map(t=>`<div style="display:flex;gap:8px;padding:6px 0;font-size:13.5px"><span style="color:#E2543B">·</span><span>${t}</span></div>`).join(''):'<p class="hint m0">这个密码的构成没有问题</p>');
 }
 $('#pwi',root).addEventListener('input',calc);
 }
@@ -8280,8 +8281,8 @@ $('#ures',root).innerHTML=`
 <div class="kv"><span>域名 / 端口</span><b>${u.hostname}${u.port?' : '+u.port:''}</b></div>
 <div class="kv"><span>路径</span><b>${u.pathname}</b></div>
 <div class="kv"><span>锚点</span><b>${u.hash||'无'}</b></div>
-<p class="lbl" style="margin-top:12px">查询参数（${qs.length}）</p>
-${qs.map(([k,v])=>`<div class="kv"><span style="min-width:0;word-break:break-all">${k.replace(/</g,'&lt;')}</span><b style="max-width:60%;text-align:right;word-break:break-all">${v.replace(/</g,'&lt;')||'—'}</b></div>`).join('')||'<p class="hint" style="margin:0">没有参数</p>'}`;
+<p class="lbl mt12">查询参数（${qs.length}）</p>
+${qs.map(([k,v])=>`<div class="kv"><span style="min-width:0;word-break:break-all">${k.replace(/</g,'&lt;')}</span><b style="max-width:60%;text-align:right;word-break:break-all">${v.replace(/</g,'&lt;')||'—'}</b></div>`).join('')||'<p class="hint m0">没有参数</p>'}`;
 };
 $('#ugo',root).click();
 }
@@ -8289,7 +8290,7 @@ function t_cron(root){
 root.innerHTML=`
 <div class="box">
 <input type="text" id="cin2" value="*/30 9-18 * * 1-5">
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn" id="cgo2">解析</button>
 </div>
 <p class="hint">五个字段：分 时 日 月 周，支持 * , - /。例如 \`0 9 * * 1\` 表示每周一 9 点。</p>
@@ -8352,7 +8353,7 @@ root.innerHTML=`
 <input type="range" id="bbm" min="800" max="4000" step="100" value="2000">
 <p class="hint">输出为 JPG，逐张二分调质量逼近目标大小；透明背景会变成白底。</p>
 </div>
-<div class="box" id="bblist"><p class="hint" style="margin:0">还没有图片</p></div>
+<div class="box" id="bblist"><p class="hint m0">还没有图片</p></div>
 <div class="box" style="display:none" id="bball"><button class="btn block" id="bbdl">全部下载</button></div>`;
 const done=[];
 $('#bbt',root).addEventListener('input',e=>$('#bbtv',root).textContent=e.target.value+' KB');
@@ -8383,7 +8384,7 @@ $('#bblist',root).innerHTML=done.length? done.map((x,i)=>`
 <button data-dl="${i}" style="border:0;background:#EEF1F5;border-radius:8px;padding:6px 10px;font-size:12.5px;cursor:pointer">下载</button>
 </div>
 <div style="font-size:12.5px;color:var(--sub);margin-top:4px">${bytes(x.before)} → ${bytes(x.after)}${x.before>x.after?'（省 '+Math.round((1-x.after/x.before)*100)+'%）':''}</div>
-</div>`).join(''):'<p class="hint" style="margin:0">还没有图片</p>';
+</div>`).join(''):'<p class="hint m0">还没有图片</p>';
 $('#bball',root).style.display=done.length?'':'none';
 }
 $('#bbpick',root).onclick=async()=>{
@@ -8464,12 +8465,12 @@ root.innerHTML=`
 <div class="seg" id="pdsize"><button class="on" data-v="a4">A4 竖版</button><button data-v="fit">按图片尺寸</button></div>
 <p class="hint" id="pdtip">每张图片单独一页，按宽度等比缩放居中。合同、票据、证件照合并成一个 PDF 很好用。</p>
 </div>
-<div class="box" id="pdlist"><p class="hint" style="margin:0">还没有图片</p></div>`;
+<div class="box" id="pdlist"><p class="hint m0">还没有图片</p></div>`;
 let files=[], mode='a4';
 segBind(root,'#pdsize',v=>mode=v);
 function render(){
 $('#pdlist',root).innerHTML=files.length? files.map((f,i)=>`<div class="kv"><span>第 ${i+1} 页</span><b style="max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${f.name}</b></div>`).join('')
-+`<button class="btn block" id="pdgo" style="margin-top:12px">生成 PDF</button>` : '<p class="hint" style="margin:0">还没有图片</p>';
++`<button class="btn block" id="pdgo" style="margin-top:12px">生成 PDF</button>` : '<p class="hint m0">还没有图片</p>';
 if(files.length) $('#pdgo',root).onclick=run;
 }
 $('#pdpick',root).onclick=async()=>{
@@ -8513,7 +8514,7 @@ function t_braille(root){
 root.innerHTML=`
 <div class="box">
 <textarea id="bin" placeholder="输入英文、数字或标点" style="min-height:100px">Hello 2026!</textarea>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn" id="bgo2">转为盲文</button>
 <button class="btn ghost" id="bcopy2">复制</button>
 </div>
@@ -8560,7 +8561,7 @@ function t_fullhalf(root){
 root.innerHTML=`
 <div class="box">
 <textarea id="fin" placeholder="粘贴文本" style="min-height:120px">Ｔｅｓｔ　１２３ ＡＢＣ　，。</textarea>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn" id="fh1">全角 → 半角</button>
 <button class="btn ghost" id="fh2">半角 → 全角</button>
 </div>
@@ -8578,7 +8579,7 @@ function t_wordcloud(root){
 root.innerHTML=`
 <div class="box">
 <textarea id="cin3" style="min-height:92px">效率 工具 离线 好用 免费 无广告 体积小 计算 图片 文字 测量 二维码</textarea>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn" id="wcgo">生成文字云</button>
 <button class="btn ghost" id="wcdl">保存图片</button>
 </div>
@@ -8635,7 +8636,7 @@ segBind(root,'#hfway',v=>{ way=v; run(); });
 ['#hfamt','#hfrate'].forEach(s=>$(s,root).addEventListener('input',run));
 function run(){
 const P=(+$('#hfamt',root).value||0)*10000, n=yr*12, r=(+$('#hfrate',root).value||0)/100/12;
-if(P<=0) return $('#hfout',root).innerHTML='<p class="hint" style="margin:0">请输入贷款金额</p>';
+if(P<=0) return $('#hfout',root).innerHTML='<p class="hint m0">请输入贷款金额</p>';
 let monthly, first, last, total;
 if(way==='1'){
 monthly = r>0 ? P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1) : P/n;
@@ -8660,7 +8661,7 @@ run();
 const COEFLIST = [{"n": "气体摩尔体积", "v": "物质的量(mol)", "op": "*", "k": "22.4", "u": "L，标准状况", "note": "", "c": "chem"}, {"n": "奶油打发体积", "v": "奶油(mL)", "op": "*", "k": "1.8", "u": "mL 约 1.6-2 倍", "note": "", "c": "food"}, {"n": "疏散指示间距", "v": "安装高度(m)", "op": "*", "k": "10", "u": "m，经验值", "note": "", "c": "fire"}, {"n": "灭火毯尺寸", "v": "保护宽度(m)", "op": "*", "k": "1.2", "u": "m", "note": "", "c": "fire"}, {"n": "消防管道试压", "v": "工作压力(MPa)", "op": "*", "k": "1.5", "u": "MPa", "note": "", "c": "fire"}, {"n": "通用载重", "v": "额定人数", "op": "*", "k": "75", "u": "kg", "note": "合并 2 项", "c": "fire"}, {"n": "路灯间距", "v": "安装高度(m)", "op": "*", "k": "3.2", "u": "m，经验", "note": "", "c": "road"}, {"n": "多边形面积坐标法", "v": "坐标对面积(㎡)", "op": "/", "k": "2", "u": "m²，按 ∑(x_i*y_i+1 - x_i+1*y_i)/2", "note": "", "c": "meas"}, {"n": "树池尺寸", "v": "树干直径(cm)", "op": "*", "k": "8", "u": "cm 经验", "note": "", "c": "land"}, {"n": "苗木规格与土球比", "v": "胸径(cm)", "op": "*", "k": "8", "u": "cm，经验", "note": "", "c": "land"}, {"n": "曳引轮直径", "v": "钢丝绳直径(mm)", "op": "*", "k": "40", "u": "mm 经验，不小于 40d", "note": "", "c": "lift"}, {"n": "电梯限速器动作速度", "v": "额定速度(m/s)", "op": "*", "k": "1.15", "u": "m/s 下限参考", "note": "", "c": "lift"}, {"n": "电梯装修重量", "v": "轿厢面积(m2)", "op": "*", "k": "150", "u": "kg", "note": "", "c": "lift"}, {"n": "域名解析 TTL", "v": "TTL(s)", "op": "/", "k": "60", "u": "min", "note": "", "c": "it"}, {"n": "栏杆长度", "v": "桥长(m)", "op": "*", "k": "2", "u": "m，双侧", "note": "", "c": "bridge"}, {"n": "箱梁顶板厚度估算", "v": "跨径(m)", "op": "/", "k": "60", "u": "m，经验", "note": "", "c": "bridge"}, {"n": "降雨量单位换算", "v": "降雨量(mm)", "op": "*", "k": "1", "u": "L/m²", "note": "", "c": "hydro"}, {"n": "血糖单位换算", "v": "血糖(mmol/L)", "op": "*", "k": "18", "u": "mg/dL", "note": "", "c": "med"}, {"n": "尿酸单位换算", "v": "尿酸(mmol/L)", "op": "*", "k": "16.81", "u": "mg/dL", "note": "", "c": "med"}, {"n": "孕周计算", "v": "末次月经距今(天)", "op": "/", "k": "7", "u": "周", "note": "", "c": "med"}, {"n": "饮水需求量", "v": "体重(kg)", "op": "*", "k": "30", "u": "mL/d", "note": "", "c": "med"}, {"n": "英语词汇覆盖率", "v": "已掌握词数", "op": "/", "k": "20000", "u": "%，常用 2 万词", "note": "", "c": "edu"}, {"n": "月利率换算", "v": "年利率", "op": "/", "k": "12", "u": "—", "note": "", "c": "num"}, {"n": "空调匹数与冷量", "v": "匹数", "op": "*", "k": "2.5", "u": "kW", "note": "", "c": "hvacsel"}, {"n": "空调冷凝水排水管", "v": "冷量(kW)", "op": "*", "k": "0.0015", "u": "L/s", "note": "", "c": "hvacsel"}, {"n": "车库排烟量", "v": "面积(m2)", "op": "*", "k": "60", "u": "m³/h", "note": "", "c": "hvacsel"}, {"n": "冷冻水流量换算", "v": "冷量(kW)", "op": "*", "k": "0.172", "u": "m³/h", "note": "", "c": "hvacsel"}, {"n": "空调室外机间距", "v": "外机宽(mm)", "op": "*", "k": "0.3", "u": "mm", "note": "", "c": "hvacsel"}, {"n": "灯具间距", "v": "安装高度(m)", "op": "*", "k": "1.5", "u": "m", "note": "", "c": "elecsel"}, {"n": "变频器容量", "v": "电机功率(kW)", "op": "*", "k": "1.15", "u": "kW", "note": "", "c": "elecsel"}, {"n": "软启动器选型", "v": "电机功率(kW)", "op": "*", "k": "1.2", "u": "kW", "note": "", "c": "elecsel"}, {"n": "热继电器整定", "v": "额定电流(A)", "op": "*", "k": "0.95", "u": "A", "note": "", "c": "elecsel"}, {"n": "型钢每米重量", "v": "截面面积(cm2)", "op": "*", "k": "0.785", "u": "kg/m", "note": "", "c": "steel"}, {"n": "防火涂料厚度估算", "v": "耐火极限(h)", "op": "*", "k": "2", "u": "mm 经验", "note": "", "c": "steel"}, {"n": "压型钢板面积", "v": "屋面面积(m2)", "op": "*", "k": "1.05", "u": "m²", "note": "", "c": "steel"}, {"n": "梁高与跨度比", "v": "跨度(m)", "op": "/", "k": "20", "u": "m", "note": "", "c": "steel"}, {"n": "管道打压试验压力", "v": "设计压力(MPa)", "op": "*", "k": "1.5", "u": "MPa", "note": "", "c": "install"}, {"n": "后置埋件抗拔力", "v": "设计值(kN)", "op": "*", "k": "1.2", "u": "kN", "note": "", "c": "struct"}, {"n": "混凝土养护用水", "v": "养护面积(m2)", "op": "/", "k": "21000", "u": "m³", "note": "", "c": "struct"}, {"n": "调薪幅度", "v": "原薪(元)", "op": "/", "k": "800", "u": "无量纲", "note": "", "c": "office"}, {"n": "折页方式页数", "v": "内页数", "op": "/", "k": "4", "u": "折", "note": "", "c": "write"}, {"n": "外文字符数折算", "v": "英文字符", "op": "/", "k": "2", "u": "字 估算", "note": "", "c": "write"}, {"n": "安全快门速度", "v": "焦距(mm)", "op": "/", "k": "1", "u": "s，不低于 1/焦距", "note": "", "c": "photo"}, {"n": "色温换算", "v": "色温(K)", "op": "/", "k": "1000000", "u": "mired", "note": "", "c": "photo"}, {"n": "照片打印尺寸", "v": "像素宽", "op": "/", "k": "300", "u": "in", "note": "", "c": "photo"}, {"n": "降噪强度", "v": "ISO", "op": "/", "k": "1000", "u": "—", "note": "", "c": "photo"}, {"n": "高光恢复量", "v": "过曝程度", "op": "*", "k": "100", "u": "%", "note": "", "c": "photo"}, {"n": "抠像边缘羽化", "v": "像素宽", "op": "/", "k": "400", "u": "px", "note": "", "c": "photo"}, {"n": "航拍电池返航余量", "v": "续航(min)", "op": "*", "k": "0.3", "u": "min", "note": "", "c": "photo"}, {"n": "音符时值换算", "v": "速度", "op": "/", "k": "60", "u": "s", "note": "", "c": "audio"}, {"n": "频率与波长", "v": "频率(Hz)", "op": "/", "k": "343", "u": "m", "note": "", "c": "audio"}, {"n": "节奏与人声同步", "v": "速度", "op": "/", "k": "60", "u": "s", "note": "", "c": "audio"}, {"n": "精神损害赔偿", "v": "等级", "op": "*", "k": "5000", "u": "元，酌情", "note": "", "c": "law"}, {"n": "音频采样位深换算", "v": "位深 bit", "op": "*", "k": "6", "u": "dB", "note": "", "c": "audio"}, {"n": "冷凝水量", "v": "冷量(kW)", "op": "*", "k": "0.4", "u": "kg/h", "note": "暖通设计估算", "c": "hvac"}, {"n": "每日饮水建议（通用）", "v": "体重(kg)", "op": "*", "k": "35", "u": "ml", "note": "合并 2 项", "c": "med"}, {"n": "睡眠周期", "v": "睡眠时长(h)", "op": "/", "k": "1.5", "u": "个", "note": "健康参考，不替代医嘱", "c": "med"}, {"n": "腌制时间", "v": "厚度(cm)", "op": "*", "k": "4", "u": "h", "note": "烹饪参考", "c": "food"}, {"n": "冷冻时间", "v": "厚度(cm)", "op": "*", "k": "60", "u": "min 参考", "note": "烹饪参考", "c": "food"}, {"n": "加密密钥长度", "v": "字节数", "op": "*", "k": "8", "u": "bit", "note": "IT 估算", "c": "it"}, {"n": "标志牌字高", "v": "设计速度(km/h)", "op": "*", "k": "0.4", "u": "cm", "note": "公路与桥隧估算", "c": "struct"}, {"n": "桥头搭板长度", "v": "跨度(m)", "op": "*", "k": "0.5", "u": "m", "note": "公路与桥隧估算", "c": "struct"}, {"n": "血糖 mmol 换算 mg", "v": "mmol/L", "op": "*", "k": "18", "u": "mg/dL", "note": "健康参考，不替代医嘱", "c": "med"}, {"n": "呼吸频率校核", "v": "30秒呼吸次数", "op": "*", "k": "2", "u": "次/min", "note": "健康参考，不替代医嘱", "c": "med"}, {"n": "卡路里换算千焦", "v": "kcal", "op": "*", "k": "4.184", "u": "kJ", "note": "健康参考，不替代医嘱", "c": "med"}, {"n": "经济补偿基数", "v": "前12月工资合计(元)", "op": "/", "k": "12", "u": "元", "note": "法律计算参考，具体以法条为准", "c": "law"}, {"n": "押一付三总额", "v": "月租(元)", "op": "*", "k": "4", "u": "元", "note": "法律计算参考，具体以法条为准", "c": "law"}, {"n": "百分比转分数", "v": "百分比", "op": "/", "k": "100", "u": "—", "note": "学习估算", "c": "edu"}, {"n": "版本发布时间窗", "v": "发布时刻", "op": "*", "k": "1", "u": "h 参考", "note": "IT 运维估算", "c": "it"}, {"n": "宠物年花费", "v": "月花费(元)", "op": "*", "k": "12", "u": "元", "note": "生活估算", "c": "life"}, {"n": "腌制时间与厚度", "v": "厚度(cm)", "op": "*", "k": "3", "u": "h", "note": "烹饪参考", "c": "food"}, {"n": "煮面时间", "v": "粗细(mm)", "op": "*", "k": "3", "u": "min", "note": "烹饪参考", "c": "food"}, {"n": "烤鸡时间与重量", "v": "重量(kg)", "op": "*", "k": "50", "u": "min", "note": "烹饪参考", "c": "food"}, {"n": "配速换算时速", "v": "配速(min/km)", "op": "/", "k": "60", "u": "km/h", "note": "运动参考", "c": "sport"}, {"n": "运动补水", "v": "运动时长(min)", "op": "*", "k": "2", "u": "ml", "note": "运动参考", "c": "sport"}, {"n": "高速限速换算", "v": "限速(km/h)", "op": "/", "k": "3.6", "u": "m/s", "note": "汽车养护估算", "c": "auto"}, {"n": "轮毂尺寸换算", "v": "轮毂(in)", "op": "*", "k": "25.4", "u": "mm", "note": "汽车养护估算", "c": "auto"}, {"n": "年生活成本（通用）", "v": "月支出(元)", "op": "*", "k": "12", "u": "元", "note": "合并 2 项", "c": "life"}, {"n": "老人赡养月支出", "v": "月费用(元)", "op": "*", "k": "12", "u": "元", "note": "生活估算", "c": "life"}, {"n": "净水器换芯", "v": "人数", "op": "/", "k": "450", "u": "天", "note": "居家维护参考", "c": "home"}, {"n": "儿童每日奶量", "v": "月龄", "op": "*", "k": "80", "u": "ml 参考", "note": "儿童参考", "c": "kid"}, {"n": "儿童阅读字数", "v": "年龄", "op": "*", "k": "100", "u": "字 参考", "note": "儿童参考", "c": "kid"}, {"n": "儿童饮食份量", "v": "年龄", "op": "*", "k": "0.8", "u": "份 参考", "note": "儿童参考", "c": "kid"}, {"n": "掷骰概率", "v": "目标点数", "op": "/", "k": "1", "u": "—", "note": "概率趣味", "c": "fun"}, {"n": "抽卡期望次数", "v": "单次概率", "op": "/", "k": "1", "u": "次", "note": "概率趣味", "c": "fun"}, {"n": "石头剪刀布胜率", "v": "策略数", "op": "/", "k": "1", "u": "—", "note": "概率趣味", "c": "fun"}, {"n": "概率换算赔率", "v": "概率", "op": "/", "k": "1", "u": "—", "note": "概率趣味", "c": "fun"}, {"n": "康复周数", "v": "损伤等级", "op": "*", "k": "3", "u": "周", "note": "健康参考，不替代医嘱", "c": "med"}, {"n": "屋面防水面积", "v": "面积(m2)", "op": "*", "k": "1.15", "u": "m²", "note": "屋面防水面积与附加层", "c": "struct"}, {"n": "外墙外保温板材用量", "v": "面积(m2)", "op": "*", "k": "1.05", "u": "m²", "note": "外墙外保温板材用量", "c": "struct"}, {"n": "哈希长度", "v": "算法位数", "op": "/", "k": "8", "u": "位", "note": "文本处理", "c": "txt"}, {"n": "翻译字数比", "v": "中文字数", "op": "/", "k": "1.8", "u": "词 估算", "note": "文本处理", "c": "txt"}, {"n": "饮水分配", "v": "日饮水(ml)", "op": "/", "k": "8", "u": "ml", "note": "健康参考，不替代医嘱", "c": "med"}, {"n": "睡眠周期完成", "v": "睡眠小时", "op": "/", "k": "1.5", "u": "个", "note": "健康参考，不替代医嘱", "c": "med"}, {"n": "家庭年度房租（通用）", "v": "月支出(元)", "op": "*", "k": "12", "u": "元", "note": "合并 2 项", "c": "life"}, {"n": "招聘年度汇总", "v": "月度值(元)", "op": "*", "k": "12", "u": "元", "note": "招聘年度", "c": "work"}, {"n": "倒数", "v": "数值", "op": "/", "k": "1", "u": "—", "note": "数学计算", "c": "num"}, {"n": "MD5 长度", "v": "位数", "op": "/", "k": "4", "u": "位", "note": "文本处理", "c": "txt"}, {"n": "URL 编码长度", "v": "字符数", "op": "*", "k": "3", "u": "字符", "note": "文本处理", "c": "txt"}, {"n": "折页页数", "v": "页数", "op": "/", "k": "4", "u": "折", "note": "媒体制作估算", "c": "media"}, {"n": "装订线长度", "v": "页数", "op": "*", "k": "0.02", "u": "m 估算", "note": "媒体制作估算", "c": "media"}, {"n": "封面设计稿尺寸", "v": "宽(mm)", "op": "*", "k": "430", "u": "mm", "note": "媒体制作估算", "c": "media"}, {"n": "缩略图尺寸", "v": "宽(px)", "op": "/", "k": "4", "u": "px", "note": "图像处理估算", "c": "img"}, {"n": "部署频率", "v": "周发布", "op": "*", "k": "52", "u": "次", "note": "开发估算", "c": "dev"}, {"n": "深度压力换算", "v": "深度(m)", "op": "*", "k": "9.8", "u": "kPa", "note": "换算工具", "c": "kit"}];
 function t_coefall(root){
 root.innerHTML='<div class="box"><div class="lbl">选择项目</div><select id="cfS"></select>'
-+'<div class="lbl" style="margin-top:10px">输入数值</div><input id="cfV" type="number" step="any" value="100">'
++'<div class="lbl mt10">输入数值</div><input id="cfV" type="number" step="any" value="100">'
 +'</div><div class="box" id="cfOut"></div>';
 const S=root.querySelector('#cfS'), V=root.querySelector('#cfV'), OUT=root.querySelector('#cfOut');
 S.innerHTML=COEFLIST.map((x,i)=>'<option value="'+i+'">'+x.n+'</option>').join('');
@@ -8693,7 +8694,7 @@ const U={
 };
 const K=Object.keys(U);
 root.innerHTML='<div class="box"><div class="lbl">换算类型</div><select id="uaT"></select>'
-+'<div class="lbl" style="margin-top:10px">数值</div><input id="uaV" type="number" step="any" value="1">'
++'<div class="lbl mt10">数值</div><input id="uaV" type="number" step="any" value="1">'
 +'<div style="display:flex;gap:10px;margin-top:10px"><div style="flex:1"><p class="lbl">从</p><select id="uaF"></select></div>'
 +'<div style="flex:1"><p class="lbl">到</p><select id="uaO"></select></div></div></div><div class="box" id="uaOut"></div>';
 const T=root.querySelector('#uaT'), F=root.querySelector('#uaF'), O=root.querySelector('#uaO'), V=root.querySelector('#uaV'), OUT=root.querySelector('#uaOut');
@@ -8729,8 +8730,8 @@ root.innerHTML='<div class="box">'
 +'<div style="flex:1"><p class="lbl">体重(kg)</p><input id="hw" type="number" value="65"></div></div>'
 +'<div style="display:flex;gap:10px;margin-top:8px"><div style="flex:1"><p class="lbl">年龄</p><input id="ha" type="number" value="30"></div>'
 +'<div style="flex:1"><p class="lbl">性别</p><select id="hg"><option value="1">男</option><option value="0">女</option></select></div></div>'
-+'<div class="lbl" style="margin-top:10px">腰围(cm)</div><input id="hu" type="number" value="85">'
-+'<div class="lbl" style="margin-top:10px">活动量</div><select id="hc"><option value="1.2">久坐</option><option value="1.375">轻度</option><option value="1.55">中度</option><option value="1.725">高强度</option></select>'
++'<div class="lbl mt10">腰围(cm)</div><input id="hu" type="number" value="85">'
++'<div class="lbl mt10">活动量</div><select id="hc"><option value="1.2">久坐</option><option value="1.375">轻度</option><option value="1.55">中度</option><option value="1.725">高强度</option></select>'
 +'</div><div class="box" id="hOut"></div>';
 const g=(id)=>root.querySelector('#'+id);
 function run(){
@@ -8799,7 +8800,7 @@ root.innerHTML=`
 <div class="box">
 <div class="lbl">年终奖金额（元）</div><input type="number" id="btamt" value="30000" step="100">
 <div class="seg" id="btmode" style="margin-top:12px"><button class="on" data-v="sep">单独计税</button><button data-v="all">并入综合所得</button></div>
-<div class="lbl" style="margin-top:12px">全年综合所得应纳税所得额（并入时用）</div>
+<div class="lbl mt12">全年综合所得应纳税所得额（并入时用）</div>
 <input type="number" id="btoth" value="0" step="100">
 <p class="hint">单独计税：奖金 ÷ 12 查月度税率表。并入：与综合所得合并按年税率表。政策按现行规定。</p>
 </div>
@@ -8859,7 +8860,7 @@ const rows=items.map(([n,a,z])=>{ const pv=b*a/100, cv=b*z/100; p+=pv; c+=cv;
 return `<div class="kv"><span>${n}</span><b>${pv? '¥'+pv.toFixed(2):'—'} / ${cv? '¥'+cv.toFixed(2):'—'}</b></div>`; }).join('');
 $('#ssout',root).innerHTML=`
 <p class="lbl">个人缴纳 / 单位缴纳</p>${rows}
-<div class="kv" style="margin-top:8px"><span>个人合计</span><b>¥${p.toFixed(2)}（${(p/b*100).toFixed(1)}%）</b></div>
+<div class="kv mt8"><span>个人合计</span><b>¥${p.toFixed(2)}（${(p/b*100).toFixed(1)}%）</b></div>
 <div class="kv"><span>单位合计</span><b>¥${c.toFixed(2)}（${(c/b*100).toFixed(1)}%）</b></div>
 <div class="kv"><span>扣除五险一金后</span><b>¥${(b-p).toFixed(2)}</b></div>
 <div class="kv"><span>单位总支出</span><b>¥${(b+c).toFixed(2)}</b></div>`;
@@ -8871,7 +8872,7 @@ root.innerHTML=`
 <div class="box">
 <div class="lbl">钢筋直径（mm）</div>
 <div class="seg" id="rbd"></div>
-<div class="row" style="margin-top:12px">
+<div class="row mt12">
 <div style="flex:1"><div class="lbl">单根长度（m）</div><input type="number" id="rbl" value="9" step="0.1"></div>
 <div style="flex:1"><div class="lbl">根数 / 件数</div><input type="number" id="rbn" value="10" step="1"></div>
 </div>
@@ -8948,7 +8949,7 @@ root.innerHTML=`
 <div class="box">
 <div class="lbl">强度等级</div>
 <div class="seg" id="ccg"></div>
-<div class="lbl" style="margin-top:12px">混凝土方量（m³）</div><input type="number" id="ccv" value="1" step="0.1">
+<div class="lbl mt12">混凝土方量（m³）</div><input type="number" id="ccv" value="1" step="0.1">
 <div class="lbl">水泥单价（元/吨）</div><input type="number" id="ccp" value="420" step="5">
 <p class="hint">配合比为常见现场经验参考（每 m³ 用量，kg），实际须按骨料含水率、外加剂和试配调整，不可直接用于结构施工。</p>
 </div>
@@ -9032,7 +9033,7 @@ root.innerHTML=`
 <div class="box">
 <div class="lbl">内容（网址、文本、名片）</div>
 <textarea id="qsin" style="min-height:72px">https://fornow.cc/app/app_17hx6swqqm6</textarea>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <div style="flex:1"><div class="lbl">前景色</div><input type="color" id="qsfg" value="var(--accent)" style="height:44px;padding:3px"></div>
 <div style="flex:1"><div class="lbl">背景色</div><input type="color" id="qfbg" value="#FFFFFF" style="height:44px;padding:3px"></div>
 </div>
@@ -9102,14 +9103,14 @@ const RULES=[
 function run(){
 const raw=($('#exin',root).value||'').replace(/[\s-]/g,'').toUpperCase();
 $('#exin',root).value=raw;
-if(!raw) return $('#exout',root).innerHTML='<p class="hint" style="margin:0">请输入单号</p>';
+if(!raw) return $('#exout',root).innerHTML='<p class="hint m0">请输入单号</p>';
 const hits=RULES.filter(r=>r[2](raw));
 const info=[
 ['单号',raw],
 ['长度',raw.length+' 位'],
 ['字符类型',/^\d+$/.test(raw)?'纯数字':/^[A-Z]+\d+$/.test(raw)?'字母+数字':'混合']
 ].map(([k,v])=>`<div class="kv"><span>${k}</span><b>${v}</b></div>`).join('');
-$('#exout',root).innerHTML= info + `<p class="lbl" style="margin-top:10px">候选承运商（${hits.length}）</p>`
+$('#exout',root).innerHTML= info + `<p class="lbl mt10">候选承运商（${hits.length}）</p>`
 + (hits.length? hits.map(h=>`<div style="padding:9px 0;border-bottom:1px dashed var(--line)"><b>${h[0]}</b><p class="hint" style="margin:2px 0 0">${h[1]}</p></div>`).join('')
 : '<p class="hint">没匹配到已知规则，可能是小众快递或录错，建议直接去官网查询。</p>');
 }
@@ -9123,7 +9124,7 @@ root.innerHTML=`
 <p class="lbl">频率 <b id="toneHz" style="color:var(--ink)">440</b> Hz</p>
 <input type="range" id="toneR" min="50" max="2000" step="10" value="440">
 <div class="seg" id="toneW" style="margin-top:10px"><button class="on" data-v="sine">正弦</button><button data-v="square">方波</button><button data-v="triangle">三角</button></div>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn" id="tonePlay">开始发声</button>
 <button class="btn ghost" id="toneStop">停止</button>
 </div>
@@ -9168,7 +9169,7 @@ background:#EEF3FF;border:1px solid #DCE6FB">
 <div style="font-size:15px;font-weight:600" id="spkSt">点开始，共 10 秒</div>
 <button class="btn block" id="spkGo" style="margin-top:16px">开始除尘</button>
 </div>
-<div class="box"><p class="hint" style="margin:0">原理：让扬声器低频震动，把喇叭孔里的灰尘震出来。别把手机泡水，也别在水边用。iPhone 无网页低频通道时效果有限。</p></div>`;
+<div class="box"><p class="hint m0">原理：让扬声器低频震动，把喇叭孔里的灰尘震出来。别把手机泡水，也别在水边用。iPhone 无网页低频通道时效果有限。</p></div>`;
 let ac=null, osc=null, timer=null, left=0;
 function stop(){
 clearInterval(timer); timer=null;
@@ -9316,7 +9317,7 @@ root.innerHTML=`
 香蕉
 橙子
 西瓜</textarea>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn" id="tsaz">A → Z</button>
 <button class="btn ghost" id="tsza">Z → A</button>
 <button class="btn ghost" id="tslen">按长度</button>
@@ -9343,7 +9344,7 @@ function t_extract(root){
 root.innerHTML=`
 <div class="box">
 <textarea id="exin" style="min-height:130px" placeholder="粘贴一段含链接、邮箱、手机号的文字"></textarea>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn" id="exurl">链接</button>
 <button class="btn ghost" id="exmail">邮箱</button>
 <button class="btn ghost" id="extel">手机号</button>
@@ -9417,7 +9418,7 @@ root.innerHTML=`
 <div><div class="lbl">个人缴纳比例 %</div><input type="number" id="npR" value="10.5" step="0.5"></div>
 <div><div class="lbl">专项附加扣除</div><input type="number" id="npD" value="0" step="100"></div>
 </div>
-<div class="kv" style="margin-top:12px"><span>五险一金</span><b id="npS">—</b></div>
+<div class="kv mt12"><span>五险一金</span><b id="npS">—</b></div>
 <div class="kv"><span>应纳税所得</span><b id="npT">—</b></div>
 <div class="kv"><span>个人所得税</span><b id="npX">—</b></div>
 <div class="kv"><span>到手工资</span><b id="npN" style="color:#17A673">—</b></div>
@@ -9452,7 +9453,7 @@ root.innerHTML=`
 <div><div class="lbl">油价（元/L）</div><input type="number" id="fuP" value="8.0" step="0.01"></div>
 <div><div class="lbl">载客/空载系数</div><input type="number" id="fuF" value="1" step="0.05"></div>
 </div>
-<div class="kv" style="margin-top:12px"><span>百公里油耗</span><b id="fuA">—</b></div>
+<div class="kv mt12"><span>百公里油耗</span><b id="fuA">—</b></div>
 <div class="kv"><span>每公里油费</span><b id="fuB">—</b></div>
 <div class="kv"><span>本次油费</span><b id="fuC">—</b></div>
 </div>
@@ -9474,7 +9475,7 @@ root.innerHTML=`
 <div><div class="lbl">体重（kg）</div><input type="number" id="caW" value="65"></div>
 <div><div class="lbl">时长（分钟）</div><input type="number" id="caT" value="30"></div>
 </div>
-<div class="lbl" style="margin-top:12px">运动类型</div>
+<div class="lbl mt12">运动类型</div>
 <div class="seg" id="caK" style="flex-wrap:wrap">
 <button class="on" data-v="3.5">走路</button><button data-v="7">跑步</button><button data-v="9">骑行</button>
 <button data-v="5">瑜伽</button><button data-v="8">游泳</button><button data-v="6">跳绳</button>
@@ -9557,7 +9558,7 @@ root.innerHTML=`
 <div><div class="lbl">最大</div><input type="number" id="rnB" value="100"></div>
 <div><div class="lbl">个数</div><input type="number" id="rnC" value="1" min="1" max="200"></div>
 </div>
-<div class="row" style="margin-top:12px">
+<div class="row mt12">
 <button class="btn" id="rnGo">生成</button>
 <button class="btn ghost" id="rnDice">掷骰子</button>
 <button class="btn ghost" id="rnCoin">正反面</button>
@@ -9669,7 +9670,7 @@ function t_csv2json(root){
 root.innerHTML=`
 <div class="box">
 <textarea id="cjIn" style="min-height:140px" placeholder="name,age&#10;张三,20&#10;李四,22"></textarea>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn" id="cjGo">转 JSON</button>
 <button class="btn ghost" id="cjDl">下载 .json</button>
 </div>
@@ -9712,7 +9713,7 @@ root.innerHTML=`
 <div class="box">
 <p class="lbl">解析：粘贴完整链接</p>
 <div class="row"><input id="upIn" placeholder="https://example.com/path?a=1&b=2"><button class="btn" id="upGo" style="flex:0 0 84px">解析</button></div>
-<div id="upOut" style="margin-top:12px"></div>
+<div id="upOut" class="mt12"></div>
 </div>
 <div class="box">
 <p class="lbl">构建：每行 key=value</p>
@@ -9726,7 +9727,7 @@ let u; try{ u=new URL($('#upIn',root).value.trim()); }catch(e){ return toast('�
 const rows=[['协议',u.protocol.replace(':','')],['主机',u.host],['路径',u.pathname],['Hash',u.hash||'—']];
 const params=Array.from(u.searchParams.entries());
 $('#upOut',root).innerHTML=rows.map(([k,v])=>`<div class="kv"><span>${k}</span><b style="font-weight:500">${escHtml(v)}</b></div>`).join('')
-+ (params.length?`<p class="lbl" style="margin-top:10px">查询参数</p>`+params.map(([k,v])=>`<div class="kv"><span>${escHtml(k)}</span><b style="font-weight:500">${escHtml(v)}</b></div>`).join(''):'');
++ (params.length?`<p class="lbl mt10">查询参数</p>`+params.map(([k,v])=>`<div class="kv"><span>${escHtml(k)}</span><b style="font-weight:500">${escHtml(v)}</b></div>`).join(''):'');
 };
 $('#upMake',root).onclick=()=>{
 const lines=$('#upBuild',root).value.split('\n').map(s=>s.trim()).filter(Boolean);
@@ -9739,7 +9740,7 @@ function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')
 function listTool(root, opt){
 root.innerHTML=`<div class="box">
 <input id="lstQ" placeholder="${opt.ph||'搜索关键词'}">
-<div id="lstW" style="margin-top:10px"></div>
+<div id="lstW" class="mt10"></div>
 </div>${opt.note?`<p class="hint">${opt.note}</p>`:''}`;
 const W=$('#lstW',root), rows=opt.rows;
 function render(q){
@@ -9766,7 +9767,7 @@ return `<div><div class="lbl">${label}</div><select id="cf_${id}">${opts.map(o=>
 }
 return `<div><div class="lbl">${label}</div><input type="number" id="cf_${id}" value="${def==null?'':def}" step="${typeof f[3]==='number'?f[3]:(f[4]||1)}"></div>`;
 }).join('')}</div>
-<div id="cfOut" style="margin-top:14px"></div>
+<div id="cfOut" class="mt14"></div>
 </div>${opt.note?`<p class="hint">${opt.note}</p>`:''}`;
 function run(){
 const v={};
@@ -9801,7 +9802,7 @@ const r=m.fn($('#cvIn',root).value);
 }
 function t_miclevel(root){
 root.innerHTML=`
-<div class="box" style="text-align:center">
+<div class="box tac">
 <div style="height:18px;border-radius:9px;background:#F1F3F7;overflow:hidden;margin-bottom:10px">
 <div id="mlBar" style="height:100%;width:0;background:linear-gradient(90deg,#17A673,#D9822B,#E2543B);transition:width .08s linear"></div>
 </div>
@@ -9892,7 +9893,7 @@ function t_multitouch(root){
 root.innerHTML=`
 <div class="box">
 <div id="mtBox" style="height:300px;border-radius:10px;background:#FAFBFD;border:1px solid var(--line);position:relative;overflow:hidden;touch-action:none"></div>
-<div class="kv" style="margin-top:10px"><span>当前触点数</span><b id="mtNow">0</b></div>
+<div class="kv mt10"><span>当前触点数</span><b id="mtNow">0</b></div>
 <div class="kv"><span>最多同时</span><b id="mtMax">0</b></div>
 </div>
 <p class="hint">把多根手指同时按在灰色区域，测试屏幕支持几点触控。</p>`;
@@ -9927,7 +9928,7 @@ function t_keytest(root){
 root.innerHTML=`
 <div class="box" style="text-align:center;padding:20px">
 <div id="ktK" style="font-size:26px;font-weight:700;word-break:break-all">按下任意键</div>
-<div id="ktC" class="hint" style="margin-top:8px">key / code / keyCode</div>
+<div id="ktC" class="hint mt8">key / code / keyCode</div>
 </div>
 ${txtOut('最近按键记录','ktLog')}`;
 const log=[];
@@ -9945,8 +9946,8 @@ return ()=>window.removeEventListener('keydown', onKey);
 function t_gamepad(root){
 root.innerHTML=`
 <div class="box"><div class="kv"><span>已连接手柄</span><b id="gpCnt">0</b></div>
-<div id="gpList" style="margin-top:10px"></div>
-<div id="gpLive" class="hint" style="margin-top:10px"></div></div>
+<div id="gpList" class="mt10"></div>
+<div id="gpLive" class="hint mt10"></div></div>
 <p class="hint">手柄连上后按任意键激活，浏览器才会识别。</p>`;
 let raf=null;
 function loop(){
@@ -9990,7 +9991,7 @@ function t_camtest(root){
 root.innerHTML=`
 <div class="box">
 <video id="cmV" autoplay playsinline muted style="width:100%;border-radius:10px;background:#000;aspect-ratio:4/3"></video>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn" id="cmGo">开启摄像头</button>
 <button class="btn ghost" id="cmFlip">切换前置/后置</button>
 <button class="btn ghost" id="cmStop">关闭</button>
@@ -10123,8 +10124,8 @@ const feats=[
 ['文件保存 File API',()=>'File' in window&&'Blob' in window]
 ];
 root.innerHTML=`
-<div class="box"><p class="lbl" style="margin:0">当前浏览器能力</p>
-<div style="margin-top:10px">${feats.map(([n,fn])=>{
+<div class="box"><p class="lbl m0">当前浏览器能力</p>
+<div class="mt10">${feats.map(([n,fn])=>{
 let ok=false; try{ ok=fn(); }catch(e){}
 return `<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F1F3F7">
 <span style="font-size:13.5px">${n}</span>
@@ -10168,7 +10169,7 @@ ctx.putImageData(dst,0,0);
 }
 function t_ico(root){
 const api=imgTool(root,`
-<div class="lbl" style="margin-top:12px">输出尺寸</div>
+<div class="lbl mt12">输出尺寸</div>
 <div class="seg" id="icoSz"><button class="on" data-v="64">64</button><button data-v="128">128</button><button data-v="256">256</button></div>
 <p class="hint">生成 Windows 图标 .ico，多用于网站 favicon 和桌面快捷方式。</p>`,'图标');
 let size=64;
@@ -10245,7 +10246,7 @@ onPick(api,draw);
 }
 function t_targetsize(root){
 const api=imgTool(root,`
-<div class="lbl" style="margin-top:12px">目标大小（KB）</div><input type="number" id="tsKb" value="200" min="10" max="5000">
+<div class="lbl mt12">目标大小（KB）</div><input type="number" id="tsKb" value="200" min="10" max="5000">
 <p class="hint">自动在质量和尺寸之间取舍，把图片压到不超标的大小，方便上传系统。</p>`,'压缩');
 onPick(api,()=>{
 const img=api.img; if(!img) return;
@@ -10272,7 +10273,7 @@ function t_collage(root){
 root.innerHTML=`
 <div class="box">
 <button class="btn block" id="cgPick">选择多张图片</button>
-<div class="lbl" style="margin-top:12px">列数</div>
+<div class="lbl mt12">列数</div>
 <div class="seg" id="cgCol"><button data-v="2">2 列</button><button class="on" data-v="3">3 列</button><button data-v="4">4 列</button></div>
 <div class="lbl">间距</div><input type="number" id="cgGap" value="8" min="0" max="40">
 <div class="lbl">背景</div><input type="color" id="cgBg" value="#FFFFFF">
@@ -10336,7 +10337,7 @@ function t_overlay(root){
 root.innerHTML=`
 <div class="box">
 <div class="row"><button class="btn" id="ovA">选择底图</button><button class="btn ghost" id="ovB">选择叠加图</button></div>
-<div class="lbl" style="margin-top:12px">叠加不透明度</div><input type="range" id="ovOp" min="10" max="100" value="70">
+<div class="lbl mt12">叠加不透明度</div><input type="range" id="ovOp" min="10" max="100" value="70">
 <div class="lbl">叠加位置</div><div class="seg" id="ovPos"><button class="on" data-v="br">右下</button><button data-v="bl">左下</button><button data-v="c">居中</button></div>
 </div>
 <div class="box" style="display:none" id="ovWrap"><canvas id="ovCv" style="width:100%;border-radius:10px"></canvas>
@@ -10391,7 +10392,7 @@ onPick(api,draw);
 }
 function t_tiledwater(root){
 const api=imgTool(root,`
-<div class="lbl" style="margin-top:12px">水印文字</div><input id="twTxt" value="仅供查阅">
+<div class="lbl mt12">水印文字</div><input id="twTxt" value="仅供查阅">
 <div class="lbl">透明度 %</div><input type="number" id="twOp" value="22" min="5" max="80">
 <div class="lbl">重复密度</div><input type="number" id="twGap" value="160" min="60" max="400">`,'水印');
 function draw(){
@@ -10421,7 +10422,7 @@ onPick(api,draw);
 }
 function t_polaroid(root){
 const api=imgTool(root,`
-<div class="lbl" style="margin-top:12px">底部留白比例</div><input type="number" id="plP" value="18" min="0" max="50">
+<div class="lbl mt12">底部留白比例</div><input type="number" id="plP" value="18" min="0" max="50">
 <div class="lbl">说明文字</div><input id="plTxt" placeholder="可留空">`,'白边');
 function draw(){
 const img=api.img; if(!img) return;
@@ -10473,7 +10474,7 @@ function t_splitlong(root){
 root.innerHTML=`
 <div class="box">
 <button class="btn block" id="slPick">选择长图</button>
-<div class="lbl" style="margin-top:12px">每段高度（px）</div><input type="number" id="slH" value="1200" min="200">
+<div class="lbl mt12">每段高度（px）</div><input type="number" id="slH" value="1200" min="200">
 </div>
 <div class="box" style="display:none" id="slWrap">
 <div class="kv"><span>预计切成</span><b id="slN">—</b></div>
@@ -10535,7 +10536,7 @@ $('#rtSave',root).onclick=()=>{ if(!img) return toast('先选择图片'); $('#rt
 }
 function t_scaleup(root){
 const api=imgTool(root,`
-<div class="lbl" style="margin-top:12px">放大倍数</div>
+<div class="lbl mt12">放大倍数</div>
 <div class="seg" id="suS"><button data-v="2">2×</button><button class="on" data-v="3">3×</button><button data-v="4">4×</button></div>
 <p class="hint">用于把小的图标、截图放大后当素材，算法为平滑插值，不会补充真实细节。</p>`,'放大');
 let k=3;
@@ -10553,7 +10554,7 @@ onPick(api,draw);
 }
 function t_circleavatar(root){
 const api=imgTool(root,`
-<div class="lbl" style="margin-top:12px">输出尺寸</div><input type="number" id="caS" value="512" min="64" max="1600">
+<div class="lbl mt12">输出尺寸</div><input type="number" id="caS" value="512" min="64" max="1600">
 <div class="lbl">外圈描边</div><input type="color" id="caB" value="var(--accent)">
 <div class="lbl">描边宽度（px）</div><input type="number" id="caW" value="0" min="0" max="30">
 <div class="lbl">背景</div><input type="color" id="caBg" value="#FFFFFF">`,'头像');
@@ -10673,7 +10674,7 @@ function t_wrap(root){
 root.innerHTML=`
 <div class="box">
 <textarea id="wrIn" style="min-height:130px" placeholder="粘贴一段长文字"></textarea>
-<div class="lbl" style="margin-top:10px">每行字数</div><input type="number" id="wrN" value="20" min="4" max="80">
+<div class="lbl mt10">每行字数</div><input type="number" id="wrN" value="20" min="4" max="80">
 <button class="btn block" id="wrGo" style="margin-top:10px">换行</button>
 </div>
 ${txtOut('结果','wrOut')}`;
@@ -10704,7 +10705,7 @@ root.innerHTML=`
 <textarea id="alIn" style="min-height:130px" placeholder="用逗号或制表符分隔">姓名,部门,金额
 张三,技术部,1200
 李四,市场部,98</textarea>
-<div class="lbl" style="margin-top:10px">分隔符</div>
+<div class="lbl mt10">分隔符</div>
 <div class="seg" id="alS"><button class="on" data-v="auto">自动</button><button data-v=",">逗号</button><button data-v="tab">制表符</button><button data-v="|">竖线</button></div>
 <button class="btn block" id="alGo" style="margin-top:10px">对齐</button>
 </div>
@@ -10728,7 +10729,7 @@ root.innerHTML=`
 <div class="box">
 <p class="lbl">模板（用 {字段} 占位）</p>
 <textarea id="tpTpl" style="min-height:110px">你好 {姓名}，您 {月份} 月的用量为 {用量} 度，费用 {金额} 元。</textarea>
-<p class="lbl" style="margin-top:10px">字段值（每行 字段=值）</p>
+<p class="lbl mt10">字段值（每行 字段=值）</p>
 <textarea id="tpVals" style="min-height:90px">姓名=张三
 月份=11
 用量=320
@@ -10890,7 +10891,7 @@ root.innerHTML=`
 <div class="box">
 <div class="lbl">末次月经第一天</div>
 <input type="date" id="pgDate">
-<div class="kv" style="margin-top:12px"><span>预产期</span><b id="pgDue">—</b></div>
+<div class="kv mt12"><span>预产期</span><b id="pgDue">—</b></div>
 <div class="kv"><span>当前孕周</span><b id="pgWeek">—</b></div>
 <div class="kv"><span>剩余天数</span><b id="pgLeft">—</b></div>
 <div class="kv"><span>孕期阶段</span><b id="pgStage">—</b></div>
@@ -10941,9 +10942,9 @@ function t_sleep(root){
 root.innerHTML=`
 <div class="box">
 <div class="seg" id="slMode"><button class="on" data-v="wake">我几点起床</button><button data-v="now">我现在睡</button></div>
-<div style="margin-top:12px"><div class="lbl">起床时间</div><input type="time" id="slWake" value="07:00"></div>
-<div class="kv" style="margin-top:12px"><span>建议入睡</span><b id="slPlan">—</b></div>
-<div id="slList" style="margin-top:10px"></div>
+<div class="mt12"><div class="lbl">起床时间</div><input type="time" id="slWake" value="07:00"></div>
+<div class="kv mt12"><span>建议入睡</span><b id="slPlan">—</b></div>
+<div id="slList" class="mt10"></div>
 </div>
 <p class="hint">按 90 分钟一个睡眠周期 + 15 分钟入睡时间估算，选最贴合你作息的时间点。</p>`;
 let mode='wake';
@@ -11036,7 +11037,7 @@ root.innerHTML=`
 赵六
 钱七
 孙八</textarea>
-<div class="lbl" style="margin-top:10px">分成几组</div><input type="number" id="rgN" value="2" min="2" max="20">
+<div class="lbl mt10">分成几组</div><input type="number" id="rgN" value="2" min="2" max="20">
 <button class="btn block" id="rgGo" style="margin-top:10px">随机分组</button>
 </div>
 <div class="box"><div id="rgOut" style="font-size:14px;line-height:1.8">—</div></div>`;
@@ -11052,7 +11053,7 @@ $('#rgOut',root).innerHTML=groups.map((g,i)=>`<div style="margin-bottom:10px"><b
 }
 function t_laptimer(root){
 root.innerHTML=`
-<div class="box" style="text-align:center">
+<div class="box tac">
 <div id="ltT" style="font-size:38px;font-weight:700;font-variant-numeric:tabular-nums">00:00.00</div>
 <div class="row" style="margin-top:14px;justify-content:center">
 <button class="btn" id="ltGo">开始</button>
@@ -11174,7 +11175,7 @@ function t_shopping(root){
 root.innerHTML=`
 <div class="box">
 <div class="row"><input id="shIn" placeholder="要买的东西"><button class="btn" id="shAdd" style="flex:0 0 72px">添加</button></div>
-<div id="shList" style="margin-top:12px"></div>
+<div id="shList" class="mt12"></div>
 <button class="btn ghost block" id="shClr" style="margin-top:12px">清空已勾选</button>
 </div>
 <p class="hint">清单存在本机，关掉页面也在。</p>`;
@@ -11220,7 +11221,7 @@ function t_anniv(root){
 root.innerHTML=`
 <div class="box">
 <div class="row"><input id="anName" placeholder="纪念日名称"><input type="date" id="anDate"><button class="btn" id="anAdd" style="flex:0 0 72px">添加</button></div>
-<div id="anList" style="margin-top:14px"></div>
+<div id="anList" class="mt14"></div>
 </div>
 <p class="hint">自动计算距今多少天、还有多少天到下一次。</p>`;
 let list=[];
@@ -11252,7 +11253,7 @@ root.innerHTML=`
 <textarea id="roIn" style="min-height:90px" placeholder="每行一个人">张三
 李四
 王五</textarea>
-<div class="lbl" style="margin-top:10px">轮值周期数</div><input type="number" id="roN" value="6" min="1" max="52">
+<div class="lbl mt10">轮值周期数</div><input type="number" id="roN" value="6" min="1" max="52">
 <button class="btn block" id="roGo" style="margin-top:10px">生成排班</button>
 </div>
 <div class="box"><div id="roOut" style="font-size:13.5px;line-height:1.9">—</div></div>`;
@@ -11304,8 +11305,8 @@ function t_weekly(root){
 root.innerHTML=`
 <div class="box">
 <div class="lbl">本周完成</div><textarea id="wkA" style="min-height:70px" placeholder="每行一条"></textarea>
-<div class="lbl" style="margin-top:10px">进行中</div><textarea id="wkB" style="min-height:70px" placeholder="每行一条"></textarea>
-<div class="lbl" style="margin-top:10px">下周计划</div><textarea id="wkC" style="min-height:70px" placeholder="每行一条"></textarea>
+<div class="lbl mt10">进行中</div><textarea id="wkB" style="min-height:70px" placeholder="每行一条"></textarea>
+<div class="lbl mt10">下周计划</div><textarea id="wkC" style="min-height:70px" placeholder="每行一条"></textarea>
 <button class="btn block" id="wkGo" style="margin-top:10px">生成周报</button>
 </div>
 ${txtOut('周报文本','wkOut')}`;
@@ -11341,7 +11342,7 @@ function t_timeblock(root){
 root.innerHTML=`
 <div class="box">
 <div class="lbl">开始时间</div><input type="time" id="tbStart" value="09:00">
-<div class="lbl" style="margin-top:10px">每块时长（分钟）</div><input type="number" id="tbLen" value="45" min="5">
+<div class="lbl mt10">每块时长（分钟）</div><input type="number" id="tbLen" value="45" min="5">
 <div class="lbl">块数</div><input type="number" id="tbN" value="6" min="1" max="24">
 <button class="btn block" id="tbGo" style="margin-top:10px">生成时间表</button>
 </div>
@@ -11364,7 +11365,7 @@ root.innerHTML=`
 <textarea id="fgNames" style="min-height:90px" placeholder="姓名，每行一个">张三
 李四
 王五</textarea>
-<div class="lbl" style="margin-top:10px">天数</div><input type="number" id="fgDays" value="7" min="1" max="31">
+<div class="lbl mt10">天数</div><input type="number" id="fgDays" value="7" min="1" max="31">
 <button class="btn block" id="fgGo" style="margin-top:10px">生成打卡表</button>
 </div>
 <div class="box" style="overflow-x:auto"><table id="fgTb" style="border-collapse:collapse;font-size:13px;width:100%"></table></div>
@@ -11394,7 +11395,7 @@ root.innerHTML=`
 <div style="height:16px;border-radius:8px;background:#F1F3F7;margin-top:14px;overflow:hidden">
 <div id="prBar" style="height:100%;width:0;background:var(--accent);transition:width .3s"></div>
 </div>
-<div class="kv" style="margin-top:10px"><span>完成度</span><b id="prPct">—</b></div>
+<div class="kv mt10"><span>完成度</span><b id="prPct">—</b></div>
 <div class="kv"><span>还差</span><b id="prLeft">—</b></div>
 </div>`;
 function run(){
@@ -11425,7 +11426,7 @@ root.innerHTML=`
 <div class="lbl">身份证号</div>
 <input id="idIn" placeholder="18 位身份证号" style="font-size:16px">
 <button class="btn block" id="idGo" style="margin-top:10px">解析</button>
-<div id="idOut" style="margin-top:12px"></div>
+<div id="idOut" class="mt12"></div>
 </div>
 <p class="hint">只做格式校验与信息拆分，不上传任何内容。</p>`;
 const W=['1','0','X','9','8','7','6','5','4','3','2'];
@@ -11451,7 +11452,7 @@ const ops=[['130–139','中国联通/移动（早期号段）'],['145、147','�
 root.innerHTML=`
 <div class="box">
 <div class="lbl">手机号</div><input id="phIn" placeholder="输入 11 位手机号" style="font-size:16px">
-<div id="phOut" style="margin-top:12px">—</div>
+<div id="phOut" class="mt12">—</div>
 </div>
 <div class="box"><p class="lbl">号段速查</p>${ops.map(([k,v])=>`<div class="kv"><span>${k}</span><b style="font-weight:500">${v}</b></div>`).join('')}</div>
 <p class="hint">号段会携号转网，结果仅供参考。</p>`;
@@ -11473,7 +11474,7 @@ function t_bankcard(root){
 root.innerHTML=`
 <div class="box">
 <div class="lbl">银行卡号</div><input id="bcIn" placeholder="输入卡号" style="font-size:16px">
-<div id="bcOut" style="margin-top:12px">—</div>
+<div id="bcOut" class="mt12">—</div>
 </div>
 <p class="hint">仅本地做 Luhn 校验与卡种识别，不涉及任何查询接口。</p>`;
 const brands=[[/^62|^60|^65|^81|^82|^95/,'银联'],[/^4\d{12}(\d{3})?$/,'Visa'],[/^5[1-5]/,'MasterCard'],[/^3[47]/,'American Express'],[/^35[2-8]/,'JCB']];
@@ -11597,7 +11598,7 @@ function t_json2ts(root){
 root.innerHTML=`
 <div class="box">
 <textarea id="jtIn" style="min-height:130px">{"id":1,"name":"张三","tags":["a","b"],"ok":true}</textarea>
-<div class="lbl" style="margin-top:10px">接口名</div><input id="jtName" value="User">
+<div class="lbl mt10">接口名</div><input id="jtName" value="User">
 <button class="btn block" id="jtGo" style="margin-top:10px">生成 TypeScript</button>
 </div>
 ${txtOut('接口定义','jtOut')}`;
@@ -11627,7 +11628,7 @@ function t_json2sql(root){
 root.innerHTML=`
 <div class="box">
 <textarea id="jsIn" style="min-height:120px">[{"id":1,"name":"张三"},{"id":2,"name":"李四"}]</textarea>
-<div class="lbl" style="margin-top:10px">表名</div><input id="jsTb" value="users">
+<div class="lbl mt10">表名</div><input id="jsTb" value="users">
 <button class="btn block" id="jsGo" style="margin-top:10px">生成 INSERT</button>
 </div>
 ${txtOut('SQL','jsOut')}`;
@@ -11645,7 +11646,7 @@ function t_jsonpath(root){
 root.innerHTML=`
 <div class="box">
 <textarea id="jpIn" style="min-height:120px">{"user":{"name":"张三","age":30},"tags":["a","b"]}</textarea>
-<div class="lbl" style="margin-top:10px">路径（用点号，数组用 0/1）</div><input id="jpPath" value="user.name">
+<div class="lbl mt10">路径（用点号，数组用 0/1）</div><input id="jpPath" value="user.name">
 <button class="btn block" id="jpGo" style="margin-top:10px">提取</button>
 </div>
 ${txtOut('取值','jpOut')}`;
@@ -11702,7 +11703,7 @@ root.innerHTML=`
 <div><div class="lbl">文字色</div><input type="color" id="ccFg" value="#6E7580"></div>
 <div><div class="lbl">背景色</div><input type="color" id="ccBg" value="#FFFFFF"></div>
 </div>
-<div id="ccOut" style="margin-top:14px"></div>
+<div id="ccOut" class="mt14"></div>
 <div id="ccDemo" style="margin-top:12px;padding:16px;border-radius:10px;border:1px solid var(--line)">示例文字 Aa 你好</div>
 </div>
 <p class="hint">WCAG 要求正文对比度 ≥ 4.5:1，大字号 ≥ 3:1。</p>`;
@@ -11773,7 +11774,7 @@ root.innerHTML=`
 <div class="lbl">字符 → 码点</div>
 <input id="ucIn" placeholder="输入一个字符，如 好" maxlength="2" style="font-size:16px">
 <div class="out" id="ucOut" style="margin-top:10px">—</div>
-<div class="lbl" style="margin-top:12px">码点 → 字符</div>
+<div class="lbl mt12">码点 → 字符</div>
 <input id="ucHex" placeholder="如 597D 或 U+597D">
 <div class="out" id="ucChar" style="margin-top:10px">—</div>
 </div>
@@ -11941,7 +11942,7 @@ onPick(api,draw);
 }
 function timerTool(root, opt){
 root.innerHTML=`
-<div class="box" style="text-align:center">
+<div class="box tac">
 <div id="tmBig" style="font-size:42px;font-weight:700;font-variant-numeric:tabular-nums">00:00</div>
 <div id="tmSub" class="hint">${opt.sub||''}</div>
 <div class="row" style="margin-top:14px;justify-content:center">
@@ -11971,8 +11972,8 @@ function checklistTool(root, opt){
 root.innerHTML=`
 <div class="box">
 <div class="row"><input id="ckIn" placeholder="${opt.ph||'添加一项'}"><button class="btn" id="ckAdd" style="flex:0 0 72px">添加</button></div>
-<div id="ckList" style="margin-top:12px"></div>
-<div class="kv" style="margin-top:10px"><span>已完成</span><b id="ckCnt">0 / 0</b></div>
+<div id="ckList" class="mt12"></div>
+<div class="kv mt10"><span>已完成</span><b id="ckCnt">0 / 0</b></div>
 <button class="btn ghost block" id="ckClr" style="margin-top:10px">清除已完成</button>
 </div>${opt.note?`<p class="hint">${opt.note}</p>`:''}`;
 const key='xy_ck_'+opt.key;
@@ -12054,7 +12055,7 @@ function t_spectrum(root){
 root.innerHTML=`
 <div class="box">
 <canvas id="spCv" style="width:100%;height:140px;border-radius:10px;background:#0E1116"></canvas>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn" id="spGo">开始</button><button class="btn ghost" id="spStop">停止</button>
 </div>
 </div>
@@ -12100,7 +12101,7 @@ function t_camres(root){
 root.innerHTML=`
 <div class="box">
 <video id="crV" autoplay playsinline muted style="width:100%;border-radius:10px;background:#000;aspect-ratio:4/3"></video>
-<div class="kv" style="margin-top:10px"><span>实际分辨率</span><b id="crRes">—</b></div>
+<div class="kv mt10"><span>实际分辨率</span><b id="crRes">—</b></div>
 <button class="btn block" id="crGo" style="margin-top:12px">开启并读取</button>
 </div>
 <p class="hint">看视频流真实分辨率，判断摄像头是否正常、是否被降级。</p>`;
@@ -12119,14 +12120,14 @@ return ()=>{ if(stream) stream.getTracks().forEach(t=>t.stop()); };
 }
 function t_micplay(root){
 root.innerHTML=`
-<div class="box" style="text-align:center">
+<div class="box tac">
 <div id="mpSt" class="hint">点录音，说一句话，再回放</div>
 <div class="row" style="margin-top:14px;justify-content:center">
 <button class="btn" id="mpRec">录音</button>
 <button class="btn ghost" id="mpStop">停止</button>
 <button class="btn ghost" id="mpPlay">回放</button>
 </div>
-<div class="kv" style="margin-top:12px"><span>录音时长</span><b id="mpLen">—</b></div>
+<div class="kv mt12"><span>录音时长</span><b id="mpLen">—</b></div>
 </div>`;
 let stream=null, rec=null, chunks=[], url=null, t0=0;
 $('#mpRec',root).onclick=async ()=>{
@@ -12186,7 +12187,7 @@ function t_fileinfo(root){
 root.innerHTML=`
 <div class="box">
 <button class="btn block" id="fiPick">选择文件</button>
-<div id="fiOut" style="margin-top:12px"></div>
+<div id="fiOut" class="mt12"></div>
 </div>
 <p class="hint">选文件只看本地信息，不会上传。</p>`;
 $('#fiPick',root).onclick=async ()=>{
@@ -12202,7 +12203,7 @@ $('#fiOut',root).innerHTML=`
 }
 function t_perms(root){
 const list=[['camera','摄像头'],['microphone','麦克风'],['geolocation','定位'],['notifications','通知'],['clipboard-read','剪贴板读取'],['persistent-storage','存储持久化']];
-root.innerHTML=`<div class="box"><p class="lbl" style="margin:0">权限状态</p><div id="pmOut" style="margin-top:10px">读取中…</div>
+root.innerHTML=`<div class="box"><p class="lbl m0">权限状态</p><div id="pmOut" class="mt10">读取中…</div>
 <button class="btn block" id="pmGo" style="margin-top:12px">重新查询</button></div>
 <p class="hint">只查询浏览器记录的授权状态，不会重新弹窗授权（除非你发起点按钮操作）。</p>`;
 async function run(){
@@ -12259,7 +12260,7 @@ function t_swipe(root){
 root.innerHTML=`
 <div class="box">
 <div id="swBox" style="height:260px;border-radius:10px;background:#FAFBFD;border:1px solid var(--line);display:grid;place-items:center;touch-action:none">
-<div style="text-align:center"><div id="swDir" style="font-size:26px;font-weight:700">滑动试试</div><div class="hint" id="swDetail">在方块内滑动手指</div></div>
+<div class="tac"><div id="swDir" style="font-size:26px;font-weight:700">滑动试试</div><div class="hint" id="swDetail">在方块内滑动手指</div></div>
 </div>
 </div>
 <p class="hint">测试屏幕滑动灵敏度与方向识别，也便于排查触摸断触。</p>`;
@@ -12278,11 +12279,11 @@ $('#swDetail',root).textContent=`距离 ${Math.round(Math.hypot(dx,dy))} px · �
 }
 function t_tapspeed(root){
 root.innerHTML=`
-<div class="box" style="text-align:center">
+<div class="box tac">
 <div id="tpArea" style="height:200px;border-radius:10px;background:#EEF3FF;display:grid;place-items:center;user-select:none">
 <div><div style="font-size:34px;font-weight:700" id="tpCnt">0</div><div class="hint">点这里，越快越多</div></div>
 </div>
-<div class="kv" style="margin-top:12px"><span>最长点击间隔</span><b id="tpGap">—</b></div>
+<div class="kv mt12"><span>最长点击间隔</span><b id="tpGap">—</b></div>
 <div class="kv"><span>最高点击速度</span><b id="tpCps">—</b></div>
 </div>
 <p class="hint">测试屏幕触控响应与连点速度，适合检查断触。</p>`;
@@ -12307,7 +12308,7 @@ function t_pointerpressure(root){
 root.innerHTML=`
 <div class="box">
 <div id="ppBox" style="height:220px;border-radius:10px;background:#FAFBFD;border:1px solid var(--line);display:grid;place-items:center;touch-action:none">
-<div style="text-align:center"><div id="ppV" style="font-size:24px;font-weight:700">--</div><div class="hint">用触控笔或手指按住</div></div>
+<div class="tac"><div id="ppV" style="font-size:24px;font-weight:700">--</div><div class="hint">用触控笔或手指按住</div></div>
 </div>
 </div>
 <p class="hint">支持压感的手机/手写笔才会返回 0–1 的力度值，普通手指一般固定。</p>`;
@@ -12346,7 +12347,7 @@ $('#sgGo',root).onclick=run; run();
 }
 function t_netlatency(root){
 root.innerHTML=`
-<div class="box" style="text-align:center">
+<div class="box tac">
 <div id="nlV" style="font-size:36px;font-weight:700">-- ms</div>
 <div class="hint" id="nlH">点开始测 5 次</div>
 <button class="btn block" id="nlGo" style="margin-top:14px">开始测速</button>
@@ -12378,7 +12379,7 @@ function t_savefile(root){
 root.innerHTML=`
 <div class="box">
 <textarea id="svIn" style="min-height:100px">另存为文件的内容</textarea>
-<div class="lbl" style="margin-top:10px">文件名</div><input id="svName" value="note.txt">
+<div class="lbl mt10">文件名</div><input id="svName" value="note.txt">
 <button class="btn block" id="svGo" style="margin-top:10px">另存为</button>
 </div>
 <p class="hint">桌面浏览器会弹出保存位置；手机多数直接下载到下载目录。</p>`;
@@ -12397,11 +12398,11 @@ download(blob,name);
 }
 function t_longpress(root){
 root.innerHTML=`
-<div class="box" style="text-align:center">
+<div class="box tac">
 <div id="lpArea" style="height:190px;border-radius:10px;background:#FAFBFD;border:1px solid var(--line);display:grid;place-items:center;user-select:none;touch-action:none">
 <div><div id="lpV" style="font-size:26px;font-weight:700">按住这里</div><div class="hint" id="lpS">持续 1 秒算长按</div></div>
 </div>
-<div class="kv" style="margin-top:10px"><span>本次时长</span><b id="lpT">—</b></div>
+<div class="kv mt10"><span>本次时长</span><b id="lpT">—</b></div>
 </div>
 <p class="hint">用于检查长按识别是否正常，也能测量屏幕触控保持能力。</p>`;
 let t0=0, timer=null;
@@ -12432,7 +12433,7 @@ root.innerHTML=`
 <div id="ptDot" style="position:absolute;width:14px;height:14px;border-radius:50%;background:var(--accent);opacity:.7;transform:translate(-50%,-50%);left:0;top:0"></div>
 <div id="ptTrail" style="position:absolute;inset:0"></div>
 </div>
-<div class="kv" style="margin-top:10px"><span>当前坐标</span><b id="ptXY">—</b></div>
+<div class="kv mt10"><span>当前坐标</span><b id="ptXY">—</b></div>
 </div>
 <p class="hint">移动手指或鼠标，观察轨迹是否连续，判断触摸屏是否断触。</p>`;
 const box=$('#ptBox',root), dot=$('#ptDot',root), trail=$('#ptTrail',root);
@@ -12472,7 +12473,7 @@ return ()=>window.removeEventListener('resize',run);
 function t_sensors(root){
 const list=['Accelerometer','Gyroscope','Magnetometer','AmbientLightSensor','ProximitySensor','GravitySensor','LinearAccelerationSensor'];
 root.innerHTML=`
-<div class="box"><p class="lbl" style="margin:0">传感器支持情况</p><div style="margin-top:10px">
+<div class="box"><p class="lbl m0">传感器支持情况</p><div class="mt10">
 ${list.map(n=>`<div class="kv"><span>${n}</span><b style="color:${n in window?'#17A673':'#9AA1AB'};font-weight:600">${n in window?'支持':'不支持'}</b></div>`).join('')}
 </div></div>
 <p class="hint">只在安卓 Chrome 系浏览器开放，iOS 多数不提供。</p>`;
@@ -12482,7 +12483,7 @@ root.innerHTML=`
 <div class="box">
 <div class="kv"><span>当前方向</span><b id="olNow">—</b></div>
 <div class="kv"><span>锁定接口</span><b>${screen.orientation&&screen.orientation.lock?'支持':'不支持'}</b></div>
-<div class="row" style="margin-top:12px">
+<div class="row mt12">
 <button class="btn" id="olP">锁定竖屏</button>
 <button class="btn ghost" id="olL">锁定横屏</button>
 <button class="btn ghost" id="olU">解除锁定</button>
@@ -12567,7 +12568,7 @@ function t_double(root){
 root.innerHTML=`
 <div class="box">
 <div class="row"><button class="btn" id="dbA">选择底图</button><button class="btn ghost" id="dbB">选择叠图</button></div>
-<div class="lbl" style="margin-top:12px">不透明度</div><input type="range" id="dbOp" min="10" max="100" value="55">
+<div class="lbl mt12">不透明度</div><input type="range" id="dbOp" min="10" max="100" value="55">
 <div class="seg" id="dbBlend" style="margin-top:10px"><button class="on" data-v="screen">滤色</button><button data-v="multiply">正片叠底</button><button data-v="overlay">叠加</button></div>
 </div>
 <div class="box" style="display:none" id="dbWrap"><canvas id="dbCv" style="width:100%;border-radius:10px"></canvas>
@@ -12619,7 +12620,7 @@ ctx.restore();
 function t_label(root){
 root.innerHTML=`
 <div class="box"><div class="lbl">标签文字</div><input id="lbTxt" value="标签文字">
-<div class="lbl" style="margin-top:10px">字号</div><input type="range" id="lbSize" min="12" max="72" value="28"></div>
+<div class="lbl mt10">字号</div><input type="range" id="lbSize" min="12" max="72" value="28"></div>
 <div class="box" style="display:none" id="lbWrap"><canvas id="lbCv" style="width:100%;border-radius:10px"></canvas>
 <button class="btn block" id="lbSave" style="margin-top:12px">保存</button></div>
 <p class="hint">在图片底部压一条说明文字，适合做带说明的截图。</p>`;
@@ -12661,7 +12662,7 @@ function t_compare(root){
 root.innerHTML=`
 <div class="box">
 <button class="btn block" id="cpPick">选择图片</button>
-<div class="lbl" style="margin-top:12px">对比位置</div><input type="range" id="cpV" min="0" max="100" value="50">
+<div class="lbl mt12">对比位置</div><input type="range" id="cpV" min="0" max="100" value="50">
 </div>
 <div class="box" style="display:none" id="cpWrap"><canvas id="cpCv" style="width:100%;border-radius:10px"></canvas>
 <p class="hint">左：原图　右：黑白处理</p></div>
@@ -12873,7 +12874,7 @@ function t_gallery(root){
 root.innerHTML=`
 <div class="box">
 <button class="btn block" id="glPick">选择多张图片（按顺序拼接）</button>
-<div class="lbl" style="margin-top:12px">图片间距</div><input type="number" id="glGap" value="10" min="0" max="60">
+<div class="lbl mt12">图片间距</div><input type="number" id="glGap" value="10" min="0" max="60">
 <div class="lbl">背景</div><input type="color" id="glBg" value="#FFFFFF">
 </div>
 <div class="box" style="display:none" id="glWrap"><canvas id="glCv" style="width:100%;border-radius:10px"></canvas>
@@ -13334,9 +13335,9 @@ function t_countdown_to(root){
 root.innerHTML=`
 <div class="box">
 <div class="lbl">目标日期时间</div><input type="datetime-local" id="ctIn">
-<div class="lbl" style="margin-top:10px">事件名称</div><input id="ctName" value="目标日">
+<div class="lbl mt10">事件名称</div><input id="ctName" value="目标日">
 </div>
-<div class="box" style="text-align:center">
+<div class="box tac">
 <div id="ctBig" style="font-size:30px;font-weight:700;font-variant-numeric:tabular-nums">--</div>
 <div class="hint" id="ctSub">设置后开始倒数</div>
 </div>
@@ -13359,10 +13360,10 @@ function t_reminder_loop(root){
 root.innerHTML=`
 <div class="box">
 <div class="lbl">提醒内容</div><input id="rlTxt" value="起来喝点水">
-<div class="lbl" style="margin-top:10px">间隔（分钟）</div><input type="number" id="rlMin" value="30" min="1" max="240">
+<div class="lbl mt10">间隔（分钟）</div><input type="number" id="rlMin" value="30" min="1" max="240">
 <button class="btn block" id="rlGo" style="margin-top:12px">开始提醒</button>
 </div>
-<div class="box" style="text-align:center"><div id="rlNext" style="font-size:24px;font-weight:700">未开始</div>
+<div class="box tac"><div id="rlNext" style="font-size:24px;font-weight:700">未开始</div>
 <div class="hint" id="rlLog">—</div></div>
 <p class="hint">页面开着时每到一个间隔弹出提示（浏览器通知需手动允许），也可用震动。</p>`;
 let timer=null, left=0;
@@ -13406,7 +13407,7 @@ function t_scoreboard(root){
 root.innerHTML=`
 <div class="box">
 <div class="row"><input id="sbName" placeholder="选手名字"><button class="btn" id="sbAdd" style="flex:0 0 72px">加入</button></div>
-<div id="sbList" style="margin-top:12px"></div>
+<div id="sbList" class="mt12"></div>
 <button class="btn ghost block" id="sbReset" style="margin-top:12px">清零</button>
 </div>
 <p class="hint">打牌、桌游、家庭比赛记分用，加减 1 分即可。</p>`;
@@ -13430,7 +13431,7 @@ function t_vote_box(root){
 root.innerHTML=`
 <div class="box">
 <div class="row"><input id="vbName" placeholder="选项"><button class="btn" id="vbAdd" style="flex:0 0 72px">加选项</button></div>
-<div id="vbList" style="margin-top:12px"></div>
+<div id="vbList" class="mt12"></div>
 <div class="kv"><span>总票数</span><b id="vbTotal">0</b></div>
 </div>
 <p class="hint">聚餐选餐厅、群里表决，点一下记一票。</p>`;
@@ -13454,7 +13455,7 @@ render();
 }
 function t_flashcard(root){
 root.innerHTML=`
-<div class="box" style="text-align:center">
+<div class="box tac">
 <div id="fcCard" style="min-height:140px;border-radius:12px;background:#FAFBFD;border:1px solid var(--line);display:grid;place-items:center;padding:16px;font-size:19px;font-weight:600">点开始背单词</div>
 <div class="hint" id="fcHint" style="margin-top:10px">—</div>
 <div class="row" style="justify-content:center;margin-top:12px">
@@ -13478,7 +13479,7 @@ show();
 }
 function t_mathquiz(root){
 root.innerHTML=`
-<div class="box" style="text-align:center">
+<div class="box tac">
 <div class="kv"><span>得分</span><b id="mqScore">0 / 0</b></div>
 <div id="mqQ" style="font-size:32px;font-weight:700;margin:18px 0">准备开始</div>
 <input id="mqA" inputmode="numeric" placeholder="答案" style="text-align:center;font-size:20px">
@@ -13523,7 +13524,7 @@ function t_seatmap(root){
 root.innerHTML=`
 <div class="box">
 <div class="lbl">名单（每行一个）</div><textarea id="smIn" style="min-height:100px">张三\n李四\n王五\n赵六\n钱七\n孙八</textarea>
-<div class="row" style="margin-top:10px"><div style="flex:1"><div class="lbl">列数</div><input type="number" id="smCol" value="4" min="2" max="8"></div>
+<div class="row mt10"><div style="flex:1"><div class="lbl">列数</div><input type="number" id="smCol" value="4" min="2" max="8"></div>
 <div style="flex:1"><div class="lbl">行数</div><input type="number" id="smRow" value="3" min="1" max="12"></div></div>
 <button class="btn block" id="smGo" style="margin-top:10px">生成座位表</button>
 </div>
@@ -13580,7 +13581,7 @@ function t_habit_grid(root){
 root.innerHTML=`
 <div class="box">
 <div class="row"><input id="hgName" placeholder="习惯名，如 早起"><button class="btn" id="hgAdd" style="flex:0 0 72px">添加</button></div>
-<div id="hgList" style="margin-top:12px"></div>
+<div id="hgList" class="mt12"></div>
 <button class="btn ghost block" id="hgNew" style="margin-top:12px">新的一天（清空勾选）</button>
 </div>
 <p class="hint">连续打卡看格子右下角的天数，断一天就归零重来。</p>`;
@@ -13598,10 +13599,10 @@ render();
 }
 function t_pomodoro_log(root){
 root.innerHTML=`
-<div class="box" style="text-align:center">
+<div class="box tac">
 <div id="plV" style="font-size:30px;font-weight:700">0 个番茄</div>
 <button class="btn block" id="plAdd" style="margin-top:12px">完成一个番茄（25 分钟）</button>
-<div class="kv" style="margin-top:10px"><span>累计专注</span><b id="plMin">0 分钟</b></div>
+<div class="kv mt10"><span>累计专注</span><b id="plMin">0 分钟</b></div>
 <button class="btn ghost block" id="plClr" style="margin-top:10px">清零</button>
 </div>
 <p class="hint">只记录数量，配合番茄钟一起用；数据只存在本机。</p>`;
@@ -13935,7 +13936,7 @@ root.innerHTML=`
 <div class="box">
 <div class="row"><div style="flex:1"><div class="lbl">长度</div><input type="number" id="rsLen" value="16" min="4" max="128"></div>
 <div style="flex:1"><div class="lbl">数量</div><input type="number" id="rsNum" value="5" min="1" max="50"></div></div>
-<div class="lbl" style="margin-top:10px">字符集</div>
+<div class="lbl mt10">字符集</div>
 <select id="rsSet"><option value="all">字母+数字</option><option value="hex">十六进制</option><option value="num">纯数字</option><option value="sym">含符号</option></select>
 <button class="btn block" id="rsGo" style="margin-top:12px">生成</button>
 </div>
@@ -13974,7 +13975,7 @@ root.innerHTML=`
 <div class="row"><div style="flex:1"><div class="lbl">分钟</div><input id="cbMi" value="0"></div>
 <div style="flex:1"><div class="lbl">小时</div><input id="cbH" value="9"></div>
 <div style="flex:1"><div class="lbl">日</div><input id="cbD" value="*"></div></div>
-<div class="row" style="margin-top:10px"><div style="flex:1"><div class="lbl">月</div><input id="cbM" value="*"></div>
+<div class="row mt10"><div style="flex:1"><div class="lbl">月</div><input id="cbM" value="*"></div>
 <div style="flex:1"><div class="lbl">周</div><input id="cbW" value="*"></div></div>
 <button class="btn block" id="cbGo" style="margin-top:12px">生成表达式</button>
 </div>
@@ -14094,7 +14095,7 @@ function t_strftime(root){
 root.innerHTML=`
 <div class="box">
 <div class="lbl">日期时间</div><input type="datetime-local" id="stIn">
-<div class="lbl" style="margin-top:10px">格式</div><input id="stFmt" value="YYYY-MM-DD HH:MM:SS">
+<div class="lbl mt10">格式</div><input id="stFmt" value="YYYY-MM-DD HH:MM:SS">
 <button class="btn block" id="stGo" style="margin-top:12px">格式化</button>
 </div>
 ${txtOut('结果','stOut')}
@@ -14114,9 +14115,9 @@ function unitConvTool(root, opt){
 root.innerHTML=`<div class="box">
 <div class="lbl">数值</div>
 <input type="number" id="ucVal" value="${opt.def!==undefined?opt.def:1}" step="any">
-<div class="lbl" style="margin-top:10px">单位</div>
+<div class="lbl mt10">单位</div>
 <select id="ucUnit">${opt.units.map((u,i)=>`<option value="${i}"${i===0?' selected':''}>${u[1]}</option>`).join('')}</select>
-<div id="ucOut" style="margin-top:14px"></div>
+<div id="ucOut" class="mt14"></div>
 </div>${opt.note?`<p class="hint">${opt.note}</p>`:''}`;
 function run(){
 const v=+$('#ucVal',root).value||0;
@@ -14181,13 +14182,13 @@ const units=opt.units;
 root.innerHTML=`
 <div class="box">
 <div class="lbl">数值</div><input type="number" id="ucIn" value="${opt.def==null?1:opt.def}" step="any">
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <div style="flex:1"><div class="lbl">从</div>
 <select id="ucFrom">${units.map((u,i)=>`<option value="${i}"${i===0?' selected':''}>${u[1]}</option>`).join('')}</select></div>
 <div style="flex:1"><div class="lbl">到</div>
 <select id="ucTo">${units.map((u,i)=>`<option value="${i}"${i===1?' selected':''}>${u[1]}</option>`).join('')}</select></div>
 </div>
-<div id="ucOut" style="margin-top:14px"></div>
+<div id="ucOut" class="mt14"></div>
 </div>${opt.note?`<p class="hint">${opt.note}</p>`:''}`;
 function run(){
 const v=+$('#ucIn',root).value||0;
@@ -14221,13 +14222,13 @@ root.innerHTML=`
 <div class="box">
 <div class="lbl">候选（每行一个）</div>
 <textarea id="rpIn" style="min-height:110px">${Array.isArray(opt.items)?opt.items.join('\n'):(opt.items||'')}</textarea>
-<div class="row" style="margin-top:10px">
+<div class="row mt10">
 <button class="btn" id="rpOne">抽一个</button>
 <button class="btn ghost" id="rpAll">全部排序</button>
 <button class="btn ghost" id="rpClear">清空</button>
 </div>
 </div>
-<div class="box" style="text-align:center">
+<div class="box tac">
 <div id="rpOut" style="font-size:24px;font-weight:700;min-height:44px;display:grid;place-items:center">—</div>
 </div>
 ${opt.note?`<p class="hint">${opt.note}</p>`:''}`;
@@ -14435,7 +14436,7 @@ function t_temp_conv(root){
 root.innerHTML=`
 <div class="box"><div class="lbl">温度</div><input type="number" id="tcIn" value="180" step="any">
 <div class="seg" id="tcFrom" style="margin-top:10px"><button class="on" data-v="c">摄氏</button><button data-v="f">华氏</button><button data-v="k">开尔文</button></div>
-<div id="tcOut" style="margin-top:12px"></div></div>`;
+<div id="tcOut" class="mt12"></div></div>`;
 let from='c';
 segBind(root,'#tcFrom',v=>{from=v;run();});
 root.addEventListener('input',run);
@@ -16618,7 +16619,7 @@ listTool(root,{ph:'方案',note:'阳台改造思路。',rows:[
 ]});
 }
 function t_coin(root){
-root.innerHTML=`<div class="box" style="text-align:center">
+root.innerHTML=`<div class="box tac">
 <div id="coinOut" style="font-size:40px;font-weight:800;color:var(--accent);min-height:60px">—</div>
 <div class="row" style="justify-content:center"><button class="btn" id="coinGo">抛一次</button></div>
 </div><p class="hint">正面 or 反面，交给随机决定。</p>`;
@@ -16627,8 +16628,8 @@ $('#coinGo',root).onclick=()=>{ $('#coinOut',root).textContent=Math.random()<0.5
 function t_dice(root){
 root.innerHTML=`<div class="box">
 <div class="lbl">骰子数量</div><input type="number" id="dcN" value="2" min="1" max="6" step="1">
-<div class="lbl" style="margin-top:8px">面数</div><input type="number" id="dcF" value="6" min="2" max="100" step="1">
-<div class="row" style="margin-top:12px"><button class="btn" id="dcGo">掷骰</button></div>
+<div class="lbl mt8">面数</div><input type="number" id="dcF" value="6" min="2" max="100" step="1">
+<div class="row mt12"><button class="btn" id="dcGo">掷骰</button></div>
 <div id="dcOut" style="margin-top:12px;font-size:22px;font-weight:700;text-align:center;color:var(--accent)">—</div>
 </div><p class="hint">支持多骰与自定义面数（如 D20）。</p>`;
 $('#dcGo',root).onclick=()=>{
@@ -16648,7 +16649,7 @@ return [['生成结果',r.join('、')]];
 }});
 }
 function t_random_color(root){
-root.innerHTML=`<div class="box" style="text-align:center">
+root.innerHTML=`<div class="box tac">
 <div id="rcSw" style="height:90px;border-radius:12px;border:1px solid #E5E8EF;background:var(--accent)"></div>
 <div id="rcHex" style="margin-top:10px;font-size:18px;font-weight:700;letter-spacing:1px">var(--accent)</div>
 <div class="row" style="justify-content:center;margin-top:12px"><button class="btn" id="rcGo">换一个</button><button class="btn ghost" id="rcCp">复制色值</button></div>
@@ -16718,7 +16719,7 @@ listTool(root,{ph:'星座 / 日期',note:'星座日期区间。',rows:[
 ]});
 }
 function t_rps(root){
-root.innerHTML=`<div class="box" style="text-align:center">
+root.innerHTML=`<div class="box tac">
 <div id="rpMe" style="font-size:26px;font-weight:700;color:var(--accent)">你：—</div>
 <div id="rpAi" style="font-size:26px;font-weight:700;color:#D9822B;margin-top:6px">电脑：—</div>
 <div id="rpRes" style="margin-top:10px;font-size:18px;font-weight:700">—</div>
@@ -16778,8 +16779,8 @@ gen();
 function t_guess_number(root){
 root.innerHTML=`<div class="box">
 <div class="hint">我想了一个 1–100 的数，猜猜看。</div>
-<input type="number" id="gnIn" placeholder="输入你的猜测" style="margin-top:8px">
-<div class="row" style="margin-top:10px"><button class="btn" id="gnGo">猜</button><button class="btn ghost" id="gnReset">重新开始</button></div>
+<input type="number" id="gnIn" placeholder="输入你的猜测" class="mt8">
+<div class="row mt10"><button class="btn" id="gnGo">猜</button><button class="btn ghost" id="gnReset">重新开始</button></div>
 <div id="gnMsg" style="margin-top:12px;font-weight:700;text-align:center;min-height:24px"></div>
 </div><p class="hint">提示会告诉你偏大还是偏小。</p>`;
 let target=Math.floor(Math.random()*100)+1, tries=0;
@@ -16810,7 +16811,7 @@ root.innerHTML=`<div class="box">
 吃烤肉
 吃面条
 随便</textarea>
-<div class="row" style="margin-top:10px"><button class="btn" id="wpGo">转一下</button></div>
+<div class="row mt10"><button class="btn" id="wpGo">转一下</button></div>
 <div id="wpOut" style="margin-top:14px;text-align:center;font-size:24px;font-weight:800;color:var(--accent);min-height:34px">—</div>
 </div><p class="hint">文字版转盘，快速做决定。</p>`;
 $('#wpGo',root).onclick=()=>{
@@ -16822,8 +16823,8 @@ $('#wpOut',root).textContent=a[Math.floor(Math.random()*a.length)];
 function t_group_split(root){
 root.innerHTML=`<div class="box">
 <div class="lbl">名单（一行一个）</div><textarea id="gsIn" style="min-height:110px"></textarea>
-<div class="lbl" style="margin-top:8px">每组人数</div><input type="number" id="gsN" value="2" min="1" step="1">
-<div class="row" style="margin-top:10px"><button class="btn" id="gsGo">分组</button></div>
+<div class="lbl mt8">每组人数</div><input type="number" id="gsN" value="2" min="1" step="1">
+<div class="row mt10"><button class="btn" id="gsGo">分组</button></div>
 </div>
 <div class="box"><div id="gsOut" style="font-size:14px;line-height:1.9"></div></div>`;
 $('#gsGo',root).onclick=()=>{
@@ -16839,7 +16840,7 @@ $('#gsOut',root).innerHTML=groups.map((g,i)=>`<div style="margin-bottom:6px"><b 
 function t_scoreboard(root){
 root.innerHTML=`<div class="box">
 <div class="lbl">玩家（逗号分隔）</div><input id="sbNames" value="A,B">
-<div class="row" style="margin-top:10px"><button class="btn" id="sbInit">重新开始</button><button class="btn ghost" id="sbReset">清零</button></div>
+<div class="row mt10"><button class="btn" id="sbInit">重新开始</button><button class="btn ghost" id="sbReset">清零</button></div>
 </div><div class="box"><div id="sbOut"></div></div>`;
 let s={};
 function render(){
@@ -16874,7 +16875,7 @@ return [['中签编号',out.join('、')]];
 function t_speak_order(root){
 root.innerHTML=`<div class="box">
 <div class="lbl">参会人（逗号或换行分隔）</div><textarea id="soIn" style="min-height:110px"></textarea>
-<div class="row" style="margin-top:10px"><button class="btn" id="soGo">生成发言顺序</button></div>
+<div class="row mt10"><button class="btn" id="soGo">生成发言顺序</button></div>
 </div><div class="box"><div id="soOut" style="line-height:2"></div></div>`;
 $('#soGo',root).onclick=()=>{
 const a=$('#soIn',root).value.split(/\n|,|，/).map(v=>v.trim()).filter(Boolean);
@@ -16919,7 +16920,7 @@ function t_riddle_fun(root){
 randPickTool(root,{items:'什么东西有钥匙却打不开锁？（钢琴）\n什么东西越分享越多？（知识）\n什么东西你能打破却看不见？（承诺）\n什么房间没有门窗？（蘑菇房）',note:'趣味谜题，聚会用。'});
 }
 function t_card_draw(root){
-root.innerHTML=`<div class="box" style="text-align:center">
+root.innerHTML=`<div class="box tac">
 <div id="cdOut" style="font-size:32px;font-weight:800;color:var(--accent);min-height:52px">—</div>
 <div class="row" style="justify-content:center"><button class="btn" id="cdGo">抽一张</button></div>
 </div><p class="hint">随机抽一张扑克牌。</p>`;
