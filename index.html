@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="5.26">
+<meta name="xyver" content="5.27">
 <title>小羽工具箱 · 本地工具集合</title>
 <meta name="description" content="小羽工具箱：984 个本地实用工具，工程、财务、文本、生活四大类，全部离线可用。">
 <meta property="og:type" content="website">
@@ -336,7 +336,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
 <main id="list"></main>
 <button class="totop" id="totop" aria-label="回到顶部"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button>
 <footer class="foot">
-  <span>小羽工具箱 v<span id="vnum">5.26</span> · 作者 fornow</span>
+  <span>小羽工具箱 v<span id="vnum">5.27</span> · 作者 fornow</span>
   <span>交流群 728403008</span>
   <a href="https://github.com/fornow330/xiaoyutool" target="_blank" rel="noopener" style="color:var(--sub);font-size:12px">GitHub</a>
   <button id="chkUpd" style="border:0;background:none;color:var(--sub);font-size:12px;text-decoration:underline;padding:4px;cursor:pointer">检查更新</button>
@@ -1526,13 +1526,11 @@ const img=new Image(); img.crossOrigin='anonymous'; img.onload=()=>res(img); img
 }
 let curCat='all', curQuery='';
 const RCKEY='xy_recent';
-function getRecent(){ try{ return JSON.parse(localStorage.getItem(RCKEY)||'[]'); }catch(e){ return []; } }
-let currentToolId='';
-function getRecent(){ try{ return JSON.parse(localStorage.getItem(RCKEY)||'[]'); }catch(e){ return []; } }
+function getRecent(){ try{ const v=JSON.parse(localStorage.getItem(RCKEY)||'[]'); return Array.isArray(v)?v.filter(x=>typeof x==='string'):[]; }catch(e){ return []; } }
 function pushRecent(id){ try{ const a=getRecent().filter(x=>x!==id); a.unshift(id); localStorage.setItem(RCKEY, JSON.stringify(a.slice(0,8))); RECENT_IDS=new Set(a.slice(0,8)); }catch(e){} }
 const RANKKEY='xy_toolrank';
 let RANKC=null;
-function getRank(){ if(RANKC) return RANKC; try{ RANKC=JSON.parse(localStorage.getItem(RANKKEY)||'{}'); }catch(e){ RANKC={}; } return RANKC; }
+function getRank(){ if(RANKC) return RANKC; try{ const v=JSON.parse(localStorage.getItem(RANKKEY)||'{}'); RANKC=(v&&typeof v==='object'&&!Array.isArray(v))?v:{}; }catch(e){ RANKC={}; } return RANKC; }
 function pushRank(id){
 try{
 const r=getRank();
@@ -1554,7 +1552,7 @@ box.innerHTML='<span class="rlbl">常用</span>'+items.map(function(t){ return '
 function renderRecent(){
 const box=$('#recent'); if(!box) return;
 const ts=getRecent().map(i=>TOOLS.find(t=>t.id===i)).filter(Boolean).slice(0,5);
-let hs=[]; try{ hs=JSON.parse(localStorage.getItem('xy_bighist')||'[]').slice(0,3); }catch(e){}
+let hs=[]; try{ const v=JSON.parse(localStorage.getItem('xy_bighist')||'[]'); hs=Array.isArray(v)?v.filter(h=>h&&typeof h.n==='string').slice(0,3):[]; }catch(e){}
 if(!ts.length && !hs.length){ box.hidden=true; box.innerHTML=''; return; }
 box.hidden=false;
 const mt=ts.map(t=>`<button class="rchip" data-rid="${t.id}">${t.n}</button>`).join('');
