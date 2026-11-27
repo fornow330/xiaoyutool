@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="5.25">
+<meta name="xyver" content="5.26">
 <title>小羽工具箱 · 本地工具集合</title>
 <meta name="description" content="小羽工具箱：984 个本地实用工具，工程、财务、文本、生活四大类，全部离线可用。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="小羽工具箱 · 984 个本地小工具">
-<meta property="og:description" content="工程、财务、文本、生活四大类 984 个工具，含 2526 个计算口径，离线可用。">
+<meta property="og:description" content="工程、财务、文本、生活四大类 984 个工具，含 1215 个计算口径，离线可用。">
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" content="var(--accent)">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -336,7 +336,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
 <main id="list"></main>
 <button class="totop" id="totop" aria-label="回到顶部"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button>
 <footer class="foot">
-  <span>小羽工具箱 v<span id="vnum">5.25</span> · 作者 fornow</span>
+  <span>小羽工具箱 v<span id="vnum">5.26</span> · 作者 fornow</span>
   <span>交流群 728403008</span>
   <a href="https://github.com/fornow330/xiaoyutool" target="_blank" rel="noopener" style="color:var(--sub);font-size:12px">GitHub</a>
   <button id="chkUpd" style="border:0;background:none;color:var(--sub);font-size:12px;text-decoration:underline;padding:4px;cursor:pointer">检查更新</button>
@@ -445,6 +445,15 @@ const LANG=(function(){
   return /^zh/i.test(bl)?'zh':'en';
 })();
 function L(zh,en){ return LANG==='en'?en:zh; }
+/* ===== EN static labels ===== */
+(function(){ if(LANG!=='en') return; const apply=function(){
+ const M={expBtn:'Export favorites',impBtn:'Import favorites',chkUpd:'Check updates',expFav:'Export favorites',impFav:'Import favorites',wipeBtn:'Clear local data',guideOk:'Got it'};
+ Object.keys(M).forEach(function(id){ const el=document.getElementById(id); if(el) el.textContent=M[id]; });
+ const spans=document.querySelectorAll('.foot span');
+ if(spans[0] && /小羽工具箱/.test(spans[0].textContent)) spans[0].innerHTML=spans[0].innerHTML.replace('小羽工具箱','Xiaoyu Toolbox').replace('作者','by');
+ [].forEach.call(spans,function(sp){ if(/交流群/.test(sp.textContent)) sp.textContent='Group 728403008'; });
+ const gb=document.getElementById('guideBar'); if(gb){ const b=gb.querySelector('b'), sp=gb.querySelector('span'); if(b) b.textContent='Three steps'; if(sp) sp.textContent='① Search on top or type initials　② Pick a category　③ The calculator covers 1215 metrics'; }
+}; apply(); document.addEventListener('DOMContentLoaded',apply); window.addEventListener('load',apply); })();
 const ENN={
  qrgen:'QR Code Generator', compass:'Compass', flash:'Screen Light', random:'Random Picker',
  pomodoro:'Pomodoro Timer', typing:'Typing Speed Test', calc:'Scientific Calculator',
@@ -1731,7 +1740,7 @@ const grid=$('#list').querySelector('.cardgrid');
 if(grid){
 grid.insertAdjacentHTML('beforeend', cards(show.slice(lastCount)));
 const mb=$('#morebtn');
-if(mb){ if(more>0) mb.textContent='显示更多（还有 '+more+' 个）'; else mb.remove(); }
+if(mb){ if(more>0) mb.textContent=L('显示更多（还有 '+more+' 个）','Show '+more+' more'); else mb.remove(); }
 lastCount=show.length;
 return;
 }
@@ -1746,7 +1755,7 @@ $('#list').innerHTML = sugHTML() + bigTipHTML() + profbar()
     return part.length? '<div class="grp">'+cname(k)+'<span>'+part.length+'</span></div><div class="cardgrid">'+cards(part)+'</div>' : '';
   }).join('')
 : `<div class="cardgrid" style="margin-top:14px">${cards(show)}</div>`)
-+ (more>0 ? `<button class="morebtn" id="morebtn">显示更多（还有 ${more} 个）</button>` : '');
++ (more>0 ? `<button class="morebtn" id="morebtn">${L('显示更多（还有 '+more+' 个）','Show '+more+' more')}</button>` : '');
 }
 let _HLQ=null;
 function hlName(name){
@@ -3170,7 +3179,7 @@ window.addEventListener('beforeinstallprompt',function(e){
     if(localStorage.getItem('xy_guide')) return;
     const bar=document.createElement('div');
     bar.id='guideBar';
-    bar.innerHTML='<b>三步上手</b><span>① 顶部搜索或按拼音首字母找工具　② 点分类缩小范围　③ 工具底部的「工程/财务计算器」可算 2526 个口径</span><button id="guideOk">知道了</button>';
+    bar.innerHTML=(LANG==='en'?( '<b>Three steps</b><span>① Search on top or type initials　② Pick a category　③ The calculator covers 1215 metrics</span><button id="guideOk">Got it</button>' ):( '<b>三步上手</b><span>① 顶部搜索或按拼音首字母找工具　② 点分类缩小范围　③ 工具底部的「工程/财务计算器」可算 1215 个口径</span><button id="guideOk">知道了</button>' ));
     const main=$('#list');
     main.parentNode.insertBefore(bar, main);
     bar.querySelector('#guideOk').addEventListener('click',function(){
