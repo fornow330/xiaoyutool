@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="5.27">
+<meta name="xyver" content="5.28">
 <title>小羽工具箱 · 本地工具集合</title>
 <meta name="description" content="小羽工具箱：984 个本地实用工具，工程、财务、文本、生活四大类，全部离线可用。">
 <meta property="og:type" content="website">
@@ -336,7 +336,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
 <main id="list"></main>
 <button class="totop" id="totop" aria-label="回到顶部"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button>
 <footer class="foot">
-  <span>小羽工具箱 v<span id="vnum">5.27</span> · 作者 fornow</span>
+  <span>小羽工具箱 v<span id="vnum">5.28</span> · 作者 fornow</span>
   <span>交流群 728403008</span>
   <a href="https://github.com/fornow330/xiaoyutool" target="_blank" rel="noopener" style="color:var(--sub);font-size:12px">GitHub</a>
   <button id="chkUpd" style="border:0;background:none;color:var(--sub);font-size:12px;text-decoration:underline;padding:4px;cursor:pointer">检查更新</button>
@@ -17092,7 +17092,25 @@ r.onload=function(){
 try{
 const o=JSON.parse(r.result);
 const d=o.data||o;
-Object.keys(d).forEach(function(k){ if(KEYS.indexOf(k)>=0) localStorage.setItem(k, d[k]); });
+if(JSON.stringify(d).length>2e6){ toast('设置包太大，没导入'); return; }
+const okId=function(id){ return TOOLS.some(function(t){return t.id===id;}); };
+const SAN={
+ xy_fav:function(v){ const a=JSON.parse(v); return Array.isArray(a)?JSON.stringify(a.filter(x=>typeof x==='string'&&okId(x)).slice(0,200)):null; },
+ xy_recent:function(v){ const a=JSON.parse(v); return Array.isArray(a)?JSON.stringify(a.filter(x=>typeof x==='string'&&okId(x)).slice(0,8)):null; },
+ xy_toolrank:function(v){ const o=JSON.parse(v); if(!o||typeof o!=='object'||Array.isArray(o)) return null; const r={}; Object.keys(o).forEach(function(k){ if(okId(k)&&typeof o[k]==='number'&&isFinite(o[k])&&o[k]>0) r[k]=Math.min(o[k],1e6); }); return JSON.stringify(r); },
+ xy_bigfav:function(v){ return SAN.mapObj(v); },
+ xy_biguse:function(v){ return SAN.mapObj(v); },
+ xy_bighist:function(v){ const a=JSON.parse(v); return Array.isArray(a)?JSON.stringify(a.filter(h=>h&&typeof h.n==='string'&&typeof h.k==='string'&&h.n.length<200).slice(0,8)):null; },
+ xy_bigpresets:function(v){ const a=JSON.parse(v); return Array.isArray(a)?JSON.stringify(a.filter(pp=>pp&&typeof pp.n==='string'&&Array.isArray(pp.v)).slice(0,20)):null; },
+ xy_bigprec:function(v){ return /^(auto|2|3|sig|raw)$/.test(v)?v:null; },
+ xy_bigcomma:function(v){ return (v==='1'||v==='0')?v:null; },
+ xy_theme:function(v){ return (v==='dark'||v==='light')?v:null; },
+ mapObj:function(v){ const o=JSON.parse(v); if(!o||typeof o!=='object'||Array.isArray(o)) return null; const r={}; Object.keys(o).forEach(function(k){ if(typeof k==='string'&&k.length<200&&o[k]) r[k]=1; }); return JSON.stringify(r); }
+};
+let n=0, skip=0;
+Object.keys(d).forEach(function(k){ if(KEYS.indexOf(k)<0) return; const h=SAN[k]; let val=null; try{ val=h?h(d[k]):null; }catch(e){ val=null; } if(val===null){ skip++; return; } try{ localStorage.setItem(k,val); n++; }catch(e){ skip++; } });
+if(!n){ toast('这个文件里没有可用设置'); return; }
+if(skip) toast('已导入 '+n+' 项，跳过 '+skip+' 项无效数据'); else toast('已导入，正在刷新');
 toast('已导入，正在刷新');
 setTimeout(function(){ location.reload(); }, 800);
 }catch(e){ toast('文件格式不对'); }
