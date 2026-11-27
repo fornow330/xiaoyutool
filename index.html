@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="5.28">
+<meta name="xyver" content="5.29">
 <title>小羽工具箱 · 本地工具集合</title>
 <meta name="description" content="小羽工具箱：984 个本地实用工具，工程、财务、文本、生活四大类，全部离线可用。">
 <meta property="og:type" content="website">
@@ -336,7 +336,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
 <main id="list"></main>
 <button class="totop" id="totop" aria-label="回到顶部"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button>
 <footer class="foot">
-  <span>小羽工具箱 v<span id="vnum">5.28</span> · 作者 fornow</span>
+  <span>小羽工具箱 v<span id="vnum">5.29</span> · 作者 fornow</span>
   <span>交流群 728403008</span>
   <a href="https://github.com/fornow330/xiaoyutool" target="_blank" rel="noopener" style="color:var(--sub);font-size:12px">GitHub</a>
   <button id="chkUpd" style="border:0;background:none;color:var(--sub);font-size:12px;text-decoration:underline;padding:4px;cursor:pointer">检查更新</button>
@@ -345,7 +345,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
   <input type="file" id="impFavFile" accept="application/json,.json" hidden>
   <button id="wipeBtn" style="border:0;background:none;color:var(--sub);font-size:12px;text-decoration:underline;padding:4px;cursor:pointer">清空本机数据</button>
 </footer>
-<div class="sheet" id="sheet" aria-hidden="true">
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" aria-hidden="true">
   <div class="sheet-head">
     <button class="backbtn" id="backbtn" aria-label="返回">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg>
@@ -355,7 +355,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
   </div>
   <div class="sheet-body" id="sheetBody"></div>
 </div>
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
 if(window.AndroidPerm && navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
 var _gum=navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
@@ -452,6 +452,9 @@ function L(zh,en){ return LANG==='en'?en:zh; }
  const spans=document.querySelectorAll('.foot span');
  if(spans[0] && /小羽工具箱/.test(spans[0].textContent)) spans[0].innerHTML=spans[0].innerHTML.replace('小羽工具箱','Xiaoyu Toolbox').replace('作者','by');
  [].forEach.call(spans,function(sp){ if(/交流群/.test(sp.textContent)) sp.textContent='Group 728403008'; });
+ const AL={backbtn:'Back',totop:'Back to top',fsbtn:'Text size',themebtn:'Toggle theme'};
+ Object.keys(AL).forEach(function(id){ const el=document.getElementById(id); if(el) el.setAttribute('aria-label',AL[id]); });
+ if(spans.length) [].forEach.call(spans,function(sp){ if(/收藏/.test(sp.getAttribute('aria-label')||'')) sp.setAttribute('aria-label',/取消/.test(sp.getAttribute('aria-label'))?'Unfavorite':'Favorite'); });
  const gb=document.getElementById('guideBar'); if(gb){ const b=gb.querySelector('b'), sp=gb.querySelector('span'); if(b) b.textContent='Three steps'; if(sp) sp.textContent='① Search on top or type initials　② Pick a category　③ The calculator covers 1215 metrics'; }
 }; apply(); document.addEventListener('DOMContentLoaded',apply); window.addEventListener('load',apply); })();
 const ENN={
@@ -1457,7 +1460,7 @@ const CATNAME = {eng:'工程建造',fin:'财务与造价',design:'设计排版',
 const $ = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
 let toastTimer;
-const TOASTEN={'已复制':'Copied','已复制全部':'Copied all','已恢复默认值':'Defaults restored','已收藏口径':'Saved','已取消收藏':'Removed','先选一个口径':'Pick a metric first','先选图片':'Choose an image first','先写点内容':'Enter some text first','上限要大于下限':'Max must exceed min','全部完成':'Done','已切换到深色':'Dark mode','已切换到浅色':'Light mode','已清空':'Cleared','没有可复制的结果':'Nothing to copy','已复制到剪贴板':'Copied','保存成功':'Saved','导入成功':'Imported'};
+const TOASTEN={'已复制':'Copied','已复制全部':'Copied all','已恢复默认值':'Defaults restored','已收藏口径':'Saved','已取消收藏':'Removed','先选一个口径':'Pick a metric first','先选图片':'Choose an image first','先写点内容':'Enter some text first','上限要大于下限':'Max must exceed min','全部完成':'Done','已切换到深色':'Dark mode','已切换到浅色':'Light mode','已清空':'Cleared','没有可复制的结果':'Nothing to copy','已复制到剪贴板':'Copied','保存成功':'Saved','导入成功':'Imported','已导出设置':'Settings exported','已导入，正在刷新':'Imported, reloading','设置包太大，没导入':'File too large','这个文件里没有可用设置':'No usable settings'};
 function toast(msg){ if(LANG==='en' && TOASTEN[msg]) msg=TOASTEN[msg];
 const t = $('#toast'); t.textContent = msg; t.classList.add('on');
 clearTimeout(toastTimer); toastTimer = setTimeout(()=>t.classList.remove('on'), 1900);
@@ -1555,9 +1558,9 @@ const ts=getRecent().map(i=>TOOLS.find(t=>t.id===i)).filter(Boolean).slice(0,5);
 let hs=[]; try{ const v=JSON.parse(localStorage.getItem('xy_bighist')||'[]'); hs=Array.isArray(v)?v.filter(h=>h&&typeof h.n==='string').slice(0,3):[]; }catch(e){}
 if(!ts.length && !hs.length){ box.hidden=true; box.innerHTML=''; return; }
 box.hidden=false;
-const mt=ts.map(t=>`<button class="rchip" data-rid="${t.id}">${t.n}</button>`).join('');
+const mt=ts.map(t=>`<button class="rchip" data-rid="${t.id}">${tname(t)}</button>`).join('');
 const mh=hs.map(h=>`<button class="rchip" data-bigk="${h.k}" data-bign="${encodeURIComponent(h.n)}">${(h.n.split(' · ')[1]||h.n)}</button>`).join('');
-box.innerHTML='<span class="rlbl">最近</span>'+mt+mh;
+box.innerHTML='<span class="rlbl">'+L('最近','Recent')+'</span>'+mt+mh;
 }
 const FVKEY='xy_fav';
 let FAVC=null;
@@ -1582,9 +1585,9 @@ box.innerHTML='<span class="rlbl">'+L('收藏 ','Favorites ')+sorted.length+'</s
 }
 function renderChips(){
 const cnt={}; TOOLS.forEach(t=>{ cnt[t.c]=(cnt[t.c]||0)+1; });
-$('#chips').innerHTML = CATS.map(c=>`<button class="chip${c.k===curCat?' on':''}" data-cat="${c.k}">${LANG==='en'?(ENCAT[c.k]||c.n):c.n}<i style="font-style:normal;opacity:.55;margin-left:5px;font-size:12px">${c.k==='all'?TOOLS.length:(cnt[c.k]||0)}</i></button>`).join('')
+$('#chips').innerHTML = CATS.map(c=>`<button class="chip${c.k===curCat?' on':''}" aria-pressed="${c.k===curCat?'true':'false'}" data-cat="${c.k}">${LANG==='en'?(ENCAT[c.k]||c.n):c.n}<i style="font-style:normal;opacity:.55;margin-left:5px;font-size:12px">${c.k==='all'?TOOLS.length:(cnt[c.k]||0)}</i></button>`).join('')
 + `<button class="chip" id="randTool" title="${L('随机打开一个工具','Open a random tool')}" style="flex:0 0 auto">${L('随机','Random')}</button>`
-+ (curCat==='all'? `<button class="chip" id="groupToggle" title="按分类分区浏览" style="flex:0 0 auto;${groupMode?'background:var(--accent);color:#fff;border-color:var(--accent)':''}">${groupMode?L('分区中','Grouped'):L('分区','Group')}</button>` : '');
++ (curCat==='all'? `<button class="chip" id="groupToggle" title="${L('按分类分区浏览','Browse by category')}" style="flex:0 0 auto;${groupMode?'background:var(--accent);color:#fff;border-color:var(--accent)':''}">${groupMode?L('分区中','Grouped'):L('分区','Group')}</button>` : '');
 }
 const HOTEXACT=['二维码生成','单位换算','图片压缩','文字统计','Base64 编解码','Base64','取色器','九宫格切图','图片拼长图','文字水印','摩斯电码','进制转换','哈希校验','URL 编解码','格式转换','日期计算','随机数生成','房贷计算','汇率换算','BMI 计算'];
 const HOT=[['二维码',9],['单位换算',9],['图片压缩',8],['文字统计',8],['取色器',7],['九宫格',7],['图片水印',7],['拼长图',7],
@@ -1777,7 +1780,7 @@ function cards(list){
 const favs=getFav();
 return list.map(t=>`
 <div class="toolcard${t.knife?' knife':''}${(!MOB && SENS.has(t.id))?' needs':''}" data-id="${t.id}" tabindex="0" role="button" aria-label="${tname(t)}">
-<button class="fav${favs.has(t.id)?' on':''}" data-fav="${t.id}" aria-label="${favs.has(t.id)?'取消收藏':'收藏'}"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.2 5.9-.8z"/></svg></button>
+<button class="fav${favs.has(t.id)?' on':''}" data-fav="${t.id}" aria-pressed="${favs.has(t.id)?'true':'false'}" aria-label="${favs.has(t.id)?L('取消收藏','Unfavorite'):L('收藏','Favorite')}"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.2 5.9-.8z"/></svg></button>
 <div class="ico" style="--ic:${t.col}">${icSvg(t.ic,t.col)}</div>
 <b title="${tname(t)}">${hlName(tname(t))}</b>${(LANG==='en'? ENDESC(t.c) : t.d)?`<i title="${LANG==='en'?ENDESC(t.c):t.d}">${LANG==='en'?ENDESC(t.c):t.d}</i>`:''}${RECENT_IDS.has(t.id)?'<s aria-hidden="true"></s>':''}
 </div>`).join('');
@@ -1880,6 +1883,8 @@ body.replaceWith(fresh); body = fresh;
 $('#sheet') && $('#sheet').classList.add('open');
 $('#sheetTitle').textContent = tname(t) + (t.knife?L(' · 瑞士刀',' · Swiss knife'):'');
 const sheet = $('#sheet'); sheet.classList.add('open'); sheet.setAttribute('aria-hidden','false');
+try{ LASTFOCUS = document.activeElement; }catch(e){}
+requestAnimationFrame(function(){ requestAnimationFrame(function(){ const bb=$('#backbtn'); if(bb) bb.focus({preventScroll:true}); }); });
 body.scrollTop = 0;
 pushRecent(id); renderRecent(); pushRank(id);
 try{ history.replaceState(null,'','#tool='+encodeURIComponent(id)); }catch(e){}
@@ -1913,8 +1918,10 @@ if(!txt){ const is=[...b.querySelectorAll('input[type=text],input[type=search]')
 if(!txt){ toast('这里没有可复制的结果'); return; }
 copyText(txt);
 }
+let LASTFOCUS=null;
 function closeSheet(){
 const sheet=$('#sheet'); sheet.classList.remove('open'); sheet.setAttribute('aria-hidden','true');
+try{ if(LASTFOCUS && LASTFOCUS.focus) LASTFOCUS.focus({preventScroll:true}); LASTFOCUS=null; }catch(e){}
 try{ if(location.hash.indexOf('tool=')>=0) history.replaceState(null,'',location.pathname+location.search); }catch(e){}
 if(activeCleanup){ try{activeCleanup();}catch(e){} activeCleanup=null; }
 const b=$('#sheetBody'); if(b){ const f=b.cloneNode(false); b.replaceWith(f); }
@@ -2374,7 +2381,7 @@ root.innerHTML='<div class="box">'
 +'<button class="btn ghost" id="bigClear" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">'+L('清空','Clear')+'</button>'
 +'<button class="btn ghost" id="bigShare" style="height:36px;font-size:13px;padding:0 12px;flex:0 0 auto">'+L('分享','Share')+'</button>'
 +'</div></div>'
-+'<div class="box" id="bigOut"></div>'
++'<div class="box" id="bigOut" aria-live="polite" aria-atomic="true"></div>'
 +'<div class="box" id="bigBatch" style="display:none"><div class="lbl">批量计算（每行一个数，套用第一个参数）</div>'
 +'<textarea id="bigBatchIn" rows="5" placeholder="每行一个数，例如&#10;250&#10;300&#10;400"></textarea>'
 +'<div style="display:flex;gap:8px;margin-top:8px"><button class="btn" id="bigBatchRun" style="flex:1">开始批量</button><button class="btn ghost" id="bigBatchTpl" style="flex:0 0 auto;padding:0 12px">下载模板</button><button class="btn ghost" id="bigBatchExp" style="flex:0 0 auto;padding:0 12px">导出结果</button><button class="btn ghost" id="bigCsvIn" style="flex:0 0 auto;padding:0 12px">导入 CSV</button><input type="file" id="bigCsvFile" accept=".csv,.txt,text/csv" hidden></div></div>'
@@ -17120,6 +17127,10 @@ impF.value='';
 });
 })();
 document.addEventListener('keydown', function(e){
+if(e.key==='Tab' && $('#sheet') && $('#sheet').classList.contains('open')){
+ const fs=[].filter.call($('#sheet').querySelectorAll('button,input,textarea,select,a[href],[tabindex]:not([tabindex="-1"])'),function(el){ return !el.disabled && el.offsetParent!==null; });
+ if(fs.length){ const f=fs[0], l=fs[fs.length-1]; if(!e.shiftKey && document.activeElement===l){ e.preventDefault(); f.focus(); } else if(e.shiftKey && document.activeElement===f){ e.preventDefault(); l.focus(); } }
+}
 if((e.ctrlKey||e.metaKey) && (e.key==='k'||e.key==='K')){
 e.preventDefault();
 const q=$('#q'); if(q && !$('#sheet').classList.contains('open')){ q.focus(); q.select(); }
