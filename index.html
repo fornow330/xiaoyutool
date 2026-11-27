@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="xyver" content="5.29">
+<meta name="xyver" content="5.30">
 <title>小羽工具箱 · 本地工具集合</title>
 <meta name="description" content="小羽工具箱：984 个本地实用工具，工程、财务、文本、生活四大类，全部离线可用。">
 <meta property="og:type" content="website">
@@ -336,7 +336,7 @@ canvas{max-width:100%;display:block;border-radius:10px}
 <main id="list"></main>
 <button class="totop" id="totop" aria-label="回到顶部"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button>
 <footer class="foot">
-  <span>小羽工具箱 v<span id="vnum">5.29</span> · 作者 fornow</span>
+  <span>小羽工具箱 v<span id="vnum">5.30</span> · 作者 fornow</span>
   <span>交流群 728403008</span>
   <a href="https://github.com/fornow330/xiaoyutool" target="_blank" rel="noopener" style="color:var(--sub);font-size:12px">GitHub</a>
   <button id="chkUpd" style="border:0;background:none;color:var(--sub);font-size:12px;text-decoration:underline;padding:4px;cursor:pointer">检查更新</button>
@@ -2637,18 +2637,29 @@ const raw=(BOX.querySelector('#bigBatchIn').value||'').trim();
 if(!raw){ toast('请输入数据'); return; }
 const rows=raw.split(/\n/).filter(function(l){return l.trim()!=='';}).slice(0,200)
 .map(function(l){ return l.split(/[\s,，\t]+/).filter(function(x){return x!=='';}); });
+let fnl=null;
+try{ fnl=new Function(keys.join(','), GX_PRE+'return ('+(m.e[0]||'0')+');'); }catch(e){ fnl=null; }
 const out=rows.map(function(cols){
+const vals=[], errs=[];
+for(let i=0;i<keys.length;i++){
+ const lb=String(m.f[i]&&m.f[i][1]||''), t=cols[i];
+ if(t===undefined){ vals.push(1); continue; }
+ const x=parseFloat(t);
+ if(!isFinite(x)){ errs.push((lb||'第'+(i+1)+'列')+'不是数字'); vals.push(0); continue; }
+ if(x<0) errs.push((lb||'数值')+'不能为负');
+ else if(/(率|百分比|%)/.test(lb) && x>100) errs.push(lb+'应在 0–100');
+ else if(/(直径|半径|宽度|宽|高|厚|长|距|面积|体积|跨度|间距)/.test(lb) && x<=0 && !/增量|变化/.test(lb)) errs.push(lb+'应大于 0');
+ vals.push(x);
+}
+if(errs.length) return [cols.join(' / '), '—', errs[0]];
+if(!fnl) return [cols.join(' / '), '—', '这个口径算不了'];
 let r='—';
-try{
-r=(new Function(keys.join(','), GX_PRE+'return ('+(m.e[0]||'0')+');')).apply(null, keys.map(function(k,i){
-const x=cols[i]!==undefined?parseFloat(cols[i]):1;
-return isFinite(x)?x:(i<cols.length?0:1);
-}));
-}catch(err){ r='—'; }
-return [cols.join(' / '), typeof r==='number'?fmtOut(r):String(r), typeof r==='number'?String(+r.toPrecision(12)):''];
+try{ r=fnl.apply(null, vals); }catch(err){ return [cols.join(' / '), '—', '超出计算范围']; }
+if(typeof r!=='number' || !isFinite(r)) return [cols.join(' / '), '—', '结果无效'];
+return [cols.join(' / '), fmtOut(r), String(+r.toPrecision(12))];
 });
 O.innerHTML='<div class="lbl">批量结果（'+m.o[0]+'）</div><p class="hint">列依次对应：'+m.f.map(function(x){return x[1];}).join(' / ')+'（缺列按 1）</p>'
-+ out.map(function(x){return '<div class="kv"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>';}).join('');
++ out.map(function(x){return '<div class="kv"><span>'+x[0]+'</span><b>'+x[1]+'</b>'+(x[2]?'<span class="hint" style="display:inline;margin:0 0 0 6px">'+x[2]+'</span>':'')+'</div>';}).join('');
 lastBatch=out; lastM=m;
 }
 function onPresetSave(){
@@ -2700,7 +2711,7 @@ O.innerHTML='<div class="lbl">同级对比 · '+grp.g+'（按各口径默认参�
 function onCsv(){
 if(!lastBatch){ toast('先跑一次批量计算'); return; }
 const head=lastM.f.map(function(x){return x[1];}).join(',')+','+lastM.o[0];
-const lines=[head].concat(lastBatch.map(function(x){ return x[0].split(' / ').join(',')+','+x[1]; }));
+const lines=[head].concat(lastBatch.map(function(x){ return x[0].split(' / ').join(',')+','+(x[1]==='—'?'—,'+(x[2]||'无效'):x[1]); }));
 const blob=new Blob(['\ufeff'+lines.join('\n')], {type:'text/csv;charset=utf-8'});
 const a=document.createElement('a');
 a.href=URL.createObjectURL(blob); a.download=(lastM.n||'计算结果')+'.csv'; a.click();
@@ -2817,7 +2828,7 @@ const bx=root.querySelector('#bigBatchExp');
 if(bx) bx.addEventListener('click',function(){
   if(!lastBatch||!lastBatch.length){ toast(L('先跑一次批量','Run batch first')); return; }
   const head=lastM.f.map(function(x){return x[1];}).join(',')+','+lastM.o[0];
-  const csv='\ufeff'+[head].concat(lastBatch.map(function(r){return r[0].split(' / ').join(',')+','+(r[2]||r[1]);})).join('\n');
+  const csv='\ufeff'+[head].concat(lastBatch.map(function(r){return r[0].split(' / ').join(',')+','+(r[1]==='—'?'—,'+(r[2]||'无效'):(r[2]||r[1]));})).join('\n');
   const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
   const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='batch-result.csv'; a.click();
   setTimeout(function(){URL.revokeObjectURL(a.href);},1000);
